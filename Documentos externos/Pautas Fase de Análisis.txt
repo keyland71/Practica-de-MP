@@ -1,0 +1,46 @@
+DOCUMENTO DE ANALISIS
+
+PENDIENTE: Análisis de ejercicio de la granja. Se subirá un documento de análisis que 
+
+Analisis gráfico y funcional del producto final
+
+
+Descripcion de las diferentes entidades (objetos, clases), y una descripcion de los diferentes atributos que tiene cada entidad
+Ejemplo:
+	Clase licantropo:
+		- Atributo 1
+		- Atributo 2
+		- Atributo 3
+		.
+		.
+		.
+		
+		
+Descripcion de las interfaces y el codigo que tiene que tener cada interfaz
+Ejemplo: La interfaz tiene la utilidad de rugir y rugir tiene que sacar por pantalla cada uno de los 3 atributos de licantropo
+
+Elaboración de mockups: Elaboracion de bocetos en sucio con la materializacion del aspecto que va a tener el producto final. Se transforman los requisitos a algo visible
+Digerentes dibujos conectados con el aspecto esencial de las pantallas
+
+
+Entidades:
+	-Propiedades 
+
+Es lo mismo que:
+
+Clases:
+	-Atributos
+
+
+Diferentes aspectos a considerar:
+-Entidades con sus distintas propiedades (algo que luego se convertirá a clases y atributos)
+-Utilidades
+-Interfaces
+-Funcionalidad de la aplicación
+
+
+
+
+
+	
+	
