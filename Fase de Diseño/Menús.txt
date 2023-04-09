@@ -1,8 +1,0 @@
-MenúLogin:
-mensajes = [
-	"Quiere registrar una cuenta nueva (1), o Iniciar sesión (2)?",
-	"Introduzca nombre de usuario",
-	"Introduzca su Nick",
-	"Introduzca contraseña"
-]
-
