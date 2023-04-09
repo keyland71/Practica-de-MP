@@ -1,0 +1,5 @@
+1. Se cargan todos los datos de memoria a State
+2. Se actualizan los punteros (en teoría)
+3. Se le pasa el control al MenuManager
+4. Se muestra el primer menú
+5. De aquí en adelante es ejecución del programa normal, donde las acciones van dictadas por cada menú.
