@@ -29,6 +29,7 @@ public class NumeroRegistro { //debe implementar equals
     }
     
     
+    //lucia
      public NumeroRegistro(char caracter1, int numero1, int numero2, char caracter2, char caracter3) {
         this.caracter1 = caracter1;
         this.numero1 = numero1;
@@ -36,12 +37,13 @@ public class NumeroRegistro { //debe implementar equals
         this.caracter2 = caracter2;
         this.caracter3 = caracter3;
     }
+     
     public NumeroRegistro obtenerNumReg() {
         return new NumeroRegistro(caracter1, numero1, numero2, caracter2, caracter3);
     }
     
      public NumeroRegistro incrementarNumReg() {
-        int nuevoNumero1 = this.numero1 + 1;
+        int nuevoNumero1 = this.numero1 + 1;  //incrementa en 1 el numero de registro y crea uno nuevo con ese incremento
         return new NumeroRegistro(this.caracter1, nuevoNumero1, this.numero2, this.caracter2, this.caracter3);
     }
     
