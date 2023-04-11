@@ -14,4 +14,9 @@ public class Estado {
     private AlmacenUsuarios almacenUsuarios;
     //...
     private NumeroRegistro ultimoNumRegistro;
+    
+    public Estado(){
+        this.almacenUsuarios = new AlmacenUsuarios();
+        //...
+    }
 }

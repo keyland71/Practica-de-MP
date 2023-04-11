@@ -1,5 +1,7 @@
 package baseDeDatos;
 
+import java.util.Map;
+
 /**
  *
  * @author Sergio de Oro Fernández
@@ -8,5 +10,13 @@ package baseDeDatos;
  * @author Marcos Jiménez Pulido
  */
 class AlmacenUsuarios {
+    //private Map<String, Usuario> usuarios;
     
+    public AlmacenUsuarios(){
+        this.cargarUsuarios();
+    }
+
+    private void cargarUsuarios() {
+        //carga usuarios
+    }
 }
