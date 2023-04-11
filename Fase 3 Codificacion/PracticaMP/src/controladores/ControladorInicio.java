@@ -2,6 +2,7 @@ package controladores;
 
 import menus.MenuInicio;
 import menus.MenuRegistro;
+import menus.MenuIniciarSesion;
 
 /**
  *
@@ -14,13 +15,14 @@ public class ControladorInicio {
 
     private MenuInicio menuInicio; //los menus no se supone que los creabamos segun aparecieran? En teoría no hace falta guardarlos aquí
     private MenuRegistro menuRegistro;
-    //private MenuIniciarSesion menuIniciarSesion;
+    private MenuIniciarSesion menuIniciarSesion;
     //private FabricaUsuarios fabricaUsuarios;
-    private int modo; //modo 0 es seleccion, modo 1 es introducir Nick registrars, modo 2 es tipo de usuario, modo 3 es si/no
+    private int modo; //modo 0 es seleccion, modo 1 es introducir Nick registrars, modo 2 es tipo de usuario, modo 3 es si/no, modo 4 es introducir nick iniciosesion
 
     public ControladorInicio() {
         this.menuInicio = new MenuInicio(); //ahora que veo esto, sí me suena que en el de secuencia del inicio ponía que era así
         this.menuRegistro = new MenuRegistro();
+        this.menuIniciarSesion = new MenuIniciarSesion();
         this.modo = 0; //sería conveniente poner en algún sitio qué significa cada modo
     }
 
@@ -52,6 +54,18 @@ public class ControladorInicio {
             case 3 ->{
                 return opcion.equals("si") || opcion.equals("no");
             }
+            case 4 -> {
+                return nickValido (opcion) || opcion.equals("salir");
+
+        }
+            case 5 -> {
+               return contraseniaValida (opcion) || opcion.equals("salir");
+                       }
+            case 6 ->{
+                return opcion.equals("si") || opcion.equals("no");
+            }
+            
+        
         }
         return false;
         
@@ -62,7 +76,8 @@ public class ControladorInicio {
             case 0 -> {
                 switch (opcion) {
                     case "1" ->
-                        System.out.println("Iniciar sesión"); // Está a modo de placeholder, aún no está terminado
+                        //System.out.println("Iniciar sesión");
+                        iniciarSesion();// Está a modo de placeholder, aún no está terminado
                     case "2" ->
                         registrarse();
                     default -> {
@@ -80,6 +95,12 @@ public class ControladorInicio {
                 if (opcion.equals("si")){
                     //crear usuario con la fabrica de usuarios
                     System.out.println("El usuario no se ha creado porque no está implementado"); // Está a modo de placeholder, aún no está terminado
+                }
+            }
+               case 6 ->{
+                if (opcion.equals("si")){
+                    //crear usuario con la fabrica de usuarios
+                    System.out.println("no se inicia sesion poque no está implementado jugador/admin"); // Está a modo de placeholder, aún no está terminado
                 }
             }
             
@@ -127,5 +148,46 @@ public class ControladorInicio {
         return true;
     }
     
-    
+   private  void iniciarSesion(){
+     String opcion = "";
+        boolean valido = false;
+        while (!valido){
+            this.modo = 4;
+            opcion = this.menuIniciarSesion.mostrarMensaje(0);
+            valido = validarEntrada(opcion);
+        
+            if (!valido) {
+                this.menuIniciarSesion.mostrarMensajeError(0); 
+           }
+        }
+        String nick = opcion;
+        //String nickusuario = this.menuIniciarSesion.mostrarMensaje(1);
+        //String contrasenia = this.menuIniciarSesion.mostrarMensaje(2);
+        
+         do { //introduce contrasenia
+            this.modo = 5;
+            opcion = this.menuIniciarSesion.mostrarMensaje(1);
+            valido = validarEntrada(opcion);
+        } while (!valido); //pedir input hasta recibir uno válido
+        
+        
+        
+        do { //quieres iniciarsesion
+            this.modo = 6;
+            opcion = this.menuIniciarSesion.mostrarMensaje(2);
+            valido = validarEntrada(opcion);
+        } while (!valido); //pedir input hasta recibir uno válido*/
+        
+        procesarEntrada(opcion);
+   }
+   
+   private boolean nickValido (String opcion) {
+        //debería comprobar en la base de datos si el usuario ya está registrado
+        return true;
+    }
+   private boolean contraseniaValida (String opcion) {
+        //debería comprobar en la base de datos si el usuario ya está registrado
+        return true;
+    }
+   
 }
