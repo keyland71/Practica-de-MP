@@ -9,7 +9,7 @@ import java.util.Map;
  * @author Ángel Marqués García
  * @author Marcos Jiménez Pulido
  */
-class AlmacenUsuarios {
+ public class AlmacenUsuarios {
     //private Map<String, Usuario> usuarios;
     
     public AlmacenUsuarios(){
