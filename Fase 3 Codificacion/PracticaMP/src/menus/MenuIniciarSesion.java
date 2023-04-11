@@ -23,7 +23,7 @@ public class MenuIniciarSesion {
    this.mensajes= new ArrayList<>();
    this.mensajesError = new ArrayList<>();
    
-   String mensaje = "Introduce tu nick";
+   String mensaje = "Introduce tu nick único";
    this.mensajes.add(mensaje);
    mensaje = "Introduce tu contraseña";
    this.mensajes.add(mensaje);

@@ -55,22 +55,19 @@ public class ControladorInicio {
                 return opcion.equals("si") || opcion.equals("no");
             }
             case 4 -> {
-                return nickValido (opcion) || opcion.equals("salir");
-
-        }
+                return nickUnico(opcion) || opcion.equals("salir"); //ponía nickValido en vez de nickUnico. Why have two functions for the same thing?
+            }
             case 5 -> {
-               return contraseniaValida (opcion) || opcion.equals("salir");
-                       }
-            case 6 ->{
+               return contraseniaValida(opcion) || opcion.equals("salir"); //muy posible que la comprobación de la contraseña sea muy ligera
+            }
+            case 6 ->{ //ya hay un caso que hace esto (modo 3), por qué no reutilizarlo?
                 return opcion.equals("si") || opcion.equals("no");
             }
-            
-        
         }
         return false;
-        
     }
 
+    
     private boolean procesarEntrada(String opcion) {
         switch (this.modo) {
             case 0 -> {
@@ -97,13 +94,12 @@ public class ControladorInicio {
                     System.out.println("El usuario no se ha creado porque no está implementado"); // Está a modo de placeholder, aún no está terminado
                 }
             }
-               case 6 ->{
+            case 6 ->{
                 if (opcion.equals("si")){
-                    //crear usuario con la fabrica de usuarios
+                    //Iniciar sesión; Crear un ControladorJugador/ControladorAdmin y pasarle el control
                     System.out.println("no se inicia sesion poque no está implementado jugador/admin"); // Está a modo de placeholder, aún no está terminado
                 }
             }
-            
         }
         return false;
     }
@@ -161,17 +157,16 @@ public class ControladorInicio {
            }
         }
         String nick = opcion;
-        //String nickusuario = this.menuIniciarSesion.mostrarMensaje(1);
-        //String contrasenia = this.menuIniciarSesion.mostrarMensaje(2);
         
-         do { //introduce contrasenia
+         do { //introduce contraseña
             this.modo = 5;
             opcion = this.menuIniciarSesion.mostrarMensaje(1);
             valido = validarEntrada(opcion);
         } while (!valido); //pedir input hasta recibir uno válido
         
-        
-        
+        ////este do while sería innecesario, considero. 
+        ////Es necesario al registrarse por si acaso ha metido un dato mal
+        ////Pero aquí si ha metido algo mal no entra. Y si no quería entrar, inmediatamente puede volver
         do { //quieres iniciarsesion
             this.modo = 6;
             opcion = this.menuIniciarSesion.mostrarMensaje(2);
@@ -181,12 +176,14 @@ public class ControladorInicio {
         procesarEntrada(opcion);
    }
    
-   private boolean nickValido (String opcion) {
+   //esta función es innecesaria, ya tenemos nickUnico, a mi entender hacen lo mismo
+   private boolean nickValido (String opcion) { 
         //debería comprobar en la base de datos si el usuario ya está registrado
         return true;
     }
+   
    private boolean contraseniaValida (String opcion) {
-        //debería comprobar en la base de datos si el usuario ya está registrado
+        //debería comprobar en la base de datos si la contraseña introducida coincide con la del usuario introducido
         return true;
     }
    
