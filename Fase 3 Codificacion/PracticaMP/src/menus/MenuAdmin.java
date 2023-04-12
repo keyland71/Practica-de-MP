@@ -22,14 +22,21 @@ public MenuAdmin(){
   this.mensajes = new ArrayList<>();
   this.mensajesError = new ArrayList<>();
         String mensaje = """
-                         MENU ADMIN.
+                         Bienvenido administrador.
                          Por favor, elija una opcion:
                          1) Editar Personajes
                          2) Validar desafios
-                         3) Banerar/desbanear usuarios""";
+                         3) Banerar/desbanear usuarios
+                         4) Darse de baja
+                         5) Salir""";
         this.mensajes.add(mensaje);
-        mensaje = "Por favor, introduzca un valor correcto. Pulse cualquier botón para continuar";
+        mensaje = "¿Esta seguro de que quiere borrar su cuenta?";
+        this.mensajes.add(mensaje);
+        mensaje = "¿Esta seguro de que desea salir?";
+        this.mensajes.add(mensaje);
+        mensaje = "Por favor, introduzca un valor correcto. Pulse cualquier boton para continuar";
         this.mensajesError.add(mensaje);
+        
         this.lector = new Scanner(System.in);
     }
  public String mostrarMensaje(int pos) {
@@ -42,7 +49,7 @@ public MenuAdmin(){
     public void mostrarMensajeError(int modo) {
         String mensaje = this.mensajesError.get(modo);
         System.out.println(mensaje);
-        (new Scanner(System.in)).nextLine();
+        this.lector.nextLine();
     }
 }
 

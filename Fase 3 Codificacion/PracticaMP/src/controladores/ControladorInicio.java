@@ -13,29 +13,29 @@ import menus.MenuIniciarSesion;
  */
 public class ControladorInicio {
 
-    private MenuInicio menuInicio; //los menus no se supone que los creabamos segun aparecieran? En teoría no hace falta guardarlos aquí
+    private MenuInicio menuInicio;
     private MenuRegistro menuRegistro;
     private MenuIniciarSesion menuIniciarSesion;
     //private FabricaUsuarios fabricaUsuarios;
-    private int modo; //modo 0 es seleccion, modo 1 es introducir Nick registrars, modo 2 es tipo de usuario, modo 3 es si/no, modo 4 es introducir nick iniciosesion
+    private int modo; //modo 0 es seleccion, modo 1 es introducir Nick registrarse, modo 2 es tipo de usuario, modo 3 es si/no, modo 4 es introducir nick iniciosesion
 
     public ControladorInicio() {
-        this.menuInicio = new MenuInicio(); //ahora que veo esto, sí me suena que en el de secuencia del inicio ponía que era así
+        this.menuInicio = new MenuInicio();
         this.menuRegistro = new MenuRegistro();
         this.menuIniciarSesion = new MenuIniciarSesion();
-        this.modo = 0; //sería conveniente poner en algún sitio qué significa cada modo
+        this.modo = 0;
     }
 
     public void iniciarControlador() {
         boolean salir = false;
         while (!salir) {
             this.modo = 0;
-            String opcion = this.menuInicio.mostrarMensaje(0); //ponía this.modo
+            String opcion = this.menuInicio.mostrarMensaje(0);
             boolean valido = validarEntrada(opcion);
             if (valido) {
                 salir = procesarEntrada(opcion);
             } else {
-                this.menuInicio.mostrarMensajeError(0); //ponía this.modo
+                this.menuInicio.mostrarMensajeError(0);
             }
         }
     }
@@ -58,7 +58,7 @@ public class ControladorInicio {
                 return nickUnico(opcion) || opcion.equals("salir"); 
             }
             case 5 -> {
-               return contraseniaValida(opcion) || opcion.equals("salir"); //muy posible que la comprobación de la contraseña sea muy ligera
+               return contraseniaValida(opcion) || opcion.equals("salir");
             }
             case 6 ->{ //ya hay un caso que hace esto (modo 3), por qué no reutilizarlo?
                 return opcion.equals("si") || opcion.equals("no");
@@ -73,13 +73,16 @@ public class ControladorInicio {
             case 0 -> {
                 switch (opcion) {
                     case "1" ->
-                        //System.out.println("Iniciar sesión");
-                        iniciarSesion();// Está a modo de placeholder, aún no está terminado
+                        iniciarSesion();
                     case "2" ->
                         registrarse();
                     default -> {
-                        System.out.println("Adiós");
-                        return true;
+                        String optSalir = this.menuInicio.mostrarMensaje(1);
+                        this.modo = 3;
+                        boolean valido = validarEntrada(optSalir);
+                        if (valido) {
+                            return optSalir.equals("si");
+                        }
                     }
                 }
             }

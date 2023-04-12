@@ -23,15 +23,15 @@ public class MenuIniciarSesion {
    this.mensajes= new ArrayList<>();
    this.mensajesError = new ArrayList<>();
    
-   String mensaje = "Introduce tu nick unico";
+   String mensaje = "Introduce tu nick unico:";
    this.mensajes.add(mensaje);
-   mensaje = "Introduce tu contrasenia";
+   mensaje = "Introduce tu contrasenia:";
    this.mensajes.add(mensaje);
-     mensaje = " ¿Desa iniciar sesion ?";
+     mensaje = " ¿Desa iniciar sesion? (si / no)";
    this.mensajes.add(mensaje);
    mensaje = "Por favor, introduzca un nick valido. Pulse cualquier boton para continuar";
    this.mensajesError.add(mensaje);
-   mensaje = "Por favor, introduzca una contraseña válida. Pulse cualquier botón para continuar";
+   mensaje = "Por favor, introduzca una contrasenia valida. Pulse cualquier boton para continuar";
    this.mensajesError.add(mensaje);
   
    this.lector = new Scanner(System.in);
@@ -47,7 +47,7 @@ public class MenuIniciarSesion {
   public void mostrarMensajeError(int modo) {
         String mensaje = this.mensajesError.get(modo);
         System.out.println(mensaje);
-        (new Scanner(System.in)).nextLine();
+        this.lector.nextLine();
     }
  
  

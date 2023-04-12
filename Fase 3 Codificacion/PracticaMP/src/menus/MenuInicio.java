@@ -27,6 +27,8 @@ public class MenuInicio {
                          2) Registrarse
                          3) Salir""";
         this.mensajes.add(mensaje);
+        mensaje = "¿Está seguro de que desea salir?";
+        this.mensajes.add(mensaje);
         mensaje = "Por favor, introduzca un valor correcto. Pulse cualquier botón para continuar";
         this.mensajesError.add(mensaje);
         this.lector = new Scanner(System.in);
@@ -42,7 +44,7 @@ public class MenuInicio {
     public void mostrarMensajeError(int modo) {
         String mensaje = this.mensajesError.get(modo);
         System.out.println(mensaje);
-        (new Scanner(System.in)).nextLine();
+       this.lector.nextLine();
     }
 
 }
