@@ -23,13 +23,13 @@ public class MenuIniciarSesion {
    this.mensajes= new ArrayList<>();
    this.mensajesError = new ArrayList<>();
    
-   String mensaje = "Introduce tu nick único";
+   String mensaje = "Introduce tu nick unico";
    this.mensajes.add(mensaje);
-   mensaje = "Introduce tu contraseña";
+   mensaje = "Introduce tu contrasenia";
    this.mensajes.add(mensaje);
-     mensaje = "¿Desa iniciar sesión?";
+     mensaje = " ¿Desa iniciar sesion ?";
    this.mensajes.add(mensaje);
-   mensaje = "Por favor, introduzca un nick válido. Pulse cualquier botón para continuar";
+   mensaje = "Por favor, introduzca un nick valido. Pulse cualquier boton para continuar";
    this.mensajesError.add(mensaje);
    mensaje = "Por favor, introduzca una contraseña válida. Pulse cualquier botón para continuar";
    this.mensajesError.add(mensaje);

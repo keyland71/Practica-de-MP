@@ -22,8 +22,8 @@ public class MenuInicio {
         this.mensajesError = new ArrayList<>();
         String mensaje = """
                          Bienvenido a MP (Majestuosas Peleas).
-                         Por favor, elija una opción:
-                         1) Iniciar sesión
+                         Por favor, elija una opcion:
+                         1) Iniciar sesion
                          2) Registrarse
                          3) Salir""";
         this.mensajes.add(mensaje);
