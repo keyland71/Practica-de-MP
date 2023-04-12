@@ -2,6 +2,7 @@ package practicamp;
 
 import baseDeDatos.Estado;
 import controladores.ControladorInicio;
+import menus.MenuAdmin;
 
 /**
  *
@@ -13,9 +14,10 @@ import controladores.ControladorInicio;
 public class Juego {
 
     public void run() {
-        Estado estado = new Estado();
-        ControladorInicio iniControlador = new ControladorInicio();
-        iniControlador.iniciarControlador();
+       Estado estado = new Estado();
+       ControladorInicio iniControlador = new ControladorInicio();
+       iniControlador.iniciarControlador();
+        
     }
     
 }
