@@ -31,7 +31,7 @@ public class Ronda {
  
     }
     
-   public String toStrign (){
+   public String toStringRonda (){
       String ronda=  "Ronda{" +
             "vidaInicialA=" + vidaInicialA +
             ", vidaInicialB=" + vidaInicialB +

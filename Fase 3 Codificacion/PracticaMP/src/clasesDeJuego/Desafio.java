@@ -37,7 +37,7 @@ public class Desafio {
     }
     
     public String resultadoCombate (Combate comb){
-       String combate = comb.toString(); 
+       String combate = comb.toStringCombate(); 
        return combate;
     }
     

@@ -159,8 +159,6 @@ public class ControladorInicio {
                 this.menuIniciarSesion.mostrarMensajeError(0); 
            }
         }
-    
-               
         
          //introduce contraseña
             this.modo = 5;

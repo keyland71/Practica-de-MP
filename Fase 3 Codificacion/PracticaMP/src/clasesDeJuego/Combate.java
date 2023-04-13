@@ -45,7 +45,9 @@ public class Combate {
     public void aniadirRonda (Ronda ronda){
         registroRondas.add(ronda);
     }
-    public String toString() {
+    
+    
+    public String toStringCombate () {
     String combate =  "Partida{" +
             "uDesafiante=" + uDesafiante +
             ", uDesafiado=" + uDesafiado +
