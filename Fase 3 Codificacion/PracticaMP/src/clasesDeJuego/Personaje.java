@@ -25,8 +25,8 @@ public abstract class Personaje {
     private int oro;
     private int vida;
     private int poder;
-    private List<Debilidad> debilidades;
-    private List<Fortaleza> fortalezas;
+    private List<Modificador> debilidades;
+    private List<Modificador> fortalezas;
     private String descripcion;
     private int puntosRecurso;
     
@@ -62,15 +62,15 @@ public abstract class Personaje {
     }
     
     public void activarModificadores(List<Modificador> modificadores){ //Posibilidad de pasarle 2 listas independientes : una con las fortalezas y otra con las debilidades, para evitar el casting
-        ArrayList <Fortaleza> listaFortalezas = new ArrayList <Fortaleza>();
-        ArrayList <Debilidad> listaDebilidades = new ArrayList <Debilidad>();
+        ArrayList <Modificador> listaFortalezas = new ArrayList <Modificador>();
+        ArrayList <Modificador> listaDebilidades = new ArrayList <Modificador>();
         
         for (int i=0; i<=modificadores.size();i++){
             if (modificadores.get(i).obtenerIncremento() > 0){ //Para poder clasificarlos de esta forma, se necesita hacer casting. 
-                listaFortalezas.add((Fortaleza) modificadores.get(i)); 
+                listaFortalezas.add(modificadores.get(i)); 
             }
             else{
-                listaDebilidades.add((Debilidad) modificadores.get(i));
+                listaDebilidades.add(modificadores.get(i));
              }    
         }
         this.fortalezas = listaFortalezas;
