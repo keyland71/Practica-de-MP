@@ -66,10 +66,10 @@ public abstract class Personaje {
         
         for (int i=0; i<=modificadores.size();i++){
             if (modificadores.get(i).obtenerIncremento() > 0){
-                fortalezas.add(i);
+                fortalezas.add(modificadores.get(i));
             }
             else{
-                debilidades.add(i);
+                debilidades.add(modificadores.get(i));
              }    
         }
         
