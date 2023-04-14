@@ -13,6 +13,7 @@ import java.util.ArrayList;
  *
  * @author Marcos
  */
+
 public abstract class Personaje {
     private String nombre;
     private HabilidadEspecial habilidadEspecial;
@@ -46,7 +47,7 @@ public abstract class Personaje {
     
     public abstract int calcularPotencialDefensa();
     
-    public int calcularVida(){ //¿Por que no mejor obtenerVida? No se calcula nada
+    public int calcularVida(){ //¿Por que no mejor obtenerVida()? No se calcula nada
         return this.vida;
     }
     
@@ -60,21 +61,20 @@ public abstract class Personaje {
         this.vida -= danio;
     }
     
-    public void activarModificadores(List<String> modificadores){
-        ArrayList <Fortaleza> fortalezas = new ArrayList <Fortaleza>();
-        ArrayList <Debilidad> debilidades = new ArrayList <Debilidad>();
+    public void activarModificadores(List<Modificador> modificadores){ //Posibilidad de pasarle 2 listas independientes : una con las fortalezas y otra con las debilidades, para evitar el casting
+        ArrayList <Fortaleza> listaFortalezas = new ArrayList <Fortaleza>();
+        ArrayList <Debilidad> listaDebilidades = new ArrayList <Debilidad>();
         
         for (int i=0; i<=modificadores.size();i++){
-            if (modificadores.get(i).obtenerIncremento() > 0){
-                fortalezas.add(modificadores.get(i));
+            if (modificadores.get(i).obtenerIncremento() > 0){ //Para poder clasificarlos de esta forma, se necesita hacer casting. 
+                listaFortalezas.add((Fortaleza) modificadores.get(i)); 
             }
             else{
-                debilidades.add(modificadores.get(i));
+                listaDebilidades.add((Debilidad) modificadores.get(i));
              }    
         }
-        
-        this.fortalezas = fortalezas;
-        this.debilidades = debilidades;
+        this.fortalezas = listaFortalezas;
+        this.debilidades = listaDebilidades;
     }
     
     public void reestablecerPersonaje(){
