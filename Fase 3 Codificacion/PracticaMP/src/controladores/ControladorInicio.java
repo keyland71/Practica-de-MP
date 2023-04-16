@@ -1,9 +1,13 @@
 package controladores;
 
+import baseDeDatos.AlmacenUsuarios;
+import baseDeDatos.Estado;
+import clasesDeJuego.Usuario;
 import java.util.Scanner;
 import menus.MenuInicio;
 import menus.MenuRegistro;
 import menus.MenuIniciarSesion;
+import sistemas.FabricaUsuarios;
 
 /**
  *
@@ -17,13 +21,14 @@ public class ControladorInicio {
     private MenuInicio menuInicio;
     private MenuRegistro menuRegistro;
     private MenuIniciarSesion menuIniciarSesion;
-    //private FabricaUsuarios fabricaUsuarios;
+    private FabricaUsuarios fabricaUsuarios;
     private int modo; //modo 0 es seleccion, modo 1 es introducir Nick registrarse, modo 2 es tipo de usuario, modo 3 es si/no, modo 4 es introducir nick iniciosesion
 
     public ControladorInicio() {
         this.menuInicio = new MenuInicio();
         this.menuRegistro = new MenuRegistro();
         this.menuIniciarSesion = new MenuIniciarSesion();
+        this.fabricaUsuarios = new FabricaUsuarios();
         this.modo = 0;
     }
 
@@ -92,7 +97,7 @@ public class ControladorInicio {
                     
                 }
             }
-            case 3 ->{
+            case 3 -> { // en teoría no se le llama nunca
                 if (opcion.equals("si")){
                     //crear usuario con la fabrica de usuarios
                     System.out.println("El usuario no se ha creado porque no está implementado"); // Está a modo de placeholder, aún no está terminado
@@ -123,18 +128,19 @@ public class ControladorInicio {
     private void registrarse(){
         String opcion = "";
         boolean valido = false;
-        while (!valido){
+        while (!valido){ //pide el nick
             this.modo = 1;
             opcion = this.menuRegistro.mostrarMensaje(0);
             valido = validarEntrada(opcion);
         
             if (!valido) {
-                this.menuInicio.mostrarMensajeError(0); //ponía this.modo
+                this.menuInicio.mostrarMensajeError(0);
             }
         }
         String nick = opcion;
         String usuario = this.menuRegistro.mostrarMensaje(1);
-        String contrasenia = this.menuRegistro.mostrarMensaje(2);
+        
+        String contrasenia = this.menuRegistro.mostrarMensaje(2); //hay que comprobar que sea válida
         
         do { //introduce tipo de usuario
             this.modo = 2;
@@ -151,13 +157,22 @@ public class ControladorInicio {
             valido = validarEntrada(opcion);
         } while (!valido); //pedir input hasta recibir uno válido
         
-        procesarEntrada(opcion);
-        
+        if (opcion.equals("si")){
+            Usuario u;
+            if (tipoUsuario.equals("admin")){
+                u = this.fabricaUsuarios.crearAdministrador(usuario, nick, contrasenia);
+            } else {
+                u = this.fabricaUsuarios.crearJugador(usuario, nick, contrasenia);
+            }
+            AlmacenUsuarios almacen = Estado.obtenerAlmacenUsuarios();
+            almacen.aniadirUsuario(u);
+        }
     }
 
-    private boolean nickUnico(String opcion) {
+    private boolean nickUnico(String nick) {
         //debería comprobar en la base de datos si el nick es único, y devolver True en caso de que lo sea
-        return true;
+        AlmacenUsuarios almacen = Estado.obtenerAlmacenUsuarios();
+        return !almacen.existeUsuario(nick);
     }
     
    private  void iniciarSesion(){
@@ -167,7 +182,6 @@ public class ControladorInicio {
             this.modo = 4;
             opcion = this.menuIniciarSesion.mostrarMensaje(0);
             valido = validarEntrada(opcion);
-        
             if (!valido) {
                 this.menuIniciarSesion.mostrarMensajeError(0); 
            }
@@ -175,27 +189,25 @@ public class ControladorInicio {
         if (opcion.equals("salir")){
             return;
         }
+        AlmacenUsuarios almacen = Estado.obtenerAlmacenUsuarios();
+        Usuario u = almacen.obtenerUsuario(opcion);
+        
         
         do{ //introduce contraseña
-            this.modo = 5;
             opcion = this.menuIniciarSesion.mostrarMensaje(1);
-            valido = validarEntrada(opcion);
+            valido = u.compararContrasenia(opcion) || opcion.equals("salir");
         } while (!valido); //pedir contraseña hasta que sea válida.
         if (opcion.equals("salir")){
             return;
         }
-
-    
-        do { //quieres iniciarsesion
-            this.modo = 6;
-            opcion = this.menuIniciarSesion.mostrarMensaje(2);
-            valido = validarEntrada(opcion);
+        Estado.ponerUsuarioActivo(u);
+       
             
                         
             ////Habría que hacer que el usuario activo del estado sea el que acaba de iniciar sesión
             
             
-        } while (!valido); //pedir input hasta recibir uno válido*/
+
         
         procesarEntrada(opcion);
    }

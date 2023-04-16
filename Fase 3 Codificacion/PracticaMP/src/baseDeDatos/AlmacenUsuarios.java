@@ -1,7 +1,12 @@
 package baseDeDatos;
 
 import clasesDeJuego.Usuario;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -18,13 +23,50 @@ import java.util.Map;
         this.cargarUsuarios();
     }
 
-    private void cargarUsuarios() {
-        //carga usuarios
+    public Usuario obtenerUsuario(String nick){
+        return this.usuarios.get(nick);
+    }
+    public boolean existeUsuario(String nick){
+        return this.usuarios.containsKey(nick);
+    }
+    private Map<String, Usuario> obtenerUsuarios(){
+        return this.usuarios;
     }
     
-    public void guardar(){
-        //guarda usuarios
+    public void aniadirUsuario(Usuario u){
+        this.usuarios.put(u.obtenerNick(), u);
+        guardarUsuarios();
     }
+    
+    
+    private void cargarUsuarios() {
+        //carga usuarios
+        AlmacenUsuarios almacenLeido = null;
+        try {
+            String fic = "./archivos/AlmacenUsuarios.AlmacenUsuarios";
+            ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(fic));
+            almacenLeido = (AlmacenUsuarios) entrada.readObject();
+            this.usuarios = almacenLeido.obtenerUsuarios();
+            entrada.close();
+        } catch (Exception e) {
+            System.out.println("No se ha encontrado el almacén, así que se ha creado uno nuevo");
+            this.usuarios = new HashMap<>();
+        }
+    }
+    
+    public void guardarUsuarios(){
+        //guarda usuarios
+        try {
+            String fic = "./archivos/AlmacenUsuarios.AlmacenUsuarios";
+            ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(fic));
+            salida.writeObject(this);
+            salida.close();
+        } catch (Exception e) {
+            System.out.println("No se ha podido guardar correctamente");
+            System.out.println(e);
+        }
+    }
+
 }
 
 

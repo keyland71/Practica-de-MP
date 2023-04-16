@@ -3,6 +3,11 @@ package baseDeDatos;
 import clasesDeJuego.NumeroRegistro;
 import clasesDeJuego.Personaje;
 import clasesDeJuego.Usuario;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.HashMap;
 
 /**
  *
@@ -27,9 +32,44 @@ public class Estado {
         Estado.almacenDesafios = new AlmacenDesafios();
         Estado.almacenPersonajes = new AlmacenPersonajes();
         //...
+        cargarNumReg();
     }
     
     
+    public static void ponerUsuarioActivo(Usuario u){
+        Estado.usuarioActivo = u;
+    }
+    
+    private static void guardarNumReg(NumeroRegistro numReg){
+        try {
+            String fic = "./archivos/UltimoNumeroDeRegistro.NumeroRegistro";
+            ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(fic));
+            salida.writeObject(numReg);
+            salida.close();
+        } catch (Exception e) {
+            System.out.println("No se ha podido guardar correctamente");
+            System.out.println(e);
+        }
+    } 
+    private void cargarNumReg(){
+        try {
+            String fic = "./archivos/UltimoNumeroDeRegistro.NumeroRegistro";
+            ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(fic));
+            this.ultimoNumRegistro = (NumeroRegistro) entrada.readObject();
+            entrada.close();
+        } catch (Exception e) {
+            System.out.println("No se ha encontrado el último numero de registro.");
+            this.ultimoNumRegistro = new NumeroRegistro();
+        }
+    }
+    
+    public static void ponerNumReg(NumeroRegistro num){
+        Estado.ultimoNumRegistro.copiar(num);
+        guardarNumReg(num);
+    }
+    public static NumeroRegistro obtenerNumeroRegistro(){
+        return Estado.ultimoNumRegistro;
+    }
     public static Usuario obtenerUsuarioActivo() {
         return Estado.usuarioActivo;
     }

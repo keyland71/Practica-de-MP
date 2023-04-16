@@ -22,6 +22,7 @@ public class Usuario implements Serializable{
         this.nick = nick;
         this.contrasenia = encriptarContrasenia(contrasenia);
         this.baneado = false;
+        this.numReg = new NumeroRegistro();
     }
     
     public String obtenerNick(){
@@ -29,18 +30,15 @@ public class Usuario implements Serializable{
     }
     //this does not work. either encriptarContrasenia es público, o (y considero que es mejor)
     //no ponemos obtenerContrasenia sino compararContrasenia.
-    public String obtenerContrasenia(){
-        return this.contrasenia;
+    public boolean compararContrasenia(String input){
+        return this.contrasenia.equals(encriptarContrasenia(input));
     }
     //por implementar
     private String encriptarContrasenia(String c){
         return c;
     }
     public boolean esAdministrador(){
-        if (this.numReg.equals(this.numReg.obtenerPrimero())){
-            return true;
-        } else 
-            return false;
+        return this.numReg.equals(new NumeroRegistro());
     }
     public boolean estaBaneado(){
         return this.baneado;
@@ -52,7 +50,7 @@ public class Usuario implements Serializable{
     //de ángel. Esto supone que en el constructor se inicializa numReg (creo que si no no funcionaría)
     // ahora mismo esa suposición no se cumple
     public void ponerNumReg(NumeroRegistro numR){
-        this.numReg.copy(numR); 
+        this.numReg.copiar(numR); 
     }
     
 }

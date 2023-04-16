@@ -1,5 +1,7 @@
 package clasesDeJuego;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Sergio de Oro Fernández
@@ -7,7 +9,7 @@ package clasesDeJuego;
  * @author Ángel Marqués García
  * @author Marcos Jiménez Pulido
  */
-public class NumeroRegistro { //debe implementar equals
+public class NumeroRegistro implements Serializable{ //debe implementar equals
     
     private char caracter1;
     private int numero1;
@@ -15,12 +17,16 @@ public class NumeroRegistro { //debe implementar equals
     private char caracter2;
     private char caracter3;
 
-    public NumeroRegistro obtenerPrimero() {
-        return null; //devuelve el primero numReg, el de los Admin
+    public NumeroRegistro() {
+        this.caracter1 = '0';
+        this.caracter2 = '0';
+        this.caracter3 = '0';
+        this.numero1 = 0;
+        this.numero2 = 0;
     }
     
     //de angel
-    public void copy(NumeroRegistro numReg){
+    public void copiar(NumeroRegistro numReg){
         this.caracter1 = numReg.caracter1;
         this.numero1 = numReg.numero1;
         this.numero2 = numReg.numero2;

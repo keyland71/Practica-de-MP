@@ -4,9 +4,12 @@
  */
 package sistemas;
 
+import baseDeDatos.AlmacenUsuarios;
 import baseDeDatos.Estado;
 import clasesDeJuego.Administrador;
 import clasesDeJuego.Jugador;
+import clasesDeJuego.NumeroRegistro;
+import clasesDeJuego.Usuario;
 
 /**
  *
@@ -23,20 +26,17 @@ public class FabricaUsuarios {
     }
     public Jugador crearJugador(String nombre, String nick, String contrasenia){
         Jugador j =new Jugador(nombre, nick, contrasenia);
-     //   AlmacenUsuarios almacen = Estado.obtenerUsuarios(); //me dice que cree la clase almacenUsuarios, wtf
-      //  almacen.aniadirUsuario(j);
+        ponerNumeroRegistro(j);
         return j;
     }
     public Administrador crearAdministrador(String nombre, String nick, String contrasenia){
         Administrador admin =new Administrador(nombre, nick, contrasenia);
-     //   AlmacenUsuarios almacen = Estado.obtenerUsuarios(); //not sure how this works
-      //  almacen.aniadirUsuario(admin);
         return admin;
     }
-    private void ponerNumeroRegistro(){
-        //not sure how this works
+    private void ponerNumeroRegistro(Jugador j){
+        NumeroRegistro num = Estado.obtenerNumeroRegistro();
+        num = num.incrementarNumReg();
+        j.ponerNumReg(num);
+        Estado.ponerNumReg(num);
     }
-    
-    
-    
 }
