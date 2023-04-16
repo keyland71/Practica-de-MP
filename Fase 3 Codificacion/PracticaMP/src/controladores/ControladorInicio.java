@@ -1,5 +1,6 @@
 package controladores;
 
+import java.util.Scanner;
 import menus.MenuInicio;
 import menus.MenuRegistro;
 import menus.MenuIniciarSesion;
@@ -70,7 +71,7 @@ public class ControladorInicio {
     
     private boolean procesarEntrada(String opcion) {
         switch (this.modo) {
-            case 0 -> {
+            case 0 -> { //menú de inicio, decides si iniciar sesión o registrarte
                 switch (opcion) {
                     case "1" ->
                         iniciarSesion();
@@ -99,6 +100,18 @@ public class ControladorInicio {
             }
             case 6 ->{
                 if (opcion.equals("si")){
+                    // <BYPASS>
+                    System.out.println("Quieres iniciar sesión como admin o jugador? (admin/jugador)");
+                    Scanner sc = new Scanner(System.in);
+                    String isAdmin = sc.nextLine();
+                    // </BYPASS>
+                    if (isAdmin.equals("admin")){
+                        ControladorAdmin cAdmin = new ControladorAdmin();
+                        cAdmin.iniciarControlador();
+                    } else {
+                        //ControladorJugador cJug = new ControladorJugador();
+                        //cJug.iniciarControlador();
+                    }
                     //Iniciar sesión; Crear un ControladorJugador/ControladorAdmin y pasarle el control
                     System.out.println("no se inicia sesion poque no esta implementado jugador/admin"); // Está a modo de placeholder, aún no está terminado
                 }
@@ -148,9 +161,9 @@ public class ControladorInicio {
     }
     
    private  void iniciarSesion(){
-     String opcion = "";
+        String opcion;
         boolean valido = false;
-        while (!valido){
+        do {
             this.modo = 4;
             opcion = this.menuIniciarSesion.mostrarMensaje(0);
             valido = validarEntrada(opcion);
@@ -158,12 +171,20 @@ public class ControladorInicio {
             if (!valido) {
                 this.menuIniciarSesion.mostrarMensajeError(0); 
            }
+        } while (!valido);
+        if (opcion.equals("salir")){
+            return;
         }
         
-         //introduce contraseña
+        do{ //introduce contraseña
             this.modo = 5;
             opcion = this.menuIniciarSesion.mostrarMensaje(1);
             valido = validarEntrada(opcion);
+        } while (!valido); //pedir contraseña hasta que sea válida.
+        if (opcion.equals("salir")){
+            return;
+        }
+
     
         do { //quieres iniciarsesion
             this.modo = 6;

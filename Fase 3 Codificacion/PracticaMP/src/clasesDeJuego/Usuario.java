@@ -4,11 +4,13 @@
  */
 package clasesDeJuego;
 
+import java.io.Serializable;
+
 /**
  *
  * @author marqu
  */
-public class Usuario {
+public class Usuario implements Serializable{
     private String nombre;
     private String nick;
     private String contrasenia;
