@@ -69,6 +69,9 @@ public class ControladorInicio {
             case 6 ->{ //ya hay un caso que hace esto (modo 3), por qué no reutilizarlo?
                 return opcion.equals("si") || opcion.equals("no");
             }
+            case 9 ->{
+                return opcion.length() >= 8 && opcion.length() <= 12;
+            }
         }
         return false;
     }
@@ -140,8 +143,12 @@ public class ControladorInicio {
         String nick = opcion;
         String usuario = this.menuRegistro.mostrarMensaje(1);
         
-        String contrasenia = this.menuRegistro.mostrarMensaje(2); //hay que comprobar que sea válida
-        
+        String contrasenia;
+        do {
+            this.modo = 9; //pongo 9 porque seguro que no está. Cuando se haga el refactor se pone un numero que tenga sentido
+            contrasenia = this.menuRegistro.mostrarMensaje(2); //hay que comprobar que sea válida
+        } while (!validarEntrada(contrasenia));
+            
         do { //introduce tipo de usuario
             this.modo = 2;
             opcion = this.menuRegistro.mostrarMensaje(3);
