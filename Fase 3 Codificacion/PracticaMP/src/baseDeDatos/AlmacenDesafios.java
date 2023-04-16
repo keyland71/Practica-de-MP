@@ -5,6 +5,7 @@
 package baseDeDatos;
 
 import clasesDeJuego.Desafio;
+import clasesDeJuego.Jugador;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ import java.util.List;
 public class AlmacenDesafios {
     
     
-    public List<Desafio> obtenerDesafiosCompletados(){
+    public List<Desafio> obtenerDesafiosCompletados(Jugador j){
         return null;
     }
 }

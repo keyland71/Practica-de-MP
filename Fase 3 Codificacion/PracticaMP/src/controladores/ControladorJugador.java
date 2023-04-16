@@ -9,6 +9,7 @@ import baseDeDatos.AlmacenPersonajes;
 import baseDeDatos.Estado;
 import clasesDeJuego.Combate;
 import clasesDeJuego.Desafio;
+import clasesDeJuego.Jugador;
 import clasesDeJuego.Usuario;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,7 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
         this.menuRanking = new MenuRanking(); 
         this.menuOro = new MenuOro();
         
-        this.usuario = Estado.obtenerUsuarioActivo(); //si el usuario activo fuera publico, no haría falta
+        this.usuario = Estado.obtenerUsuarioActivo();
         this.modo = 0;
     }
     
@@ -81,15 +82,6 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
                         cCrearDes.iniciarControlador();
                     }
                     case "4" -> { // consultar historial de oro
-                        //según pone en el diseño, en este case habría que:
-                        // 1. traer el almacén de desafíos y el usuario activo del estado
-                        // 2. buscar entre los desafíos aquellos en los que esté el usuarioActivo
-                        // 3. quedarse con los COMBATES de aquellos desafíos en los que esté el usuario
-                        // 4. enviar los combates con menuOro.mostrarHistorial(listaDeDesafios)
-                        //según yo entiendo, eso ocurriría en mostrarMenuOro()
-                        
-                        //yo (ángel) sugiero que todo eso ocurra en el menuOro al llamar a su constructor.
-                        //this.menuOro.mostrarHistorial();
                         mostrarMenuOro();
                     }
                     case "5" -> { // crear personaje
@@ -97,6 +89,7 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
                         cCrearPers.iniciarControlador();
                     }
                     case "6" -> { // borrar personaje
+                        //comprobar que tiene un personaje
                         boolean valido;
                         do {
                             this.modo = 1;
@@ -131,7 +124,7 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
 
     private void mostrarMenuOro() {
         AlmacenDesafios almacen = Estado.obtenerAlmacenDesafios();
-        List<Desafio> desafios = almacen.obtenerDesafiosCompletados();
+        List<Desafio> desafios = almacen.obtenerDesafiosCompletados((Jugador) Estado.obtenerUsuarioActivo());
         List<Combate> combates = new ArrayList<>();
         for (Desafio desafio:desafios) {
             combates.add(desafio.obtenerCombate());

@@ -21,7 +21,7 @@ public class MenuOro {
         this.lector = new Scanner(System.in);
     }
     public String mostrarHistorial(List<Combate> combates){ //no haría falta devolver el input del usuario
-        int i = 0;
+        int i = 1;
         for (Combate c:combates){
             mostrarElemento(c, i); //sugiero renombrar a mostrarCombate
             i++; //teniendo cuidado, se podría poner arriba, asegurando que sea post-incremento
