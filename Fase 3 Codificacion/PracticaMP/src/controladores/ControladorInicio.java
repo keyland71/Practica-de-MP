@@ -109,8 +109,8 @@ public class ControladorInicio {
                         ControladorAdmin cAdmin = new ControladorAdmin();
                         cAdmin.iniciarControlador();
                     } else {
-                        //ControladorJugador cJug = new ControladorJugador();
-                        //cJug.iniciarControlador();
+                        ControladorJugador cJug = new ControladorJugador();
+                        cJug.iniciarControlador();
                     }
                     //Iniciar sesión; Crear un ControladorJugador/ControladorAdmin y pasarle el control
                     System.out.println("no se inicia sesion poque no esta implementado jugador/admin"); // Está a modo de placeholder, aún no está terminado
@@ -190,6 +190,11 @@ public class ControladorInicio {
             this.modo = 6;
             opcion = this.menuIniciarSesion.mostrarMensaje(2);
             valido = validarEntrada(opcion);
+            
+                        
+            ////Habría que hacer que el usuario activo del estado sea el que acaba de iniciar sesión
+            
+            
         } while (!valido); //pedir input hasta recibir uno válido*/
         
         procesarEntrada(opcion);

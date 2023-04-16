@@ -84,7 +84,7 @@ private boolean procesarEntrada (String opcion){
                 }
                 default -> {
                     String optSalir = this.menuAdministrador.mostrarMensaje(2); //ponía mostrarMensaje(3), y daba ListIndexOutOfRange
-                    this.modo = 3;
+                    this.modo = 5;
                     boolean valido = validarEntrada(optSalir);
                     if (valido) {
                         return optSalir.equals("si");

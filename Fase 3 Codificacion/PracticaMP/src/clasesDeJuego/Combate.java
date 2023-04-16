@@ -19,14 +19,14 @@ public class Combate {
     private String vencedor;
     private String usuarioConEsbirros;
     private int oroGanado;
-    private List registroRondas;
+    private List<Ronda> registroRondas;
     
     
     public Combate (Jugador j1, Jugador j2){
-        this.uDesafiante=j1;
-        this.uDesafiado=j2;
-        this.fecha= fecha.now();
-        this.rondasUsadas=0;
+        this.uDesafiante =j1;
+        this.uDesafiado =j2;
+        this.fecha = LocalDateTime.now(); //ponía fecha.now, por si diera problemas
+        this.rondasUsadas = 0;
         this.vencedor = null;
         this.usuarioConEsbirros=null;
         this.oroGanado=0;
@@ -34,31 +34,29 @@ public class Combate {
     }
     
     public void incrementoRondasUsadas (){
-        this.rondasUsadas +=1;  //incrementa el valor en 1
+        this.rondasUsadas++;  //incrementa el valor en 1
     }
     
     public String obtenerFecha (){
-        String fechastr = fecha.toString();
-        return fechastr;
+        return fecha.toString();
     }
     
     public void aniadirRonda (Ronda ronda){
         registroRondas.add(ronda);
     }
     
-    
-    public String toStringCombate () {
-    String combate =  "Partida{" +
-            "uDesafiante=" + uDesafiante +
-            ", uDesafiado=" + uDesafiado +
-            ", rondasUsadas=" + rondasUsadas +
-            ", fecha=" + fecha +
-            ", vencedor='" + vencedor + '\'' +
-            ", usuarioConEsbirros='" + usuarioConEsbirros + '\'' +
-            ", oroGanado=" + oroGanado +
-            ", registroRonda=" + registroRondas +
-            '}';
-    return combate;
+    public String toStringCombate () { 
+        //Más, Esto es cómo se le mostrará al usuario el combate, por qué ponemos uDesafiante en vez de Usuario desafiante?
+        String combate =  "Partida: " +
+            "\n    Usuario Desafiante: " + uDesafiante +
+            ",\n    Usuario Desafiado: " + uDesafiado +
+            ",\n    Rondas Usadas: " + rondasUsadas +
+            ",\n    Fecha: " + fecha.toString() +
+            ",\n    Vencedor: " + vencedor  +
+            ",\n    Usuario Con Esbirros Vivos: " + usuarioConEsbirros + 
+            ",\n    Oro Ganado: " + oroGanado +
+            ",\n    registroRonda: " + registroRondas.toString(); //habrá que revisar cómo escribir el registro de rondas
+        return combate;
 }
     
     public Jugador obtenerUDessafiado(){
@@ -67,5 +65,13 @@ public class Combate {
     
     public Jugador obtenerUDesafiante(){
         return uDesafiante;
+    }
+    
+    //Son necesarias para mostrar el historial de oro
+    public int obtenerOroGanado(){
+        return this.oroGanado;
+    }
+    public String obtenerVencedor(){
+        return this.vencedor;
     }
 }

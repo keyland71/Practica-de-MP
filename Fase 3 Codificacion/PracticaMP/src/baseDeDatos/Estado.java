@@ -1,6 +1,8 @@
 package baseDeDatos;
 
 import clasesDeJuego.NumeroRegistro;
+import clasesDeJuego.Personaje;
+import clasesDeJuego.Usuario;
 
 /**
  *
@@ -10,13 +12,37 @@ import clasesDeJuego.NumeroRegistro;
  * @author Marcos Jiménez Pulido
  */
 public class Estado {
-    
-    private AlmacenUsuarios almacenUsuarios;
+
+    private static AlmacenUsuarios almacenUsuarios;
+    private static AlmacenDesafios almacenDesafios;
+    private static AlmacenPersonajes almacenPersonajes;
     //...
-    private NumeroRegistro ultimoNumRegistro;
+    private static NumeroRegistro ultimoNumRegistro;
+    
+    private static Usuario usuarioActivo;
+    private static Personaje personajeActivo;
     
     public Estado(){
-        this.almacenUsuarios = new AlmacenUsuarios();
+        Estado.almacenUsuarios = new AlmacenUsuarios();
+        Estado.almacenDesafios = new AlmacenDesafios();
+        Estado.almacenPersonajes = new AlmacenPersonajes();
         //...
+    }
+    
+    
+    public static Usuario obtenerUsuarioActivo() {
+        return Estado.usuarioActivo;
+    }
+    public static Personaje obtenerPersonajeActivo() {
+        return Estado.personajeActivo;
+    }
+    public static AlmacenUsuarios obtenerAlmacenUsuarios() {
+        return Estado.almacenUsuarios;
+    }
+    public static AlmacenDesafios obtenerAlmacenDesafios() {
+        return Estado.almacenDesafios;
+    }
+    public static AlmacenPersonajes obtenerAlmacenPersonajes(){
+        return Estado.almacenPersonajes;
     }
 }

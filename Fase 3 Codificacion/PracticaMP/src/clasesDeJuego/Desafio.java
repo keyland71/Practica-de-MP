@@ -36,14 +36,16 @@ public class Desafio {
         return oroApostado;
     }
     
-    public String resultadoCombate (Combate comb){
-       String combate = comb.toStringCombate(); 
-       return combate;
+    public String resultadoCombate(Combate comb){
+       return comb.toStringCombate();
     }
     
     /*public String mostrarResultado(){  //guardará sólo el oro
         
     }*/
     
+    public Combate obtenerCombate(){
+       return this.combate;
+    }
     
 }

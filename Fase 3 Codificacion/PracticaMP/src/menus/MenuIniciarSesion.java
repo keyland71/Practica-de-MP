@@ -15,7 +15,7 @@ import java.util.Scanner;
  * @author Marcos Jiménez Pulido
  */
 public class MenuIniciarSesion {
-     private List<String> mensajes;
+    private List<String> mensajes;
     private List<String> mensajesError;
     private Scanner lector;   
     
