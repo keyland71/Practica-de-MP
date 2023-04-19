@@ -65,10 +65,10 @@ public class ControladorRegistro {
                 return opcion.length() > 0;
             }
             case 2 -> {
-                return opcion.length() >= 8 && opcion.length() <= 12;
+                return opcion.length() >= 8 && opcion.length() <= 12 || opcion.equalsIgnoreCase("salir");
             }
             default -> { //case 3 
-                return opcion.equalsIgnoreCase("admin") || opcion.equalsIgnoreCase("jugador");
+                return opcion.equalsIgnoreCase("admin") || opcion.equalsIgnoreCase("jugador") || opcion.equalsIgnoreCase("salir");
             }
         }
     }

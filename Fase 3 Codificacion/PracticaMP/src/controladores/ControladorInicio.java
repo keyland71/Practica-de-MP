@@ -49,7 +49,7 @@ public class ControladorInicio {
     private boolean validarEntrada(String opcion) {
         if (this.modo == 0) {
             return this.opcionesDisponibles.contains(opcion);
-        }
+        } // modo == 1
         return opcion.equalsIgnoreCase("si") || opcion.equalsIgnoreCase("no");
     }
 

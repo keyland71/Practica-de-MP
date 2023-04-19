@@ -53,9 +53,9 @@ public class ControladorInicioSesion {
 
     private boolean validarEntrada(String opcion) {
         if (this.modo == 0) {
-            return nickExistente(opcion);
+            return nickExistente(opcion) || opcion.equalsIgnoreCase("salir");
         }
-        return comprobarContrasenia(opcion);
+        return comprobarContrasenia(opcion) ;
     }
 
     /**
@@ -98,22 +98,10 @@ public class ControladorInicioSesion {
      * coincide con la del usuario introducido. Falso en otro caso.
      */
     private boolean comprobarContrasenia(String contrasenia) {
-        boolean valido = (contrasenia.length() >= 8 && contrasenia.length() <= 12) && contraseniaValida(contrasenia);
-        return valido;
-    }
-
-    /**
-     * Comprueba que la contraseña introducida por el usuario coincida con la
-     * del usuario introducido al iniciar sesión
-     *
-     * @param contrasenia
-     * @return Verdadero si la contraseña coincide con la del usuario
-     * introducido. Falso en caso contrario.
-     */
-    private boolean contraseniaValida(String contrasenia) {
         AlmacenUsuarios almacen = Estado.obtenerAlmacenUsuarios();
         Usuario usuario = almacen.obtenerUsuario(this.nick);
-        return usuario.compararContrasenia(contrasenia);
+        boolean valido = (contrasenia.length() >= 8 && contrasenia.length() <= 12) && usuario.compararContrasenia(contrasenia);
+        return valido;
     }
 
     /**
