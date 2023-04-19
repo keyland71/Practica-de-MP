@@ -1,0 +1,1 @@
+En esta carpeta se guardarán todos los archivos asociados a los almacenes del programa, así como el último número de registro

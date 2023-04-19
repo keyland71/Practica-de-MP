@@ -13,43 +13,47 @@ import java.util.Scanner;
  * @author Lucía Domínguez Rodrigo
  * @author Ángel Marqués García
  * @author Marcos Jiménez Pulido
+ *
+ * Este menú contiene los mensajes referidos al inicio de sesión en la
+ * aplicación. También contiene los mensajes de error convenientes por cada paso
+ * de la ejecución y, además, un mensaje de error para cuando no hay usuarios en
+ * la base de datos, indicando al usuario que debe registrarse primero.
  */
 public class MenuIniciarSesion {
+
     private List<String> mensajes;
     private List<String> mensajesError;
-    private Scanner lector;   
-    
- public MenuIniciarSesion(){
-   this.mensajes= new ArrayList<>();
-   this.mensajesError = new ArrayList<>();
-   
-   String mensaje = "Introduce tu nick unico:";
-   this.mensajes.add(mensaje);
-   mensaje = "Introduce tu contrasenia:";
-   this.mensajes.add(mensaje);
-     mensaje = " ¿Desa iniciar sesion? (si / no)";
-   this.mensajes.add(mensaje);
-   mensaje = "Por favor, introduzca un nick valido. Pulse cualquier boton para continuar";
-   this.mensajesError.add(mensaje);
-   mensaje = "Por favor, introduzca una contrasenia valida. Pulse cualquier boton para continuar";
-   this.mensajesError.add(mensaje);
-  
-   this.lector = new Scanner(System.in);
-  }
- 
-   public String mostrarMensaje(int pos) {
+    private Scanner lector;
+
+    public MenuIniciarSesion() {
+        this.mensajes = new ArrayList<>();
+        this.mensajesError = new ArrayList<>();
+
+        String mensaje = "Introduce tu nick:";
+        this.mensajes.add(mensaje);
+        mensaje = "Introduce tu contrasenia: (escriba \"salir\" si desea salir al menú principal)";
+        this.mensajes.add(mensaje);
+        mensaje = "Por favor, introduzca un nick valido. Pulse cualquier boton para continuar.";
+        this.mensajesError.add(mensaje);
+        mensaje = "Por favor, introduzca una contrasenia valida. Pulse cualquier boton para continuar.";
+        this.mensajesError.add(mensaje);
+        mensaje = "No existen usuarios. Por favor, registrese primero y luego vuelva aqui. Pulse cualquier boton para continuar.";
+        this.mensajesError.add(mensaje);
+
+        this.lector = new Scanner(System.in);
+    }
+
+    public String mostrarMensaje(int pos) {
         String mensaje = this.mensajes.get(pos);
         System.out.println(mensaje);
         String opcion = this.lector.nextLine();
         return opcion;
     }
- 
-  public void mostrarMensajeError(int modo) {
-        String mensaje = this.mensajesError.get(modo);
+
+    public void mostrarMensajeError(int pos) {
+        String mensaje = this.mensajesError.get(pos);
         System.out.println(mensaje);
         this.lector.nextLine();
     }
- 
- 
- 
+
 }

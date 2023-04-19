@@ -33,6 +33,10 @@ import java.util.Map;
         return this.usuarios;
     }
     
+    public int obtenerNumUsuarios(){
+        return this.usuarios.keySet().size();
+    }
+    
     public void aniadirUsuario(Usuario u){
         this.usuarios.put(u.obtenerNick(), u);
         guardarUsuarios();
@@ -40,7 +44,6 @@ import java.util.Map;
     
     
     private void cargarUsuarios() {
-        //carga usuarios
         AlmacenUsuarios almacenLeido = null;
         try {
             String fic = "./archivos/AlmacenUsuarios.AlmacenUsuarios";
@@ -55,7 +58,6 @@ import java.util.Map;
     }
     
     public void guardarUsuarios(){
-        //guarda usuarios
         try {
             String fic = "./archivos/AlmacenUsuarios.AlmacenUsuarios";
             ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(fic));

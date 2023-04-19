@@ -29,7 +29,7 @@ public class MenuInicio {
         this.mensajes.add(mensaje);
         mensaje = "¿Está seguro de que desea salir?";
         this.mensajes.add(mensaje);
-        mensaje = "Por favor, introduzca un valor correcto. Pulse cualquier botón para continuar";
+        mensaje = "Por favor, introduzca un valor correcto. Pulse cualquier boton para continuar.";
         this.mensajesError.add(mensaje);
         this.lector = new Scanner(System.in);
     }
@@ -41,8 +41,8 @@ public class MenuInicio {
         return opcion;
     }
 
-    public void mostrarMensajeError(int modo) {
-        String mensaje = this.mensajesError.get(modo);
+    public void mostrarMensajeError(int pos) {
+        String mensaje = this.mensajesError.get(pos);
         System.out.println(mensaje);
        this.lector.nextLine();
     }

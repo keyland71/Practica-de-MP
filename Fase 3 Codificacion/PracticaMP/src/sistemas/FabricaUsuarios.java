@@ -19,18 +19,42 @@ import clasesDeJuego.Usuario;
  * @author Marcos Jiménez Pulido
  */
 public class FabricaUsuarios {
-    //en el diseño pone que tiene como atributo un Jugador y un Admin
-    //aunque las flechas dicen que sólo los usa
-    //no veo qué ganas teniéndolos como atributo, así que no los pongo
+    
+    private String nick;
+    private String contrasenia;
+    private String nombre;
+
+    /**
+     * @param nick the nick to set
+     */
+    public void ponerNick(String nick) {
+        this.nick = nick;
+    }
+
+    /**
+     * @param contrasenia the contrasenia to set
+     */
+    public void ponerContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void ponerNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
     public FabricaUsuarios(){
     }
-    public Jugador crearJugador(String nombre, String nick, String contrasenia){
-        Jugador j =new Jugador(nombre, nick, contrasenia);
+    
+    public Jugador crearJugador(){
+        Jugador j =new Jugador(this.nombre, this.nick, this.contrasenia);
         ponerNumeroRegistro(j);
         return j;
     }
-    public Administrador crearAdministrador(String nombre, String nick, String contrasenia){
-        Administrador admin =new Administrador(nombre, nick, contrasenia);
+    public Administrador crearAdministrador(){
+        Administrador admin =new Administrador(this.nombre, this.nick, this.contrasenia);
         return admin;
     }
     private void ponerNumeroRegistro(Jugador j){
