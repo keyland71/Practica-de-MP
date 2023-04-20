@@ -6,6 +6,7 @@ package controladores;
 
 import baseDeDatos.AlmacenDesafios;
 import baseDeDatos.AlmacenPersonajes;
+import baseDeDatos.AlmacenUsuarios;
 import baseDeDatos.Estado;
 import clasesDeJuego.Combate;
 import clasesDeJuego.Desafio;
@@ -13,6 +14,7 @@ import clasesDeJuego.Jugador;
 import clasesDeJuego.Usuario;
 import java.util.ArrayList;
 import java.util.List;
+import menus.MenuBorrarCuenta;
 import menus.MenuBorrarPersonaje;
 import menus.MenuJugador;
 import menus.MenuOro;
@@ -23,24 +25,27 @@ import menus.MenuRanking;
  * @author Ángel Marqués
  */
 public class ControladorJugador { //ojo cuidao con las notificaciones
+
     private Usuario usuario; //esto es necesario? 
     private MenuJugador menuJugador;
     private MenuRanking menuRanking;
     private MenuOro menuOro;
     private MenuBorrarPersonaje menuBorrarPersonaje;
+    private MenuBorrarCuenta menuBorrarCuenta;
     private int modo;  //0 selección de opción, 1 borrarPersonaje (si/no)
-    
-    public ControladorJugador(){
+
+    public ControladorJugador() {
         this.menuBorrarPersonaje = new MenuBorrarPersonaje();
+        this.menuBorrarCuenta = new MenuBorrarCuenta();
         this.menuJugador = new MenuJugador();
-        this.menuRanking = new MenuRanking(); 
+        this.menuRanking = new MenuRanking();
         this.menuOro = new MenuOro();
-        
+
         this.usuario = Estado.obtenerUsuarioActivo();
         this.modo = 0;
     }
-    
-    public void iniciarControlador(){
+
+    public void iniciarControlador() {
         boolean salir = false;
         do {
             this.modo = 0;
@@ -51,25 +56,26 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
                 this.menuJugador.mostrarMensajeError(0);
             }
         } while (!salir);
+        Estado.ponerUsuarioActivo(null);
     }
-    
-    private boolean validarEntrada(String opcion){
-        switch (this.modo){
+
+    private boolean validarEntrada(String opcion) {
+        switch (this.modo) {
             case 0 -> { //input válido si es un número del 1 al 8, inclusive
                 return opcion.equals("1") || opcion.equals("2") || opcion.equals("3") || opcion.equals("4") || opcion.equals("5") || opcion.equals("6") || opcion.equals("7") || opcion.equals("8");
             }
             case 1 -> {
-                return opcion.equals("si") || opcion.equals("no");
+                return opcion.equalsIgnoreCase("si") || opcion.equalsIgnoreCase("no");
             }
         }
         return false;
     }
-    
-    private boolean procesarEntrada(String entrada){
+
+    private boolean procesarEntrada(String entrada) {
         String opcion;
-        switch (this.modo){
+        switch (this.modo) {
             case 0 -> {
-                switch (entrada){
+                switch (entrada) {
                     case "1" -> { //consultar ranking
                         this.menuRanking.mostrarRanking();
                     }
@@ -90,24 +96,48 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
                     }
                     case "6" -> { // borrar personaje
                         //comprobar que tiene un personaje
+                        if (Estado.obtenerPersonajeActivo() == null) { //si no hay personaje activo, no lo puedes borrar
+                            return false;
+                        }
                         boolean valido;
                         do {
                             this.modo = 1;
                             opcion = this.menuBorrarPersonaje.mostrarMensaje(0); //seguro que lo quieres borrar?
                             valido = validarEntrada(opcion);
-                            if (!valido){
+                            if (!valido) {
                                 this.menuBorrarPersonaje.mostrarMensajeError(0);
                             }
                         } while (!valido);
-                        if (opcion.equals("si")){
+                        if (opcion.equalsIgnoreCase("si")) {
                             AlmacenPersonajes almacen = Estado.obtenerAlmacenPersonajes();
                             almacen.borrarPersonaje(Estado.obtenerPersonajeActivo());
                             this.menuBorrarPersonaje.mostrarMensaje(1); //borrado correctamente
                         }
                     }
                     case "7" -> { // borrar cuenta
-                        //preguntar si está seguro
-                        //luego obtener el almacén de usuarios, y eliminar el usuario con el nombre del usuario activo
+                        //pregunta 2 veces si quieres borrar la cuenta. 
+                        //Si en alguna dices que no, sale inmediatamente. 
+                        //Si en ambas dices que sí, borra la cuenta.
+                        boolean valido;
+                        int i = 0;
+                        do {
+                            this.modo = 1;
+                            opcion = this.menuBorrarCuenta.mostrarMensaje(i); //seguro que lo quieres borrar?
+                            valido = validarEntrada(opcion);
+                            if (!valido) {
+                                this.menuBorrarCuenta.mostrarMensajeError();
+                            } else if (opcion.equalsIgnoreCase("no")) {
+                                break;
+                            } else { //opcion == si
+                                i++;
+                            }
+                        } while (!valido || i != 2); //se mantiene aquí hasta que reciba 2 veces un input valido
+                        if (opcion.equalsIgnoreCase("si") && i == 2) {
+                            AlmacenUsuarios almacen = Estado.obtenerAlmacenUsuarios();
+                            almacen.borrarUsuario(Estado.obtenerUsuarioActivo());
+                            this.menuBorrarCuenta.mostrarMensaje(i); //borrado correctamente
+                            return true;
+                        }
                     }
                     case "8" -> { // cerrar sesión
                         String optSalir = this.menuJugador.mostrarMensaje(3);
@@ -126,7 +156,7 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
         AlmacenDesafios almacen = Estado.obtenerAlmacenDesafios();
         List<Desafio> desafios = almacen.obtenerDesafiosCompletados((Jugador) Estado.obtenerUsuarioActivo());
         List<Combate> combates = new ArrayList<>();
-        for (Desafio desafio:desafios) {
+        for (Desafio desafio : desafios) {
             combates.add(desafio.obtenerCombate());
         }
         this.menuOro.mostrarHistorial(combates);

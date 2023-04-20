@@ -42,6 +42,11 @@ import java.util.Map;
         guardarUsuarios();
     }
     
+    public void borrarUsuario(Usuario u){
+        this.usuarios.remove(u.obtenerNick());
+        guardarUsuarios();
+    }
+    
     
     private void cargarUsuarios() {
         AlmacenUsuarios almacenLeido = null;
