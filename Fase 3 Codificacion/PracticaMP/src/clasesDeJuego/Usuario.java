@@ -16,7 +16,7 @@ public class Usuario implements Serializable{
     private String contrasenia;
     private boolean baneado;
     private NumeroRegistro numReg;
-    private Personaje personaje;
+   
     
     public Usuario(String nombre, String nick, String contrasenia){
         this.nombre = nombre;
@@ -24,7 +24,6 @@ public class Usuario implements Serializable{
         this.contrasenia = encriptarContrasenia(contrasenia);
         this.baneado = false;
         this.numReg = new NumeroRegistro();
-        this.personaje = null;
     }
     
     public String obtenerNick(){
@@ -49,7 +48,5 @@ public class Usuario implements Serializable{
     public void ponerNumReg(NumeroRegistro numR){
         this.numReg.copiar(numR); 
     }
-    public void ponerPersonaje(Personaje p){
-        this.personaje = p;
-    }
+   
 }
