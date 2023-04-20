@@ -24,6 +24,10 @@ public class FabricaUsuarios {
     private String contrasenia;
     private String nombre;
 
+    
+        public FabricaUsuarios(){
+    }
+        
     /**
      * @param nick the nick to set
      */
@@ -45,8 +49,7 @@ public class FabricaUsuarios {
         this.nombre = nombre;
     }
     
-    public FabricaUsuarios(){
-    }
+
     
     public Jugador crearJugador(){
         Jugador j =new Jugador(this.nombre, this.nick, this.contrasenia);

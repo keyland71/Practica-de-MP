@@ -109,7 +109,7 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
                 if (opcion.equalsIgnoreCase("si")) {
                     AlmacenPersonajes almacen = Estado.obtenerAlmacenPersonajes();
                     almacen.borrarPersonaje(Estado.obtenerPersonajeActivo()); //habrá que ver cómo se implementa borrarPersonaje
-                    Estado.obtenerUsuarioActivo().ponerPersonaje(null); //esto lo debería cambiar también de Estado.personajeActivo, al ser referencias
+                    Estado.quitarPersonajeActivo(); //esto lo debería cambiar también de Estado.personajeActivo, al ser referencias
                     this.menuBorrarPersonaje.mostrarMensaje(1); //borrado correctamente
                 }
             }

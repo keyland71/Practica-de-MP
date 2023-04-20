@@ -18,6 +18,10 @@ public class Jugador extends Usuario {
     public Personaje obtenerPersonaje(){
         return this.personaje;
     }
+    
+     public void ponerPersonaje(Personaje p){
+        this.personaje = p;
+    }
     //no me tiene sentido implementar aquí estaBaneado, porque necesitarias implementarlo tb arriba
     //y para eso te quedas con la implementación de arriba
     //más sentido me tiene implementarlo arriba y hacer override en Admin
