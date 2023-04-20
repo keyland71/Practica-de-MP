@@ -23,7 +23,7 @@ import menus.MenuIniciarSesion;
 public class ControladorInicioSesion {
 
     private MenuIniciarSesion menuIniciarSesion;
-    private int modo;
+    private int modo; 
     private String nick;
 
     public ControladorInicioSesion() {
@@ -51,11 +51,11 @@ public class ControladorInicioSesion {
 
     }
 
-    private boolean validarEntrada(String opcion) {
+    private boolean validarEntrada(String opcion){
         if (this.modo == 0) {
             return nickExistente(opcion) || opcion.equalsIgnoreCase("salir");
         }
-        return comprobarContrasenia(opcion) ;
+        return comprobarContrasenia(opcion);
     }
 
     /**
@@ -100,7 +100,7 @@ public class ControladorInicioSesion {
     private boolean comprobarContrasenia(String contrasenia) {
         AlmacenUsuarios almacen = Estado.obtenerAlmacenUsuarios();
         Usuario usuario = almacen.obtenerUsuario(this.nick);
-        boolean valido = (contrasenia.length() >= 8 && contrasenia.length() <= 12) && usuario.compararContrasenia(contrasenia);
+        boolean valido = contrasenia.equalsIgnoreCase("salir") || usuario.compararContrasenia(contrasenia); //(contrasenia.length() >= 8 && contrasenia.length() <= 12) && usuario.compararContrasenia(contrasenia);
         return valido;
     }
 

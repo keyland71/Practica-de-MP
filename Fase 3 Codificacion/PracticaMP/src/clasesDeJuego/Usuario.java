@@ -38,7 +38,7 @@ public class Usuario implements Serializable{
         return c;
     }
     public boolean esAdministrador(){
-        return this.numReg.equals(new NumeroRegistro());
+        return this.numReg.sonIguales(new NumeroRegistro());
     }
     public boolean estaBaneado(){
         return this.baneado;

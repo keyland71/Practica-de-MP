@@ -54,7 +54,7 @@ public class FabricaUsuarios {
         return j;
     }
     public Administrador crearAdministrador(){
-        Administrador admin =new Administrador(this.nombre, this.nick, this.contrasenia);
+        Administrador admin = new Administrador(this.nombre, this.nick, this.contrasenia);
         return admin;
     }
     private void ponerNumeroRegistro(Jugador j){

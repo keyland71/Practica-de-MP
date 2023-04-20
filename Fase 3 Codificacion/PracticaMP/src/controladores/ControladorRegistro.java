@@ -25,7 +25,7 @@ public class ControladorRegistro {
 
     private MenuRegistro menuRegistro;
     private FabricaUsuarios fabricaUsuarios;
-    private int modo;
+    private int modo; ////0 nick, 1 nombre, 2 contraseña, 3 tipo
 
     public ControladorRegistro() {
         this.menuRegistro = new MenuRegistro();
@@ -56,7 +56,7 @@ public class ControladorRegistro {
      * @param opcion dato introducido por el usuario
      * @return 
      */
-    private boolean validarEntrada(String opcion) {
+    private boolean validarEntrada(String opcion) { //0 nick, 1 nombre, 2 contraseña, 3 tipo
         switch (this.modo) {
             case 0 -> {
                 return nickUnico(opcion);
@@ -78,7 +78,7 @@ public class ControladorRegistro {
      * @param opcion
      * @return 
      */
-    private boolean procesarEntrada(String opcion) {
+    private boolean procesarEntrada(String opcion){ //0 nick, 1 nombre, 2 contraseña, 3 tipo
         if (opcion.equalsIgnoreCase("salir")) {
             return true;
         }
@@ -87,10 +87,10 @@ public class ControladorRegistro {
                 this.fabricaUsuarios.ponerNick(opcion);
             }
             case 1 -> {
-                this.fabricaUsuarios.ponerContrasenia(opcion);
+                this.fabricaUsuarios.ponerNombre(opcion);//this.fabricaUsuarios.ponerContrasenia(opcion);
             }
             case 2 -> {
-                this.fabricaUsuarios.ponerNombre(opcion);
+                this.fabricaUsuarios.ponerContrasenia(opcion);//this.fabricaUsuarios.ponerNombre(opcion);
             }
             default -> { //case 3
                 registrarUsuario(opcion);
@@ -122,7 +122,7 @@ public class ControladorRegistro {
      */
     private boolean hacerPeticion() throws RuntimeException {
         boolean salir = false;
-        String opcion = this.menuRegistro.mostrarMensaje(this.modo);
+        String opcion = this.menuRegistro.mostrarMensaje(this.modo); //0 nick, 1 nombre, 2 contraseña, 3 tipo
         boolean valido = validarEntrada(opcion);
 
         if (valido) {

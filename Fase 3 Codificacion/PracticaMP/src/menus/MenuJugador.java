@@ -22,14 +22,15 @@ public class MenuJugador { //se ocupa de Ranking, Oro, Borrar personaje, y ¿Cre
         this.mensajesError = new ArrayList<>();
         
         String mensaje0 = """
-                          1. Consultar Ranking
-                          2. Cambiar Equipo Activo
-                          3. Hacer Desafío
-                          4. Consultar Historial de Oro
-                          5. Crear Personaje
-                          6. Borrar Personaje
-                          7. Borrar Cuenta
-                          8. Cerrar Sesión
+                          Bienvenido al Menú de Jugador, estas son tus opciones:
+                            1. Consultar Ranking
+                            2. Cambiar Equipo Activo
+                            3. Hacer Desafío
+                            4. Consultar Historial de Oro
+                            5. Crear Personaje
+                            6. Borrar Personaje
+                            7. Borrar Cuenta
+                            8. Cerrar Sesión
                           """;
         String mensaje1 = "¿Seguro que quiere borrar su personaje?";
         String mensaje2 = "¿Seguro que quiere borrar su cuenta?";
