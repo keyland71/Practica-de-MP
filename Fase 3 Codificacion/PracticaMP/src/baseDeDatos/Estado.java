@@ -1,5 +1,6 @@
 package baseDeDatos;
 
+import clasesDeJuego.Jugador;
 import clasesDeJuego.NumeroRegistro;
 import clasesDeJuego.Personaje;
 import clasesDeJuego.Usuario;
@@ -7,7 +8,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.HashMap;
 
 /**
  *
@@ -25,7 +25,6 @@ public class Estado {
     private static NumeroRegistro ultimoNumRegistro;
     
     private static Usuario usuarioActivo;
-    private static Personaje personajeActivo;
     
     public Estado(){
         Estado.almacenUsuarios = new AlmacenUsuarios();
@@ -33,6 +32,7 @@ public class Estado {
         Estado.almacenPersonajes = new AlmacenPersonajes();
         //...
         cargarNumReg();
+        this.usuarioActivo = null;
     }
     
     
@@ -73,8 +73,19 @@ public class Estado {
     public static Usuario obtenerUsuarioActivo() {
         return Estado.usuarioActivo;
     }
+    //cuidado con esta función, podría dar problemas
     public static Personaje obtenerPersonajeActivo() {
-        return Estado.personajeActivo;
+        try {
+            if (Class.forName("Jugador").isInstance(Estado.usuarioActivo)){
+                Jugador j = (Jugador) Estado.usuarioActivo;
+                return j.obtenerPersonaje();
+            }
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Estado.obtenerPersonajeActivo() ha dado problemas; ");
+            System.out.println(ex);
+        }
+        return null;
+        
     }
     public static AlmacenUsuarios obtenerAlmacenUsuarios() {
         return Estado.almacenUsuarios;

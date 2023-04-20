@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author marqu
+ * @author Ángel Marqués García
  */
 public class Usuario implements Serializable{
     private String nombre;
@@ -16,6 +16,7 @@ public class Usuario implements Serializable{
     private String contrasenia;
     private boolean baneado;
     private NumeroRegistro numReg;
+    private Personaje personaje;
     
     public Usuario(String nombre, String nick, String contrasenia){
         this.nombre = nombre;
@@ -23,13 +24,12 @@ public class Usuario implements Serializable{
         this.contrasenia = encriptarContrasenia(contrasenia);
         this.baneado = false;
         this.numReg = new NumeroRegistro();
+        this.personaje = null;
     }
     
     public String obtenerNick(){
         return this.nick;
     }
-    //this does not work. either encriptarContrasenia es público, o (y considero que es mejor)
-    //no ponemos obtenerContrasenia sino compararContrasenia.
     public boolean compararContrasenia(String input){
         return this.contrasenia.equals(encriptarContrasenia(input));
     }
@@ -46,11 +46,10 @@ public class Usuario implements Serializable{
     public void cambiarBaneo(boolean b){
         this.baneado = b;
     }
-    
-    //de ángel. Esto supone que en el constructor se inicializa numReg (creo que si no no funcionaría)
-    // ahora mismo esa suposición no se cumple
     public void ponerNumReg(NumeroRegistro numR){
         this.numReg.copiar(numR); 
     }
-    
+    public void ponerPersonaje(Personaje p){
+        this.personaje = p;
+    }
 }
