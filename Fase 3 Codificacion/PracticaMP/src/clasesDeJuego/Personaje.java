@@ -31,8 +31,8 @@ public abstract class Personaje {
     private int puntosRecurso;
     
     
-    public Personaje(String nombre) {
-        this.nombre = nombre;
+    public Personaje() {
+       //se ha quitado porque no deja contruir bn los constructores de los modelos de las fábricas HAY QUE REVISARLO
     }
     
     public void ponerArmasActivas(Set<Arma> armas){
@@ -43,9 +43,11 @@ public abstract class Personaje {
         this.armaduraActiva = armadura;
     }   
     
-    public abstract int calcularPotencialAtaque(); //Como el personaje que se le pasa como parámetro es el personaje mismo, no se pone. Se tendrá que llamar a si mismo (this)
+    public int calcularPotencialAtaque(){
+       return 0; } ; //Como el personaje que se le pasa como parámetro es el personaje mismo, no se pone. Se tendrá que llamar a si mismo (this)
     
-    public abstract int calcularPotencialDefensa();
+    public int calcularPotencialDefensa(){
+     return 0; }
     
     public int calcularVida(){ //¿Por que no mejor obtenerVida()? No se calcula nada
         return this.vida;

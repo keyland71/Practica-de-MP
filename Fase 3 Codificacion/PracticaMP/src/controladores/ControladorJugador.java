@@ -142,8 +142,9 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
                 String optSalir = this.menuJugador.mostrarMensaje(3);
                 this.modo = 1;
                 if (validarEntrada(optSalir)) {
-                    return optSalir.equals("si");
+                    return optSalir.equalsIgnoreCase("si");
                 } //end if
+
             } // end case "8"
         } //end switch 1
         return false;
