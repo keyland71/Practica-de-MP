@@ -11,20 +11,22 @@
 package clasesDeJuego;
 
 
-public class Modificador {
+public abstract class Modificador {
 
     private String nombre;
     private int valor;
     private boolean estaActivo;
     
     
-    public int obtenerIncremento() {
-        return this.valor;
-    } 
-    
     public void ponerActivo(boolean activo){
         this.estaActivo = true;
     }
+    
+    public int obtenerValor(){
+        return this.valor;
+    }
+    
+    public abstract int obtenerIncremento();
     
 }
 

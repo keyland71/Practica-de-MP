@@ -17,5 +17,6 @@ public class Administrador extends Usuario{
     public boolean estaBaneado(){
         return false;
     }
-    public void cambiarBaneo(boolean b){}
+    public void cambiarBaneo(boolean b){
+    }
 }

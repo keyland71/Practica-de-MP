@@ -23,7 +23,7 @@ public class Ronda {
         this.vidaInicialA = vidaIniA;
         this.vidaInicialB = 0; //valor por defecto
         this.vidaFinalA = 0;   //valor por defecto
-        this.vidaFinalB =0;    //alor por defecto
+        this.vidaFinalB =0;    //valor por defecto
         this.valorAtaqueFinalA =0; //valor por defecto
         this.valorAtaqueFinalB=0; //valor por defecto
         this.valorDefensaA=0; //valor por defecto;

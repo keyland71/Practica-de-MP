@@ -19,12 +19,20 @@ public class Vampiro extends Personaje implements Cloneable {
         
     }
     
-    
+    @Override
+    public boolean puedeUsarHabilidad(){
+        if (this.obtenerRecurso() >= this.obtenerHabilidadEspecial().obtenerCoste()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     
     @Override
-    public void modificarRecurso  (int recurso){ 
+    public void modificarRecurso (int recurso){ 
         //sangre que le quita a su oponente. Pone que como máximo tiene que ser 10
-        if ((this.obtenerRecurso ())<=10) { //pone que tiene que ser como máximo 10.
+        if ((this.obtenerRecurso())<=10) { //pone que tiene que ser como máximo 10.
             ponerRecurso (recurso);
         }
         Vampiro v = new Vampiro();

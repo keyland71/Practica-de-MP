@@ -25,8 +25,8 @@ public abstract class Personaje {
     private int oro;
     private int vida;
     private int poder;
-    private List<Modificador> debilidades;
-    private List<Modificador> fortalezas;
+    private List<Debilidad> debilidades;
+    private List<Fortaleza> fortalezas;
     private String descripcion;
     private int puntosRecurso;
     
@@ -44,7 +44,7 @@ public abstract class Personaje {
     }   
     
     public int calcularPotencialAtaque(){
-       return 0; } ; //Como el personaje que se le pasa como parámetro es el personaje mismo, no se pone. Se tendrá que llamar a si mismo (this)
+       return 0; } //Como el personaje que se le pasa como parámetro es el personaje mismo, no se pone. Se tendrá que llamar a si mismo (this)
     
     public int calcularPotencialDefensa(){
      return 0; }
@@ -53,35 +53,45 @@ public abstract class Personaje {
         return this.vida;
     }
     
-    //public boolean puedeUsarHabilidad(). ¿Qué hace? ¿Innecesario?
+    public HabilidadEspecial obtenerHabilidadEspecial(){
+        return this.habilidadEspecial;
+    }
+    
+    public abstract boolean puedeUsarHabilidad();
     
     public void modificarRecurso(int cantidad){
         this.puntosRecurso = cantidad;
+    }
+    
+    public void ponerRecurso (int recurso){
+        this.puntosRecurso = recurso;
+    }
+
+    public int obtenerRecurso (){
+        return this.puntosRecurso;
     }
     
     public void recibirDanio(int danio){
         this.vida -= danio;
     }
     
-    public void activarModificadores(List<Modificador> modificadores){ //Posibilidad de pasarle 2 listas independientes : una con las fortalezas y otra con las debilidades, para evitar el casting
-        ArrayList <Modificador> listaFortalezas = new ArrayList <Modificador>();
-        ArrayList <Modificador> listaDebilidades = new ArrayList <Modificador>();
-        
-        for (int i=0; i<=modificadores.size();i++){
-            if (modificadores.get(i).obtenerIncremento() > 0){ //Para poder clasificarlos de esta forma, se necesita hacer casting. 
-                listaFortalezas.add(modificadores.get(i)); 
-            }
-            else{
-                listaDebilidades.add(modificadores.get(i));
-             }    
-        }
+    public void activarFortalezas (List<Fortaleza> listaFortalezas){
         this.fortalezas = listaFortalezas;
+    }
+
+    public void activarDebilidades (List<Debilidad> listaDebilidades){
         this.debilidades = listaDebilidades;
     }
     
-    public void reestablecerPersonaje(){
-        //Se reestablecen los campos del personaje pero, ¿dónde están esos valores guardados para restaurarlos?
+    
+    /*public void reestablecerPersonaje(){
+        this.armaduraActiva = null;
+        this.armasActivas.clear();
+        this.vida = 
     }
+    ¿Se reestablecen todos a null o solo algunos? ¿Cuáles?
+    
+    */
     
     public void sumarOro(int oro){
         this.oro += oro;

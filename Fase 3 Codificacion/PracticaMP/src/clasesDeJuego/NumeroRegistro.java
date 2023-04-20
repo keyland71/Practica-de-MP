@@ -25,7 +25,7 @@ public class NumeroRegistro implements Serializable { //debe implementar equals
         this.numero2 = 0;
     }
 
-    //lucia
+
     public NumeroRegistro(char caracter1, int numero1, int numero2, char caracter2, char caracter3) {
         this.caracter1 = caracter1;
         this.numero1 = numero1;
@@ -34,7 +34,7 @@ public class NumeroRegistro implements Serializable { //debe implementar equals
         this.caracter3 = caracter3;
     }
 
-    //de angel
+    
     public void copiar(NumeroRegistro numReg) {
         this.caracter1 = numReg.caracter1;
         this.numero1 = numReg.numero1;

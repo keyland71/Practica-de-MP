@@ -12,7 +12,8 @@ package clasesDeJuego;
  */
 public class Cazador extends Personaje implements Cloneable {
    
-     public Cazador () {
-        
+    @Override
+    public boolean puedeUsarHabilidad(){
+        return true;
     }
 }

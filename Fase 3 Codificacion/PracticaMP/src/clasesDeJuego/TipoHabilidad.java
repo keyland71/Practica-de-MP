@@ -8,6 +8,8 @@ package clasesDeJuego;
  *
  * @author lucia
  */
-public class Don extends HabilidadEspecial {
-    
+public enum TipoHabilidad {
+    Disciplina,
+    Don,
+    Talento;
 }

@@ -9,7 +9,9 @@ package clasesDeJuego;
  * @author marqu
  */
 public class Jugador extends Usuario {
+    
     private Personaje personaje;
+    
     
     public Jugador(String nombre, String nick, String contrasenia){
         super(nombre, nick, contrasenia); //se hacía así?
@@ -22,6 +24,15 @@ public class Jugador extends Usuario {
      public void ponerPersonaje(Personaje p){
         this.personaje = p;
     }
+     
+    public boolean jugadorBaneado(){
+        return this.estaBaneado();
+    } 
+    
+    public void cambiarEstadoBaneo(boolean b){
+        this.cambiarBaneo(b);
+    }
+     
     //no me tiene sentido implementar aquí estaBaneado, porque necesitarias implementarlo tb arriba
     //y para eso te quedas con la implementación de arriba
     //más sentido me tiene implementarlo arriba y hacer override en Admin

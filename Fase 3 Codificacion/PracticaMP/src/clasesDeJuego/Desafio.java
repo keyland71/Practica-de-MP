@@ -40,10 +40,6 @@ public class Desafio {
        return comb.toStringCombate();
     }
     
-    /*public String mostrarResultado(){  //guardará sólo el oro
-        
-    }*/
-    
     public Combate obtenerCombate(){
        return this.combate;
     }

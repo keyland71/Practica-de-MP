@@ -6,6 +6,7 @@ package clasesDeJuego;
 
 import java.io.Serializable;
 
+
 /**
  *
  * @author Ángel Marqués García
@@ -14,6 +15,7 @@ public class Usuario implements Serializable{
     private String nombre;
     private String nick;
     private String contrasenia;
+    private int claveEncriptacion;
     private boolean baneado;
     private NumeroRegistro numReg;
    
@@ -29,13 +31,36 @@ public class Usuario implements Serializable{
     public String obtenerNick(){
         return this.nick;
     }
+    
+    public String obtenerContrasenia(){
+        return this.contrasenia;  
+    }
+    
     public boolean compararContrasenia(String input){
         return this.contrasenia.equals(encriptarContrasenia(input));
     }
-    //por implementar
+    
+    
     private String encriptarContrasenia(String c){
-        return c;
+        /*String [] caracteres = c.split("");
+        int clave = (int)(((Math.random()*10)+1)*96); //Genera un numero aleatorio entre el 0 y el 96
+        if (clave > 126) {
+            clave = clave / 2;
+        }
+        for (int i = 0; i<= c.length(); i++){
+           char caracter = caracteres[i].charAt(0);
+           int posicionTablaASCII = caracter;
+           posicionTablaASCII = (posicionTablaASCII + clave);
+           char nuevoCaracter = (char) posicionTablaASCII;
+           String nuevoString = nuevoCaracter.toString(0); //REVISAR
+           caracteres[i] = nuevoString;
+           String contrasenia = contrasenia.concat(caracteres[i]);
+        }
+        this.claveEncriptacion = clave;*/
+        
+        return c; //Debería de ser return contrasenia
     }
+
     public boolean esAdministrador(){
         return this.numReg.sonIguales(new NumeroRegistro());
     }
@@ -48,5 +73,5 @@ public class Usuario implements Serializable{
     public void ponerNumReg(NumeroRegistro numR){
         this.numReg.copiar(numR); 
     }
-   
-}
+    
+  }
