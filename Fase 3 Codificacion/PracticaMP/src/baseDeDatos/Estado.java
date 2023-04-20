@@ -35,6 +35,17 @@ public class Estado {
         this.usuarioActivo = null;
     }
     
+    public static void quitarPersonajeActivo(){
+        try {
+            if (Class.forName("Jugador").isInstance(Estado.usuarioActivo)){
+                Jugador j = (Jugador) Estado.usuarioActivo;
+                j.ponerPersonaje(null);
+            }
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Estado.quitarPersonajeActivo() ha dado problemas;");
+            System.out.println(ex);
+        }        
+    }
     
     public static void ponerUsuarioActivo(Usuario u){
         Estado.usuarioActivo = u;
