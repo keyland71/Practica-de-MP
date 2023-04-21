@@ -46,7 +46,6 @@ public class Combate {
     }
     
     public String toStringCombate () { 
-        //Más, Esto es cómo se le mostrará al usuario el combate, por qué ponemos uDesafiante en vez de Usuario desafiante?
         String combate =  "Partida: " +
             "\n    Usuario Desafiante: " + uDesafiante +
             ",\n    Usuario Desafiado: " + uDesafiado +

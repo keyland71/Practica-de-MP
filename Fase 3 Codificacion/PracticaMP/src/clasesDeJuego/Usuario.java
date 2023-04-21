@@ -23,8 +23,7 @@ public class Usuario implements Serializable{
     public Usuario(String nombre, String nick, String contrasenia){
         this.nombre = nombre;
         this.nick = nick;
-        this.contrasenia = this.encriptarContrasenia(contrasenia);
-        this.claveEncriptacion = 0;
+        this.contrasenia = this.encriptarContrasenia(contrasenia, true);
         this.baneado = false;
         this.numReg = new NumeroRegistro();
     }
@@ -38,13 +37,19 @@ public class Usuario implements Serializable{
     }
     
     public boolean compararContrasenia(String input){
-        return this.contrasenia.equals(encriptarContrasenia(input));
+        return this.contrasenia.equals(encriptarContrasenia(input, false));
     }
     
     
-    public String encriptarContrasenia(String c){ //Funciona (probado aparte)
+    public final String encriptarContrasenia(String c, boolean generarClave){ //Funciona (probado aparte)
+        int clave;
         String [] caracteres = c.split("");
-        int clave = (int)((Math.random()*126)+33); //Genera un numero aleatorio entre el 33 y el 126 (caracteres imprimibles de la tabla ASCII)
+        if (generarClave){
+            clave = (int)((Math.random()*126)+33); //Genera un numero aleatorio entre el 33 y el 126 (caracteres imprimibles de la tabla ASCII)
+        } else {
+            clave = this.claveEncriptacion;
+        }
+        this.claveEncriptacion = clave;
         
         String contraseniaEncriptada = "";
         for (int i = 0; i<= c.length()-1; i++){
@@ -59,8 +64,9 @@ public class Usuario implements Serializable{
            caracteres[i] = nuevoString;
            contraseniaEncriptada = contraseniaEncriptada + (caracteres[i] == null ? "" : caracteres[i]);  
         }
-        this.claveEncriptacion = clave;
+        
         return contraseniaEncriptada; 
+
     }
     
     public String desencriptarContrasenia(String c){ //Funciona (probado aparte)

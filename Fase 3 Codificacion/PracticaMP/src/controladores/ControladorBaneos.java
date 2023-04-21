@@ -22,7 +22,7 @@ public class ControladorBaneos {
     private List<Jugador> jugadores;
     private int modo;
     private int pagActual;
-    public static int tamPag = 5;
+    public static final int tamPag = 5;
 
     public ControladorBaneos(boolean mostrarBan) {
         this.menuBan = new MenuBaneo();
@@ -32,7 +32,7 @@ public class ControladorBaneos {
         this.jugadores = new ArrayList<>();
     }
 
-    public void cargarJugadores(){
+    private void cargarJugadores(){
         AlmacenUsuarios almacen = Estado.obtenerAlmacenUsuarios();
         List<Jugador> candidatos = almacen.obtenerJugadores();
         
@@ -56,7 +56,8 @@ public class ControladorBaneos {
         do {
             this.modo = 0;
             if (this.pagActual*tamPag>this.jugadores.size()-1){ //this is some confusing logic
-                if (this.pagActual != 0){
+                //entramos aquí si la página actual NO tiene jugadores
+                if (this.pagActual != 0){ 
                     this.pagActual--;
                 } else{
                     this.menuBan.mostrarMensaje(mostrarBaneados ? 5:4);
@@ -88,11 +89,11 @@ public class ControladorBaneos {
                 int mod = jugadores.size() % tamPag; 
                 if (mod==0 || this.pagActual != ultimaPagina){ // si la última página tiene tamPag elementos o no estamos en la última página
                     for (int i=1;i<=tamPag;i++){ //el for hace lo mismo que los or, pero dinámico. Permite que los válidos dependan de tamPag
-                    if (opcion.equals(Integer.toString(i))){
-                        return true;
+                        if (opcion.equals(Integer.toString(i))){
+                            return true;
+                        }
                     }
-                }
-                    //return opcion.equals("1") || opcion.equals("2") || opcion.equals("3") || opcion.equals("4") || opcion.equals("5");
+                    return false;
                 }
                 // Si estamos en la última página, y esta tiene menos de tamPag elementos
                 for (int i=1;i<=mod;i++){
@@ -154,7 +155,7 @@ public class ControladorBaneos {
             case "salir" -> {
                 return true;
             } //end if
-            } //end case 5
+        } //end case 5
 
         return false;
     }
