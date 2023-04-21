@@ -23,7 +23,8 @@ public class Usuario implements Serializable{
     public Usuario(String nombre, String nick, String contrasenia){
         this.nombre = nombre;
         this.nick = nick;
-        this.contrasenia = encriptarContrasenia(contrasenia);
+        this.contrasenia = this.encriptarContrasenia(contrasenia);
+        this.claveEncriptacion = 0;
         this.baneado = false;
         this.numReg = new NumeroRegistro();
     }
@@ -41,24 +42,41 @@ public class Usuario implements Serializable{
     }
     
     
-    private String encriptarContrasenia(String c){
-        /*String [] caracteres = c.split("");
-        int clave = (int)(((Math.random()*10)+1)*96); //Genera un numero aleatorio entre el 0 y el 96
-        if (clave > 126) {
-            clave = clave / 2;
-        }
-        for (int i = 0; i<= c.length(); i++){
+    public String encriptarContrasenia(String c){ //Funciona (probado aparte)
+        String [] caracteres = c.split("");
+        int clave = (int)((Math.random()*126)+33); //Genera un numero aleatorio entre el 33 y el 126 (caracteres imprimibles de la tabla ASCII)
+        
+        String contraseniaEncriptada = "";
+        for (int i = 0; i<= c.length()-1; i++){
            char caracter = caracteres[i].charAt(0);
            int posicionTablaASCII = caracter;
+           while (posicionTablaASCII + clave > 126){ //Para que la suma del entero ASCII mas la clave de encriptacion siempre sea un caracter imprimible de la tabla ASCII
+               clave = clave / 2;
+           }
            posicionTablaASCII = (posicionTablaASCII + clave);
            char nuevoCaracter = (char) posicionTablaASCII;
-           String nuevoString = nuevoCaracter.toString(0); //REVISAR
+           String nuevoString = Character.toString(nuevoCaracter);
            caracteres[i] = nuevoString;
-           String contrasenia = contrasenia.concat(caracteres[i]);
+           contraseniaEncriptada = contraseniaEncriptada + (caracteres[i] == null ? "" : caracteres[i]);  
         }
-        this.claveEncriptacion = clave;*/
-        
-        return c; //Debería de ser return contrasenia
+        this.claveEncriptacion = clave;
+        return contraseniaEncriptada; 
+    }
+    
+    public String desencriptarContrasenia(String c){ //Funciona (probado aparte)
+        String [] caracteres = c.split("");
+        String contraseniaDesencriptada = "";
+        for (int i = 0; i<= c.length()-1; i++){
+           char caracter = caracteres[i].charAt(0);
+           int posicionTablaASCII = caracter;
+           posicionTablaASCII = (posicionTablaASCII - this.claveEncriptacion);
+           char nuevoCaracter = (char) posicionTablaASCII;
+           String nuevoString = Character.toString(nuevoCaracter);
+           caracteres[i] = nuevoString;
+           contraseniaDesencriptada = contraseniaDesencriptada + (caracteres[i] == null ? "" : caracteres[i]);  
+        }
+        this.claveEncriptacion = 0;
+        return contraseniaDesencriptada; 
     }
 
     public boolean esAdministrador(){
