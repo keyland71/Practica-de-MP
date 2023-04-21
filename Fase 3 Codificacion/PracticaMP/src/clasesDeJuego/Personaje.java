@@ -35,6 +35,10 @@ public abstract class Personaje {
        //se ha quitado porque no deja contruir bn los constructores de los modelos de las fábricas HAY QUE REVISARLO
     }
     
+    public int obtenerOro(){
+        return this.oro;
+    }
+    
     public void ponerArmasActivas(Set<Arma> armas){
         this.armasActivas = armas;
     }
