@@ -4,9 +4,6 @@
  */
 package clasesDeJuego;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 
 /**
  *
@@ -35,14 +32,7 @@ public class Vampiro extends Personaje implements Cloneable {
         if ((this.obtenerRecurso())<=10) { //pone que tiene que ser como máximo 10.
             ponerRecurso (recurso);
         }
-        Vampiro v = new Vampiro();
-        try {
-            v.clone();
-        } catch (CloneNotSupportedException ex) {
-            System.out.println(ex);
-            Logger.getLogger(Vampiro.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    } 
+    }
     
 }
 

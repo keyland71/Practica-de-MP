@@ -11,13 +11,6 @@ package sistemas;
  */
 
 public class FabricaPersonajes {
-
-    private ModeloVampiro modeloVampiro;
     
-   /* private ModeloLicantropo modeloLicantropo;
-    
-    private ModeloCazador modeloCazador;
-
-*/
 
 }
