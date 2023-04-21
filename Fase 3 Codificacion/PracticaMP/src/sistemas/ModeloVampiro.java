@@ -25,6 +25,12 @@ class ModeloVampiro extends Personaje {
  @Override
    public int calcularPotencialDefensa(){
      return 0; }
+
+   //esta me decia NetBeans que la tengo que añadir, la ha añadido netbeans. Daba problemas, en rojo
+    @Override
+    public boolean puedeUsarHabilidad() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
   }
     
     

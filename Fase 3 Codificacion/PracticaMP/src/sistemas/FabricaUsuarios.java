@@ -62,7 +62,7 @@ public class FabricaUsuarios {
     }
     private void ponerNumeroRegistro(Jugador j){
         NumeroRegistro num = Estado.obtenerNumeroRegistro();
-        num = num.incrementarNumReg();
+        num.incrementarNumReg(); //num = num.incrementarNumReg()
         j.ponerNumReg(num);
         Estado.ponerNumReg(num);
     }
