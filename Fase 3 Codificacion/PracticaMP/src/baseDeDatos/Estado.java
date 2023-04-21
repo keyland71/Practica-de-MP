@@ -37,7 +37,7 @@ public class Estado {
     
     public static void quitarPersonajeActivo(){
         try {
-            if (Class.forName("Jugador").isInstance(Estado.usuarioActivo)){
+            if (Class.forName("clasesDeJuego.Jugador").isInstance(Estado.usuarioActivo)){
                 Jugador j = (Jugador) Estado.usuarioActivo;
                 j.ponerPersonaje(null);
             }
@@ -66,11 +66,12 @@ public class Estado {
         try {
             String fic = "./archivos/UltimoNumeroDeRegistro.NumeroRegistro";
             ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(fic));
-            this.ultimoNumRegistro = (NumeroRegistro) entrada.readObject();
+            Estado.ultimoNumRegistro = (NumeroRegistro) entrada.readObject();
             entrada.close();
         } catch (Exception e) {
             System.out.println("No se ha encontrado el último numero de registro.");
-            this.ultimoNumRegistro = new NumeroRegistro();
+            System.out.println(e);
+            Estado.ultimoNumRegistro = new NumeroRegistro();
         }
     }
     
@@ -87,7 +88,7 @@ public class Estado {
     //cuidado con esta función, podría dar problemas
     public static Personaje obtenerPersonajeActivo() {
         try {
-            if (Class.forName("Jugador").isInstance(Estado.usuarioActivo)){
+            if (Class.forName("clasesDeJuego.Jugador").isInstance(Estado.usuarioActivo)){
                 Jugador j = (Jugador) Estado.usuarioActivo;
                 return j.obtenerPersonaje();
             }

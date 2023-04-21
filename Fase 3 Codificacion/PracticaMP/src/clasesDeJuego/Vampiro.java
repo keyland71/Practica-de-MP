@@ -39,6 +39,7 @@ public class Vampiro extends Personaje implements Cloneable {
         try {
             v.clone();
         } catch (CloneNotSupportedException ex) {
+            System.out.println(ex);
             Logger.getLogger(Vampiro.class.getName()).log(Level.SEVERE, null, ex);
         }
     } 

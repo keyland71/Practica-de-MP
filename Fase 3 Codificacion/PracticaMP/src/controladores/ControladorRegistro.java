@@ -46,6 +46,7 @@ public class ControladorRegistro {
                     this.modo++;
                 }
             } catch (RuntimeException e) {
+                System.out.println(e);
                 this.menuRegistro.mostrarMensajeError(this.modo);
             }
         }

@@ -1,12 +1,15 @@
 package baseDeDatos;
 
+import clasesDeJuego.Jugador;
 import clasesDeJuego.Usuario;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,38 +19,57 @@ import java.util.Map;
  * @author Ángel Marqués García
  * @author Marcos Jiménez Pulido
  */
- public class AlmacenUsuarios implements Serializable{
+public class AlmacenUsuarios implements Serializable {
+
     private Map<String, Usuario> usuarios;
-    
-    public AlmacenUsuarios(){
+
+    public AlmacenUsuarios() {
         this.cargarUsuarios();
     }
 
-    public Usuario obtenerUsuario(String nick){
+    public List<Jugador> obtenerJugadores() {
+        List<Jugador> result = new ArrayList<>();
+        try {
+            for (Usuario u : usuarios.values()) {
+                if (Class.forName("clasesDeJuego.Jugador").isInstance(u)) {
+                    Jugador j = (Jugador) u;
+                    result.add(j);
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            System.out.println("AlmacenUsuarios.obtenerJugadores() ha dado problemas;");
+            System.out.println(ex);
+        }
+
+        return result;
+    }
+
+    public Usuario obtenerUsuario(String nick) {
         return this.usuarios.get(nick);
     }
-    public boolean existeUsuario(String nick){
+
+    public boolean existeUsuario(String nick) {
         return this.usuarios.containsKey(nick);
     }
-    private Map<String, Usuario> obtenerUsuarios(){
+
+    private Map<String, Usuario> obtenerUsuarios() {
         return this.usuarios;
     }
-    
-    public int obtenerNumUsuarios(){
+
+    public int obtenerNumUsuarios() {
         return this.usuarios.keySet().size();
     }
-    
-    public void aniadirUsuario(Usuario u){
+
+    public void aniadirUsuario(Usuario u) {
         this.usuarios.put(u.obtenerNick(), u);
         guardarUsuarios();
     }
-    
-    public void borrarUsuario(Usuario u){
+
+    public void borrarUsuario(Usuario u) {
         this.usuarios.remove(u.obtenerNick());
         guardarUsuarios();
     }
-    
-    
+
     private void cargarUsuarios() {
         AlmacenUsuarios almacenLeido = null;
         try {
@@ -58,11 +80,12 @@ import java.util.Map;
             entrada.close();
         } catch (Exception e) {
             System.out.println("No se ha encontrado el almacén, así que se ha creado uno nuevo");
+            System.out.println(e);
             this.usuarios = new HashMap<>();
         }
     }
-    
-    public void guardarUsuarios(){
+
+    public void guardarUsuarios() {
         try {
             String fic = "./archivos/AlmacenUsuarios.AlmacenUsuarios";
             ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(fic));
@@ -75,7 +98,6 @@ import java.util.Map;
     }
 
 }
-
 
 //esto está copiado de algún sitio
 //write

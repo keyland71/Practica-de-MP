@@ -26,9 +26,10 @@ public MenuAdmin(){
                          Por favor, elija una opcion:
                          1) Editar Personajes
                          2) Validar desafios
-                         3) Banerar/desbanear usuarios
-                         4) Darse de baja
-                         5) Salir""";
+                         3) Banear usuarios
+                         4) Desbanear usuarios
+                         5) Darse de baja
+                         6) Salir""";
         this.mensajes.add(mensaje);
         mensaje = "¿Esta seguro de que quiere borrar su cuenta?";
         this.mensajes.add(mensaje);

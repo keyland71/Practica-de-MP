@@ -42,6 +42,9 @@ public class ControladorInicioSesion {
                         this.modo++;
                     }
                 } catch (RuntimeException e) {
+                    e.printStackTrace();
+                    System.out.println(e);
+                    
                     this.menuIniciarSesion.mostrarMensajeError(this.modo);
                 }
             }
