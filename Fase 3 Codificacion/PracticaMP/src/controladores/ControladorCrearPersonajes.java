@@ -4,44 +4,43 @@
  */
 package controladores;
 
-import baseDeDatos.AlmacenUsuarios;
+import baseDeDatos.AlmacenPersonajes;
 import baseDeDatos.Estado;
 import clasesDeJuego.Desafio;
 import clasesDeJuego.Jugador;
-import clasesDeJuego.Personaje;
-import menus.MenuCrearDesafio;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import menus.MenuCrearPersonaje;
+import sistemas.FabricaPersonajes;
 
 /**
  *
- * @author Sergio de Oro
- * @author Marcos Jimenez
- * @author Lucía Dominguez
- * @author Ángel Marqués
+ * @author lucia
  */
-public class ControladorCrearDesafío {
+public class ControladorCrearPersonajes {
+       private int modo;
+    private MenuCrearPersonaje menuCrearPersonajes;
+    private Set <String> tipoPersonajes;
+      private FabricaPersonajes fabricaPersonaje;
 
-    private int modo;
-    private MenuCrearDesafio menuDesafio;
-    private int oro;
-    private Jugador oponente; 
-    
-
-    public ControladorCrearDesafío() {
-        this.menuDesafio = new MenuCrearDesafio();
+    public ControladorCrearPersonajes() {
+        this.menuCrearPersonajes = new MenuCrearPersonaje();
         this.modo = 0;
+        this.tipoPersonajes = new HashSet(Arrays.asList("vampiro", "licantropo", "cazador"));
     }
 
     public void iniciarControlador() {
         boolean salir = false;
         this.modo = 0;
         do {
-            String opcion = this.menuDesafio.mostrarMensaje(this.modo);
+            String opcion = this.menuCrearPersonajes.mostrarMensaje(this.modo);
             boolean valido = validarEntrada(opcion);
             if (valido) {
                 salir = procesarEntrada(opcion);
                 this.modo++;
             } else {
-                this.menuDesafio.mostrarMensajeError(this.modo);
+                this.menuCrearPersonajes.mostrarMensajeError(this.modo);
             }
         } while (!salir);
     }
@@ -51,11 +50,11 @@ public class ControladorCrearDesafío {
             return true;
         }
         switch (this.modo) {
-            case 0 -> { //input válido si es un número del 1 al 8, inclusive
-                return confirmarOro(opcion);
+            case 0 -> { //input válido si 
+                return  this.nombreUnico(opcion)|| opcion.equalsIgnoreCase ("salir") ;
             }
             case 1 -> {
-                return nickExiste(opcion);
+                return this.tipoPersonajes.contains(opcion) || opcion.equalsIgnoreCase ("salir");
             }
             case 2 -> {
                 return opcion.equalsIgnoreCase("si") || opcion.equalsIgnoreCase("no");
@@ -64,20 +63,16 @@ public class ControladorCrearDesafío {
         return false;
     }
 
-    private boolean confirmarOro(String o) {
-        int oroA = Integer.parseInt(o);
-        Jugador j = (Jugador) Estado.obtenerUsuarioActivo();
-        Personaje p = j.obtenerPersonaje();
-        return p.obtenerOro() > oroA;
+    private boolean nombreUnico (String o) {
+         
+        AlmacenPersonajes almacen = Estado.obtenerAlmacenPersonajes();
+        return !almacen.existePersonaje(o);
     }
+    
 
-    private boolean nickExiste(String nombre) {
-        AlmacenUsuarios almacen = Estado.obtenerAlmacenUsuarios();
-        return almacen.existeUsuario(nombre);
-    }
-
-    private boolean procesarEntrada(String entrada) {
-        if (entrada.equalsIgnoreCase("salir")){
+   
+    private boolean procesarEntrada (String entrada) {
+    /* if (entrada.equalsIgnoreCase("salir")){
             return true;
         }
         String opcion;
@@ -85,7 +80,8 @@ public class ControladorCrearDesafío {
             case 0 -> { //guardar el oro apostado
                 this.oro = Integer.parseInt(entrada);
             }
-            case 1 -> { //guardar el oponente
+            case 1 -> { 
+                
                 this.oponente = (Jugador) Estado.obtenerAlmacenUsuarios().obtenerUsuario(entrada);
             }
             case 2 -> { //crear el desafío y guardarlo
@@ -96,7 +92,7 @@ public class ControladorCrearDesafío {
                 }
             }
 
-        } //end switch 1
+        } //end switch 1*/
         return false;
     }
 }

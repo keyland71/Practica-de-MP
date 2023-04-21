@@ -15,10 +15,12 @@ import java.util.List;
 import java.util.Scanner;
 
 
+
 public class MenuCrearPersonaje {
     private List<String> mensajes;
     private List<String> mensajesError;
-    private Scanner lector;   
+    private Scanner lector;  
+  
     
     public MenuCrearPersonaje(){
         this.mensajes = new ArrayList<>();
@@ -37,6 +39,12 @@ public class MenuCrearPersonaje {
     public String mostrarMensaje(int pos) {
         System.out.println(this.mensajes.get(pos));
         return this.lector.nextLine();
+    }
+    
+      public void mostrarMensajeError(int pos) {
+        String mensaje = this.mensajesError.get(pos);
+        System.out.println(mensaje);
+       this.lector.nextLine();
     }
     
 }

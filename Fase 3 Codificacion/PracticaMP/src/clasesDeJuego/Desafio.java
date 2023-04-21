@@ -44,4 +44,11 @@ public class Desafio {
        return this.combate;
     }
     
+    public Jugador obtenerJugadorDesafiante (){
+        return this.uDesafiante;
+    }
+    
+    public Jugador obtenerJugadorDesafiado (){
+        return uDesafiado;
+    }
 }

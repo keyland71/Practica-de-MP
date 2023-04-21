@@ -152,7 +152,7 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
 
     private void mostrarMenuOro() {
         AlmacenDesafios almacen = Estado.obtenerAlmacenDesafios();
-        List<Desafio> desafios = almacen.obtenerDesafiosCompletados((Jugador) Estado.obtenerUsuarioActivo());
+        List<Desafio> desafios = almacen.obtenerDesafiosCompletados(/*(Jugador) Estado.obtenerUsuarioActivo()*/);
         List<Combate> combates = new ArrayList<>();
         for (Desafio desafio : desafios) {
             combates.add(desafio.obtenerCombate());
