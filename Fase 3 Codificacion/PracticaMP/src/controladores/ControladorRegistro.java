@@ -8,6 +8,7 @@ import baseDeDatos.AlmacenUsuarios;
 import baseDeDatos.Estado;
 import clasesDeJuego.Usuario;
 import menus.MenuRegistro;
+import sistemas.ExcepcionMalaEntrada;
 import sistemas.FabricaUsuarios;
 
 /**
@@ -45,7 +46,7 @@ public class ControladorRegistro {
                 if (!salir) {
                     this.modo++;
                 }
-            } catch (RuntimeException e) {
+            } catch (ExcepcionMalaEntrada e) {
                 System.out.println(e);
                 this.menuRegistro.mostrarMensajeError(this.modo);
             }
@@ -121,7 +122,7 @@ public class ControladorRegistro {
      * entrada hay que salir. Falso en otro caso
      * @throws RuntimeException indica que el dato introducido no es válido
      */
-    private boolean hacerPeticion() throws RuntimeException {
+    private boolean hacerPeticion() throws ExcepcionMalaEntrada {
         boolean salir = false;
         String opcion = this.menuRegistro.mostrarMensaje(this.modo); //0 nick, 1 nombre, 2 contraseña, 3 tipo
         boolean valido = validarEntrada(opcion);
@@ -129,7 +130,7 @@ public class ControladorRegistro {
         if (valido) {
             salir = procesarEntrada(opcion);
         } else {
-            throw new RuntimeException();
+            throw new ExcepcionMalaEntrada();
         }
 
         return salir;

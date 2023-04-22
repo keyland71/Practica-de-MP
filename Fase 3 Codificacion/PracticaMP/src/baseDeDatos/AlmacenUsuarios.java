@@ -97,6 +97,17 @@ public class AlmacenUsuarios implements Serializable {
         }
     }
 
+    public List<Jugador> obtenerJugadoresBan(boolean mostrarBaneados) {
+        List<Jugador> candidatos = this.obtenerJugadores();
+        List<Jugador> result = new ArrayList<>();
+        for (Jugador j:candidatos){
+            if (j.estaBaneado() == mostrarBaneados){
+                result.add(j);
+            }
+        }
+        return result;
+    }
+
 }
 
 //esto está copiado de algún sitio

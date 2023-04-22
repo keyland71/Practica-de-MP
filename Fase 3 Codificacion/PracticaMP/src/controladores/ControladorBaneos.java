@@ -34,13 +34,7 @@ public class ControladorBaneos {
 
     private void cargarJugadores(){
         AlmacenUsuarios almacen = Estado.obtenerAlmacenUsuarios();
-        List<Jugador> candidatos = almacen.obtenerJugadores();
-        
-        for (Jugador j:candidatos){
-            if (j.estaBaneado() == this.mostrarBaneados){
-                this.jugadores.add(j);
-            }
-        }
+        this.jugadores = almacen.obtenerJugadoresBan(mostrarBaneados);
     }
     
     public void iniciarControlador() {
@@ -86,7 +80,7 @@ public class ControladorBaneos {
                 if (opcion.equalsIgnoreCase("salir") || opcion.equalsIgnoreCase("s") || opcion.equalsIgnoreCase("a")){
                     return true;
                 }
-                int mod = jugadores.size() % tamPag; 
+                int mod = jugadores.size() % tamPag; //mod guarda el numero de elementos en la última página
                 if (mod==0 || this.pagActual != ultimaPagina){ // si la última página tiene tamPag elementos o no estamos en la última página
                     for (int i=1;i<=tamPag;i++){ //el for hace lo mismo que los or, pero dinámico. Permite que los válidos dependan de tamPag
                         if (opcion.equals(Integer.toString(i))){
@@ -105,38 +99,16 @@ public class ControladorBaneos {
                 
             }
             case 1 -> {
-                return opcion.equals("si") || opcion.equals("no");
+                return opcion.equalsIgnoreCase("si") || opcion.equalsIgnoreCase("no");
             }
         }
         return false;
     }
 
-    private boolean procesarEntrada(String entrada) {
+    private boolean procesarEntrada(String entrada) { //importan las mayúsculas? 
         boolean valido;
         String opcion;
         switch (entrada) {
-            case "1", "2", "3", "4", "5"  -> {
-                do {
-                    this.modo = 1; //el modo es para que de por valido "si" y "no"
-                    opcion = this.menuBan.mostrarMensaje(2); //seguro que lo quieres banear?
-                    valido = validarEntrada(opcion);
-                    if (!valido) {
-                        this.menuBan.mostrarMensajeError(1);
-                    }
-                } while (!valido);
-                if (opcion.equalsIgnoreCase("si")){
-                    int pos = Integer.parseInt(entrada) + this.pagActual*ControladorBaneos.tamPag;
-                    pos--; //para que sea el índice real
-                    
-                    this.jugadores.get(pos).cambiarBaneo(!mostrarBaneados); //realizamos el cambio
-                    Estado.obtenerAlmacenUsuarios().guardarUsuarios();      //guardamos el cambio
-                    
-                    this.jugadores.remove(pos);         //actualizamos nuestra lista
-                    this.menuBan.quitarJugador(pos);    //actualizamos la lista del menú
-                    
-                    this.menuBan.mostrarMensaje(3); // usuario baneado
-                }
-            }
             case "s" -> { //suma 1 a la página actual si no estamos en la última. 
                 //Para saber si estamos en la última, divide el tamaño de la lista entre el tamaño de página (redondeando hacia arriba), y lo compara con la página actual
                 if (this.pagActual != Math.ceil((double) jugadores.size() / tamPag)-1) {
@@ -155,6 +127,27 @@ public class ControladorBaneos {
             case "salir" -> {
                 return true;
             } //end if
+            default  -> { //si se pone este al final, como default, no se hay que preocupar por los números, ya sabemos que es válido
+                do {
+                    this.modo = 1; //el modo es para que de por valido "si" y "no"
+                    opcion = this.menuBan.mostrarMensaje(2); //seguro que lo quieres banear?
+                    valido = validarEntrada(opcion);
+                    if (!valido) {
+                        this.menuBan.mostrarMensajeError(1);
+                    }
+                } while (!valido);
+                if (opcion.equalsIgnoreCase("si")){
+                    int pos = Integer.parseInt(entrada) + this.pagActual*ControladorBaneos.tamPag - 1;
+                    
+                    this.jugadores.get(pos).cambiarBaneo(!mostrarBaneados); //realizamos el cambio
+                    Estado.obtenerAlmacenUsuarios().guardarUsuarios();      //guardamos el cambio
+                    
+                    this.jugadores.remove(pos);         //actualizamos nuestra lista
+                    this.menuBan.quitarJugador(pos);    //actualizamos la lista del menú
+                    
+                    this.menuBan.mostrarMensaje(3); // usuario baneado
+                }
+            }
         } //end case 5
 
         return false;

@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author burakku
+ * @author Ángel Marqués
  */
 public class MenuBaneo {
     private List<String> jugadores;

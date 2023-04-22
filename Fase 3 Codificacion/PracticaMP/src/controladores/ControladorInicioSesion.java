@@ -8,6 +8,7 @@ import baseDeDatos.AlmacenUsuarios;
 import baseDeDatos.Estado;
 import clasesDeJuego.Usuario;
 import menus.MenuIniciarSesion;
+import sistemas.ExcepcionMalaEntrada;
 
 /**
  *
@@ -41,7 +42,7 @@ public class ControladorInicioSesion {
                     if (!salir) {
                         this.modo++;
                     }
-                } catch (RuntimeException e) {
+                } catch (ExcepcionMalaEntrada e) {
                     e.printStackTrace();
                     System.out.println(e);
                     
@@ -115,7 +116,7 @@ public class ControladorInicioSesion {
      * entrada hay que salir. Falso en otro caso
      * @throws RuntimeException indica que el dato introducido no es válido
      */
-    private boolean hacerPeticion() throws RuntimeException {
+    private boolean hacerPeticion() throws ExcepcionMalaEntrada {
         boolean salir = false;
         String opcion = this.menuIniciarSesion.mostrarMensaje(this.modo);
         boolean valido = validarEntrada(opcion);
@@ -123,7 +124,7 @@ public class ControladorInicioSesion {
         if (valido) {
             salir = procesarEntrada(opcion);
         } else {
-            throw new RuntimeException();
+            throw new ExcepcionMalaEntrada();
         }
 
         return salir;
