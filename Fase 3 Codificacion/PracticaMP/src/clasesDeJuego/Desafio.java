@@ -51,4 +51,13 @@ public class Desafio {
     public Jugador obtenerJugadorDesafiado (){
         return uDesafiado;
     }
+
+    public void devolverOro() {
+        this.uDesafiante.obtenerPersonaje().sumarOro(oroApostado);
+    }
+    
+    @Override
+    public String toString(){
+        return this.uDesafiante.obtenerNick() + " -> " + this.uDesafiado + "(" + Integer.toString(this.oroApostado) + ")"; //Escribe angel -> sergio (300)
+    }
 }

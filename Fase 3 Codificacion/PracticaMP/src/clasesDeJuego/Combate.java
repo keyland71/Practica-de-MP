@@ -12,6 +12,7 @@ import java.util.List;
  * @author lucia
  */
 public class Combate {
+
     private Jugador uDesafiante;
     private Jugador uDesafiado;
     private int rondasUsadas;
@@ -20,57 +21,83 @@ public class Combate {
     private String usuarioConEsbirros;
     private int oroGanado;
     private List<Ronda> registroRondas;
-    
-    
-    public Combate (Jugador j1, Jugador j2){
-        this.uDesafiante =j1;
-        this.uDesafiado =j2;
+    private int[] fortDebP1;
+    private int[] fortDebP2;
+
+    public Combate(Jugador j1, Jugador j2) {
+        this.uDesafiante = j1;
+        this.uDesafiado = j2;
         this.fecha = LocalDateTime.now(); //ponía fecha.now, por si diera problemas
         this.rondasUsadas = 0;
         this.vencedor = null;
-        this.usuarioConEsbirros=null;
-        this.oroGanado=0;
-        this.registroRondas=null;   
+        this.usuarioConEsbirros = null;
+        this.oroGanado = 0;
+        this.registroRondas = null;
+        this.fortDebP1 = new int[2];
+        this.fortDebP2 = new int[2];
     }
-    
-    public void incrementoRondasUsadas (){
+
+    public void incrementoRondasUsadas() {
         this.rondasUsadas++;  //incrementa el valor en 1
     }
-    
-    public String obtenerFecha (){
+
+    public String obtenerFecha() {
         return fecha.toString();
     }
-    
-    public void aniadirRonda (Ronda ronda){
+
+    public void aniadirRonda(Ronda ronda) {
         registroRondas.add(ronda);
     }
-    
-    public String toStringCombate () { 
-        String combate =  "Partida: " +
-            "\n    Usuario Desafiante: " + uDesafiante +
-            ",\n    Usuario Desafiado: " + uDesafiado +
-            ",\n    Rondas Usadas: " + rondasUsadas +
-            ",\n    Fecha: " + fecha.toString() +
-            ",\n    Vencedor: " + vencedor  +
-            ",\n    Usuario Con Esbirros Vivos: " + usuarioConEsbirros + 
-            ",\n    Oro Ganado: " + oroGanado +
-            ",\n    registroRonda: " + registroRondas.toString(); //habrá que revisar cómo escribir el registro de rondas
+
+    public String toStringCombate() {
+        String combate = "Partida: "
+                + "\n    Usuario Desafiante: " + uDesafiante
+                + ",\n    Usuario Desafiado: " + uDesafiado
+                + ",\n    Rondas Usadas: " + rondasUsadas
+                + ",\n    Fecha: " + fecha.toString()
+                + ",\n    Vencedor: " + vencedor
+                + ",\n    Usuario Con Esbirros Vivos: " + usuarioConEsbirros
+                + ",\n    Oro Ganado: " + oroGanado
+                + ",\n    registroRonda: " + registroRondas.toString(); //habrá que revisar cómo escribir el registro de rondas
         return combate;
-}
-    
-    public Jugador obtenerUDessafiado(){
+    }
+
+    public Jugador obtenerUDessafiado() {
         return uDesafiado;
     }
-    
-    public Jugador obtenerUDesafiante(){
+
+    public Jugador obtenerUDesafiante() {
         return uDesafiante;
     }
-    
+
     //Son necesarias para mostrar el historial de oro
-    public int obtenerOroGanado(){
+    public int obtenerOroGanado() {
         return this.oroGanado;
     }
-    public String obtenerVencedor(){
+
+    public String obtenerVencedor() {
         return this.vencedor;
+    }
+
+    public void ponerFortalezaP1(int f) {
+        fortDebP1[0] = f;
+    }
+
+    public void ponerDebilidadP1(int f) {
+        fortDebP1[1] = f;
+    }
+
+    public void ponerFortalezaP2(int f) {
+        fortDebP2[0] = f;
+    }
+
+    public void ponerDebilidadP2(int f) {
+        fortDebP2[1] = f;
+    }
+
+    public void resetearModificadores() {
+        this.fortDebP1 = new int[2];
+        this.fortDebP2 = new int[2];
+
     }
 }

@@ -87,6 +87,13 @@ public abstract class Personaje {
         this.debilidades = listaDebilidades;
     }
     
+    public List<Fortaleza> obtenerFortalezas(){
+        return this.fortalezas;
+    }
+    public List<Debilidad> obtenerDebilidades(){
+        return this.debilidades;
+    }
+    
     
     /*public void reestablecerPersonaje(){
         this.armaduraActiva = null;
@@ -97,8 +104,8 @@ public abstract class Personaje {
     
     */
     
-    public void sumarOro(int oro){
-        this.oro += oro;
+    public void sumarOro(int o){
+        this.oro += o;
     }
     
 }

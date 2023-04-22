@@ -64,8 +64,8 @@ public class ControladorAdmin {
             }
             case "2" -> {
                 //se llama a controlador de validar desafio;
-                //ControladorValidarDesafio cValDes = new ControladorValidarDesafio(); //lo mismo que arriba
-                //cValDes.iniciarControlador();
+                ControladorSeleccionarDesafio cSelDes = new ControladorSeleccionarDesafio(); //lo mismo que arriba
+                cSelDes.iniciarControlador();
             }
             case "3" -> { //banear
                 //se llama a controlador de baneos
