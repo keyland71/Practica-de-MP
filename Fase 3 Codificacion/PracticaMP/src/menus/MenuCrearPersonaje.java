@@ -29,10 +29,16 @@ public class MenuCrearPersonaje {
         
         String mensaje = "Introduce el nombre del personaje: ";
         this.mensajes.add(mensaje);
-        mensaje = "Introduce el tipo de personaje: ";
+        mensaje = "Introduce el tipo de personaje (vampiro, licantropo, cazador): ";
+        this.mensajes.add(mensaje);
+        mensaje = "¿Seguro que quieres crear ese personaje?";
         this.mensajes.add(mensaje);
         
-        mensaje = "Por favor, introduzca un valor correcto. Pulse cualquier boton para continuar";
+        mensaje = "Has introducido un nombre inválido. Pulse cualquier boton para continuar"; //se borra esta frase si el nombre no tiene que ser unico
+        this.mensajesError.add(mensaje);
+        mensaje = "Has introducido un tipo inválido. Pulse cualquier boton para continuar";
+        this.mensajesError.add(mensaje);
+        mensaje = "Has introducido un valor inválido. Debes escribir si o no. Pulse cualquier boton para continuar";
         this.mensajesError.add(mensaje);
     }
 
@@ -42,8 +48,7 @@ public class MenuCrearPersonaje {
     }
     
       public void mostrarMensajeError(int pos) {
-        String mensaje = this.mensajesError.get(pos);
-        System.out.println(mensaje);
+        System.out.println(this.mensajesError.get(pos));
        this.lector.nextLine();
     }
     
