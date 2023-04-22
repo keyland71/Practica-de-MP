@@ -52,7 +52,7 @@ public class AlmacenUsuarios implements Serializable {
         return this.usuarios.containsKey(nick);
     }
 
-    Map<String, Usuario> obtenerUsuarios() {
+    public Map<String, Usuario> obtenerUsuarios() {
         return this.usuarios;
     }
 

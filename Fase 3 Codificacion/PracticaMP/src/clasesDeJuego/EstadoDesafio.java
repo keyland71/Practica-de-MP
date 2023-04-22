@@ -11,7 +11,7 @@ package clasesDeJuego;
 public enum EstadoDesafio {
     pendienteValidar,
     validado,
-    completado,
+    aceptado,
     rechazado,
-    pendienteMostrar;  
+    completado;  
 }

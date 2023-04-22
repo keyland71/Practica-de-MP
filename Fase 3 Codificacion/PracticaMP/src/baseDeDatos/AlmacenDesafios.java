@@ -6,6 +6,7 @@ package baseDeDatos;
 
 import clasesDeJuego.Desafio;
 import clasesDeJuego.EstadoDesafio;
+import clasesDeJuego.Jugador;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -13,45 +14,53 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  *
+ * @author Marcos Jiménez
+ * @author Lucia Dominguez
  * @author Ángel Marqués
  */
 public class AlmacenDesafios {
+
     private List<Desafio> desafios;
-    
-   
-    
-    
-    public AlmacenDesafios (){
+
+    public AlmacenDesafios() {
         this.cargarDesafios();
     }
-    
-    
-    public List<Desafio> obtenerDesafiosCompletados(){
-        List<Desafio> desafiosCompletados = new ArrayList <>();
-         for (int i = 0; i<= this.desafios.size();i++) {
-            if (this.desafios.get(i).obtenerEstado() == EstadoDesafio.completado ) {
-              desafiosCompletados.add(desafios.get(i));
-            } 
-         }  
-      return desafiosCompletados; 
+
+    public void aniadirDesafio(Desafio des) {
+        desafios.add(des);
+        this.guardarDesafios();
     }
-    
-    
-    
-     public List<Desafio> obtenerDesafiosAvalidar(){
-         List<Desafio> desafiosAvalidar = new ArrayList <>();
-         for (int i = 0; i<= this.desafios.size();i++) {
-            if (this.desafios.get(i).obtenerEstado() == EstadoDesafio.pendienteValidar ) {
-              desafiosAvalidar.add(desafios.get(i));
-            } 
-         }  
-      return desafiosAvalidar; 
+    public void borrarDesafio(Desafio des) {
+        desafios.remove(des); //esto podría no funcionar si Desafío no implementa .equals En ese caso, habría que buscar secuencialmente uno que coincida
+        this.guardarDesafios();
     }
-     
-     /*
+    public List<Desafio> obtenerDesafios() {
+        return this.desafios;
+    }
+
+    public List<Desafio> obtenerDesafiosCompletados(Jugador j) {
+        List<Desafio> desafiosCompletados = new ArrayList<>();
+        for (Desafio d:this.desafios){
+            if (d.obtenerEstado() == EstadoDesafio.completado && (d.obtenerJugadorDesafiado().obtenerNick().equals(j.obtenerNick()) || d.obtenerJugadorDesafiante().obtenerNick().equals(j.obtenerNick()))){
+                desafiosCompletados.add(d); //si el combate está completado y el j es uno de los dos jugadores, añade el combate
+            }
+        }
+        return desafiosCompletados;
+    }
+
+    public List<Desafio> obtenerDesafiosAvalidar() {
+        List<Desafio> desafiosAvalidar = new ArrayList<>();
+        for (Desafio d:this.desafios){
+            if (d.obtenerEstado() == EstadoDesafio.pendienteValidar) {
+                desafiosAvalidar.add(d);
+            }
+        }
+        return desafiosAvalidar;
+    }
+
+    /*
      public List<Desafio> obtenerDesafiosAvalidar(Jugador j){
          List<Desafio> desafiosAvalidar = new ArrayList <>();
          for (int i = 0; i<= this.desafios.size();i++) {
@@ -62,39 +71,35 @@ public class AlmacenDesafios {
       return desafiosAvalidar; 
     }
      */
-     
-     
-   
-      public List<Desafio> obtenerDesafiosPendientes(){
-         List<Desafio> desafiosPendientes = new ArrayList<>();
-         for (int i = 0; i<= this.desafios.size();i++) {
-            if (this.desafios.get(i).obtenerEstado() == EstadoDesafio.pendienteMostrar) {
-              desafiosPendientes.add(desafios.get(i));
-            } 
-         }  
-      return desafiosPendientes; 
+    public List<Desafio> obtenerDesafiosPendientesAceptar(String nick) {
+        List<Desafio> desafiosPendientes = new ArrayList<>();
+        for (Desafio d:this.desafios){
+            if (d.obtenerEstado() == EstadoDesafio.validado && (d.obtenerJugadorDesafiado().obtenerNick().equals(nick) || d.obtenerJugadorDesafiante().obtenerNick().equals(nick))){
+                desafiosPendientes.add(d); //si el combate está pendiente de aceptar y el j es uno de los dos jugadores, añade el combate
+            }
+        }
+        return desafiosPendientes;
     }
-      
-   
-   
+    
+    public List<Desafio> obtenerDesafiosNoMostrados(String nick) {
+        List<Desafio> desafiosPendientes = new ArrayList<>();
+        for (Desafio d:this.desafios){
+            if ((d.obtenerEstado() == EstadoDesafio.aceptado || d.obtenerEstado() == EstadoDesafio.rechazado) && (d.obtenerJugadorDesafiado().obtenerNick().equals(nick) || d.obtenerJugadorDesafiante().obtenerNick().equals(nick))){
+                desafiosPendientes.add(d); //si el combate está completado o rechazado y el j es uno de los dos jugadores, añade el combate
+            }
+        }
+        return desafiosPendientes;
+    }
 
-    public void aniadirDesafio(Desafio des) {
-        desafios.add(des);
-        this.guardarDesafio();
-    }
-    
-    
-  
-    
-     private void cargarDesafios() {
+ 
+
+    private void cargarDesafios() {
         AlmacenDesafios almacenLeido = null;
         try {
             String fic = "./archivos/AlmacenDesafio.AlmacenDesafio";
             ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(fic));
             almacenLeido = (AlmacenDesafios) entrada.readObject();
-            this.desafios.addAll(almacenLeido.obtenerDesafiosCompletados());
-            this.desafios.addAll(almacenLeido.obtenerDesafiosAvalidar()); //se añade addAll para no sobreescribir this.desafio. Se va añadiendo a la lista desafio según se obtengan
-            this.desafios.addAll(almacenLeido.obtenerDesafiosPendientes());
+            this.desafios = almacenLeido.obtenerDesafios();
             entrada.close();
         } catch (Exception e) {
             System.out.println("No se ha encontrado el almacén, así que se ha creado uno nuevo");
@@ -102,9 +107,8 @@ public class AlmacenDesafios {
             this.desafios = new ArrayList<>();
         }
     }
-     
-     
-       public void guardarDesafio () {
+
+    public void guardarDesafios() {
         try {
             String fic = "./archivos/AlmacenDesafio.AlmacenDesafio";
             ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(fic));
