@@ -5,107 +5,225 @@
  */
 package clasesDeJuego;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.List;
-import java.util.ArrayList;
 
 /**
  *
  * @author Marcos
  */
-
 public abstract class Personaje {
+
     private String nombre;
     private HabilidadEspecial habilidadEspecial;
     private Set<Arma> armasDisponibles;
-    private Set<Arma> armasActivas;
+    private Set<Arma> armasActivas = new HashSet<>();
     private Set<Armadura> armadurasDisponibles;
     private Armadura armaduraActiva;
     private Set<Esbirro> esbirros;
-    private int oro;
+    private int oro = 100;
     private int vida;
     private int poder;
-    private List<Debilidad> debilidades;
-    private List<Fortaleza> fortalezas;
+    private List<Modificador> modificadores;
     private String descripcion;
-    private int puntosRecurso;
-    
-    
-    public Personaje() {
-       //se ha quitado porque no deja contruir bn los constructores de los modelos de las fábricas HAY QUE REVISARLO
-    }
-    
-    public int obtenerOro(){
-        return this.oro;
-    }
-    
-    public void ponerArmasActivas(Set<Arma> armas){
-        this.armasActivas = armas;
-    }
-    
-    public void ponerArmaduraActiva(Armadura armadura){
-        this.armaduraActiva = armadura;
-    }   
-    
-    public int calcularPotencialAtaque(){
-       return 0; } //Como el personaje que se le pasa como parámetro es el personaje mismo, no se pone. Se tendrá que llamar a si mismo (this)
-    
-    public int calcularPotencialDefensa(){
-     return 0; }
-    
-    public int calcularVida(){ //¿Por que no mejor obtenerVida()? No se calcula nada
-        return this.vida;
-    }
-    
-    public HabilidadEspecial obtenerHabilidadEspecial(){
-        return this.habilidadEspecial;
-    }
-    
-    public abstract boolean puedeUsarHabilidad();
-    
-    public void modificarRecurso(int cantidad){
-        this.puntosRecurso = cantidad;
-    }
-    
-    public void ponerRecurso (int recurso){
-        this.puntosRecurso = recurso;
+    private int puntosRecurso = 0;
+
+    public Personaje(HabilidadEspecial hab, Set<Arma> armas, Set<Armadura> armaduras, Set<Esbirro> esbirros, int vida, int poder, List<Modificador> mods, String desc, int puntosRec) {
+        this.nombre = "Modelo Personaje";
+        this.habilidadEspecial = hab;
+        this.armasDisponibles = armas;
+        this.armadurasDisponibles = armaduras;
+        this.esbirros = esbirros;
+        this.vida = vida;
+        this.poder = poder;
+        this.modificadores = mods;
+        this.descripcion = desc;
+        this.puntosRecurso = puntosRec;
     }
 
-    public int obtenerRecurso (){
+    public Personaje(String nombre, Personaje personajeModelo) {
+        this.nombre = nombre;
+        this.habilidadEspecial = personajeModelo.obtenerHabilidadEspecial();
+        this.armasDisponibles = new HashSet<>();
+        for (Arma arma : personajeModelo.obtenerArmasDisponibles()) {
+            this.armasDisponibles.add(arma);
+        }
+        this.armadurasDisponibles = new HashSet<>();
+        for (Armadura armadura : personajeModelo.obtenerArmadurasDisponibles()) {
+            this.armadurasDisponibles.add(armadura);
+        }
+        this.esbirros = new HashSet<>();
+        for (Esbirro esbirro : personajeModelo.obtenerEsbirros()) {
+            this.esbirros.add(esbirro);
+        }
+        this.vida = personajeModelo.obtenerVida();
+        this.poder = personajeModelo.obtenerPoder();
+        this.modificadores = new ArrayList<>();
+        for (Modificador mod : personajeModelo.obtenerModificadores()) {
+            this.modificadores.add(mod);
+        }
+        this.descripcion = personajeModelo.obtenerDescripcion();
+    }
+
+    public String obtenerNombre() {
+        return this.nombre;
+    }
+
+    public String obtenerDescripcion() {
+        return this.descripcion;
+    }
+
+    public List<Modificador> obtenerModificadores() {
+        return this.modificadores;
+    }
+
+    public List<Modificador> obtenerFortalezas(String[] fortalezas) {
+        List<Modificador> fortalezasActivas = new ArrayList<>();
+        buscarYAniadirModificador(fortalezasActivas, fortalezas);
+        return fortalezasActivas;
+    }
+
+    public List<Modificador> obtenerDebilidades(String[] debilidades) {
+        List<Modificador> debilidadesActivas = new ArrayList<>();
+        buscarYAniadirModificador(debilidadesActivas, debilidades);
+        return debilidadesActivas;
+    }
+
+    public int obtenerVida() {
+        return this.vida;
+    }
+
+    public int obtenerPoder() {
+        return this.poder;
+    }
+
+    public Set<Esbirro> obtenerEsbirros() {
+        return this.esbirros;
+    }
+
+    public Set<Arma> obtenerArmasDisponibles() {
+        return this.armasDisponibles;
+    }
+
+    public Set<Armadura> obtenerArmadurasDisponibles() {
+        return this.armadurasDisponibles;
+    }
+
+    public HabilidadEspecial obtenerHabilidadEspecial() {
+        return this.habilidadEspecial;
+    }
+
+    public int obtenerRecurso() {
         return this.puntosRecurso;
     }
     
-    public void recibirDanio(int danio){
-        this.vida -= danio;
+    public int obtenerAtaqueArmadura() {
+        return this.armaduraActiva.obtenerAtaque();
     }
     
-    public void activarFortalezas (List<Fortaleza> listaFortalezas){
-        this.fortalezas = listaFortalezas;
+    public int obtenerDefensaArmadura() {
+        return this.armaduraActiva.obtenerDefensa();
+    }
+    
+    public int obtenerAtaqueArmas() {
+        int ataqueTotal = 0;
+        for (Arma arma : this.armasActivas) {
+            ataqueTotal += arma.obtenerAtaque();
+        }
+        return ataqueTotal;
+    }
+    
+    public int obtenerDefensaArmas() {
+        int defensaTotal = 0;
+        for (Arma arma : this.armasActivas) {
+            defensaTotal = arma.obtenerDefensa();
+        }
+        return defensaTotal;
+    }
+    
+    public void ponerPuntosRecurso(int recurso) {
+        this.puntosRecurso = recurso;
     }
 
-    public void activarDebilidades (List<Debilidad> listaDebilidades){
-        this.debilidades = listaDebilidades;
+    public void ponerArmasActivas(Set<Arma> armas) {
+        this.armasActivas = armas;
+    }
+
+    public void ponerArmaduraActiva(Armadura armadura) {
+        this.armaduraActiva = armadura;
+    }
+
+    public void sumarOro(int oro) {
+        this.oro += oro;
     }
     
-    public List<Fortaleza> obtenerFortalezas(){
-        return this.fortalezas;
+    public void sumarRecurso(int recurso) {
+        if ((this.puntosRecurso + recurso) <= 0) {
+            this.puntosRecurso += recurso;
+        } else {
+            this.puntosRecurso = 0;
+        }
+        
     }
-    public List<Debilidad> obtenerDebilidades(){
-        return this.debilidades;
+
+    public int calcularPotencialAtaque(int promedioModificadores) {
+        int potencialAtaque = this.obtenerPoder() + this.obtenerAtaqueArmas() + this.obtenerAtaqueArmadura() + promedioModificadores;
+        if (this.puedeUsarHabilidad()) {
+            potencialAtaque += this.obtenerHabilidadEspecial().obtenerAtaque();
+        }
+        return potencialAtaque;
+    }
+
+    public int calcularPotencialDefensa(int promedioModificadores) {
+        int potencialDefensa = this.obtenerDefensaArmas() + this.obtenerDefensaArmadura() + promedioModificadores;
+        if (this.puedeUsarHabilidad()) {
+            potencialDefensa += this.obtenerHabilidadEspecial().obtenerDefensa();
+        }
+        return potencialDefensa;
+    }
+
+    public int calcularVida() {
+        int vidaTotal = this.vida;
+        for (Esbirro esbirro : this.esbirros) {
+            vidaTotal += esbirro.obtenerVida();
+        }
+        return vidaTotal;
+    }
+
+    public boolean puedeUsarHabilidad() {
+        return this.puntosRecurso >= this.habilidadEspecial.obtenerCoste();
     }
     
-    
-    /*public void reestablecerPersonaje(){
-        this.armaduraActiva = null;
-        this.armasActivas.clear();
-        this.vida = 
+    public void usarHabilidad() {
+        //Por defecto no hace nada
     }
-    ¿Se reestablecen todos a null o solo algunos? ¿Cuáles?
-    
-    */
-    
-    public void sumarOro(int o){
-        this.oro += o;
+
+    public abstract void modificarRecurso();
+
+    public void recibirDanio() {
+        //Por defecto no ocurre nada
     }
-    
+
+    public void reestablecerPersonaje() {
+        this.puntosRecurso = 0;
+    }
+
+    private void buscarYAniadirModificador(List<Modificador> listaMods, String[] nombres) {
+        for (String nombreMod : nombres) {
+            boolean encontrado = false;
+            int pos = 0;
+            while (!encontrado) {
+                encontrado = this.modificadores.get(pos).obtenerNombre().equals(nombreMod);
+                if (!encontrado) {
+                    pos += 1;
+                }
+            }
+            if (encontrado) {
+                listaMods.add(this.modificadores.get(pos));
+            }
+        }
+    }
+
 }

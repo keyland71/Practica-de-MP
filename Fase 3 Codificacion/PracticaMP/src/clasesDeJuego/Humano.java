@@ -5,16 +5,11 @@
 package clasesDeJuego;
 
 /**
- * @author marcos
- * @author lucia
+ *
+ * @author sergi
  */
-public abstract class Esbirro {
-
-    private String nombre;
-    private int vida;
-
-    public int obtenerVida() {
-        return this.vida;
-    }
-
+public class Humano extends Esbirro {
+    
+    private NivelLealtad nivelLealtad;
+    
 }

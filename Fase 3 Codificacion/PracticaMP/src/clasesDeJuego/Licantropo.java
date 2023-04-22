@@ -4,27 +4,43 @@
  */
 package clasesDeJuego;
 
+import java.util.List;
+import java.util.Set;
+
 
 
 /**
  *
  * @author lucia
  */
-public class Licantropo extends Personaje implements Cloneable {
+public class Licantropo extends Personaje {
     
-    private final int rabiaMinima = 1;
+    public static int rabiaMaxima = 3;
     
-    public Licantropo () {
-        
+    public Licantropo(HabilidadEspecial hab, Set<Arma> armas, Set<Armadura> armaduras, Set<Esbirro> esbirros, int vida, int poder, List<Modificador> mods, String desc) {
+        super(hab, armas, armaduras, esbirros, vida, poder, mods, desc, 0);
     }
-    
+
+    public Licantropo(String nombre, Licantropo licantropoModelo) {
+        super(nombre, licantropoModelo);
+    }
+
     @Override
-    public boolean puedeUsarHabilidad(){
-        if (this.obtenerRecurso() >= this.rabiaMinima){ 
-            return true;
+    public void modificarRecurso() {
+        if ((this.obtenerRecurso()) <= Licantropo.rabiaMaxima) {
+            this.sumarRecurso(1);
         }
-        else{
-            return false;
-        }
+    }
+
+    @Override
+    public int calcularPotencialAtaque(int promedioModificadores) {
+        int potencialAtaque = super.calcularPotencialAtaque(promedioModificadores) + this.obtenerRecurso();
+        return potencialAtaque;
+    }
+
+    @Override
+    public int calcularPotencialDefensa(int promedioModificadores) {
+        int potencialDefensa = super.calcularPotencialDefensa(promedioModificadores) + this.obtenerRecurso();
+        return potencialDefensa;
     }
 }

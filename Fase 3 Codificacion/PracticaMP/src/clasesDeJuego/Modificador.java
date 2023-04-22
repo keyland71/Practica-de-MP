@@ -18,6 +18,10 @@ public abstract class Modificador {
     private boolean estaActivo;
     
     
+    public String obtenerNombre() {
+        return this.nombre;
+    }
+    
     public void ponerActivo(boolean activo){
         this.estaActivo = true;
     }
