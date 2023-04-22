@@ -9,7 +9,7 @@ package clasesDeJuego;
  * @author lucia
  */
 public enum TipoHabilidad {
-    Disciplina,
-    Don,
-    Talento;
+    disciplina,
+    don,
+    talento;
 }

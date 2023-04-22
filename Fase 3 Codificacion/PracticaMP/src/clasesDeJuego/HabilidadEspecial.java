@@ -16,6 +16,15 @@ public class HabilidadEspecial {
     private int coste;
     private TipoHabilidad tipo; //Se tiene en cuenta que, en el caso de que la habilidad especial sea de tipo Talento, el coste tiene que ser 0
 
+    public HabilidadEspecial(String nom, int at, int def, int cost, TipoHabilidad t){
+        this.nombre = nom;
+        this.ataque = at;
+        this.defensa = def;
+        this.coste = cost;
+        this.tipo = t;
+        
+    }
+    
     public int obtenerAtaque() {
         return ataque;
     }

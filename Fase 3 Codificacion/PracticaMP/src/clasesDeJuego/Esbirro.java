@@ -12,7 +12,12 @@ public abstract class Esbirro {
 
     private String nombre;
     private int vida;
-
+    
+    public Esbirro(String nom, int v){
+        this.nombre = nom;
+        this.vida = v;
+    }
+    
     public int obtenerVida() {
         return this.vida;
     }

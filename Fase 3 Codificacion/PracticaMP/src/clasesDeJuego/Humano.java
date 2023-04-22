@@ -12,4 +12,10 @@ public class Humano extends Esbirro {
     
     private NivelLealtad nivelLealtad;
     
+    
+    public Humano(String nom, int vida, NivelLealtad nivel){
+        super(nom, vida);
+        this.nivelLealtad = nivel;
+        
+    }
 }

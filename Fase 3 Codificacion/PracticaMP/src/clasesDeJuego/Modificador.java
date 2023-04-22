@@ -11,26 +11,29 @@
 package clasesDeJuego;
 
 
-public abstract class Modificador {
+public class Modificador {
 
     private String nombre;
     private int valor;
-    private boolean estaActivo;
+    private TipoModificador tipo;
     
-    
-    public String obtenerNombre() {
-        return this.nombre;
+    public Modificador(String nombre, int valor, TipoModificador tipo){
+        this.nombre = nombre;
+        this.valor = obtenerIncremento(valor, tipo);
+        this.tipo = tipo;
     }
     
-    public void ponerActivo(boolean activo){
-        this.estaActivo = true;
+    public int obtenerIncremento(int valor, TipoModificador tipo){
+        if(tipo.equals(TipoModificador.fortaleza)){
+            return valor;
+        }
+        else if(tipo.equals(TipoModificador.debilidad)){
+            return valor * (-1);
+        }
+        else{
+            return 0;
+        }
     }
-    
-    public int obtenerValor(){
-        return this.valor;
-    }
-    
-    public abstract int obtenerIncremento();
     
 }
 

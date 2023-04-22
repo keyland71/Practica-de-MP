@@ -15,6 +15,11 @@ public class Arma extends Equipo {
 
     private Variante tipo;
     
+    public Arma(String nombre, int modAtaque, int modDefensa, Variante tipoArma){
+        super(nombre, modAtaque, modDefensa);
+        this.tipo = tipoArma;
+        
+    }
     
     public Variante obtenerVariante(){
         return this.tipo;

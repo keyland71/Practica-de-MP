@@ -15,6 +15,13 @@ public class Demonio extends Esbirro {
     private String pacto;
     private Set<Esbirro> esbirros;
     
+    public Demonio(String nom, int vida, String pac, Set<Esbirro> conjEsb){
+        super(nom, vida);
+        this.pacto = pac;
+        this.esbirros = conjEsb; 
+    }
+    
+    
     @Override
     public int obtenerVida() {
         int vidaTotal = super.obtenerVida();

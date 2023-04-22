@@ -19,6 +19,12 @@ public class Equipo {
     
     private int modificadorDefensa;
     
+    public Equipo(String nombre, int modAtaque, int modDefensa){
+        this.nombre = nombre;
+        this.modificadorAtaque = modAtaque;
+        this.modificadorDefensa = modDefensa;
+    }
+    
     
     public int obtenerAtaque(){
         return this.modificadorAtaque;
