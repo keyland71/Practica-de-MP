@@ -6,8 +6,6 @@ package baseDeDatos;
 
 import clasesDeJuego.Arma;
 import clasesDeJuego.Armadura;
-import clasesDeJuego.HabilidadEspecial;
-import clasesDeJuego.TipoHabilidad;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import clasesDeJuego.Variante;

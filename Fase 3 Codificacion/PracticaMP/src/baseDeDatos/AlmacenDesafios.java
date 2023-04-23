@@ -27,7 +27,7 @@ public class AlmacenDesafios implements Serializable{
     private List<Desafio> desafios;
 
     public AlmacenDesafios() {
-        this.cargarDesafios();
+        this.desafios = new ArrayList<>();
     }
 
     public void aniadirDesafio(Desafio des) {
@@ -94,7 +94,7 @@ public class AlmacenDesafios implements Serializable{
     }
 
  
-
+    //inutil
     private void cargarDesafios() {
         AlmacenDesafios almacenLeido = null;
         try {
@@ -110,6 +110,7 @@ public class AlmacenDesafios implements Serializable{
         }
     }
 
+    //inutil
     public void guardarDesafios() {
         try {
             String fic = "./archivos/AlmacenDesafio.AlmacenDesafio";

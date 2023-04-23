@@ -25,7 +25,7 @@ public class AlmacenUsuarios implements Serializable {
     private Map<String, Usuario> usuarios;
 
     public AlmacenUsuarios() {
-        this.cargarUsuarios();
+        this.usuarios = new HashMap<>();
     }
 
     public List<Jugador> obtenerJugadores() {
@@ -71,6 +71,7 @@ public class AlmacenUsuarios implements Serializable {
         Juego.estado.guardar();
     }
 
+    //inutil
     private void cargarUsuarios() {
         AlmacenUsuarios almacenLeido = null;
         try {
@@ -86,6 +87,7 @@ public class AlmacenUsuarios implements Serializable {
         }
     }
 
+    //inutil
     public void guardarUsuarios() {
         try {
             String fic = "./archivos/AlmacenUsuarios.AlmacenUsuarios";
