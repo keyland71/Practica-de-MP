@@ -10,8 +10,10 @@
 
 package clasesDeJuego;
 
+import java.io.Serializable;
 
-public class Equipo {
+
+public class Equipo implements Serializable{
     
     private String nombre;
     

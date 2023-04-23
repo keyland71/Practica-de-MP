@@ -4,6 +4,7 @@
  */
 package clasesDeJuego;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  *
  * @author lucia
  */
-public class Combate {
+public class Combate implements Serializable{
 
     private Jugador uDesafiante;
     private Jugador uDesafiado;

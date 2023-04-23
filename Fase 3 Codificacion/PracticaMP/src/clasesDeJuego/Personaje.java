@@ -5,6 +5,7 @@
  */
 package clasesDeJuego;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +15,7 @@ import java.util.List;
  *
  * @author Marcos
  */
-public abstract class Personaje {
+public abstract class Personaje implements Serializable{
 
     private String nombre;
     private HabilidadEspecial habilidadEspecial;
@@ -81,7 +82,7 @@ public abstract class Personaje {
     public List<Modificador> obtenerFortalezas() {
         List<Modificador> fortalezas = new ArrayList<>();
         for (Modificador fortaleza:this.modificadores){
-            if (fortaleza.obtenerTipo() == TipoModificador.fortaleza){
+            if (fortaleza.obtenerTipo() == TipoModificador.Fortaleza){
                 fortalezas.add(fortaleza);
             }
         }
@@ -90,7 +91,7 @@ public abstract class Personaje {
     public List<Modificador> obtenerDebilidades() {
         List<Modificador> debilidades = new ArrayList<>();
         for (Modificador debilidad:this.modificadores){
-            if (debilidad.obtenerTipo() == TipoModificador.debilidad){
+            if (debilidad.obtenerTipo() == TipoModificador.Debilidad){
                 debilidades.add(debilidad);
             }
         }

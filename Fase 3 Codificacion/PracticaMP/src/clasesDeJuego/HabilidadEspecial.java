@@ -4,11 +4,13 @@
  */
 package clasesDeJuego;
 
+import java.io.Serializable;
+
 /**
  *
  * @author lucia
  */
-public class HabilidadEspecial {
+public class HabilidadEspecial implements Serializable{
 
     private String nombre;
     private int ataque;

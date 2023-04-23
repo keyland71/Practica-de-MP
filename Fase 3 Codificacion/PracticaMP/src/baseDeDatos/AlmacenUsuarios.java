@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import practicamp.Juego;
 
 /**
  *
@@ -62,12 +63,12 @@ public class AlmacenUsuarios implements Serializable {
 
     public void aniadirUsuario(Usuario u) {
         this.usuarios.put(u.obtenerNick(), u);
-        guardarUsuarios();
+        Juego.estado.guardar(); //antes llamaba a guardarUsuarios()
     }
 
     public void borrarUsuario(Usuario u) {
         this.usuarios.remove(u.obtenerNick());
-        guardarUsuarios();
+        Juego.estado.guardar();
     }
 
     private void cargarUsuarios() {

@@ -8,6 +8,7 @@ import baseDeDatos.Estado;
 import clasesDeJuego.Administrador;
 import clasesDeJuego.Jugador;
 import clasesDeJuego.NumeroRegistro;
+import practicamp.Juego;
 
 /**
  *
@@ -58,9 +59,9 @@ public class FabricaUsuarios {
     }
 
     private void ponerNumeroRegistro(Jugador j) {
-        NumeroRegistro num = Estado.obtenerNumeroRegistro();
+        NumeroRegistro num = Juego.estado.obtenerNumeroRegistro();
         num.incrementarNumReg(); //num = num.incrementarNumReg()
         j.ponerNumReg(num);
-        Estado.ponerNumReg(num);
+        Juego.estado.ponerNumReg(num);
     }
 }

@@ -4,11 +4,13 @@
  */
 package clasesDeJuego;
 
+import java.io.Serializable;
+
 /**
  *
  * @author lucia
  */
-public class Desafio {
+public class Desafio implements Serializable{
     private Jugador uDesafiante;
     private Jugador uDesafiado;
     private EstadoDesafio estadoCombate;
@@ -19,9 +21,9 @@ public class Desafio {
     public Desafio (Jugador j1, Jugador j2,int oro){
      this.uDesafiante = j1;
      this.uDesafiado = j2;
-     this.estadoCombate = null;
+     this.estadoCombate = EstadoDesafio.pendienteValidar;
      this.oroApostado = oro;
-     this.combate = null;
+     this.combate = new Combate(j1,j2);
 }
     
     public EstadoDesafio obtenerEstado (){
@@ -58,6 +60,6 @@ public class Desafio {
     
     @Override
     public String toString(){
-        return this.uDesafiante.obtenerNick() + " -> " + this.uDesafiado + "(" + Integer.toString(this.oroApostado) + ")"; //Escribe angel -> sergio (300)
+        return this.uDesafiante.obtenerNick() + " -> " + this.uDesafiado.obtenerNick() + "(" + Integer.toString(this.oroApostado) + ")"; //Escribe angel -> sergio (300)
     }
 }

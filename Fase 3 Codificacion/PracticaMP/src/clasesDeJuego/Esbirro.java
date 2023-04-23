@@ -4,11 +4,13 @@
  */
 package clasesDeJuego;
 
+import java.io.Serializable;
+
 /**
  * @author marcos
  * @author lucia
  */
-public abstract class Esbirro {
+public abstract class Esbirro implements Serializable{
 
     private String nombre;
     private int vida;
@@ -24,6 +26,10 @@ public abstract class Esbirro {
     
     public int obtenerVida() {
         return this.vida;
+    }
+    
+    public boolean tieneSubordinados(){
+        return false;
     }
 
 }

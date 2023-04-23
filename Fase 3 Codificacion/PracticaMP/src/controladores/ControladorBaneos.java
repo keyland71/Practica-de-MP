@@ -10,6 +10,7 @@ import clasesDeJuego.Jugador;
 import java.util.ArrayList;
 import java.util.List;
 import menus.MenuBaneo;
+import practicamp.Juego;
 
 /**
  *
@@ -33,7 +34,7 @@ public class ControladorBaneos {
     }
 
     private void cargarJugadores(){
-        AlmacenUsuarios almacen = Estado.obtenerAlmacenUsuarios();
+        AlmacenUsuarios almacen = Juego.estado.obtenerAlmacenUsuarios();
         this.jugadores = almacen.obtenerJugadoresBan(mostrarBaneados);
     }
     
@@ -77,7 +78,7 @@ public class ControladorBaneos {
                 //por tanto comprobamos si estamos en la última página. Si no estamos, vale 1-5
                 //Si estamos en la última página, valen los números del 1 al último que muestre la página
                 double ultimaPagina = Math.ceil((double) jugadores.size() / tamPag)-1;
-                if (opcion.equalsIgnoreCase("salir") || opcion.equalsIgnoreCase("s") || opcion.equalsIgnoreCase("a")){
+                if (opcion.equalsIgnoreCase("s") || opcion.equalsIgnoreCase("a") || opcion.equals("salir")){ //salir debe ser con minúsculas, o toca poner 2^5 combinaciones en el case de procesarEntrada
                     return true;
                 }
                 int mod = jugadores.size() % tamPag; //mod guarda el numero de elementos en la última página
@@ -109,7 +110,10 @@ public class ControladorBaneos {
         boolean valido;
         String opcion;
         switch (entrada) {
-            case "s" -> { //suma 1 a la página actual si no estamos en la última. 
+            case "salir" -> {
+                return true;
+            }
+            case "s", "S" -> { //suma 1 a la página actual si no estamos en la última. 
                 //Para saber si estamos en la última, divide el tamaño de la lista entre el tamaño de página (redondeando hacia arriba), y lo compara con la página actual
                 if (this.pagActual != Math.ceil((double) jugadores.size() / tamPag)-1) {
                     this.pagActual++;
@@ -117,16 +121,13 @@ public class ControladorBaneos {
                     this.menuBan.mostrarMensajeError(2);
                 }
             }
-            case "a" -> {
+            case "a", "A" -> {
                 if (this.pagActual != 0) {
                     this.pagActual--;
                 } else {
                     this.menuBan.mostrarMensajeError(2);
                 }
             }
-            case "salir" -> {
-                return true;
-            } //end if
             default  -> { //si se pone este al final, como default, no se hay que preocupar por los números, ya sabemos que es válido
                 do {
                     this.modo = 1; //el modo es para que de por valido "si" y "no"
@@ -140,7 +141,8 @@ public class ControladorBaneos {
                     int pos = Integer.parseInt(entrada) + this.pagActual*ControladorBaneos.tamPag - 1;
                     
                     this.jugadores.get(pos).cambiarBaneo(!mostrarBaneados); //realizamos el cambio
-                    Estado.obtenerAlmacenUsuarios().guardarUsuarios();      //guardamos el cambio
+                    Juego.estado.guardar();
+                    //Juego.estado.obtenerAlmacenUsuarios().guardarUsuarios();      //guardamos el cambio
                     
                     this.jugadores.remove(pos);         //actualizamos nuestra lista
                     this.menuBan.quitarJugador(pos);    //actualizamos la lista del menú

@@ -13,8 +13,10 @@ import menus.MenuAdmin;
  */
 public class Juego {
 
+    public static Estado estado;
+    
     public void run() {
-       Estado estado = new Estado();
+       Juego.estado = new Estado();
        ControladorInicio iniControlador = new ControladorInicio();
        iniControlador.iniciarControlador();
         

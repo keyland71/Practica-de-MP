@@ -42,7 +42,9 @@ public class MenuJugador { //se ocupa de Ranking, Oro, Borrar personaje, y ¿Cre
         mensajes.add(mensaje4);
         
         String mensajeError1 = "Por favor, introduzca un valor correcto. Pulse intro para continuar";
+        String mensajeError2 = "No puedes crear un personaje si ya tienes uno. Borra tu personaje y vuelve a intentarlo";
         this.mensajesError.add(mensajeError1);
+        this.mensajesError.add(mensajeError2);
         
         this.lector = new Scanner(System.in);
     }

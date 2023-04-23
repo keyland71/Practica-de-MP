@@ -6,23 +6,76 @@ package baseDeDatos;
 
 import clasesDeJuego.Arma;
 import clasesDeJuego.Armadura;
+import clasesDeJuego.HabilidadEspecial;
+import clasesDeJuego.TipoHabilidad;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import clasesDeJuego.Variante;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Set;
 
-public class AlmacenEquipo {
+public class AlmacenEquipo implements Serializable{
 
     private List<Arma> armas;
     private List<Armadura> armaduras;
 
-    public AlmacenEquipo() {
+    public AlmacenEquipo() { 
+        this.armas = new ArrayList<>();
+        this.armaduras = new ArrayList<>();
         this.cargarEquipo();
+        
     }
 
     private void cargarEquipo() {
+    File armas = new File("./archivos/Armas.csv");
+    File armaduras = new File("./archivos/Armaduras.csv");
+        try { //podría estar interesante separarlos en dos try catch distintos
+            
+            String nombre;
+            Variante tipo;
+            int ataque;
+            int defensa;
+            
+            //leemos armas
+            Scanner lectorArmas = new Scanner(armas);
+            while (lectorArmas.hasNextLine()) {
+                String linea = lectorArmas.nextLine();
+                String[] seccionesLinea = linea.split(";");
+                
+                nombre = seccionesLinea[0];
+                ataque = Integer.parseInt(seccionesLinea[1]);
+                defensa = Integer.parseInt(seccionesLinea[2]);
+                tipo = Variante.valueOf(seccionesLinea[3]);
+
+                Arma nuevaArma = new Arma(nombre, ataque, defensa, tipo);
+                this.armas.add(nuevaArma);
+            }
+            
+            //leemos armaduras
+            Scanner lectorArmaduras = new Scanner(armaduras);
+            while (lectorArmaduras.hasNextLine()) {
+                String linea = lectorArmaduras.nextLine();
+                String[] seccionesLinea = linea.split(";");
+              
+                nombre = seccionesLinea[0];
+                ataque = Integer.parseInt(seccionesLinea[1]);
+                defensa = Integer.parseInt(seccionesLinea[2]);
+
+                Armadura nuevaArmadura = new Armadura(nombre, ataque, defensa);
+                this.armaduras.add(nuevaArmadura);
+            }
+        } catch (FileNotFoundException exception) {
+            System.out.println("No existe uno de los siguients archivos: Armas.csv, Armaduras.csv.");
+        }
+    }
+    
+    private void cargarEquipoViejo() {
         try {
             String nombre;
             int modificadorAtaque;

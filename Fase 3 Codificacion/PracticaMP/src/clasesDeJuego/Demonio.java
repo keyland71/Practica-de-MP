@@ -31,4 +31,9 @@ public class Demonio extends Esbirro {
         return vidaTotal;
     }
     
+    @Override
+    public boolean tieneSubordinados(){
+        return (!this.esbirros.isEmpty());
+    }
+    
 }

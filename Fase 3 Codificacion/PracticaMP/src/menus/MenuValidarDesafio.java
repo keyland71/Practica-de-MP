@@ -4,6 +4,8 @@
  */
 package menus;
 
+import clasesDeJuego.Modificador;
+import clasesDeJuego.Personaje;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,8 +19,19 @@ public class MenuValidarDesafio {
     private List<String> mensajes;
     private List<String> mensajesError;
     private Scanner lector;
+    
+    private List<Modificador> fP1;
+    private List<Modificador> dP1;
+    private List<Modificador> fP2;
+    private List<Modificador> dP2;
+    
 
-    public MenuValidarDesafio(){
+    public MenuValidarDesafio(Personaje p1, Personaje p2){
+        this.fP1 = p1.obtenerFortalezas();
+        this.dP1 = p1.obtenerDebilidades();
+        this.fP2 = p2.obtenerFortalezas();
+        this.dP2 = p2.obtenerDebilidades();
+        
         this.mensajes = new ArrayList<>();
         this.mensajesError = new ArrayList<>(); 
        
@@ -48,8 +61,27 @@ public class MenuValidarDesafio {
 
     
     public String mostrarMensaje(int pos) {
+        //primero escribe el mensaje        
         String mensaje = this.mensajes.get(pos);
         System.out.println(mensaje);
+        
+        //luego escribe las opciones
+        List<Modificador> elementos;
+        switch (pos) {
+            case 0 -> elementos = this.fP1;
+            case 1 -> elementos = this.dP1;
+            case 2 -> elementos = this.fP2;
+            case 3 -> elementos = this.dP2;
+            default -> elementos = null;
+        }
+        if (elementos!=null){
+            int i = 1;
+            for (Modificador m:elementos){
+                System.out.println("    " + Integer.toString(i) + ". " + m.obtenerNombre());
+                i++;
+            }
+        }
+        //luego pide un input
         String opcion = this.lector.nextLine();
         return opcion;
     }

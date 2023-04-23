@@ -4,11 +4,13 @@
  */
 package clasesDeJuego;
 
+import java.io.Serializable;
+
 /**
  *
  * @author lucia
  */
-public class Ronda {
+public class Ronda implements Serializable{
     private int vidaInicialA;
     private int vidaInicialB;
     private int vidaFinalA;

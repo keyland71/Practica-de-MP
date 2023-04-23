@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 import sistemas.FabricaPersonajes;
@@ -25,37 +26,82 @@ import sistemas.FabricaPersonajes;
  * @author Ángel Marqués García
  * @author Marcos Jiménez Pulido
  */
-public class Estado {
+public class Estado implements Serializable{
 
-    private static AlmacenUsuarios almacenUsuarios;
-    private static AlmacenDesafios almacenDesafios;
-    private static AlmacenPersonajes almacenPersonajes;
-    private static AlmacenEquipo almacenEquipo;
-    private static AlmacenEsbirros almacenEsbirros;
-    private static AlmacenHabilidades almacenHabilidades;
-    private static AlmacenModificadores almacenModificadores;
-    private static NumeroRegistro ultimoNumRegistro;
-    private static FabricaPersonajes fabricaPersonajes;
-
-    private static Usuario usuarioActivo;
+    private AlmacenUsuarios almacenUsuarios;
+    private AlmacenDesafios almacenDesafios;
+    private AlmacenPersonajes almacenPersonajes;
+    private AlmacenEquipo almacenEquipo;
+    private AlmacenEsbirros almacenEsbirros;
+    private AlmacenHabilidades almacenHabilidades;
+    private AlmacenModificadores almacenModificadores;
+    
+    private NumeroRegistro ultimoNumRegistro;
+    private FabricaPersonajes fabricaPersonajes;
+    private Usuario usuarioActivo;
 
     public Estado() {
-        Estado.almacenUsuarios = new AlmacenUsuarios();
-        Estado.almacenDesafios = new AlmacenDesafios();
-        Estado.almacenPersonajes = new AlmacenPersonajes();
-        Estado.almacenEquipo = new AlmacenEquipo();
-        Estado.almacenEsbirros = new AlmacenEsbirros();
-        Estado.almacenHabilidades = new AlmacenHabilidades();
-        Estado.almacenModificadores = new AlmacenModificadores();
-        cargarNumReg();
-        Estado.usuarioActivo = null;
-        inicializarFabricaPersonajes();
+        this.ultimoNumRegistro = new NumeroRegistro(); //para copiarlo debe estar inicializado
+        cargar();
     }
 
-    public static void quitarPersonajeActivo() {
+    private void cargar() {
+        Estado estadoLeido = null;
         try {
-            if (Class.forName("clasesDeJuego.Jugador").isInstance(Estado.usuarioActivo)) {
-                Jugador j = (Jugador) Estado.usuarioActivo;
+            String fic = "./archivos/Estado.Estado";
+            ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(fic));
+            estadoLeido = (Estado) entrada.readObject();    //lee el estado
+            this.copia(estadoLeido);                        //copia el estado leído en this
+            entrada.close();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("No se ha encontrado el Estado, así que se ha creado vacío");
+
+            this.almacenUsuarios = new AlmacenUsuarios();
+            this.almacenDesafios = new AlmacenDesafios();
+            this.almacenPersonajes = new AlmacenPersonajes();
+            this.almacenEquipo = new AlmacenEquipo();
+            this.almacenEsbirros = new AlmacenEsbirros();
+            this.almacenHabilidades = new AlmacenHabilidades();
+            this.almacenModificadores = new AlmacenModificadores();
+            //cargarNumReg();
+            this.usuarioActivo = null;
+            this.fabricaPersonajes = new FabricaPersonajes();
+            inicializarFabricaPersonajes();
+
+        }
+    }
+
+    private void copia(Estado estadoLeido) {
+
+        this.almacenUsuarios = estadoLeido.obtenerAlmacenUsuarios();
+        this.almacenDesafios = estadoLeido.obtenerAlmacenDesafios();
+        this.almacenPersonajes = estadoLeido.obtenerAlmacenPersonajes();
+        this.almacenEquipo = estadoLeido.obtenerAlmacenEquipo();
+        this.almacenEsbirros = estadoLeido.obtenerAlmacenEsbirros();
+        this.almacenHabilidades = estadoLeido.obtenerAlmacenHabilidades();
+        this.almacenModificadores = estadoLeido.obtenerAlmacenModificadores();
+        
+        this.usuarioActivo = estadoLeido.obtenerUsuarioActivo();
+        this.fabricaPersonajes = estadoLeido.obtenerFabricaPersonajes();
+        this.ultimoNumRegistro.copiar(estadoLeido.obtenerNumeroRegistro());
+    }
+
+    public void guardar() {
+        try {
+            String fic = "./archivos/Estado.Estado";
+            ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(fic));
+            salida.writeObject(this);
+            salida.close();
+        } catch (IOException e) {
+            System.out.println("No se ha podido guardar correctamente");
+            System.out.println(e);
+        }
+    }
+
+    public void quitarPersonajeActivo() {
+        try {
+            if (Class.forName("clasesDeJuego.Jugador").isInstance(this.usuarioActivo)) {
+                Jugador j = (Jugador) this.usuarioActivo;
                 j.ponerPersonaje(null);
             }
         } catch (ClassNotFoundException ex) {
@@ -64,11 +110,12 @@ public class Estado {
         }
     }
 
-    public static void ponerUsuarioActivo(Usuario u) {
-        Estado.usuarioActivo = u;
+    public void ponerUsuarioActivo(Usuario u) {
+        this.usuarioActivo = u;
     }
 
-    private static void guardarNumReg(NumeroRegistro numReg) {
+    //inutil
+    private void guardarNumReg(NumeroRegistro numReg) {
         try {
             String fic = "./archivos/UltimoNumeroDeRegistro.NumeroRegistro";
             ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(fic));
@@ -79,38 +126,40 @@ public class Estado {
             System.out.println(e);
         }
     }
-
+    
+    //inutil
     private void cargarNumReg() {
         try {
             String fic = "./archivos/UltimoNumeroDeRegistro.NumeroRegistro";
             ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(fic));
-            Estado.ultimoNumRegistro = (NumeroRegistro) entrada.readObject();
+            this.ultimoNumRegistro = (NumeroRegistro) entrada.readObject();
             entrada.close();
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("No se ha encontrado el último numero de registro.");
             System.out.println(e);
-            Estado.ultimoNumRegistro = new NumeroRegistro();
+            this.ultimoNumRegistro = new NumeroRegistro();
         }
     }
 
-    public static void ponerNumReg(NumeroRegistro num) {
-        Estado.ultimoNumRegistro.copiar(num);
-        guardarNumReg(num);
+    public void ponerNumReg(NumeroRegistro num) {
+        this.ultimoNumRegistro.copiar(num);
+        //guardarNumReg(num);
+        this.guardar();
     }
 
-    public static NumeroRegistro obtenerNumeroRegistro() {
-        return Estado.ultimoNumRegistro;
+    public NumeroRegistro obtenerNumeroRegistro() {
+        return this.ultimoNumRegistro;
     }
 
-    public static Usuario obtenerUsuarioActivo() {
-        return Estado.usuarioActivo;
+    public Usuario obtenerUsuarioActivo() {
+        return this.usuarioActivo;
     }
 
     //cuidado con esta función, podría dar problemas
-    public static Personaje obtenerPersonajeActivo() {
+    public Personaje obtenerPersonajeActivo() {
         try {
-            if (Class.forName("clasesDeJuego.Jugador").isInstance(Estado.usuarioActivo)) {
-                Jugador j = (Jugador) Estado.usuarioActivo;
+            if (Class.forName("clasesDeJuego.Jugador").isInstance(this.usuarioActivo)) {
+                Jugador j = (Jugador) this.usuarioActivo;
                 return j.obtenerPersonaje();
             } else {
                 return null;
@@ -123,52 +172,69 @@ public class Estado {
 
     }
 
-    public static AlmacenUsuarios obtenerAlmacenUsuarios() {
-        return Estado.almacenUsuarios;
+    public AlmacenUsuarios obtenerAlmacenUsuarios() {
+        return this.almacenUsuarios;
     }
 
-    public static AlmacenDesafios obtenerAlmacenDesafios() {
-        return Estado.almacenDesafios;
+    public AlmacenDesafios obtenerAlmacenDesafios() {
+        return this.almacenDesafios;
     }
 
-    public static AlmacenPersonajes obtenerAlmacenPersonajes() {
-        return Estado.almacenPersonajes;
+    public AlmacenPersonajes obtenerAlmacenPersonajes() {
+        return this.almacenPersonajes;
     }
 
-    public static AlmacenEquipo obtenerAlmacenEquipo() {
-        return Estado.almacenEquipo;
+    public AlmacenEquipo obtenerAlmacenEquipo() {
+        return this.almacenEquipo;
     }
 
-    public static AlmacenEsbirros obtenerAlmacenEsbirros() {
-        return Estado.almacenEsbirros;
+    public AlmacenEsbirros obtenerAlmacenEsbirros() {
+        return this.almacenEsbirros;
     }
 
-    public static AlmacenHabilidades obtenerAlmacenHabilidades() {
-        return Estado.almacenHabilidades;
+    public AlmacenHabilidades obtenerAlmacenHabilidades() {
+        return this.almacenHabilidades;
     }
 
-    public static AlmacenModificadores obtenerAlmacenModificadores() {
-        return Estado.almacenModificadores;
+    public AlmacenModificadores obtenerAlmacenModificadores() {
+        return this.almacenModificadores;
+    }
+    
+    public FabricaPersonajes obtenerFabricaPersonajes(){
+        return this.fabricaPersonajes;
     }
 
     private void inicializarFabricaPersonajes() {
-        Set<Arma> armas = Estado.almacenEquipo.obtenerArmasEjemploVampiro();
-        Set<Armadura> armaduras = Estado.almacenEquipo.obtenerArmadurasEjemploVampiro();
-        Set<Esbirro> esbirros = Estado.almacenEsbirros.obtenerEsbirrosEjemploVampiro();
-        HabilidadEspecial habilidad = Estado.almacenHabilidades.obtenerHabilidadEjemploVampiro();
-        List<Modificador> modificadores = Estado.almacenModificadores.obtenerModificadoresEjemploVampiro();
-        Estado.fabricaPersonajes.crearModeloVampiro(armas, armaduras, esbirros, habilidad, modificadores);
-        armas = Estado.almacenEquipo.obtenerArmasEjemploLicantropo();
-        armaduras = Estado.almacenEquipo.obtenerArmadurasEjemploLicantropo();
-        esbirros = Estado.almacenEsbirros.obtenerEsbirrosEjemploLicantropo();
-        habilidad = Estado.almacenHabilidades.obtenerHabilidadEjemploLicantropo();
-        modificadores = Estado.almacenModificadores.obtenerModificadoresEjemploLicantropo();
-        Estado.fabricaPersonajes.crearModeloLicantropo(armas, armaduras, esbirros, habilidad, modificadores);
-        armas = Estado.almacenEquipo.obtenerArmasEjemploCazador();
-        armaduras = Estado.almacenEquipo.obtenerArmadurasEjemploCazador();
-        esbirros = Estado.almacenEsbirros.obtenerEsbirrosEjemploCazador();
-        habilidad = Estado.almacenHabilidades.obtenerHabilidadEjemploCazador();
-        modificadores = Estado.almacenModificadores.obtenerModificadoresEjemploCazador();
-        Estado.fabricaPersonajes.crearModeloCazador(armas, armaduras, esbirros, habilidad, modificadores);
+        //declaración de variables
+        Set<Arma> armas;
+        Set<Armadura> armaduras;
+        Set<Esbirro> esbirros;
+        List<Modificador> modificadores;
+        HabilidadEspecial habilidad;
+
+        //creación del Vampiro
+        armas = this.almacenEquipo.obtenerArmasEjemploVampiro();
+        armaduras = this.almacenEquipo.obtenerArmadurasEjemploVampiro();
+        esbirros = this.almacenEsbirros.obtenerEsbirrosEjemploVampiro();
+        habilidad = this.almacenHabilidades.obtenerHabilidadEjemploVampiro();
+        modificadores = this.almacenModificadores.obtenerModificadoresEjemploVampiro();
+        this.fabricaPersonajes.crearModeloVampiro(armas, armaduras, esbirros, habilidad, modificadores);
+
+        //creación del Licántropo
+        armas = this.almacenEquipo.obtenerArmasEjemploLicantropo();
+        armaduras = this.almacenEquipo.obtenerArmadurasEjemploLicantropo();
+        esbirros = this.almacenEsbirros.obtenerEsbirrosEjemploLicantropo();
+        habilidad = this.almacenHabilidades.obtenerHabilidadEjemploLicantropo();
+        modificadores = this.almacenModificadores.obtenerModificadoresEjemploLicantropo();
+        this.fabricaPersonajes.crearModeloLicantropo(armas, armaduras, esbirros, habilidad, modificadores);
+
+        //creación del cazador
+        armas = this.almacenEquipo.obtenerArmasEjemploCazador();
+        armaduras = this.almacenEquipo.obtenerArmadurasEjemploCazador();
+        esbirros = this.almacenEsbirros.obtenerEsbirrosEjemploCazador();
+        habilidad = this.almacenHabilidades.obtenerHabilidadEjemploCazador();
+        modificadores = this.almacenModificadores.obtenerModificadoresEjemploCazador();
+        this.fabricaPersonajes.crearModeloCazador(armas, armaduras, esbirros, habilidad, modificadores);
     }
+
 }

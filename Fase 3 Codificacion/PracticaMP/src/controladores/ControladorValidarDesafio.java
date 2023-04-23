@@ -4,12 +4,12 @@
  */
 package controladores;
 
-import baseDeDatos.Estado;
 import clasesDeJuego.Combate;
 import clasesDeJuego.Desafio;
 import clasesDeJuego.EstadoDesafio;
 import clasesDeJuego.Personaje;
 import menus.MenuValidarDesafio;
+import practicamp.Juego;
 
 /**
  *
@@ -25,16 +25,16 @@ public class ControladorValidarDesafio {
 
     //se encarga de llevar a cabo el proceso de validación del desafío que reciba en el constructor
     public ControladorValidarDesafio(Desafio d) {
-        this.menuDesafio = new MenuValidarDesafio();
+        this.desafio = d;
         this.p1 = this.desafio.obtenerJugadorDesafiante().obtenerPersonaje();
         this.p2 = this.desafio.obtenerJugadorDesafiado().obtenerPersonaje();
-        this.desafio = d;
+        this.menuDesafio = new MenuValidarDesafio(p1, p2);
         this.modo = 0;
     }
 
     public boolean iniciarControlador() {
         boolean salir = false;
-        boolean tramitado = false;
+        boolean tramitado[] = {false};
         this.modo = 0;
         do {
             String opcion = this.menuDesafio.mostrarMensaje(this.modo);
@@ -46,7 +46,7 @@ public class ControladorValidarDesafio {
                 this.menuDesafio.mostrarMensajeError(this.modo);
             }
         } while (!salir);
-        return tramitado; //necesito que devuelva algo para actualizar en ControladorSeleccionarDesafio la lista de desafios pendientes
+        return tramitado[0]; //necesito que devuelva algo para actualizar en ControladorSeleccionarDesafio la lista de desafios pendientes
     }
 
     private boolean validarEntrada(String opcion) {
@@ -85,17 +85,18 @@ public class ControladorValidarDesafio {
         return false;
     }
 
-    private boolean procesarEntrada(String entrada, boolean tramitado) {
-        int pos = 0;
-        if (this.modo != 4){
-            pos = Integer.parseInt(entrada);
-        }
-        Combate c = this.desafio.obtenerCombate();
+    private boolean procesarEntrada(String entrada, boolean[] tramitado) {
         
+        Combate c = this.desafio.obtenerCombate();
         if (entrada.equalsIgnoreCase("salir")) {
             this.menuDesafio.mostrarMensaje(2); //operacion cancelada
             c.resetearModificadores(); // si se interrumpe el proceso, reseteamos los modificadores
             return true;
+        }
+        
+        int pos = 0;
+        if (this.modo != 4){
+            pos = Integer.parseInt(entrada);
         }
 
         switch (this.modo) { //guardamos en el combate el modificador seleccionado
@@ -114,9 +115,9 @@ public class ControladorValidarDesafio {
             case 4 -> {
                 if (entrada.equalsIgnoreCase("si")) {
                     this.desafio.cambiarEstado(EstadoDesafio.validado); //realizamos el cambio
-                    Estado.obtenerAlmacenDesafios().guardarDesafios();  //guardamos el cambio
+                    Juego.estado.guardar();  //guardamos el cambio
                     this.menuDesafio.mostrarMensaje(5); //Desafio validado
-                    tramitado = true;
+                    tramitado[0] = true;
                 } else{
                     c.resetearModificadores(); // si no se crea el desafío, reseteamos los modificadores
                 }

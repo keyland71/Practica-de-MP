@@ -34,7 +34,7 @@ public class MenuCrearDesafio {
         
         mensaje = "No puedes apostar esa cantidad";
         this.mensajesError.add(mensaje);
-        mensaje = "No existe un usuario con ese nick";
+        mensaje = "No existe un usuario con ese nick, o el usuario no tiene un personaje activo";
         this.mensajesError.add(mensaje);
         mensaje = "No has introducido un valor válido. Vuelve a interlo!";
         this.mensajesError.add(mensaje);

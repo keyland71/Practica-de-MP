@@ -9,7 +9,7 @@ package clasesDeJuego;
  * @author lucia
  */
 public enum TipoModificador {
-    fortaleza,
-    debilidad;
+    Fortaleza,
+    Debilidad;
    
 }

@@ -11,8 +11,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import practicamp.Juego;
 
 /**
  *
@@ -20,7 +22,7 @@ import java.util.List;
  * @author Lucia Dominguez
  * @author Ángel Marqués
  */
-public class AlmacenDesafios {
+public class AlmacenDesafios implements Serializable{
 
     private List<Desafio> desafios;
 
@@ -30,11 +32,11 @@ public class AlmacenDesafios {
 
     public void aniadirDesafio(Desafio des) {
         desafios.add(des);
-        this.guardarDesafios();
+        Juego.estado.guardar();
     }
     public void borrarDesafio(Desafio des) {
         desafios.remove(des); //esto podría no funcionar si Desafío no implementa .equals En ese caso, habría que buscar secuencialmente uno que coincida
-        this.guardarDesafios();
+        Juego.estado.guardar();
     }
     public List<Desafio> obtenerDesafios() {
         return this.desafios;

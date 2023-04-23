@@ -10,8 +10,10 @@
 
 package clasesDeJuego;
 
+import java.io.Serializable;
 
-public class Modificador {
+
+public class Modificador implements Serializable{
 
     private String nombre;
     private int valor;
@@ -24,10 +26,10 @@ public class Modificador {
     }
     
     public int obtenerIncremento(int valor, TipoModificador tipo){
-        if(tipo.equals(TipoModificador.fortaleza)){
+        if(tipo.equals(TipoModificador.Fortaleza)){
             return valor;
         }
-        else if(tipo.equals(TipoModificador.debilidad)){
+        else if(tipo.equals(TipoModificador.Debilidad)){
             return valor * (-1);
         }
         else{

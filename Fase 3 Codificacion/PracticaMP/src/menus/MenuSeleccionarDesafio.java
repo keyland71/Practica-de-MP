@@ -39,7 +39,7 @@ public class MenuSeleccionarDesafio {
         this.mensajes.add(mensaje);
         mensaje = "   (s)siguiente página\n   (a)anterior página\n   (salir) para volver al menú Admin";
         this.mensajes.add(mensaje);
-        mensaje = "¿Por qué quieres cancelar el desafío?\n 1.   Me parece injusto\n   2. Incumple las normas\n   3. Cancelar";
+        mensaje = "¿Por qué quieres cancelar el desafío?\n   1. Me parece injusto\n   2. Incumple las normas\n   3. Cancelar";
         this.mensajes.add(mensaje);
         
         mensaje = "El valor introducido no es válido. Por favor introduzca un valor válido. Pulse intro para continuar.";

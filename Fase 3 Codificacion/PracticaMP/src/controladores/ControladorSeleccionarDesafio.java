@@ -6,12 +6,12 @@ package controladores;
 
 import baseDeDatos.AlmacenDesafios;
 import baseDeDatos.AlmacenUsuarios;
-import baseDeDatos.Estado;
 import clasesDeJuego.Desafio;
 import clasesDeJuego.Jugador;
 import java.util.ArrayList;
 import java.util.List;
 import menus.MenuSeleccionarDesafio;
+import practicamp.Juego;
 
 /**
  *
@@ -33,11 +33,11 @@ public class ControladorSeleccionarDesafio {
     }
 
     private void cargarDesafios() {
-        AlmacenDesafios almacen = Estado.obtenerAlmacenDesafios();
+        AlmacenDesafios almacen = Juego.estado.obtenerAlmacenDesafios();
         this.desafios = new ArrayList<>(almacen.obtenerDesafiosAvalidar());
     }
 
-    public void iniciarControlador() { //esto está mal. Creo que se muestran cosas mal
+    public void iniciarControlador() {
         cargarDesafios();
         this.menuSel.ponerDesafios(this.desafios);
         if (this.desafios.isEmpty()) {
@@ -76,7 +76,7 @@ public class ControladorSeleccionarDesafio {
                 //por tanto comprobamos si estamos en la última página. Si no estamos, vale 1-5
                 //Si estamos en la última página, valen los números del 1 al último que muestre la página
                 double ultimaPagina = Math.ceil((double) desafios.size() / tamPag) - 1;
-                if (opcion.equalsIgnoreCase("salir") || opcion.equalsIgnoreCase("s") || opcion.equalsIgnoreCase("a")) {
+                if (opcion.equalsIgnoreCase("s") || opcion.equalsIgnoreCase("a") || opcion.equals("salir")){ //salir debe ser con minúsculas, o toca poner 2^5 combinaciones en el case de procesarEntrada
                     return true;
                 }
                 int mod = desafios.size() % tamPag;
@@ -116,7 +116,7 @@ public class ControladorSeleccionarDesafio {
             case "volver" -> {
                 this.modo = 0;
             }
-            case "s" -> { //suma 1 a la página actual si no estamos en la última. 
+            case "s", "S" -> { //suma 1 a la página actual si no estamos en la última. 
                 //Para saber si estamos en la última, divide el tamaño de la lista entre el tamaño de página (redondeando hacia arriba), y lo compara con la página actual
                 if (this.pagActual != Math.ceil((double) desafios.size() / tamPag) - 1) {
                     this.pagActual++;
@@ -124,7 +124,7 @@ public class ControladorSeleccionarDesafio {
                     this.menuSel.mostrarMensajeError(3); //no hay más que mostrar
                 }
             }
-            case "a" -> {
+            case "a", "A" -> {
                 if (this.pagActual != 0) {
                     this.pagActual--;
                 } else {
@@ -164,6 +164,7 @@ public class ControladorSeleccionarDesafio {
         boolean desafioTramitado = cVaDes.iniciarControlador();
         if (desafioTramitado){
             this.desafios.remove(pos); //al ser desafios una copia, no debería borrar los desafíos del almacén
+            this.menuSel.quitarDesafio(pos);    //actualizamos la lista del menú
         }
     }
 
@@ -196,16 +197,17 @@ public class ControladorSeleccionarDesafio {
         this.menuSel.quitarDesafio(pos);    //actualizamos la lista del menú
 
         //borramos el desafio, se entiende que el almacén se ocupa de guardar el cambio
-        AlmacenDesafios almacenD = Estado.obtenerAlmacenDesafios();
+        AlmacenDesafios almacenD = Juego.estado.obtenerAlmacenDesafios();
         almacenD.borrarDesafio(d);
 
         this.menuSel.mostrarMensaje(4); // desafio eliminado
 
         if (opcion.equals("2")) { //si rompe las normas, baneamos al usuario
-            AlmacenUsuarios almacenU = Estado.obtenerAlmacenUsuarios();
+            AlmacenUsuarios almacenU = Juego.estado.obtenerAlmacenUsuarios();
             Jugador j = (Jugador) almacenU.obtenerUsuario(d.obtenerJugadorDesafiante().obtenerNick());
             j.cambiarBaneo(true);
-            almacenU.guardarUsuarios();
+            //almacenU.guardarUsuarios();
+            Juego.estado.guardar();
         }
     }
 }

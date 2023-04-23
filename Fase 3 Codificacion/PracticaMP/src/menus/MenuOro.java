@@ -8,6 +8,7 @@ import baseDeDatos.Estado;
 import clasesDeJuego.Combate;
 import java.util.List;
 import java.util.Scanner;
+import practicamp.Juego;
 
 /**
  *
@@ -34,7 +35,7 @@ public class MenuOro {
         //obtiene el oro 
         String fecha = combate.obtenerFecha();
         int oro = combate.obtenerOroGanado();
-        if (!Estado.obtenerUsuarioActivo().obtenerNick().equals(combate.obtenerVencedor())){
+        if (!Juego.estado.obtenerUsuarioActivo().obtenerNick().equals(combate.obtenerVencedor())){
             oro = -oro;        
         }
         System.out.println("Combate " + num + ": \n" + "    Fecha: " + fecha + "\n    Oro ganado: " + oro);

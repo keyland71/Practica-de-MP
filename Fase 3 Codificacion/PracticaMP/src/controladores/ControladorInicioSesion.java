@@ -8,6 +8,7 @@ import baseDeDatos.AlmacenUsuarios;
 import baseDeDatos.Estado;
 import clasesDeJuego.Usuario;
 import menus.MenuIniciarSesion;
+import practicamp.Juego;
 import sistemas.ExcepcionMalaEntrada;
 
 /**
@@ -33,7 +34,7 @@ public class ControladorInicioSesion {
     }
 
     public void iniciarControlador() {
-        AlmacenUsuarios almacen = Estado.obtenerAlmacenUsuarios();
+        AlmacenUsuarios almacen = Juego.estado.obtenerAlmacenUsuarios();
         if (almacen.obtenerNumUsuarios() != 0) {
             boolean salir = false;
             while (!salir) {
@@ -89,7 +90,7 @@ public class ControladorInicioSesion {
      * Falso en otro caso.
      */
     private boolean nickExistente(String nick) {
-        AlmacenUsuarios almacen = Estado.obtenerAlmacenUsuarios();
+        AlmacenUsuarios almacen = Juego.estado.obtenerAlmacenUsuarios();
         return almacen.existeUsuario(nick);
     }
 
@@ -102,7 +103,7 @@ public class ControladorInicioSesion {
      * coincide con la del usuario introducido. Falso en otro caso.
      */
     private boolean comprobarContrasenia(String contrasenia) {
-        AlmacenUsuarios almacen = Estado.obtenerAlmacenUsuarios();
+        AlmacenUsuarios almacen = Juego.estado.obtenerAlmacenUsuarios();
         Usuario usuario = almacen.obtenerUsuario(this.nick);
         boolean valido = contrasenia.equalsIgnoreCase("salir") || usuario.compararContrasenia(contrasenia); //(contrasenia.length() >= 8 && contrasenia.length() <= 12) && usuario.compararContrasenia(contrasenia);
         return valido;
@@ -131,9 +132,9 @@ public class ControladorInicioSesion {
     }
 
     private void iniciarSesion() {
-        AlmacenUsuarios almacen = Estado.obtenerAlmacenUsuarios();
+        AlmacenUsuarios almacen = Juego.estado.obtenerAlmacenUsuarios();
         Usuario usuario = almacen.obtenerUsuario(this.nick);
-        Estado.ponerUsuarioActivo(usuario);
+        Juego.estado.ponerUsuarioActivo(usuario);
         boolean esAdmin = usuario.esAdministrador();
         if (esAdmin) {
             ControladorAdmin controladorAdmin = new ControladorAdmin();

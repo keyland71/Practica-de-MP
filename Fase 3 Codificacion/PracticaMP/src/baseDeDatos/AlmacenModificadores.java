@@ -7,20 +7,50 @@ package baseDeDatos;
 import clasesDeJuego.Modificador;
 import clasesDeJuego.TipoModificador;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
-public class AlmacenModificadores {
+public class AlmacenModificadores implements Serializable{
 
     private List<Modificador> modificadores;
 
     public AlmacenModificadores() {
+        this.modificadores = new ArrayList<>();
         this.cargarModificadores();
 
     }
 
-    private void cargarModificadores() {
+    private void cargarModificadores(){
+    File miArchivo = new File("./archivos/Modificadores.csv");
+        try {
+            Scanner lector = new Scanner(miArchivo);
+            String nombre;
+            int valor;
+            TipoModificador tipo;
+            
+            while (lector.hasNextLine()) {
+                String linea = lector.nextLine();
+                String[] seccionesLinea = linea.split(";");
+                
+                nombre = seccionesLinea[0];
+                valor = Integer.parseInt(seccionesLinea[1]);
+                tipo = TipoModificador.valueOf(seccionesLinea[2]);
+                
+                Modificador mod = new Modificador(nombre, valor, tipo);
+                this.modificadores.add(mod);
+            }
+        } catch (FileNotFoundException exception) {
+            System.out.println("No existe el archivo Modificadores.csv.");
+        }
+    }
+    
+    private void cargarModificadoresViejo() {
         try {
             //Leer modificadores
             BufferedReader br = new BufferedReader(new FileReader("./archivos/Modificadores.csv"));

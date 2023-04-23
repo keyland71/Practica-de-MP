@@ -5,9 +5,10 @@
 package controladores;
 
 import baseDeDatos.AlmacenUsuarios;
-import baseDeDatos.Estado;
+import clasesDeJuego.Jugador;
 import menus.MenuAdmin;
 import menus.MenuBorrarCuenta;
+import practicamp.Juego;
 
 /**
  * @authos marcos
@@ -40,7 +41,7 @@ public class ControladorAdmin {
                 this.menuAdministrador.mostrarMensajeError(0);
             }
         }
-        Estado.ponerUsuarioActivo(null);
+        Juego.estado.ponerUsuarioActivo(null);
     }
 
     private boolean validarEntrada(String opcion) {
@@ -112,8 +113,8 @@ public class ControladorAdmin {
             }
         } while (!valido || i != 2); //se mantiene aquí hasta que reciba 2 veces un input valido
         if (opcion.equalsIgnoreCase("si") && i == 2) {
-            AlmacenUsuarios almacen = Estado.obtenerAlmacenUsuarios();
-            almacen.borrarUsuario(Estado.obtenerUsuarioActivo());
+            AlmacenUsuarios almacen = Juego.estado.obtenerAlmacenUsuarios();
+            almacen.borrarUsuario(Juego.estado.obtenerUsuarioActivo());
             this.menuBorrarCuenta.mostrarMensaje(i); //borrado correctamente
             return true;
         } else {

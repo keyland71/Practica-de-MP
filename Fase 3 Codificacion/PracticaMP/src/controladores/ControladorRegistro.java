@@ -8,6 +8,7 @@ import baseDeDatos.AlmacenUsuarios;
 import baseDeDatos.Estado;
 import clasesDeJuego.Usuario;
 import menus.MenuRegistro;
+import practicamp.Juego;
 import sistemas.ExcepcionMalaEntrada;
 import sistemas.FabricaUsuarios;
 
@@ -110,7 +111,7 @@ public class ControladorRegistro {
      * nick. Falso en otro caso.
      */
     private boolean nickUnico(String nick) {
-        AlmacenUsuarios almacen = Estado.obtenerAlmacenUsuarios();
+        AlmacenUsuarios almacen = Juego.estado.obtenerAlmacenUsuarios();
         return !almacen.existeUsuario(nick);
     }
 
@@ -143,7 +144,7 @@ public class ControladorRegistro {
         } else {
             u = this.fabricaUsuarios.crearJugador();
         }
-        AlmacenUsuarios almacen = Estado.obtenerAlmacenUsuarios();
+        AlmacenUsuarios almacen = Juego.estado.obtenerAlmacenUsuarios();
         almacen.aniadirUsuario(u);
     }
 

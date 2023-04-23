@@ -29,6 +29,8 @@ public class MenuBorrarPersonaje {
         
         mensaje = "Por favor, introduzca un valor correcto. Pulse cualquier boton para continuar";
         this.mensajesError.add(mensaje);
+        mensaje = "No puedes borrar tu personaje puesto que no tienes un personaje activo. Crea un personaje y vuelve a intentarlo";
+        this.mensajesError.add(mensaje);
     }
     public String mostrarMensaje(int pos) {
         System.out.println(this.mensajes.get(pos));

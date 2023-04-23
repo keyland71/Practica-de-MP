@@ -6,10 +6,16 @@ package controladores;
 
 import baseDeDatos.AlmacenPersonajes;
 import baseDeDatos.Estado;
+import clasesDeJuego.Cazador;
+import clasesDeJuego.Jugador;
+import clasesDeJuego.Licantropo;
+import clasesDeJuego.Personaje;
+import clasesDeJuego.Vampiro;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import menus.MenuCrearPersonaje;
+import practicamp.Juego;
 import sistemas.FabricaPersonajes;
 
 /**
@@ -65,7 +71,7 @@ public class ControladorCrearPersonaje {
     }
 
     private boolean nombreUnico(String nombre) {
-        AlmacenPersonajes almacen = Estado.obtenerAlmacenPersonajes();
+        AlmacenPersonajes almacen = Juego.estado.obtenerAlmacenPersonajes();
         return !almacen.existePersonaje(nombre); //existePersonaje es un return false, así que siempre considerará el nombre como único
     }
 
@@ -83,12 +89,33 @@ public class ControladorCrearPersonaje {
             }
             case 2 -> { //crear el personaje y guardarlo
                 if (entrada.equalsIgnoreCase("si")){
-                    FabricaPersonajes f = new FabricaPersonajes();
+                    Personaje p;
+                    AlmacenPersonajes almacen = Juego.estado.obtenerAlmacenPersonajes();
+                    
+                    FabricaPersonajes f = Juego.estado.obtenerFabricaPersonajes();
+                    if (this.tipoElegido.equalsIgnoreCase("vampiro")){
+                        p = f.crearVampiro(this.nombreElegido);
+                        almacen.aniadirVampiro((Vampiro) p);
+                        
+                    } else if (this.tipoElegido.equalsIgnoreCase("licantropo")){
+                        p = f.crearLicantropo(this.nombreElegido);
+                        almacen.aniadirLicantropo((Licantropo) p);
+                        
+                    } else {
+                        p = f.crearCazador(this.nombreElegido);
+                        almacen.aniadirCazador((Cazador) p);
+                    }
+                    Jugador j = (Jugador) Juego.estado.obtenerUsuarioActivo();
+                    j.ponerPersonaje(p);
+                    Juego.estado.guardar();
+                    
+                    
                     //llamar a la fábrica para que cree el personaje
                     //si la fábrica tiene métodos distintos para cada tipo, usar un case para llamar al pertinente
                     //si la fábrica guarda el personaje, that's it.
                     //si la fábrica no guarda el personaje, lo hay que guardar
                 }
+                return true;
             }
 
         }

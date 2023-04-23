@@ -12,6 +12,7 @@ import clasesDeJuego.HabilidadEspecial;
 import clasesDeJuego.Licantropo;
 import clasesDeJuego.Modificador;
 import clasesDeJuego.Vampiro;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -19,7 +20,7 @@ import java.util.Set;
  *
  * @author Marcos, Lucía
  */
-public class FabricaPersonajes {
+public class FabricaPersonajes implements Serializable{
 
     private Vampiro modeloVampiro;
     private Licantropo modeloLicantropo;

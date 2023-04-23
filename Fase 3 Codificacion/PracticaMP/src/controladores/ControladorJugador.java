@@ -18,6 +18,7 @@ import menus.MenuBorrarPersonaje;
 import menus.MenuJugador;
 import menus.MenuOro;
 import menus.MenuRanking;
+import practicamp.Juego;
 
 /**
  *
@@ -53,7 +54,7 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
                 this.menuJugador.mostrarMensajeError(0);
             }
         } while (!salir);
-        Estado.ponerUsuarioActivo(null);
+        Juego.estado.ponerUsuarioActivo(null);
     }
 
     private boolean validarEntrada(String opcion) {
@@ -79,7 +80,7 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
                 cCamEq.iniciarControlador();
             }
             case "3" -> { // hacer desafío
-                if (Estado.obtenerPersonajeActivo() != null){
+                if (Juego.estado.obtenerPersonajeActivo() != null){
                     ControladorCrearDesafío cCrearDes = new ControladorCrearDesafío();
                     cCrearDes.iniciarControlador();
                 } else {
@@ -91,14 +92,20 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
                 mostrarMenuOro();
             }
             case "5" -> { // crear personaje
-                ControladorCrearPersonaje cCrearPers = new ControladorCrearPersonaje();
-                cCrearPers.iniciarControlador();
+                Jugador j = (Jugador) Juego.estado.obtenerUsuarioActivo();
+                if (j.obtenerPersonaje() != null){
+                    this.menuJugador.mostrarMensajeError(1);
+                } else {
+                    ControladorCrearPersonaje cCrearPers = new ControladorCrearPersonaje();
+                    cCrearPers.iniciarControlador();
+                }
             }
             case "6" -> { // borrar personaje
                 //comprueba que tiene un personaje
                 //borra el personaje del almacén
                 //borra el personaje del usuario activo (y por tanto del Estado)
-                if (Estado.obtenerPersonajeActivo() == null) { //si no hay personaje activo, no lo puedes borrar
+                if (Juego.estado.obtenerPersonajeActivo() == null) { //si no hay personaje activo, no lo puedes borrar
+                    this.menuBorrarPersonaje.mostrarMensajeError(1);
                     return false;
                 }
                 boolean valido;
@@ -111,9 +118,9 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
                     }
                 } while (!valido);
                 if (opcion.equalsIgnoreCase("si")) {
-                    AlmacenPersonajes almacen = Estado.obtenerAlmacenPersonajes();
-                    almacen.borrarPersonaje(Estado.obtenerPersonajeActivo());   //habrá que ver cómo se implementa borrarPersonaje
-                    Estado.quitarPersonajeActivo();                             //esto lo debería cambiar también de Estado.personajeActivo, al ser referencias
+                    AlmacenPersonajes almacen = Juego.estado.obtenerAlmacenPersonajes();
+                    almacen.borrarPersonaje(Juego.estado.obtenerPersonajeActivo());   //habrá que ver cómo se implementa borrarPersonaje
+                    Juego.estado.quitarPersonajeActivo();                             //esto lo debería cambiar también de Estado.personajeActivo, al ser referencias
                     this.menuBorrarPersonaje.mostrarMensaje(1);                 //borrado correctamente
                 }
             }
@@ -136,8 +143,8 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
                     }
                 } while (!valido || i != 2); //se mantiene aquí hasta que reciba 2 veces un input valido
                 if (opcion.equalsIgnoreCase("si") && i == 2) {
-                    AlmacenUsuarios almacen = Estado.obtenerAlmacenUsuarios();
-                    almacen.borrarUsuario(Estado.obtenerUsuarioActivo());
+                    AlmacenUsuarios almacen = Juego.estado.obtenerAlmacenUsuarios();
+                    almacen.borrarUsuario(Juego.estado.obtenerUsuarioActivo());
                     this.menuBorrarCuenta.mostrarMensaje(i); //borrado correctamente
                     return true;
                 }
@@ -155,8 +162,8 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
     }
 
     private void mostrarMenuOro() {
-        AlmacenDesafios almacen = Estado.obtenerAlmacenDesafios();
-        List<Desafio> desafios = almacen.obtenerDesafiosCompletados((Jugador) Estado.obtenerUsuarioActivo());
+        AlmacenDesafios almacen = Juego.estado.obtenerAlmacenDesafios();
+        List<Desafio> desafios = almacen.obtenerDesafiosCompletados((Jugador) Juego.estado.obtenerUsuarioActivo());
         List<Combate> combates = new ArrayList<>();
         for (Desafio desafio : desafios) {
             combates.add(desafio.obtenerCombate());
