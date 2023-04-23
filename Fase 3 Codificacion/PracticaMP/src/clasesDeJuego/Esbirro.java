@@ -25,5 +25,9 @@ public abstract class Esbirro {
     public int obtenerVida() {
         return this.vida;
     }
+    
+    public boolean tieneHumanos() {
+        return false;
+    }
 
 }

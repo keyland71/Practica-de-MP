@@ -18,4 +18,9 @@ public class Humano extends Esbirro {
         this.nivelLealtad = nivel;
         
     }
+    
+    @Override
+    public boolean tieneHumanos() {
+        return true;
+    }
 }

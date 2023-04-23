@@ -24,6 +24,13 @@ public class Cazador extends Personaje {
     public Cazador(String nombre, Cazador cazadorModelo) {
         super(nombre, cazadorModelo);
     }
+    
+    @Override
+    public void ponerHabilidadEspecial(HabilidadEspecial hab) {
+        if (hab.obtenerTipo().equals(TipoHabilidad.talento)) {
+            super.ponerHabilidadEspecial(hab);
+        }
+    }
 
     @Override
     public void modificarRecurso() {

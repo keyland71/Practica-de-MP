@@ -72,7 +72,7 @@ public class AlmacenEsbirros {
     public List<Esbirro> obtenerEsbirros() {
         return this.esbirros;
     }
-
+    
     public Set<Esbirro> obtenerEsbirrosEjemploVampiro() {
         Esbirro esbirro1 = this.esbirros.get(1);
         Esbirro esbirro2 = this.esbirros.get(4);

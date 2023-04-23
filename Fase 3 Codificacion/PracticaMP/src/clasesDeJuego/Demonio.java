@@ -31,4 +31,13 @@ public class Demonio extends Esbirro {
         return vidaTotal;
     }
     
+    @Override
+    public boolean tieneHumanos() {
+        boolean hayHumanos = super.tieneHumanos();
+        for (Esbirro esbirro : this.esbirros) {
+            hayHumanos |= esbirro.tieneHumanos();
+        }
+        return hayHumanos;
+    }
+    
 }
