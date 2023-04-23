@@ -58,7 +58,7 @@ public class ControladorInicioSesion {
 
     private boolean validarEntrada(String opcion){
         if (this.modo == 0) {
-            return nickExistente(opcion) || opcion.equalsIgnoreCase("salir");
+            return nickValido(opcion) || opcion.equalsIgnoreCase("salir");
         }
         return comprobarContrasenia(opcion);
     }
@@ -89,9 +89,10 @@ public class ControladorInicioSesion {
      * @return verdadero si existe un usuario en la base de datos con ese nick.
      * Falso en otro caso.
      */
-    private boolean nickExistente(String nick) {
+    private boolean nickValido(String nick) {
         AlmacenUsuarios almacen = Juego.estado.obtenerAlmacenUsuarios();
-        return almacen.existeUsuario(nick);
+        Usuario u = almacen.obtenerUsuario(nick);
+        return u!=null && !u.estaBaneado(); //un nick es válido si existe un usuario NO baneado con ese nick
     }
 
     /**

@@ -33,7 +33,7 @@ public class MenuIniciarSesion {
         this.mensajes.add(mensaje);
         mensaje = "Introduce tu contrasenia: (escriba \"salir\" si desea salir al menú principal)";
         this.mensajes.add(mensaje);
-        mensaje = "Por favor, introduzca un nick valido. Pulse cualquier boton para continuar.";
+        mensaje = "No existe un usuario con el nick introducido, o bien el usuario está baneado. Pulse cualquier boton para continuar.";
         this.mensajesError.add(mensaje);
         mensaje = "Por favor, introduzca una contrasenia valida. Pulse cualquier boton para continuar.";
         this.mensajesError.add(mensaje);
