@@ -33,10 +33,10 @@ public abstract class Personaje implements Serializable{
 
     public Personaje(HabilidadEspecial hab, Set<Arma> armas, Set<Armadura> armaduras, Set<Esbirro> esbirros, int vida, int poder, List<Modificador> mods, String desc, int puntosRec) {
         this.nombre = "Modelo Personaje";
-        this.habilidadEspecial = hab;
+        ponerHabilidadEspecial(hab);
         this.armasDisponibles = armas;
         this.armadurasDisponibles = armaduras;
-        this.esbirros = esbirros;
+        ponerEsbirros(esbirros);
         this.vida = vida;
         this.poder = poder;
         this.modificadores = mods;
@@ -166,6 +166,10 @@ public abstract class Personaje implements Serializable{
         return defensaTotal;
     }
     
+    public int obtenerOro(){
+        return this.oro;
+    }
+    
     public void ponerPuntosRecurso(int recurso) {
         this.puntosRecurso = recurso;
     }
@@ -176,6 +180,14 @@ public abstract class Personaje implements Serializable{
 
     public void ponerArmaduraActiva(Armadura armadura) {
         this.armaduraActiva = armadura;
+    }
+    
+     public void ponerEsbirros(Set<Esbirro> esbirros) {
+        this.esbirros = esbirros;
+     }
+     
+     public void ponerHabilidadEspecial(HabilidadEspecial hab) {
+        this.habilidadEspecial = hab;
     }
 
     public void sumarOro(int oro) {
@@ -231,10 +243,6 @@ public abstract class Personaje implements Serializable{
 
     public void reestablecerPersonaje() {
         this.puntosRecurso = 0;
-    }
-    
-    public int obtenerOro(){
-        return this.oro;
     }
 
 }

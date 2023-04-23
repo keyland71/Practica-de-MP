@@ -4,6 +4,7 @@
  */
 package clasesDeJuego;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -23,6 +24,24 @@ public class Vampiro extends Personaje {
     public Vampiro(String nombre, Vampiro vampiroModelo) {
         super(nombre, vampiroModelo);
         this.edad = vampiroModelo.obtenerEdad();
+    }
+    
+    @Override
+    public void ponerEsbirros(Set<Esbirro> esbirros) {
+        Set<Esbirro> esbirrosSinHumanos = new HashSet<>();
+        for (Esbirro esbirro : esbirros) {
+            if (!esbirro.tieneHumanos()) {
+                esbirrosSinHumanos.add(esbirro);
+            }
+        }
+        super.ponerEsbirros(esbirrosSinHumanos);
+    }
+    
+    @Override
+    public void ponerHabilidadEspecial(HabilidadEspecial hab) {
+        if (hab.obtenerTipo().equals(TipoHabilidad.disciplina)) {
+            super.ponerHabilidadEspecial(hab);
+        }
     }
 
     @Override
