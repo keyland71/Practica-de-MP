@@ -66,7 +66,7 @@ public class ControladorCrearPersonaje {
 
     private boolean nombreUnico(String nombre) {
         AlmacenPersonajes almacen = Estado.obtenerAlmacenPersonajes();
-        return !almacen.existePersonaje(nombre);
+        return !almacen.existePersonaje(nombre); //existePersonaje es un return false, así que siempre considerará el nombre como único
     }
 
     private boolean procesarEntrada(String entrada) {
@@ -81,7 +81,7 @@ public class ControladorCrearPersonaje {
             case 1 -> { //guardar el tipo
                 this.tipoElegido = entrada;
             }
-            case 2 -> { //crear el desafío y guardarlo
+            case 2 -> { //crear el personaje y guardarlo
                 if (entrada.equalsIgnoreCase("si")){
                     FabricaPersonajes f = new FabricaPersonajes();
                     //llamar a la fábrica para que cree el personaje

@@ -30,15 +30,16 @@ public class MenuJugador { //se ocupa de Ranking, Oro, Borrar personaje, y ¿Cre
                             5. Crear Personaje
                             6. Borrar Personaje
                             7. Borrar Cuenta
-                            8. Cerrar Sesión
-                          """;
+                            8. Cerrar Sesión""";
         String mensaje1 = "¿Seguro que quiere borrar su personaje?";
         String mensaje2 = "¿Seguro que quiere borrar su cuenta?";
         String mensaje3 = "¿Seguro que quiere cerrar sesión?";
+        String mensaje4 = "No puede crear un desafio si no tiene personaje.";
         mensajes.add(mensaje0);
         mensajes.add(mensaje1);
         mensajes.add(mensaje2);
         mensajes.add(mensaje3);
+        mensajes.add(mensaje4);
         
         String mensajeError1 = "Por favor, introduzca un valor correcto. Pulse intro para continuar";
         this.mensajesError.add(mensajeError1);

@@ -79,8 +79,13 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
                 cCamEq.iniciarControlador();
             }
             case "3" -> { // hacer desafío
-                ControladorCrearDesafío cCrearDes = new ControladorCrearDesafío();
-                cCrearDes.iniciarControlador();
+                if (Estado.obtenerPersonajeActivo() != null){
+                    ControladorCrearDesafío cCrearDes = new ControladorCrearDesafío();
+                    cCrearDes.iniciarControlador();
+                } else {
+                    this.menuJugador.mostrarMensaje(4);
+        
+                }
             }
             case "4" -> { // consultar historial de oro
                 mostrarMenuOro();
@@ -107,9 +112,9 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
                 } while (!valido);
                 if (opcion.equalsIgnoreCase("si")) {
                     AlmacenPersonajes almacen = Estado.obtenerAlmacenPersonajes();
-                    almacen.borrarPersonaje(Estado.obtenerPersonajeActivo()); //habrá que ver cómo se implementa borrarPersonaje
-                    Estado.quitarPersonajeActivo(); //esto lo debería cambiar también de Estado.personajeActivo, al ser referencias
-                    this.menuBorrarPersonaje.mostrarMensaje(1); //borrado correctamente
+                    almacen.borrarPersonaje(Estado.obtenerPersonajeActivo());   //habrá que ver cómo se implementa borrarPersonaje
+                    Estado.quitarPersonajeActivo();                             //esto lo debería cambiar también de Estado.personajeActivo, al ser referencias
+                    this.menuBorrarPersonaje.mostrarMensaje(1);                 //borrado correctamente
                 }
             }
             case "7" -> { // borrar cuenta

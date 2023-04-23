@@ -91,6 +91,8 @@ public class Estado {
             if (Class.forName("clasesDeJuego.Jugador").isInstance(Estado.usuarioActivo)){
                 Jugador j = (Jugador) Estado.usuarioActivo;
                 return j.obtenerPersonaje();
+            } else{
+                return null;
             }
         } catch (ClassNotFoundException ex) {
             System.out.println("Estado.obtenerPersonajeActivo() ha dado problemas; ");

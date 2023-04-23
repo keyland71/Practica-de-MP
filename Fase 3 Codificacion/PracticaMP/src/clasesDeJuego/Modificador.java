@@ -35,5 +35,13 @@ public class Modificador {
         }
     }
     
+    public String obtenerNombre(){
+        return this.nombre;
+    }
+
+    public TipoModificador obtenerTipo() {
+        return this.tipo;
+    }
+    
 }
 

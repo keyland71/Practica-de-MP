@@ -18,7 +18,7 @@ public class AlmacenPersonajes {
     }
     
     public boolean existePersonaje(String nombre){
-    return true;
+    return false;
      }
     
     

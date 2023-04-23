@@ -78,17 +78,39 @@ public abstract class Personaje {
     public List<Modificador> obtenerModificadores() {
         return this.modificadores;
     }
-
-    public List<Modificador> obtenerFortalezas(String[] fortalezas) {
-        List<Modificador> fortalezasActivas = new ArrayList<>();
-        buscarYAniadirModificador(fortalezasActivas, fortalezas);
-        return fortalezasActivas;
+    public List<Modificador> obtenerFortalezas() {
+        List<Modificador> fortalezas = new ArrayList<>();
+        for (Modificador fortaleza:this.modificadores){
+            if (fortaleza.obtenerTipo() == TipoModificador.fortaleza){
+                fortalezas.add(fortaleza);
+            }
+        }
+        return fortalezas;
     }
-
-    public List<Modificador> obtenerDebilidades(String[] debilidades) {
-        List<Modificador> debilidadesActivas = new ArrayList<>();
-        buscarYAniadirModificador(debilidadesActivas, debilidades);
-        return debilidadesActivas;
+    public List<Modificador> obtenerDebilidades() {
+        List<Modificador> debilidades = new ArrayList<>();
+        for (Modificador debilidad:this.modificadores){
+            if (debilidad.obtenerTipo() == TipoModificador.debilidad){
+                debilidades.add(debilidad);
+            }
+        }
+        return debilidades;
+    }
+    
+    private void buscarYAniadirModificador(List<Modificador> listaMods, String[] nombres) {
+        for (String nombreMod : nombres) {
+            boolean encontrado = false;
+            int pos = 0;
+            while (!encontrado) {
+                encontrado = this.modificadores.get(pos).obtenerNombre().equals(nombreMod);
+                if (!encontrado) {
+                    pos += 1;
+                }
+            }
+            if (encontrado) {
+                listaMods.add(this.modificadores.get(pos));
+            }
+        }
     }
 
     public int obtenerVida() {
@@ -209,21 +231,9 @@ public abstract class Personaje {
     public void reestablecerPersonaje() {
         this.puntosRecurso = 0;
     }
-
-    private void buscarYAniadirModificador(List<Modificador> listaMods, String[] nombres) {
-        for (String nombreMod : nombres) {
-            boolean encontrado = false;
-            int pos = 0;
-            while (!encontrado) {
-                encontrado = this.modificadores.get(pos).obtenerNombre().equals(nombreMod);
-                if (!encontrado) {
-                    pos += 1;
-                }
-            }
-            if (encontrado) {
-                listaMods.add(this.modificadores.get(pos));
-            }
-        }
+    
+    public int obtenerOro(){
+        return this.oro;
     }
 
 }
