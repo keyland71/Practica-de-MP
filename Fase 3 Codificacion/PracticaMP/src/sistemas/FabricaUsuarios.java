@@ -4,12 +4,10 @@
  */
 package sistemas;
 
-import baseDeDatos.AlmacenUsuarios;
 import baseDeDatos.Estado;
 import clasesDeJuego.Administrador;
 import clasesDeJuego.Jugador;
 import clasesDeJuego.NumeroRegistro;
-import clasesDeJuego.Usuario;
 
 /**
  *
@@ -19,15 +17,14 @@ import clasesDeJuego.Usuario;
  * @author Marcos Jiménez Pulido
  */
 public class FabricaUsuarios {
-    
+
     private String nick;
     private String contrasenia;
     private String nombre;
 
-    
-        public FabricaUsuarios(){
+    public FabricaUsuarios() {
     }
-        
+
     /**
      * @param nick the nick to set
      */
@@ -48,19 +45,19 @@ public class FabricaUsuarios {
     public void ponerNombre(String nombre) {
         this.nombre = nombre;
     }
-    
 
-    
-    public Jugador crearJugador(){
-        Jugador j =new Jugador(this.nombre, this.nick, this.contrasenia);
+    public Jugador crearJugador() {
+        Jugador j = new Jugador(this.nombre, this.nick, this.contrasenia);
         ponerNumeroRegistro(j);
         return j;
     }
-    public Administrador crearAdministrador(){
+
+    public Administrador crearAdministrador() {
         Administrador admin = new Administrador(this.nombre, this.nick, this.contrasenia);
         return admin;
     }
-    private void ponerNumeroRegistro(Jugador j){
+
+    private void ponerNumeroRegistro(Jugador j) {
         NumeroRegistro num = Estado.obtenerNumeroRegistro();
         num.incrementarNumReg(); //num = num.incrementarNumReg()
         j.ponerNumReg(num);
