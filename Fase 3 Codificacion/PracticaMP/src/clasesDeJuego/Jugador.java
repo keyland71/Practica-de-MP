@@ -11,9 +11,11 @@ package clasesDeJuego;
 public class Jugador extends Usuario {
 
     private Personaje personaje;
+    private int victorias;
 
     public Jugador(String nombre, String nick, String contrasenia) {
         super(nombre, nick, contrasenia);
+        this.victorias = 0;
         this.personaje = null;
     }
 
@@ -29,4 +31,8 @@ public class Jugador extends Usuario {
     //y para eso te quedas con la implementación de arriba
     //más sentido me tiene implementarlo arriba y hacer override en Admin
     //por ahora lo hago como he dicho
+
+    public void incrementarVictorias() {
+        this.victorias++;
+    }
 }

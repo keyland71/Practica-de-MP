@@ -40,14 +40,14 @@ public class Licantropo extends Personaje {
     }
 
     @Override
-    public int calcularPotencialAtaque(int promedioModificadores) {
-        int potencialAtaque = super.calcularPotencialAtaque(promedioModificadores) + this.obtenerRecurso();
+    public int calcularPotencialAtaque() {
+        int potencialAtaque = super.calcularPotencialAtaque() + this.obtenerRecurso();
         return potencialAtaque;
     }
 
     @Override
-    public int calcularPotencialDefensa(int promedioModificadores) {
-        int potencialDefensa = super.calcularPotencialDefensa(promedioModificadores) + this.obtenerRecurso();
+    public int calcularPotencialDefensa() {
+        int potencialDefensa = super.calcularPotencialDefensa() + this.obtenerRecurso();
         return potencialDefensa;
     }
 }

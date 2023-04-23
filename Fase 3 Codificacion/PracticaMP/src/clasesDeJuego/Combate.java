@@ -6,6 +6,7 @@ package clasesDeJuego;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public class Combate implements Serializable{
     private Jugador uDesafiado;
     private int rondasUsadas;
     private LocalDateTime fecha;
-    private String vencedor;
+    private Jugador vencedor;
     private String usuarioConEsbirros;
     private int oroGanado;
     private List<Ronda> registroRondas;
@@ -33,12 +34,12 @@ public class Combate implements Serializable{
         this.vencedor = null;
         this.usuarioConEsbirros = null;
         this.oroGanado = 0;
-        this.registroRondas = null;
+        this.registroRondas = new ArrayList<>();
         this.fortDebP1 = new int[2];
         this.fortDebP2 = new int[2];
     }
 
-    public void incrementoRondasUsadas() {
+    public void incrementarRonda() {
         this.rondasUsadas++;  //incrementa el valor en 1
     }
 
@@ -51,19 +52,20 @@ public class Combate implements Serializable{
     }
 
     public String toStringCombate() {
-        String combate = "Partida: "
-                + "\n    Usuario Desafiante: " + uDesafiante
-                + ",\n    Usuario Desafiado: " + uDesafiado
-                + ",\n    Rondas Usadas: " + rondasUsadas
+        String reg = Ronda.registroAString(registroRondas);
+        String combate = "Resumen del Combate: "
+                + "\n    Usuario Desafiante: " + uDesafiante.obtenerNick()
+                + ",\n    Usuario Desafiado: " + uDesafiado.obtenerNick()
+                + ",\n    Rondas Usadas: " + Integer.toString(rondasUsadas)
                 + ",\n    Fecha: " + fecha.toString()
-                + ",\n    Vencedor: " + vencedor
+                + ",\n    Vencedor: " + vencedor.obtenerNick()
                 + ",\n    Usuario Con Esbirros Vivos: " + usuarioConEsbirros
-                + ",\n    Oro Ganado: " + oroGanado
-                + ",\n    registroRonda: " + registroRondas.toString(); //habrá que revisar cómo escribir el registro de rondas
+                + ",\n    Oro Ganado: " + Integer.toString(oroGanado)
+                + ",\n    " + reg; //habrá que revisar cómo escribir el registro de rondas
         return combate;
     }
 
-    public Jugador obtenerUDessafiado() {
+    public Jugador obtenerUDesafiado() {
         return uDesafiado;
     }
 
@@ -76,7 +78,7 @@ public class Combate implements Serializable{
         return this.oroGanado;
     }
 
-    public String obtenerVencedor() {
+    public Jugador obtenerVencedor() {
         return this.vencedor;
     }
 
@@ -100,5 +102,17 @@ public class Combate implements Serializable{
         this.fortDebP1 = new int[2];
         this.fortDebP2 = new int[2];
 
+    }
+
+    public void ponerVencedor(boolean b) {
+        this.vencedor = (b ? this.uDesafiante:this.uDesafiado);
+    }
+
+    public void ponerUsuarioConEsbirros(boolean b) {
+        this.usuarioConEsbirros = (b ? this.uDesafiante:this.uDesafiado).obtenerNick();
+    }
+
+    public void ponerOro(int o) {
+        this.oroGanado = o;
     }
 }

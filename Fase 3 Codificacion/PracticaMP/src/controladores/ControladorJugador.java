@@ -7,7 +7,6 @@ package controladores;
 import baseDeDatos.AlmacenDesafios;
 import baseDeDatos.AlmacenPersonajes;
 import baseDeDatos.AlmacenUsuarios;
-import baseDeDatos.Estado;
 import clasesDeJuego.Combate;
 import clasesDeJuego.Desafio;
 import clasesDeJuego.Jugador;
@@ -34,9 +33,10 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
     private int modo;  //0 selección de opción, 1 borrarPersonaje/cuenta (si/no)
 
     public ControladorJugador() {
+        Jugador j = (Jugador) Juego.estado.obtenerUsuarioActivo();
         this.menuBorrarPersonaje = new MenuBorrarPersonaje();
         this.menuBorrarCuenta = new MenuBorrarCuenta();
-        this.menuJugador = new MenuJugador();
+        this.menuJugador = new MenuJugador(j.obtenerPersonaje()==null ? 100:j.obtenerPersonaje().obtenerOro());
         this.menuRanking = new MenuRanking();
         this.menuOro = new MenuOro();
 
@@ -44,6 +44,10 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
     }
 
     public void iniciarControlador() {
+        
+        ControladorNotificaciones cNot = new ControladorNotificaciones();
+        cNot.iniciarControlador();
+        
         boolean salir = false;
         do {
             this.modo = 0;
@@ -163,7 +167,7 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
 
     private void mostrarMenuOro() {
         AlmacenDesafios almacen = Juego.estado.obtenerAlmacenDesafios();
-        List<Desafio> desafios = almacen.obtenerDesafiosCompletados((Jugador) Juego.estado.obtenerUsuarioActivo());
+        List<Desafio> desafios = almacen.obtenerDesafiosCompletados(Juego.estado.obtenerUsuarioActivo().obtenerNick());
         List<Combate> combates = new ArrayList<>();
         for (Desafio desafio : desafios) {
             combates.add(desafio.obtenerCombate());

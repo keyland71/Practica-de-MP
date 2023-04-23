@@ -52,11 +52,8 @@ public class Vampiro extends Personaje {
     }
 
     @Override
-    public int calcularPotencialAtaque(int promedioModificadores) {
-        int potencialAtaque = this.obtenerPoder() + this.obtenerAtaqueArmas() + this.obtenerAtaqueArmadura() + promedioModificadores;
-        if (this.puedeUsarHabilidad()) {
-            potencialAtaque += this.obtenerHabilidadEspecial().obtenerAtaque();
-        }
+    public int calcularPotencialAtaque() {
+        int potencialAtaque = super.calcularPotencialAtaque();
         if (this.obtenerRecurso() >= 5) {
             potencialAtaque += 2;
         }
@@ -64,11 +61,8 @@ public class Vampiro extends Personaje {
     }
 
     @Override
-    public int calcularPotencialDefensa(int promedioModificadores) {
-        int potencialDefensa = this.obtenerDefensaArmas() + this.obtenerDefensaArmadura() + promedioModificadores;
-        if (this.puedeUsarHabilidad()) {
-            potencialDefensa += this.obtenerHabilidadEspecial().obtenerDefensa();
-        }
+    public int calcularPotencialDefensa() {
+        int potencialDefensa = super.calcularPotencialDefensa();
         if (this.obtenerRecurso() >= 5) {
             potencialDefensa += 2;
         }

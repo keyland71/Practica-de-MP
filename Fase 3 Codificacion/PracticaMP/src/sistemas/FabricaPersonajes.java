@@ -28,19 +28,7 @@ public class FabricaPersonajes implements Serializable{
 
     public FabricaPersonajes() {
     }
-
-    public void crearModeloVampiro(Set<Arma> armas, Set<Armadura> armaduras, Set<Esbirro> esbirros, HabilidadEspecial habilidad, List<Modificador> modificadores) {
-        this.modeloVampiro = new Vampiro(habilidad, armas, armaduras, esbirros, 5, 3, modificadores, "Los vampiros son criaturas que utilizan la sangre que roban de sus víctimas como recurso para activar algunas de sus habilidades.");
-    }
-
-    public void crearModeloLicantropo(Set<Arma> armas, Set<Armadura> armaduras, Set<Esbirro> esbirros, HabilidadEspecial habilidad, List<Modificador> modificadores) {
-        this.modeloLicantropo = new Licantropo(habilidad, armas, armaduras, esbirros, 4, 4, modificadores, "Los licántropos son criaturas que pueden cambiar de forma humana a una forma de Bestia que aparenta ser la de un gigantesco lobo bípedo.");
-    }
-
-    public void crearModeloCazador(Set<Arma> armas, Set<Armadura> armaduras, Set<Esbirro> esbirros, HabilidadEspecial habilidad, List<Modificador> modificadores) {
-        this.modeloCazador = new Cazador(habilidad, armas, armaduras, esbirros, 3, 3, modificadores, "Los cazadores son humanos con una voluntad extraordinaria que les dota de habilidades sobrenaturales.");
-    }
-
+    
     public Vampiro crearVampiro(String nombre) {
         return new Vampiro(nombre, this.modeloVampiro);
     }
@@ -51,5 +39,17 @@ public class FabricaPersonajes implements Serializable{
 
     public Cazador crearCazador(String nombre) {
         return new Cazador(nombre, this.modeloCazador);
+    }
+    
+    public void crearModeloVampiro(Set<Arma> armas, Set<Armadura> armaduras, Set<Esbirro> esbirros, HabilidadEspecial habilidad, List<Modificador> modificadores) {
+        this.modeloVampiro = new Vampiro(habilidad, armas, armaduras, esbirros, 5, 3, modificadores, "Los vampiros son criaturas que utilizan la sangre que roban de sus víctimas como recurso para activar algunas de sus habilidades.");
+    }
+
+    public void crearModeloLicantropo(Set<Arma> armas, Set<Armadura> armaduras, Set<Esbirro> esbirros, HabilidadEspecial habilidad, List<Modificador> modificadores) {
+        this.modeloLicantropo = new Licantropo(habilidad, armas, armaduras, esbirros, 4, 4, modificadores, "Los licántropos son criaturas que pueden cambiar de forma humana a una forma de Bestia que aparenta ser la de un gigantesco lobo bípedo.");
+    }
+
+    public void crearModeloCazador(Set<Arma> armas, Set<Armadura> armaduras, Set<Esbirro> esbirros, HabilidadEspecial habilidad, List<Modificador> modificadores) {
+        this.modeloCazador = new Cazador(habilidad, armas, armaduras, esbirros, 3, 3, modificadores, "Los cazadores son humanos con una voluntad extraordinaria que les dota de habilidades sobrenaturales.");
     }
 }

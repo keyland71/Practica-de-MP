@@ -42,7 +42,9 @@ public class AlmacenDesafios implements Serializable{
         return this.desafios;
     }
 
-    public List<Desafio> obtenerDesafiosCompletados(Jugador j) {
+    public List<Desafio> obtenerDesafiosCompletados(String nick) {
+        Jugador j = (Jugador) Juego.estado.obtenerAlmacenUsuarios().obtenerUsuario(nick);
+        
         List<Desafio> desafiosCompletados = new ArrayList<>();
         for (Desafio d:this.desafios){
             if (d.obtenerEstado() == EstadoDesafio.completado && (d.obtenerJugadorDesafiado().obtenerNick().equals(j.obtenerNick()) || d.obtenerJugadorDesafiante().obtenerNick().equals(j.obtenerNick()))){

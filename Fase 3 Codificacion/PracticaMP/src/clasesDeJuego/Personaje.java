@@ -42,6 +42,10 @@ public abstract class Personaje implements Serializable{
         this.modificadores = mods;
         this.descripcion = desc;
         this.puntosRecurso = puntosRec;
+        
+        //para pruebas
+        this.armasActivas.add((Arma)armas.toArray()[0]);
+        this.armaduraActiva = ((Armadura)armaduras.toArray()[0]);
     }
 
     public Personaje(String nombre, Personaje personajeModelo) {
@@ -66,6 +70,10 @@ public abstract class Personaje implements Serializable{
             this.modificadores.add(mod);
         }
         this.descripcion = personajeModelo.obtenerDescripcion();
+        
+        //para pruebas
+        this.armasActivas.add((Arma)this.armasDisponibles.toArray()[0]);
+        this.armaduraActiva = ((Armadura)this.armadurasDisponibles.toArray()[0]);
     }
 
     public String obtenerNombre() {
@@ -75,7 +83,7 @@ public abstract class Personaje implements Serializable{
     public String obtenerDescripcion() {
         return this.descripcion;
     }
-
+    
     public List<Modificador> obtenerModificadores() {
         return this.modificadores;
     }
@@ -98,19 +106,18 @@ public abstract class Personaje implements Serializable{
         return debilidades;
     }
     
-    private void buscarYAniadirModificador(List<Modificador> listaMods, String[] nombres) {
-        for (String nombreMod : nombres) {
-            boolean encontrado = false;
-            int pos = 0;
-            while (!encontrado) {
-                encontrado = this.modificadores.get(pos).obtenerNombre().equals(nombreMod);
-                if (!encontrado) {
-                    pos += 1;
-                }
+    private void activarModificadores(int[] fortDeb) {
+        int numF = 0;
+        int numD = 0;
+        
+        for (Modificador m:this.modificadores){
+            if (numF==fortDeb[0] || numD==fortDeb[1]){
+                this.modificadores.get(numF+numD).ponerEstaActivo(true);
+            } else {
+                this.modificadores.get(numF+numD).ponerEstaActivo(false);
             }
-            if (encontrado) {
-                listaMods.add(this.modificadores.get(pos));
-            }
+            if (m.obtenerTipo() == TipoModificador.Fortaleza) numF++;
+            else numD++;
         }
     }
 
@@ -190,8 +197,14 @@ public abstract class Personaje implements Serializable{
         this.habilidadEspecial = hab;
     }
 
-    public void sumarOro(int oro) {
-        this.oro += oro;
+    public int sumarOro(int i) { //devuelve la cantidad de oro que se le haya quitado/sumado al usuario
+        if (this.oro + i >= 0){
+            this.oro += i;
+        } else {
+            i = this.oro;
+            this.oro = 0;
+        }
+        return (i > 0 ? i:-i); //para asegurar que devuelve un valor positivo
     }
     
     public void sumarRecurso(int recurso) {
@@ -203,18 +216,34 @@ public abstract class Personaje implements Serializable{
         
     }
 
-    public int calcularPotencialAtaque(int promedioModificadores) {
+    private int calcularEfectoModificadores(){ //sería mucho más cómodo si guardaramos aparte los modificadores activos
+        int result = 0;
+        for (Modificador m:this.modificadores){
+            if (m.obtenerEstaActivo()){
+                result += m.obtenerValor();
+            }
+        }
+        return result;
+    }
+    
+    public int calcularPotencialAtaque() {
+        int promedioModificadores = calcularEfectoModificadores();
+        
         int potencialAtaque = this.obtenerPoder() + this.obtenerAtaqueArmas() + this.obtenerAtaqueArmadura() + promedioModificadores;
         if (this.puedeUsarHabilidad()) {
             potencialAtaque += this.obtenerHabilidadEspecial().obtenerAtaque();
+            //no habría que poner aquí que gaste el recurso si debe?
         }
         return potencialAtaque;
     }
 
-    public int calcularPotencialDefensa(int promedioModificadores) {
+    public int calcularPotencialDefensa() {
+        int promedioModificadores = calcularEfectoModificadores();
+        
         int potencialDefensa = this.obtenerDefensaArmas() + this.obtenerDefensaArmadura() + promedioModificadores;
         if (this.puedeUsarHabilidad()) {
             potencialDefensa += this.obtenerHabilidadEspecial().obtenerDefensa();
+            //no habría que poner aquí que gaste el recurso si debe?
         }
         return potencialDefensa;
     }

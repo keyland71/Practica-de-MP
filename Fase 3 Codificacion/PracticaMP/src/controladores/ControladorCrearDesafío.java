@@ -68,13 +68,13 @@ public class ControladorCrearDesafío {
         int oroA = Integer.parseInt(o);
         Jugador j = (Jugador) Juego.estado.obtenerUsuarioActivo();
         Personaje p = j.obtenerPersonaje();
-        return p.obtenerOro() >= oroA;
+        return p.obtenerOro() >= oroA && oroA >= 0;
     }
 
     private boolean usuarioValido(String nombre) {
         AlmacenUsuarios almacen = Juego.estado.obtenerAlmacenUsuarios();
-        if (!almacen.existeUsuario(nombre)){
-            return false;
+        if (!almacen.existeUsuario(nombre) || Juego.estado.obtenerUsuarioActivo().obtenerNick().equalsIgnoreCase(nombre)){
+            return false; //si no existe el usuario o es el usuario activo, devuelve false
         }
         Jugador j = (Jugador) almacen.obtenerUsuario(nombre);
         return j.obtenerPersonaje()!=null;

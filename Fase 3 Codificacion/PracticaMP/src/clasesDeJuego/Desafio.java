@@ -34,7 +34,7 @@ public class Desafio implements Serializable{
         estadoCombate = estado;
     }
     
-    public int obtenerOroApostado(){
+    public int obtenerOro(){
         return oroApostado;
     }
     

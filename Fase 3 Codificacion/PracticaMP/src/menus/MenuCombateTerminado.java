@@ -4,6 +4,7 @@
  */
 package menus;
 
+import clasesDeJuego.Combate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,22 +13,21 @@ import java.util.Scanner;
  *
  * @author Ángel Marqués
  */
-public class MenuBorrarCuenta {
+public class MenuCombateTerminado {
     private List<String> mensajes;
-    private String mensajeError;
+    private List<String> mensajesError;
     private Scanner lector;
     
-    public MenuBorrarCuenta(){
+    public MenuCombateTerminado(){
         mensajes = new ArrayList<>();
+        mensajesError = new ArrayList<>();
         
-        String mensaje = "¿Seguro que quieres borrar tu cuenta? (si/no)";
+        String mensaje = "Mensaje0";
         this.mensajes.add(mensaje);
-        mensaje = "Esta accion no podrá ser desecha, y perderás todo tu progreso. ¿Seguro que quieres continuar? (si/no)";
-        this.mensajes.add(mensaje);
-        mensaje = "Se ha borrado su cuenta. Pulse intro para continuar";
+
         
-        this.mensajes.add(mensaje);
-        mensajeError = "Por favor, introduzca un valor correcto. Pulse intro para continuar";
+        mensaje = "Por favor, introduzca un valor correcto. Pulse intro para continuar";
+        this.mensajesError.add(mensaje);
         
         this.lector = new Scanner(System.in);
     }
@@ -37,9 +37,14 @@ public class MenuBorrarCuenta {
         return this.lector.nextLine();
     }
 
-    public void mostrarMensajeError() {
-        System.out.println(this.mensajeError);
+    public void mostrarMensajeError(int pos) {
+        System.out.println(this.mensajesError.get(pos));
         this.lector.nextLine();
+    }
+
+    public void mostrarCombate(Combate c) {
+        System.out.println(c.toStringCombate());
+        System.out.println("\nPulsa intro para continuar");
     }
 
 }

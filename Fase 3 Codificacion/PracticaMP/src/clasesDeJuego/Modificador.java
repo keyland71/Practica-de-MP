@@ -18,6 +18,7 @@ public class Modificador implements Serializable{
     private String nombre;
     private int valor;
     private TipoModificador tipo;
+    private boolean estaActivo;
     
     public Modificador(String nombre, int valor, TipoModificador tipo){
         this.nombre = nombre;
@@ -25,7 +26,11 @@ public class Modificador implements Serializable{
         this.tipo = tipo;
     }
     
-    public int obtenerIncremento(int valor, TipoModificador tipo){
+    public int obtenerValor(){
+        return this.valor;
+    }
+    
+    private int obtenerIncremento(int valor, TipoModificador tipo){
         if(tipo.equals(TipoModificador.Fortaleza)){
             return valor;
         }
@@ -43,6 +48,12 @@ public class Modificador implements Serializable{
 
     public TipoModificador obtenerTipo() {
         return this.tipo;
+    }
+    public boolean obtenerEstaActivo(){
+        return this.estaActivo;
+    }
+    public void ponerEstaActivo(boolean b){
+        this.estaActivo = b;
     }
     
 }
