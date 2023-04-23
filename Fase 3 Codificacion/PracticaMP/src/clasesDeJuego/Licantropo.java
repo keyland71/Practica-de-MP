@@ -27,7 +27,7 @@ public class Licantropo extends Personaje {
     
     @Override
     public void ponerHabilidadEspecial(HabilidadEspecial hab) {
-        if (hab.obtenerTipo().equals(TipoHabilidad.don)) {
+        if (hab.obtenerTipo().equals(TipoHabilidad.Don)) {
             super.ponerHabilidadEspecial(hab);
         }
     }

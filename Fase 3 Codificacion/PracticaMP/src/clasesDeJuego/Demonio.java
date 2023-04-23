@@ -34,6 +34,8 @@ public class Demonio extends Esbirro {
     @Override
     public boolean tieneSubordinados(){
         return (!this.esbirros.isEmpty());
+    }
+    
     public boolean tieneHumanos() {
         boolean hayHumanos = super.tieneHumanos();
         for (Esbirro esbirro : this.esbirros) {

@@ -39,7 +39,7 @@ public class Vampiro extends Personaje {
     
     @Override
     public void ponerHabilidadEspecial(HabilidadEspecial hab) {
-        if (hab.obtenerTipo().equals(TipoHabilidad.disciplina)) {
+        if (hab.obtenerTipo().equals(TipoHabilidad.Disciplina)) {
             super.ponerHabilidadEspecial(hab);
         }
     }

@@ -29,6 +29,8 @@ public abstract class Esbirro implements Serializable{
     }
     
     public boolean tieneSubordinados(){
+        return false;
+    }
     public boolean tieneHumanos() {
         return false;
     }
