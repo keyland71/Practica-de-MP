@@ -18,6 +18,10 @@ public abstract class Esbirro {
         this.vida = v;
     }
     
+    public String obtenerNombre(){
+        return this.nombre;
+    }
+    
     public int obtenerVida() {
         return this.vida;
     }

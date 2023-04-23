@@ -5,6 +5,7 @@
 
 package baseDeDatos;
 
+import clasesDeJuego.Demonio;
 import clasesDeJuego.Esbirro;
 import clasesDeJuego.Ghoul;
 import clasesDeJuego.Humano;
@@ -12,7 +13,9 @@ import clasesDeJuego.NivelLealtad;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class AlmacenEsbirros {
@@ -21,7 +24,6 @@ public class AlmacenEsbirros {
     
     private void cargarEsbirros() {
         try {
-            //Leer esbirros
             List<Esbirro> listaEsbirros = new ArrayList<>();
             BufferedReader br = new BufferedReader(new FileReader("./archivos/Esbirros.csv"));
             for (String linea = br.readLine(); linea != null; linea = br.readLine()) {
@@ -42,13 +44,23 @@ public class AlmacenEsbirros {
                         Ghoul esbG = new Ghoul(nombre, vida, dependencia);
                         listaEsbirros.add(esbG);
                     }
-                    /*case "Demonio" -> {
+                    case "Demonio" -> {
                         String pacto = lineaLeida[3];
-                        //Bucle for que lea y cree cada esbirro dependiendo de los datos de la columna 5 de Esbirros.csv (y los añada al conjunto conjEsb)
-                        //Tras haber creado el conjunto, pasarlo al constructor de Demonio, tal y como se define debajo
-                        Demonio esbD = new Demonio(nombre, vida, pacto, conjEsbirros);
+                        String [] listaNomEsbirros = lineaLeida[4].split(",");
+                        List <Esbirro> listaEsbActuales = this.obtenerEsbirros();
+                        Set <Esbirro> listaEsbDemonio = new HashSet<>();
+                        for(int i=0; i<listaNomEsbirros.length; i++){
+                            for(int j=0; j<listaEsbActuales.size(); j++){ 
+                                if(listaNomEsbirros[i].equals(listaEsbActuales.get(j).obtenerNombre())){
+                                    listaEsbDemonio.add(listaEsbActuales.get(j));
+                                }
+                            }
+                        }
+                        /*Como se ha contemplado que pueda haber más de un esbirro con el mismo nombre, hay que buscar en las listas completas (no se puede parar cuando encuentre un esbirro con el mismo nombre)
+                          Otra opción para ahorrar la búsqueda en ambas listas sería ordenar las listas de esbirros por el nombre*/
+                        Demonio esbD = new Demonio(nombre, vida, pacto, listaEsbDemonio);
                         listaEsbirros.add(esbD);
-                    }  */                     
+                    }                       
                 }
             }
             br.close();
@@ -57,6 +69,11 @@ public class AlmacenEsbirros {
         catch(Exception e){
             System.out.println("Problemas con lectura de archivo Esbirros.csv");
         }
+    }
+    
+    
+    public List<Esbirro> obtenerEsbirros(){
+        return this.esbirros;
     }
     
     
