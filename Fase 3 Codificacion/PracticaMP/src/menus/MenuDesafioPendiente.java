@@ -15,15 +15,16 @@ import clasesDeJuego.Desafio;
  */
 public class MenuDesafioPendiente {
     private List<String> mensajes;
-    private List<String> mensajesError;
     private Scanner lector;
     
     
     public MenuDesafioPendiente(){
-        this.mensajesError = new ArrayList<>();
+        this.mensajes = new ArrayList<>();
 
         String mensaje = "El valor introducido no es correcto. Introduce a para aceptar, o r para rechazar el combate.";
-        this.mensajesError.add(mensaje);
+        this.mensajes.add(mensaje);
+        mensaje = "No tienes ningún desafío pendiente de ser aceptado";
+        this.mensajes.add(mensaje);
         
         this.lector = new Scanner(System.in);
     }
@@ -35,8 +36,8 @@ public class MenuDesafioPendiente {
         return this.lector.nextLine();
     }
 
-    public void mostrarMensajeError(int pos) {
-        System.out.println(this.mensajesError.get(pos));
+    public void mostrarMensaje(int pos) {
+        System.out.println(this.mensajes.get(pos));
         this.lector.nextLine();
     }
 

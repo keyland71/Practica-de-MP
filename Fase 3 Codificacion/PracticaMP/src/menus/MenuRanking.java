@@ -4,6 +4,7 @@
  */
 package menus;
 
+import clasesDeJuego.Jugador;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,9 +20,13 @@ public class MenuRanking { //Hay que ver cómo hacemos el ranking
         //carga el ranking
         this.lector = new Scanner(System.in);
     }
-    public void mostrarRanking(){
-        System.out.println("Aquí se mostrará el ranking una vez implementado. Pulsa intro para continuar");
+    public void mostrarRanking(List<Jugador> ranking){
+        System.out.print("Este es el ranking de Jugadores:");
+        
+        for (int i=0;i<ranking.size();i++){
+            System.out.print("\n    " + Integer.toString(i) + ". " + ranking.get(i).obtenerNick() + " (" + Integer.toString(ranking.get(i).obtenerVictorias()) + " victorias)");
+        }
+        System.out.println();
         this.lector.nextLine();
-        return;
     }
 }

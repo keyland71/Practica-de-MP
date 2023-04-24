@@ -88,7 +88,7 @@ public class AlmacenDesafios implements Serializable{
     public List<Desafio> obtenerDesafiosNoMostrados(String nick) {
         List<Desafio> desafiosPendientes = new ArrayList<>();
         for (Desafio d:this.desafios){
-            if ((d.obtenerEstado() == EstadoDesafio.aceptado || d.obtenerEstado() == EstadoDesafio.rechazado) && (d.obtenerJugadorDesafiado().obtenerNick().equals(nick) || d.obtenerJugadorDesafiante().obtenerNick().equals(nick))){
+            if ((d.obtenerEstado() == EstadoDesafio.aceptado || d.obtenerEstado() == EstadoDesafio.rechazado || d.obtenerEstado() == EstadoDesafio.cancelado) && (d.obtenerJugadorDesafiado().obtenerNick().equals(nick) || d.obtenerJugadorDesafiante().obtenerNick().equals(nick))){
                 desafiosPendientes.add(d); //si el combate está completado o rechazado y el j es uno de los dos jugadores, añade el combate
             }
         }

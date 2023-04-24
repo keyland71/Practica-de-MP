@@ -5,6 +5,7 @@
 package menus;
 
 import clasesDeJuego.Combate;
+import clasesDeJuego.Desafio;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,7 +23,9 @@ public class MenuCombateTerminado {
         mensajes = new ArrayList<>();
         mensajesError = new ArrayList<>();
         
-        String mensaje = "Mensaje0";
+        String mensaje = "Si has enviado algún desafio, el oponente todavía no ha respondido";
+        this.mensajes.add(mensaje);
+        mensaje = "Han respondido a alguno de tus desafíos. Aquí está el resultado:";
         this.mensajes.add(mensaje);
 
         
@@ -45,6 +48,14 @@ public class MenuCombateTerminado {
     public void mostrarCombate(Combate c) {
         System.out.println(c.toStringCombate());
         System.out.println("\nPulsa intro para continuar");
+    }
+
+    public void mostrarDesafioRechazado(Desafio d) {
+        System.out.println("El jugador " + d.obtenerJugadorDesafiado().obtenerNick() + " ha rechazado tu desafio. Se te devolverá el oro que apostaste (" + d.obtenerOro() + ")");
+    }
+
+    public void mostrarDesafioCancelado(Desafio d) {
+        System.out.println("El desafío " + d.toString() + " ha sido cancelado por un administrador. Se te devolverá el oro que apostaste (" + d.obtenerOro() + ")");
     }
 
 }

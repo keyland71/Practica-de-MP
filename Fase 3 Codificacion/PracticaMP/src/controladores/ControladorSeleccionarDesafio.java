@@ -7,6 +7,7 @@ package controladores;
 import baseDeDatos.AlmacenDesafios;
 import baseDeDatos.AlmacenUsuarios;
 import clasesDeJuego.Desafio;
+import clasesDeJuego.EstadoDesafio;
 import clasesDeJuego.Jugador;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,6 @@ public class ControladorSeleccionarDesafio {
         this.menuSel = new MenuSeleccionarDesafio();
         this.pagActual = 0;
         this.modo = 0;
-
     }
 
     private void cargarDesafios() {
@@ -197,8 +197,9 @@ public class ControladorSeleccionarDesafio {
         this.menuSel.quitarDesafio(pos);    //actualizamos la lista del menú
 
         //borramos el desafio, se entiende que el almacén se ocupa de guardar el cambio
-        AlmacenDesafios almacenD = Juego.estado.obtenerAlmacenDesafios();
-        almacenD.borrarDesafio(d);
+        //AlmacenDesafios almacenD = Juego.estado.obtenerAlmacenDesafios();
+        //almacenD.borrarDesafio(d);
+        d.cambiarEstado(EstadoDesafio.cancelado);
 
         this.menuSel.mostrarMensaje(4); // desafio eliminado
 

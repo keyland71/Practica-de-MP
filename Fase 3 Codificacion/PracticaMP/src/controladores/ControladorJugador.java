@@ -12,7 +12,9 @@ import clasesDeJuego.Desafio;
 import clasesDeJuego.Jugador;
 import clasesDeJuego.Personaje;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import menus.MenuBorrarCuenta;
 import menus.MenuBorrarPersonaje;
 import menus.MenuJugador;
@@ -80,7 +82,8 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
         String opcion;
         switch (entrada) {
             case "1" -> { //consultar ranking
-                this.menuRanking.mostrarRanking();
+                List<Jugador> ranking = Juego.estado.obtenerAlmacenUsuarios().obtenerRanking();
+                this.menuRanking.mostrarRanking(ranking);
             }
             case "2" -> { // cambiar equipo
                 ControladorCambiarEquipo cCamEq = new ControladorCambiarEquipo();

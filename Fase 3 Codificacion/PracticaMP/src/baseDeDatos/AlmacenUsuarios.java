@@ -111,22 +111,9 @@ public class AlmacenUsuarios implements Serializable {
         return result;
     }
 
+    public List<Jugador> obtenerRanking(){
+        List<Jugador> jugadores = this.obtenerJugadores();
+        jugadores.sort((j1, j2) -> -Integer.compare(j1.obtenerVictorias(), j2.obtenerVictorias()));
+        return jugadores;
+    }
 }
-
-//esto está copiado de algún sitio
-//write
-//FileOutputStream fileOutputStream
-//      = new FileOutputStream("yourfile.txt");
-//    ObjectOutputStream objectOutputStream 
-//      = new ObjectOutputStream(fileOutputStream);
-//    objectOutputStream.writeObject(person);
-//    objectOutputStream.flush();
-//    objectOutputStream.close();
-//   
-//read
-//    FileInputStream fileInputStream
-//      = new FileInputStream("yourfile.txt");
-//    ObjectInputStream objectInputStream
-//      = new ObjectInputStream(fileInputStream);
-//    Person p2 = (Person) objectInputStream.readObject();
-//    objectInputStream.close(); 

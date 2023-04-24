@@ -35,4 +35,8 @@ public class Jugador extends Usuario {
     public void incrementarVictorias() {
         this.victorias++;
     }
+    
+    public int obtenerVictorias(){
+        return this.victorias;
+    }
 }

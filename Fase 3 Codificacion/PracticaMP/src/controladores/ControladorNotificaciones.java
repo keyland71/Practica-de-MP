@@ -40,6 +40,11 @@ public class ControladorNotificaciones {
         String opcion;
         boolean inputValido = false;
         this.modo = 0;
+        if (this.desafiosPendientes.isEmpty()){
+            this.menuDesafio.mostrarMensaje(1);
+        } else
+            this.menuDesafio.mostrarMensaje(2);
+        
         for (Desafio d : this.desafiosPendientes) {
             this.desafioActual = d;
             do {
@@ -48,13 +53,25 @@ public class ControladorNotificaciones {
                 if (inputValido) {
                     procesarEntrada(opcion);
                 } else {
-                    this.menuDesafio.mostrarMensajeError(0);
+                    this.menuDesafio.mostrarMensaje(0);
                 }
             } while (!inputValido);
         }
 
+        if (this.desafiosCompletados.isEmpty()){
+            this.menuCombate.mostrarMensaje(0);
+        } else
+            this.menuCombate.mostrarMensaje(1);
+        
         for (Desafio d : this.desafiosCompletados) {
-            this.menuCombate.mostrarCombate(d.obtenerCombate());
+            switch (d.obtenerEstado()) {
+                case rechazado -> this.menuCombate.mostrarDesafioRechazado(d);
+                case aceptado -> this.menuCombate.mostrarCombate(d.obtenerCombate());
+                default -> {
+                    this.menuCombate.mostrarDesafioCancelado(d);
+                    Juego.estado.obtenerAlmacenDesafios().borrarDesafio(d);
+                }
+            }
             d.cambiarEstado(EstadoDesafio.completado);
         }
         Juego.estado.guardar();
@@ -94,7 +111,9 @@ public class ControladorNotificaciones {
             
             System.out.println("Ha ganado " + vencedor.obtenerNick() + ", obtiene " + Integer.toString(this.desafioActual.obtenerOro() + oroDesafiado + DirectorCombate.oroFijo) + " de oro. Parte de " + Integer.toString(vencedor.obtenerPersonaje().obtenerOro()));
             System.out.println("Oro del personaje activo antes: " + Integer.toString(p.obtenerOro()));
+            
             vencedor.obtenerPersonaje().sumarOro(this.desafioActual.obtenerOro() + oroDesafiado + DirectorCombate.oroFijo);
+            
             System.out.println("Oro del personaje activo despues: " + Integer.toString(p.obtenerOro()));
             System.out.println("Y ha llegado a " + Integer.toString(vencedor.obtenerPersonaje().obtenerOro()));
             
