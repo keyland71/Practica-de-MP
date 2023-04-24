@@ -107,17 +107,17 @@ public abstract class Personaje implements Serializable{
     }
     
     private void activarModificadores(int[] fortDeb) {
-        int numF = 0;
-        int numD = 0;
+        int indF = 0;
+        int indD = 0;
         
         for (Modificador m:this.modificadores){
-            if (numF==fortDeb[0] || numD==fortDeb[1]){
-                this.modificadores.get(numF+numD).ponerEstaActivo(true);
+            if (indF==fortDeb[0] || indD==fortDeb[1]){
+                this.modificadores.get(indF+indD).ponerEstaActivo(true);
             } else {
-                this.modificadores.get(numF+numD).ponerEstaActivo(false);
+                this.modificadores.get(indF+indD).ponerEstaActivo(false);
             }
-            if (m.obtenerTipo() == TipoModificador.Fortaleza) numF++;
-            else numD++;
+            if (m.obtenerTipo() == TipoModificador.Fortaleza) indF++;
+            else indD++;
         }
     }
 

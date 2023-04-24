@@ -67,7 +67,7 @@ public class MenuJugador { //se ocupa de Ranking, Oro, Borrar personaje, y ¿Cre
         this.lector.nextLine();
     }
     
-    private String mostrarMensaje0() {
+    private String mostrarMensaje0() { //igual se puede ahorrar este método actualizando la String desde ponerOro
         String mensaje0 = String.format("""
                           Bienvenido al Menú de Jugador, estas son tus opciones:
                             1. Consultar Ranking

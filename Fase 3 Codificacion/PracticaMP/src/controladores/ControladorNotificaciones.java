@@ -41,9 +41,8 @@ public class ControladorNotificaciones {
         boolean inputValido = false;
         this.modo = 0;
         if (this.desafiosPendientes.isEmpty()){
-            this.menuDesafio.mostrarMensaje(1);
-        } else
-            this.menuDesafio.mostrarMensaje(2);
+            this.menuDesafio.mostrarMensaje(1); //no hay desafios que mostrar
+        }
         
         for (Desafio d : this.desafiosPendientes) {
             this.desafioActual = d;
@@ -72,7 +71,7 @@ public class ControladorNotificaciones {
                     Juego.estado.obtenerAlmacenDesafios().borrarDesafio(d);
                 }
             }
-            d.cambiarEstado(EstadoDesafio.completado);
+            d.cambiarEstado(EstadoDesafio.completado); //igual no debería estar aquí por no cambiarlo si se ha borrado
         }
         Juego.estado.guardar();
     }
@@ -118,7 +117,7 @@ public class ControladorNotificaciones {
             System.out.println("Y ha llegado a " + Integer.toString(vencedor.obtenerPersonaje().obtenerOro()));
             
             this.desafioActual.cambiarEstado(EstadoDesafio.aceptado);
-            this.menuCombate.mostrarCombate(this.desafioActual.obtenerCombate());
+            this.menuCombate.mostrarCombate(c);
             
         } else if (entrada.equalsIgnoreCase("r")) {
             combateRechazado();

@@ -40,7 +40,7 @@ public class DirectorCombate {
             return;
         }
         boolean ganaP1 = vidaP1>vidaP2 ;
-        this.combate.ponerVencedor(ganaP1);
+        this.combate.ponerVencedor(ganaP1); //igual para que los setters sean setters, la logica tendría que estar aquí
         this.combate.ponerUsuarioConEsbirros(ganaP1);
     }
 
@@ -72,6 +72,7 @@ public class DirectorCombate {
             this.rondaActual.ponerDefensaA(defensaReal);
 
         if (ataqueReal >= defensaReal) {
+            //los vampiros me suena que recuperan recurso al hacer daño
             defensor.recibirDanio();
             if (defensor.obtenerNombre().equals(p1.obtenerNombre())){
                 this.vidaP1--;
