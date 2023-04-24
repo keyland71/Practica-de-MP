@@ -10,6 +10,7 @@ import baseDeDatos.AlmacenUsuarios;
 import clasesDeJuego.Combate;
 import clasesDeJuego.Desafio;
 import clasesDeJuego.Jugador;
+import clasesDeJuego.Personaje;
 import java.util.ArrayList;
 import java.util.List;
 import menus.MenuBorrarCuenta;
@@ -33,10 +34,9 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
     private int modo;  //0 selección de opción, 1 borrarPersonaje/cuenta (si/no)
 
     public ControladorJugador() {
-        Jugador j = (Jugador) Juego.estado.obtenerUsuarioActivo();
         this.menuBorrarPersonaje = new MenuBorrarPersonaje();
         this.menuBorrarCuenta = new MenuBorrarCuenta();
-        this.menuJugador = new MenuJugador(j.obtenerPersonaje()==null ? 100:j.obtenerPersonaje().obtenerOro());
+        this.menuJugador = new MenuJugador();
         this.menuRanking = new MenuRanking();
         this.menuOro = new MenuOro();
 
@@ -45,8 +45,11 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
 
     public void iniciarControlador() {
         
+        Personaje p = Juego.estado.obtenerPersonajeActivo();
         ControladorNotificaciones cNot = new ControladorNotificaciones();
         cNot.iniciarControlador();
+        if (p != null)
+            this.menuJugador.ponerOro(p.obtenerOro());
         
         boolean salir = false;
         do {
@@ -84,20 +87,20 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
                 cCamEq.iniciarControlador();
             }
             case "3" -> { // hacer desafío
-                if (Juego.estado.obtenerPersonajeActivo() != null){
+                Personaje p = Juego.estado.obtenerPersonajeActivo();
+                if (p != null){
                     ControladorCrearDesafío cCrearDes = new ControladorCrearDesafío();
-                    cCrearDes.iniciarControlador();
+                    cCrearDes.iniciarControlador(); 
+                    this.menuJugador.ponerOro(p.obtenerOro());
                 } else {
                     this.menuJugador.mostrarMensaje(4);
-        
                 }
             }
             case "4" -> { // consultar historial de oro
                 mostrarMenuOro();
             }
             case "5" -> { // crear personaje
-                Jugador j = (Jugador) Juego.estado.obtenerUsuarioActivo();
-                if (j.obtenerPersonaje() != null){
+                if (Juego.estado.obtenerPersonajeActivo() != null){
                     this.menuJugador.mostrarMensajeError(1);
                 } else {
                     ControladorCrearPersonaje cCrearPers = new ControladorCrearPersonaje();

@@ -59,11 +59,17 @@ public class DirectorCombate {
     private void realizarTurno(Personaje atacante, Personaje defensor) {
         int potencial = atacante.calcularPotencialAtaque();
         int ataqueReal = calcularEficacia(potencial);
-        this.rondaActual.ponerAtaqueA(ataqueReal);
+        if (atacante.obtenerNombre().equalsIgnoreCase(p1.obtenerNombre())){
+            this.rondaActual.ponerAtaqueA(ataqueReal);
+        } else 
+            this.rondaActual.ponerAtaqueB(ataqueReal);
 
         potencial = defensor.calcularPotencialDefensa();
         int defensaReal = calcularEficacia(potencial);
-        this.rondaActual.ponerDefensaA(defensaReal);
+        if (atacante.obtenerNombre().equalsIgnoreCase(p1.obtenerNombre())){
+            this.rondaActual.ponerDefensaB(defensaReal);
+        } else 
+            this.rondaActual.ponerDefensaA(defensaReal);
 
         if (ataqueReal >= defensaReal) {
             defensor.recibirDanio();

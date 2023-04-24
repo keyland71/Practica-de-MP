@@ -58,8 +58,8 @@ public class Combate implements Serializable{
                 + ",\n    Usuario Desafiado: " + uDesafiado.obtenerNick()
                 + ",\n    Rondas Usadas: " + Integer.toString(rondasUsadas)
                 + ",\n    Fecha: " + fecha.toString()
-                + ",\n    Vencedor: " + vencedor.obtenerNick()
-                + ",\n    Usuario Con Esbirros Vivos: " + usuarioConEsbirros
+                + ",\n    Vencedor: " + (vencedor == null ? "empate":vencedor.obtenerNick())
+                + ",\n    Usuario Con Esbirros Vivos: " + (usuarioConEsbirros == null ? "ninguno":usuarioConEsbirros)
                 + ",\n    Oro Ganado: " + Integer.toString(oroGanado)
                 + ",\n    " + reg; //habrá que revisar cómo escribir el registro de rondas
         return combate;

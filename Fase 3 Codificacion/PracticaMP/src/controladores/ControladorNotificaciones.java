@@ -11,6 +11,7 @@ import menus.MenuDesafioPendiente;
 import clasesDeJuego.Desafio;
 import clasesDeJuego.EstadoDesafio;
 import clasesDeJuego.Jugador;
+import clasesDeJuego.Personaje;
 import practicamp.Juego;
 import sistemas.DirectorCombate;
 
@@ -88,12 +89,13 @@ public class ControladorNotificaciones {
             
             vencedor.incrementarVictorias();
             
-            Jugador j = (Jugador) Juego.estado.obtenerUsuarioActivo();
+            //mensajes para el debug. Si bien es cierto que el primero de todos puede estar guay escribirlo
+            Personaje p = Juego.estado.obtenerPersonajeActivo();
             
             System.out.println("Ha ganado " + vencedor.obtenerNick() + ", obtiene " + Integer.toString(this.desafioActual.obtenerOro() + oroDesafiado + DirectorCombate.oroFijo) + " de oro. Parte de " + Integer.toString(vencedor.obtenerPersonaje().obtenerOro()));
-            System.out.println("Oro del personaje activo antes: " + Integer.toString(j.obtenerPersonaje().obtenerOro()));
+            System.out.println("Oro del personaje activo antes: " + Integer.toString(p.obtenerOro()));
             vencedor.obtenerPersonaje().sumarOro(this.desafioActual.obtenerOro() + oroDesafiado + DirectorCombate.oroFijo);
-            System.out.println("Oro del personaje activo despues: " + Integer.toString(j.obtenerPersonaje().obtenerOro()));
+            System.out.println("Oro del personaje activo despues: " + Integer.toString(p.obtenerOro()));
             System.out.println("Y ha llegado a " + Integer.toString(vencedor.obtenerPersonaje().obtenerOro()));
             
             this.desafioActual.cambiarEstado(EstadoDesafio.aceptado);

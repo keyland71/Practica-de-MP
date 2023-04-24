@@ -66,8 +66,7 @@ public class ControladorCrearDesafío {
 
     private boolean confirmarOro(String o) {
         int oroA = Integer.parseInt(o);
-        Jugador j = (Jugador) Juego.estado.obtenerUsuarioActivo();
-        Personaje p = j.obtenerPersonaje();
+        Personaje p = Juego.estado.obtenerPersonajeActivo();
         return p.obtenerOro() >= oroA && oroA >= 0;
     }
 

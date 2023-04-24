@@ -16,11 +16,14 @@ public class MenuJugador { //se ocupa de Ranking, Oro, Borrar personaje, y ¿Cre
     private List<String> mensajes;
     private List<String> mensajesError;
     private Scanner lector;
+    private int oro;
     
-    public MenuJugador(int oro){
+    public MenuJugador(){
         this.mensajes = new ArrayList<>();
         this.mensajesError = new ArrayList<>();
+        this.oro = 100;
         
+        /*
         String mensaje0 = String.format("""
                           Bienvenido al Menú de Jugador, estas son tus opciones:
                             1. Consultar Ranking
@@ -31,6 +34,8 @@ public class MenuJugador { //se ocupa de Ranking, Oro, Borrar personaje, y ¿Cre
                             6. Borrar Personaje
                             7. Borrar Cuenta
                             8. Cerrar Sesión""", Integer.toString(oro));
+        */
+        String mensaje0 = "";
         String mensaje1 = "¿Seguro que quiere borrar su personaje?";
         String mensaje2 = "¿Seguro que quiere borrar su cuenta?";
         String mensaje3 = "¿Seguro que quiere cerrar sesión?";
@@ -50,6 +55,9 @@ public class MenuJugador { //se ocupa de Ranking, Oro, Borrar personaje, y ¿Cre
     }
     
     public String mostrarMensaje(int pos) {
+        if (pos==0){
+            return mostrarMensaje0();
+        }
         System.out.println(this.mensajes.get(pos));
         return this.lector.nextLine();
     }
@@ -57,6 +65,25 @@ public class MenuJugador { //se ocupa de Ranking, Oro, Borrar personaje, y ¿Cre
     public void mostrarMensajeError(int pos) {
         System.out.println(this.mensajesError.get(pos));
         this.lector.nextLine();
+    }
+    
+    private String mostrarMensaje0() {
+        String mensaje0 = String.format("""
+                          Bienvenido al Menú de Jugador, estas son tus opciones:
+                            1. Consultar Ranking
+                            2. Cambiar Equipo Activo
+                            3. Hacer Desafio (%s)                               
+                            4. Consultar Historial de Oro
+                            5. Crear Personaje
+                            6. Borrar Personaje
+                            7. Borrar Cuenta
+                            8. Cerrar Sesión""", Integer.toString(oro));
+        System.out.println(mensaje0);
+        return this.lector.nextLine();
+    }
+    
+    public void ponerOro(int o){
+        this.oro = o;
     }
     
 }
