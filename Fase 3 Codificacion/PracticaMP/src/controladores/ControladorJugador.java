@@ -86,8 +86,12 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
                 this.menuRanking.mostrarRanking(ranking);
             }
             case "2" -> { // cambiar equipo
-                ControladorCambiarEquipo cCamEq = new ControladorCambiarEquipo();
-                cCamEq.iniciarControlador();
+                if (Juego.estado.obtenerPersonajeActivo() == null){
+                    this.menuJugador.mostrarMensaje(5);
+                } else {
+                    ControladorCambiarEquipoActivo cCamEqAc = new ControladorCambiarEquipoActivo(Juego.estado.obtenerPersonajeActivo());
+                    cCamEqAc.iniciarControlador();
+                }
             }
             case "3" -> { // hacer desafío
                 Personaje p = Juego.estado.obtenerPersonajeActivo();

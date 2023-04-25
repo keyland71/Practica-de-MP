@@ -16,4 +16,10 @@ public class Armadura extends Equipo {
     public Armadura(String nombre, int modAtaque, int modDefensa){
         super(nombre, modAtaque, modDefensa); 
     }
+    
+    @Override
+    public String toString(){
+        String result = "        Nombre: " + this.obtenerNombre() + "\n        Defensa: " + this.obtenerDefensa() + "\n        Ataque: " + this.obtenerAtaque();
+        return result;
+    }
 }

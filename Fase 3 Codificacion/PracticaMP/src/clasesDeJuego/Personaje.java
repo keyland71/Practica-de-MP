@@ -7,6 +7,7 @@ package clasesDeJuego;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.List;
@@ -19,9 +20,9 @@ public abstract class Personaje implements Serializable{
 
     private String nombre;
     private HabilidadEspecial habilidadEspecial;
-    private Set<Arma> armasDisponibles;
-    private Set<Arma> armasActivas = new HashSet<>();
-    private Set<Armadura> armadurasDisponibles;
+    private Set<Arma> armasDisponibles= new HashSet<>();;
+    private List<Arma> armasActivas = new ArrayList<>();
+    private Set<Armadura> armadurasDisponibles = new HashSet<>();
     private Armadura armaduraActiva;
     private Set<Esbirro> esbirros;
     private int oro = 100;
@@ -31,11 +32,11 @@ public abstract class Personaje implements Serializable{
     private String descripcion;
     private int puntosRecurso = 0;
 
-    public Personaje(HabilidadEspecial hab, Set<Arma> armas, Set<Armadura> armaduras, Set<Esbirro> esbirros, int vida, int poder, List<Modificador> mods, String desc, int puntosRec) {
+    public Personaje(HabilidadEspecial hab, Collection<Arma> armas, Collection<Armadura> armaduras, Set<Esbirro> esbirros, int vida, int poder, List<Modificador> mods, String desc, int puntosRec) {
         this.nombre = "Modelo Personaje";
         ponerHabilidadEspecial(hab);
-        this.armasDisponibles = armas;
-        this.armadurasDisponibles = armaduras;
+        this.armasDisponibles.addAll(armas);
+        this.armadurasDisponibles.addAll(armaduras);
         ponerEsbirros(esbirros);
         this.vida = vida;
         this.poder = poder;
@@ -51,11 +52,9 @@ public abstract class Personaje implements Serializable{
     public Personaje(String nombre, Personaje personajeModelo) {
         this.nombre = nombre;
         this.habilidadEspecial = personajeModelo.obtenerHabilidadEspecial();
-        this.armasDisponibles = new HashSet<>();
         for (Arma arma : personajeModelo.obtenerArmasDisponibles()) {
             this.armasDisponibles.add(arma);
         }
-        this.armadurasDisponibles = new HashSet<>();
         for (Armadura armadura : personajeModelo.obtenerArmadurasDisponibles()) {
             this.armadurasDisponibles.add(armadura);
         }
@@ -74,6 +73,13 @@ public abstract class Personaje implements Serializable{
         //para pruebas
         this.armasActivas.add((Arma)this.armasDisponibles.toArray()[0]);
         this.armaduraActiva = ((Armadura)this.armadurasDisponibles.toArray()[0]);
+    }
+    
+    public List<Arma> obtenerArmasActivas() {
+        return this.armasActivas;
+    }
+    public Armadura obtenerArmaduraActiva() {
+        return this.armaduraActiva;
     }
 
     public String obtenerNombre() {
@@ -181,8 +187,9 @@ public abstract class Personaje implements Serializable{
         this.puntosRecurso = recurso;
     }
 
-    public void ponerArmasActivas(Set<Arma> armas) {
-        this.armasActivas = armas;
+    public void ponerArmasActivas(Collection<Arma> armas) {
+        this.armasActivas.clear();
+        this.armasActivas.addAll(armas);
     }
 
     public void ponerArmaduraActiva(Armadura armadura) {
