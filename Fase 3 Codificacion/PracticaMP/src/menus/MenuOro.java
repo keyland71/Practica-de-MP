@@ -35,9 +35,14 @@ public class MenuOro {
         //obtiene el oro 
         String fecha = combate.obtenerFecha();
         int oro = combate.obtenerOroGanado();
-        if (!Juego.estado.obtenerUsuarioActivo().obtenerNick().equals(combate.obtenerVencedor())){
+        String vencedor = combate.obtenerVencedor().obtenerNick();
+        String oponente = combate.obtenerUDesafiado().obtenerNick();
+        if (Juego.estado.obtenerUsuarioActivo().obtenerNick().equalsIgnoreCase(oponente)){
+            oponente = combate.obtenerUDesafiante().obtenerNick();
+        }
+        if (!Juego.estado.obtenerUsuarioActivo().obtenerNick().equals(vencedor)){
             oro = -oro;        
         }
-        System.out.println("Combate " + num + ": \n" + "    Fecha: " + fecha + "\n    Oro ganado: " + oro);
+        System.out.println("Combate " + num + ": " + "\n    Oponente: " + oponente + "\n    Oro ganado: " + oro + "\n    Fecha: " + fecha);
      }
 }

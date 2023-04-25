@@ -6,6 +6,7 @@ package clasesDeJuego;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,8 +44,9 @@ public class Combate implements Serializable{
         this.rondasUsadas++;  //incrementa el valor en 1
     }
 
-    public String obtenerFecha() {
-        return fecha.toString();
+    public String obtenerFecha() { 
+        String[] parts = fecha.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:MM:ss")).split(" ");
+        return parts[0] + " a las " + parts[1]; //"yyyy-MM-dd HH:mm:ss"
     }
 
     public void aniadirRonda(Ronda ronda) {
