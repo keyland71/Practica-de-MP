@@ -32,7 +32,7 @@ public abstract class Personaje implements Serializable{
     private String descripcion;
     private int puntosRecurso = 0;
 
-    public Personaje(HabilidadEspecial hab, Collection<Arma> armas, Collection<Armadura> armaduras, Set<Esbirro> esbirros, int vida, int poder, List<Modificador> mods, String desc, int puntosRec) {
+    public Personaje(HabilidadEspecial hab, Set<Arma> armas, Set<Armadura> armaduras, Set<Esbirro> esbirros, int vida, int poder, List<Modificador> mods, String desc, int puntosRec) {
         this.nombre = "Modelo Personaje";
         ponerHabilidadEspecial(hab);
         this.armasDisponibles.addAll(armas);
