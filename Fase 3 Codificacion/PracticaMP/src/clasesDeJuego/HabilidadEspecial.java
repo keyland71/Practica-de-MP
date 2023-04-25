@@ -42,5 +42,8 @@ public class HabilidadEspecial implements Serializable{
     public TipoHabilidad obtenerTipo() {
         return this.tipo;
     }
+    public String obtenerNombre() {
+        return this.nombre;
+    }
 
 }

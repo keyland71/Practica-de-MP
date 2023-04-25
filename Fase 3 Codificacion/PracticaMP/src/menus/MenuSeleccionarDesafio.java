@@ -72,21 +72,16 @@ public class MenuSeleccionarDesafio {
     }
     
     public String mostrarMensaje(int pos) {
-        String mensaje = this.mensajes.get(pos);
-        System.out.println(mensaje);
-        String opcion = this.lector.nextLine();
-        return opcion;
+        System.out.println(this.mensajes.get(pos));
+        return this.lector.nextLine();
     }
     public void mostrarMensajeError(int pos) {
-        String mensaje = this.mensajesError.get(pos);
-        System.out.println(mensaje);
+        System.out.println(this.mensajesError.get(pos));
        this.lector.nextLine();
     }
 
     public void ponerDesafios(List<Desafio> challenges) {
-        this.desafios = new ArrayList<>(challenges);
-        //for (Desafio d:challenges){
-        //    this.desafios.add(d);
-        //}
+        this.desafios.clear();
+        this.desafios.addAll(challenges);
     }
 }

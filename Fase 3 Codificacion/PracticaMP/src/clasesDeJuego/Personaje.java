@@ -18,20 +18,71 @@ import java.util.List;
  */
 public abstract class Personaje implements Serializable{
 
-    private String nombre;
-    private HabilidadEspecial habilidadEspecial;
-    private Set<Arma> armasDisponibles= new HashSet<>();;
-    private List<Arma> armasActivas = new ArrayList<>();
+    private String nombre; 
+    private String descripcion; 
+    private int vida; 
+    private int poder; 
+    private HabilidadEspecial habilidadEspecial; 
+    private List<Arma> armasActivas = new ArrayList<>(); 
+    private Set<Arma> armasDisponibles= new HashSet<>();
+    private Armadura armaduraActiva; 
     private Set<Armadura> armadurasDisponibles = new HashSet<>();
-    private Armadura armaduraActiva;
-    private Set<Esbirro> esbirros;
-    private int oro = 100;
-    private int vida;
-    private int poder;
-    private List<Modificador> modificadores;
-    private String descripcion;
-    private int puntosRecurso = 0;
+    private List<Modificador> modificadores; 
+    private Set<Esbirro> esbirros; 
+    private int oro = 100; ////asdasd
+    private int puntosRecurso = 0; ////asdasd
 
+    @Override
+    public String toString(){
+        List<Equipo> aAc = new ArrayList<>(armasActivas);
+        List<Equipo> aDisp = new ArrayList<>(armasDisponibles);
+        List<Equipo> adDisp = new ArrayList<>(armadurasDisponibles);
+        
+        String result = "1. Nombre: " + nombre + "\n" +
+                        "2. Descripcion: " + descripcion + "\n" +
+                        "3. Vida: " + Integer.toString(vida) + "\n" +
+                        "4. Poder: " + Integer.toString(poder) + "\n" +
+                        "5. Habilidad: " + habilidadEspecial.obtenerNombre() + "\n" +
+                        "6. Armas Activas: " + eqToString(aAc) + "\n" +
+                        "7. Armas Disponibles" + "\n    " + eqToString(aDisp) + "\n" +
+                        "8. Armadura Activa: " + armaduraActiva.obtenerNombre() + "\n" +
+                        "9. Armadurass Disponibles: " + "\n    " + eqToString(adDisp) + "\n" +
+                        "10. Modificadores: " + modToString(this.modificadores) + "\n" +
+                        "11. Esbirros:" + esbToString(this.esbirros) + "\n"
+                        ;
+        return result;
+    }
+    private String eqToString(List<Equipo> e){
+        String result = null;
+        for (Equipo eq:e){
+            if (result==null){
+                result = eq.obtenerNombre();
+            } else
+                result += ", " + eq.obtenerNombre();
+        }
+        return result;
+    }
+    private String modToString(List<Modificador> m){
+        String result = null;
+        for (Modificador mod:m){
+            if (result==null){
+                result = mod.obtenerNombre() + (mod.obtenerTipo()== TipoModificador.Fortaleza ? "(F)":"(D)");
+            } else
+                result += ", " + mod.obtenerNombre() + (mod.obtenerTipo()== TipoModificador.Fortaleza ? "(F)":"(D)");
+        }
+        return result;
+    }
+    private String esbToString(Set<Esbirro> esbirros){
+        String result = null;
+        for (Esbirro esb:esbirros){
+            if (result==null){
+                result = esb.obtenerNombre();
+            } else
+                result += ", " + esb.obtenerNombre();
+        }
+        return result;
+    }
+    
     public Personaje(HabilidadEspecial hab, Set<Arma> armas, Set<Armadura> armaduras, Set<Esbirro> esbirros, int vida, int poder, List<Modificador> mods, String desc, int puntosRec) {
         this.nombre = "Modelo Personaje";
         ponerHabilidadEspecial(hab);
@@ -280,5 +331,7 @@ public abstract class Personaje implements Serializable{
     public void reestablecerPersonaje() {
         this.puntosRecurso = 0;
     }
+    
+    
 
 }

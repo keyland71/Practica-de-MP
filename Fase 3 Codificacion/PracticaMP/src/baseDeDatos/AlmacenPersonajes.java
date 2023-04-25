@@ -28,6 +28,14 @@ public class AlmacenPersonajes implements Serializable{
         this.cazadores = new ArrayList<>();
     }
     
+    public List<Personaje> obtenerPersonajes(){
+        List<Personaje> result = new ArrayList<>();
+        result.addAll(vampiros);
+        result.addAll(licantropos);
+        result.addAll(cazadores);
+        return result;
+    }
+    
     public void borrarPersonaje(Personaje p){
         String nombre = p.obtenerNombre();
         int i;

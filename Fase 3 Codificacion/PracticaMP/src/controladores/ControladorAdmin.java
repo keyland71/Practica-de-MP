@@ -18,11 +18,8 @@ public class ControladorAdmin {
 
     private MenuAdmin menuAdministrador;
     private MenuBorrarCuenta menuBorrarCuenta;
-    //private 
     private int modo; //0 selección, 
-    //creo que sólo tendría un modo. Delega todas las opciones, la única vez que introduces un input en este menú es para decidir qué opcion coges
-    //el procesamiento desde ahí es cosa del respectivo controlador. (menos posiblemente en el caso de darse de baja o salir) (ángel)
-
+   
     public ControladorAdmin() {
         this.menuAdministrador = new MenuAdmin();
         this.menuBorrarCuenta = new MenuBorrarCuenta();
@@ -60,8 +57,8 @@ public class ControladorAdmin {
         switch (opcion) {
             case "1" -> {
                 //se llama a controlador editar personajes; 
-                //ControladorCambiarEquipo cCaEq = new ControladorCambiarEquipo(); //editar personajes es privado, por lo que habría que llamarlo desde su constructor
-                //cCaEq.iniciarControlador();
+                ControladorSeleccionarPersonaje cSelPj = new ControladorSeleccionarPersonaje(); //editar personajes es privado, por lo que habría que llamarlo desde su constructor
+                cSelPj.iniciarControlador();
             }
             case "2" -> {
                 //se llama a controlador de validar desafio;
