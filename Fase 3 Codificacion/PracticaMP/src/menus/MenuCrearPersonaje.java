@@ -34,7 +34,7 @@ public class MenuCrearPersonaje {
         mensaje = "¿Seguro que quieres crear ese personaje?";
         this.mensajes.add(mensaje);
         
-        mensaje = "Has introducido un nombre inválido. Pulse cualquier boton para continuar"; //se borra esta frase si el nombre no tiene que ser unico
+        mensaje = "Has introducido un nombre inválido. El nombre de los personajes debe ser único. Pulse cualquier boton para continuar"; //se borra esta frase si el nombre no tiene que ser unico
         this.mensajesError.add(mensaje);
         mensaje = "Has introducido un tipo inválido. Pulse cualquier boton para continuar";
         this.mensajesError.add(mensaje);

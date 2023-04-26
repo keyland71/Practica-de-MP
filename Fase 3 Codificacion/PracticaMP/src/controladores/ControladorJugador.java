@@ -12,9 +12,7 @@ import clasesDeJuego.Desafio;
 import clasesDeJuego.Jugador;
 import clasesDeJuego.Personaje;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import menus.MenuBorrarCuenta;
 import menus.MenuBorrarPersonaje;
 import menus.MenuJugador;
@@ -95,7 +93,7 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
             }
             case "3" -> { // hacer desafío
                 Personaje p = Juego.estado.obtenerPersonajeActivo();
-                if (p != null){
+                if (p != null && Juego.estado.obtenerAlmacenUsuarios().obtenerNumJugadores()>= 2){
                     ControladorCrearDesafío cCrearDes = new ControladorCrearDesafío();
                     cCrearDes.iniciarControlador(); 
                     this.menuJugador.ponerOro(p.obtenerOro());
@@ -112,6 +110,8 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
                 } else {
                     ControladorCrearPersonaje cCrearPers = new ControladorCrearPersonaje();
                     cCrearPers.iniciarControlador();
+                    Personaje p = Juego.estado.obtenerPersonajeActivo();
+                    if (p!=null) this.menuJugador.ponerOro(p.obtenerOro());
                 }
             }
             case "6" -> { // borrar personaje
@@ -178,6 +178,10 @@ public class ControladorJugador { //ojo cuidao con las notificaciones
     private void mostrarMenuOro() {
         AlmacenDesafios almacen = Juego.estado.obtenerAlmacenDesafios();
         List<Desafio> desafios = almacen.obtenerDesafiosCompletados(Juego.estado.obtenerUsuarioActivo().obtenerNick());
+        if (desafios.isEmpty()){
+            this.menuOro.mostrarMensaje();
+        }
+        
         List<Combate> combates = new ArrayList<>();
         for (Desafio desafio : desafios) {
             combates.add(desafio.obtenerCombate());

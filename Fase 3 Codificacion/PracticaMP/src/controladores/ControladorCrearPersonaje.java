@@ -32,7 +32,7 @@ public class ControladorCrearPersonaje {
 
     public ControladorCrearPersonaje() {
         this.menuCrearPersonaje = new MenuCrearPersonaje();
-        this.tiposDisponibles = new HashSet(Arrays.asList("vampiro", "licantropo", "cazador"));
+        this.tiposDisponibles = new HashSet(Arrays.asList("vampiro", "licantropo", "cazador", "VAMPIRO", "LICANTROPO", "CAZADOR", "Vampiro", "Licantropo", "Cazador"));
         this.modo = 0;
     }
 

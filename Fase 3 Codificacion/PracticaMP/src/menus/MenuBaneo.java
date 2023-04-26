@@ -31,6 +31,8 @@ public class MenuBaneo {
         this.mensajes.add(mensaje);
         mensaje = "¿Seguro que quieres banear a este usuario? (si/no)";
         this.mensajes.add(mensaje);
+        mensaje = "¿Seguro que quieres desbanear a este usuario? (si/no)";
+        this.mensajes.add(mensaje);
         mensaje = "Usuario baneado. Pulse intro para continuar";
         this.mensajes.add(mensaje);
         mensaje = "Todos los usuarios están baneados, no se puede banear ningún usuario";
@@ -65,7 +67,7 @@ public class MenuBaneo {
             }
         }
         
-        return mostrarMensaje(6);
+        return mostrarMensaje(7);
         
     }
 
@@ -74,15 +76,12 @@ public class MenuBaneo {
     }
     
     public String mostrarMensaje(int pos) {
-        String mensaje = this.mensajes.get(pos);
-        System.out.println(mensaje);
-        String opcion = this.lector.nextLine();
-        return opcion;
+        System.out.println(this.mensajes.get(pos));
+        return this.lector.nextLine();
     }
     public void mostrarMensajeError(int pos) {
-        String mensaje = this.mensajesError.get(pos);
-        System.out.println(mensaje);
-       this.lector.nextLine();
+        System.out.println(this.mensajesError.get(pos));
+        this.lector.nextLine();
     }
 
     public void ponerJugadores(List<Jugador> jugadores) {

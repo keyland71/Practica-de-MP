@@ -48,14 +48,17 @@ public class MenuCombateTerminado {
     public void mostrarCombate(Combate c) {
         System.out.println(c.toStringCombate());
         System.out.println("\nPulsa intro para continuar");
+        this.lector.nextLine();
     }
 
     public void mostrarDesafioRechazado(Desafio d) {
         System.out.println("El jugador " + d.obtenerJugadorDesafiado().obtenerNick() + " ha rechazado tu desafio. Se te devolverá el oro que apostaste (" + d.obtenerOro() + ")");
+        this.lector.nextLine();
     }
 
     public void mostrarDesafioCancelado(Desafio d) {
         System.out.println("El desafío " + d.toString() + " ha sido cancelado por un administrador. Se te devolverá el oro que apostaste (" + d.obtenerOro() + ")");
+        this.lector.nextLine();
     }
 
 }

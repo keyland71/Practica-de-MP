@@ -32,6 +32,7 @@ public class ControladorCrearDesafío {
     }
 
     public void iniciarControlador() {
+        this.menuDesafio.mostrarMensaje(3);
         boolean salir = false;
         this.modo = 0;
         do {
@@ -72,7 +73,7 @@ public class ControladorCrearDesafío {
 
     private boolean usuarioValido(String nombre) {
         AlmacenUsuarios almacen = Juego.estado.obtenerAlmacenUsuarios();
-        if (!almacen.existeUsuario(nombre) || Juego.estado.obtenerUsuarioActivo().obtenerNick().equalsIgnoreCase(nombre)){
+        if (!almacen.existeJugador(nombre) || Juego.estado.obtenerUsuarioActivo().obtenerNick().equalsIgnoreCase(nombre)){
             return false; //si no existe el usuario o es el usuario activo, devuelve false
         }
         Jugador j = (Jugador) almacen.obtenerUsuario(nombre);

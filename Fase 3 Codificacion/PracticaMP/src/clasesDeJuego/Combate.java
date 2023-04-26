@@ -110,8 +110,11 @@ public class Combate implements Serializable{
         this.vencedor = (b ? this.uDesafiante:this.uDesafiado);
     }
 
-    public void ponerUsuarioConEsbirros(boolean b) {
-        this.usuarioConEsbirros = (b ? this.uDesafiante:this.uDesafiado).obtenerNick();
+    public void ponerUsuarioConEsbirros(Jugador j) {
+        if (j != null)
+            this.usuarioConEsbirros = j.obtenerNick();
+        else 
+            this.usuarioConEsbirros = null;
     }
 
     public void ponerOro(int o) {

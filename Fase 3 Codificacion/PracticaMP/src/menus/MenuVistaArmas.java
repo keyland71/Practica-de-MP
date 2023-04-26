@@ -56,6 +56,7 @@ public class MenuVistaArmas {
         for (int i=0;i<armas.size();i++){
             System.out.println("    Arma " + Integer.toString(i+1) + ":\n" + armas.get(i).toString());
         }
+        System.out.println("Introduce el número del arma que te quieras equipar, o 'salir' si no quieres cambiar tu arma");
         
         return this.lector.nextLine();
     }

@@ -54,6 +54,7 @@ public class MenuVistaArmaduras {
         for (int i=0;i<armaduras.size();i++){
             System.out.println("    Armadura " + Integer.toString(i+1) + ":\n" + armaduras.get(i).toString());
         }
+        System.out.println("Introduce el número de la armadura que te quieras equipar, o 'salir' si no quieres cambiar tu armadura");
         return this.lector.nextLine();    
     }
 }

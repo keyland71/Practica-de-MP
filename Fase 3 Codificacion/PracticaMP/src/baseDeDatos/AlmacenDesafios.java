@@ -78,7 +78,7 @@ public class AlmacenDesafios implements Serializable{
     public List<Desafio> obtenerDesafiosPendientesAceptar(String nick) {
         List<Desafio> desafiosPendientes = new ArrayList<>();
         for (Desafio d:this.desafios){
-            if (d.obtenerEstado() == EstadoDesafio.validado && (d.obtenerJugadorDesafiado().obtenerNick().equals(nick) || d.obtenerJugadorDesafiante().obtenerNick().equals(nick))){
+            if (d.obtenerEstado() == EstadoDesafio.validado && (d.obtenerJugadorDesafiado().obtenerNick().equals(nick) /*|| d.obtenerJugadorDesafiante().obtenerNick().equals(nick)*/)){ //no debería hacer falta, si tienes que responder es porque eres el desafiado. Ahora no se lo debería mostrar al desafiante
                 desafiosPendientes.add(d); //si el combate está pendiente de aceptar y el j es uno de los dos jugadores, añade el combate
             }
         }

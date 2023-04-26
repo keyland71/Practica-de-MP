@@ -41,7 +41,15 @@ public class DirectorCombate {
         }
         boolean ganaP1 = vidaP1>vidaP2 ;
         this.combate.ponerVencedor(ganaP1); //igual para que los setters sean setters, la logica tendría que estar aquí
-        this.combate.ponerUsuarioConEsbirros(ganaP1);
+        this.combate.ponerUsuarioConEsbirros(null);
+        if (ganaP1){
+            if (this.vidaP1 > this.p1.obtenerVida())
+                this.combate.ponerUsuarioConEsbirros(this.combate.obtenerUDesafiante());
+        } else
+            if (this.vidaP2 > this.p2.obtenerVida()){
+                this.combate.ponerUsuarioConEsbirros(this.combate.obtenerUDesafiado());
+            }
+        
     }
 
     private void realizarRonda() {

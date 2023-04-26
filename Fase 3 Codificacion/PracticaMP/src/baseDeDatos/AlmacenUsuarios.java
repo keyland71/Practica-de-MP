@@ -116,4 +116,16 @@ public class AlmacenUsuarios implements Serializable {
         jugadores.sort((j1, j2) -> -Integer.compare(j1.obtenerVictorias(), j2.obtenerVictorias()));
         return jugadores;
     }
+
+    public int obtenerNumJugadores() {
+        return this.obtenerJugadores().size();
+    }
+
+    public boolean existeJugador(String nombre) {
+        for (Jugador j:this.obtenerJugadores()){
+            if (j.obtenerNick().equalsIgnoreCase(nombre))
+                return true;
+        }
+        return false;
+    }
 }

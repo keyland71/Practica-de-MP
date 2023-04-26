@@ -42,7 +42,7 @@ public class ControladorBaneos {
         cargarJugadores();
         this.menuBan.ponerJugadores(this.jugadores);
         if (this.jugadores.isEmpty()){
-            this.menuBan.mostrarMensaje(mostrarBaneados ? 5:4);
+            this.menuBan.mostrarMensaje(mostrarBaneados ? 6:5);
             return;
         }
         
@@ -55,7 +55,7 @@ public class ControladorBaneos {
                 if (this.pagActual != 0){ 
                     this.pagActual--;
                 } else{
-                    this.menuBan.mostrarMensaje(mostrarBaneados ? 5:4);
+                    this.menuBan.mostrarMensaje(mostrarBaneados ? 6:5);
                     return;
                 }
             }
@@ -131,7 +131,7 @@ public class ControladorBaneos {
             default  -> { //si se pone este al final, como default, no se hay que preocupar por los números, ya sabemos que es válido
                 do {
                     this.modo = 1; //el modo es para que de por valido "si" y "no"
-                    opcion = this.menuBan.mostrarMensaje(2); //seguro que lo quieres banear?
+                    opcion = this.menuBan.mostrarMensaje(this.mostrarBaneados ? 3:2); //seguro que lo quieres banear?
                     valido = validarEntrada(opcion);
                     if (!valido) {
                         this.menuBan.mostrarMensajeError(1);
@@ -147,7 +147,7 @@ public class ControladorBaneos {
                     this.jugadores.remove(pos);         //actualizamos nuestra lista
                     this.menuBan.quitarJugador(pos);    //actualizamos la lista del menú
                     
-                    this.menuBan.mostrarMensaje(3); // usuario baneado
+                    this.menuBan.mostrarMensaje(4); // usuario baneado
                 }
             }
         } //end case 5

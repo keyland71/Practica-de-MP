@@ -31,6 +31,8 @@ public class MenuCrearDesafio {
         this.mensajes.add(mensaje);
         mensaje = "¿Seguro que quieres crear el desafío? (si/no)";
         this.mensajes.add(mensaje);
+        mensaje = "Si te equivocas, en cualquier momento puedes escribir 'salir', que te devolverá al menú anterior y cancelará el desafío";
+        this.mensajes.add(mensaje);
         
         mensaje = "No puedes apostar esa cantidad";
         this.mensajesError.add(mensaje);

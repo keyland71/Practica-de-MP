@@ -45,4 +45,9 @@ public class MenuOro {
         }
         System.out.println("Combate " + num + ": " + "\n    Oponente: " + oponente + "\n    Oro ganado: " + oro + "\n    Fecha: " + fecha);
      }
+
+    public void mostrarMensaje() {
+        System.out.println("No has participado en ningún combate todavía. Cuando participes en alguno, aquí podrás ver un pequeño resumen, junto con el oro perdido o ganado");
+        this.lector.nextLine();
+    }
 }
