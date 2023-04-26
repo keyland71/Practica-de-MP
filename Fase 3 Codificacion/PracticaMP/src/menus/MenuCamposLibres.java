@@ -21,10 +21,10 @@ public class MenuCamposLibres {
     public MenuCamposLibres() {
         this.mensajes = new ArrayList<>();
         this.mensajesError = new ArrayList<>();
-        
+
         String mensaje = "";
         this.mensajes.add(mensaje);
-        
+
         mensaje = """
                   El valor introducido no es un valor v\u00e1lido para el campo que quiere modificar.
                    Tenga en cuenta que los campos vida y poder s\u00f3lo aceptan valores entre 1 y 5, y el nombre del personaje debe ser \u00fanico""";
