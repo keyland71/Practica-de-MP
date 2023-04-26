@@ -25,6 +25,9 @@ public class AlmacenModificadores implements Serializable{
         this.cargarModificadores();
 
     }
+    public List<Modificador> obtenerModificadores(){
+        return this.modificadores;
+    }
 
     private void cargarModificadores(){
     File miArchivo = new File("./archivos/Modificadores.csv");

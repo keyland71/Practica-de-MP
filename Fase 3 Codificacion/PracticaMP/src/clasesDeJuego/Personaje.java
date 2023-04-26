@@ -46,9 +46,9 @@ public abstract class Personaje implements Serializable{
                         "6. Armas Activas: " + eqToString(aAc) + "\n" +
                         "7. Armas Disponibles" + "\n    " + eqToString(aDisp) + "\n" +
                         "8. Armadura Activa: " + armaduraActiva.obtenerNombre() + "\n" +
-                        "9. Armadurass Disponibles: " + "\n    " + eqToString(adDisp) + "\n" +
+                        "9. Armaduras Disponibles: " + "\n    " + eqToString(adDisp) + "\n" +
                         "10. Modificadores: " + modToString(this.modificadores) + "\n" +
-                        "11. Esbirros:" + esbToString(this.esbirros) + "\n"
+                        "11. Esbirros: " + esbToString(this.esbirros) + "\n"
                         ;
         return result;
     }
@@ -331,7 +331,37 @@ public abstract class Personaje implements Serializable{
     public void reestablecerPersonaje() {
         this.puntosRecurso = 0;
     }
-    
-    
 
+    public void ponerNombre(String n) {
+        this.nombre = n;
+    }
+    
+    public void ponerDescripcion(String d) {
+        this.descripcion = d;
+    }
+
+    public void ponerVida(int v) {
+        this.vida = v;
+    }
+
+    public void ponerPoder(int p) {
+        this.poder = p;
+    }
+
+    public void ponerArmasDisponibles(List<Arma> armas) {
+        this.armasDisponibles.clear();
+        this.armasDisponibles.addAll(armas);
+        this.armasActivas.clear();
+        this.armasActivas.add(armas.get(0));
+    }
+
+    public void ponerArmadurasDisponibles(List<Armadura> armaduras) {
+        this.armadurasDisponibles.clear();
+        this.armadurasDisponibles.addAll(armaduras);
+        this.armaduraActiva = armaduras.get(0);
+    }
+
+    public void ponerModificadores(List<Modificador> mods) {
+        this.modificadores.clear();
+        this.modificadores.addAll(mods);    }
 }

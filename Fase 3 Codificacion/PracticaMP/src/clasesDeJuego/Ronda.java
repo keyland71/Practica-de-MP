@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class Ronda implements Serializable {
 
-    static String registroAString(List<Ronda> registroRondas) {
+    static String fromListToString(List<Ronda> registroRondas) {
         String result = "";
         int i = 0;
         for (Ronda r:registroRondas){

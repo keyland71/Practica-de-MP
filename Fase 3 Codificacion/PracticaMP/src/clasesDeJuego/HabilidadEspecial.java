@@ -5,12 +5,23 @@
 package clasesDeJuego;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
  * @author lucia
  */
 public class HabilidadEspecial implements Serializable{
+
+    public static String fromListToString(List<HabilidadEspecial> habilidades) {
+        String result = "";
+        int i = 1;
+        for (HabilidadEspecial h:habilidades){
+            result += "    " + Integer.toString(i) + ". " + h.nombre + "\n";
+            i++;
+        }
+        return result;
+    }
 
     private String nombre;
     private int ataque;

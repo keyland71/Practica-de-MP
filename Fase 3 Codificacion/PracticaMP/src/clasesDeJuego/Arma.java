@@ -10,9 +10,21 @@
 
 package clasesDeJuego;
 
+import java.util.List;
+
 
 public class Arma extends Equipo {
-
+    
+    public static String fromListToString(List<Arma> elementos) {
+        String result = "";
+        int i = 1;
+        for (Arma a:elementos){
+            result += "    " + Integer.toString(i) + ". " + a.obtenerNombre() + " (" + a.tipo.toString() + ")"+"\n";
+            i++;
+        }
+        return result;    
+    }
+    
     private Variante tipo;
     
     public Arma(String nombre, int modAtaque, int modDefensa, Variante tipoArma){

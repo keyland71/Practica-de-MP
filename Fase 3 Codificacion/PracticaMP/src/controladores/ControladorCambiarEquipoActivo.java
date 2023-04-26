@@ -66,6 +66,7 @@ public class ControladorCambiarEquipoActivo {
         if (opcion.equalsIgnoreCase("salir")) {
             return true;
         }
+        try {
         switch (this.modo) {
             case 0 -> {
                 return opcion.equals("1") || opcion.equals("2");
@@ -80,6 +81,9 @@ public class ControladorCambiarEquipoActivo {
                 return opcion.equalsIgnoreCase("si") || opcion.equalsIgnoreCase("no");
             }
         }
+        } catch (NumberFormatException e){
+            //necesario para poder hacer Integer.parseInt(opcion) sin preocuparse de si opcion representa un numero
+        }
         return false;
     }
 
@@ -92,11 +96,10 @@ public class ControladorCambiarEquipoActivo {
         } else {
             elegirArmadura();
         }
-
         return false;
     }
 
-    private void elegirArma() {
+    public void elegirArma() {
         this.modo = 1;
         boolean salir = false;
         String opcion;
@@ -146,7 +149,7 @@ public class ControladorCambiarEquipoActivo {
         Juego.estado.guardar();
     }
 
-    private void elegirArmadura() {
+    public void elegirArmadura() {
         this.modo = 2;
         String opcion;
         int armaduraElegida;

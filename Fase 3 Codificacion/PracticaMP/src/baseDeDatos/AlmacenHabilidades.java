@@ -75,6 +75,15 @@ public class AlmacenHabilidades implements Serializable{
         }
     }
 
+    public List<HabilidadEspecial> obtenerHabilidades(TipoHabilidad tipo) {
+        return switch (tipo) {
+            case Disciplina -> this.obtenerDisciplinas();
+            case Don -> this.obtenerDones();
+            default -> this.obtenerTalentos();
+        };
+    }
+    
+    //creo que podría ser privada
     public List<HabilidadEspecial> obtenerDisciplinas() {
         List<HabilidadEspecial> disc = new ArrayList<>();
         for (int i = 0; i <= this.habilidades.size() - 1; i++) {
@@ -85,6 +94,7 @@ public class AlmacenHabilidades implements Serializable{
         return disc;
     }
 
+    //creo que podría ser privada
     public List<HabilidadEspecial> obtenerDones() {
         List<HabilidadEspecial> dones = new ArrayList<>();
         for (int i = 0; i <= this.habilidades.size() - 1; i++) {
@@ -95,6 +105,7 @@ public class AlmacenHabilidades implements Serializable{
         return dones;
     }
 
+    //creo que podría ser privada
     public List<HabilidadEspecial> obtenerTalentos() {
         List<HabilidadEspecial> talentos = new ArrayList<>();
         for (int i = 0; i <= this.habilidades.size() - 1; i++) {

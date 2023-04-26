@@ -54,7 +54,7 @@ public class Combate implements Serializable{
     }
 
     public String toStringCombate() {
-        String reg = Ronda.registroAString(registroRondas);
+        String reg = Ronda.fromListToString(registroRondas);
         String combate = "Resumen del Combate: "
                 + "\n    Usuario Desafiante: " + uDesafiante.obtenerNick()
                 + ",\n    Usuario Desafiado: " + uDesafiado.obtenerNick()

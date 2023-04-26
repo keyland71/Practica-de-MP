@@ -5,12 +5,23 @@
 package clasesDeJuego;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 /**
  * @author marcos
  * @author lucia
  */
 public abstract class Esbirro implements Serializable{
+
+    public static String fromListToString(Collection<Esbirro> elementos) {
+        String result = "";
+        int i = 1;
+        for (Esbirro esb:elementos){
+            result += "    " + Integer.toString(i) + ". " + esb.nombre + "\n";
+            i++;
+        }
+        return result;    
+    }
 
     private String nombre;
     private int vida;

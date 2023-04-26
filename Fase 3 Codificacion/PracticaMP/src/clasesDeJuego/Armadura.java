@@ -10,8 +10,21 @@
 
 package clasesDeJuego;
 
+import java.util.List;
+
 
 public class Armadura extends Equipo {
+
+    public static String fromListToString(List<Armadura> elementos) {
+        String result = "";
+        int i = 1;
+        for (Armadura a:elementos){
+            result += "    " + Integer.toString(i) + ". " + a.obtenerNombre() + "\n";
+            i++;
+        }
+        return result;    
+    }
+    
     
     public Armadura(String nombre, int modAtaque, int modDefensa){
         super(nombre, modAtaque, modDefensa); 

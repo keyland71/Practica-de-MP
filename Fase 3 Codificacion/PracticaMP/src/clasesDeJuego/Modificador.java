@@ -11,9 +11,20 @@
 package clasesDeJuego;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 
 public class Modificador implements Serializable{
+    
+    public static String fromListToString(Collection<Modificador> elementos) {
+        String result = "";
+        int i = 1;
+        for (Modificador mod:elementos){
+            result += "    " + Integer.toString(i) + ". " + mod.nombre + ( mod.obtenerTipo() == TipoModificador.Debilidad ? "(D)":"(F)") + "\n";
+            i++;
+        }
+        return result;    
+    }
 
     private String nombre;
     private int valor;
