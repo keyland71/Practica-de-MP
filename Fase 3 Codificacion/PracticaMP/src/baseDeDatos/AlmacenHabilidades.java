@@ -6,10 +6,8 @@ package baseDeDatos;
 
 import clasesDeJuego.HabilidadEspecial;
 import clasesDeJuego.TipoHabilidad;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,26 +52,6 @@ public class AlmacenHabilidades implements Serializable{
         }
     }
     
-    private void cargarHabilidadesViejo() {
-        try {
-            //Leer habilidades
-            BufferedReader br = new BufferedReader(new FileReader("./archivos/HabilidadesEspeciales.csv"));
-            for (String linea = br.readLine(); linea != null; linea = br.readLine()) {
-                String[] lineaLeida = linea.split(";");
-                
-                String nombre = lineaLeida[0];
-                TipoHabilidad tipoHab = TipoHabilidad.valueOf(lineaLeida[1]);
-                int valorAtaque = Integer.parseInt(lineaLeida[2]);
-                int valorDefensa = Integer.parseInt(lineaLeida[3]);
-                int coste = Integer.parseInt(lineaLeida[4]);
-                HabilidadEspecial hab = new HabilidadEspecial(nombre, valorAtaque, valorDefensa, coste, tipoHab);
-                this.habilidades.add(hab);
-            }
-            br.close();
-        } catch (Exception e) {
-            System.out.println("Problemas con lectura de archivo HabilidadesEspeciales.csv");
-        }
-    }
 
     public List<HabilidadEspecial> obtenerHabilidades(TipoHabilidad tipo) {
         return switch (tipo) {

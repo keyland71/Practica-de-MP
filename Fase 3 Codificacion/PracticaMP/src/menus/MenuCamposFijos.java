@@ -4,19 +4,12 @@
  */
 package menus;
 
-import clasesDeJuego.Arma;
-import clasesDeJuego.Armadura;
-import clasesDeJuego.Equipo;
-import clasesDeJuego.Esbirro;
-import clasesDeJuego.HabilidadEspecial;
-import clasesDeJuego.Modificador;
+
 import clasesDeJuego.Personaje;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
-import practicamp.Juego;
+
 
 /**
  *

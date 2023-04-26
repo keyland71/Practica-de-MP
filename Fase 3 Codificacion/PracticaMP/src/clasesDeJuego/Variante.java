@@ -11,5 +11,5 @@ package clasesDeJuego;
 public enum Variante {
     unaMano,
     dosManos;
-   
+
 }

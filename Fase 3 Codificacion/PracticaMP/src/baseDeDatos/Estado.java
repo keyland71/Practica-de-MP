@@ -26,7 +26,7 @@ import sistemas.FabricaPersonajes;
  * @author Ángel Marqués García
  * @author Marcos Jiménez Pulido
  */
-public class Estado implements Serializable{
+public class Estado implements Serializable {
 
     private AlmacenUsuarios almacenUsuarios;
     private AlmacenDesafios almacenDesafios;
@@ -35,7 +35,7 @@ public class Estado implements Serializable{
     private AlmacenEsbirros almacenEsbirros;
     private AlmacenHabilidades almacenHabilidades;
     private AlmacenModificadores almacenModificadores;
-    
+
     private NumeroRegistro ultimoNumRegistro;
     private FabricaPersonajes fabricaPersonajes;
     private Usuario usuarioActivo;
@@ -80,7 +80,7 @@ public class Estado implements Serializable{
         this.almacenEsbirros = estadoLeido.obtenerAlmacenEsbirros();
         this.almacenHabilidades = estadoLeido.obtenerAlmacenHabilidades();
         this.almacenModificadores = estadoLeido.obtenerAlmacenModificadores();
-        
+
         this.usuarioActivo = estadoLeido.obtenerUsuarioActivo();
         this.fabricaPersonajes = estadoLeido.obtenerFabricaPersonajes();
         this.ultimoNumRegistro.copiar(estadoLeido.obtenerNumeroRegistro());
@@ -126,7 +126,7 @@ public class Estado implements Serializable{
             System.out.println(e);
         }
     }
-    
+
     //inutil
     private void cargarNumReg() {
         try {
@@ -199,8 +199,8 @@ public class Estado implements Serializable{
     public AlmacenModificadores obtenerAlmacenModificadores() {
         return this.almacenModificadores;
     }
-    
-    public FabricaPersonajes obtenerFabricaPersonajes(){
+
+    public FabricaPersonajes obtenerFabricaPersonajes() {
         return this.fabricaPersonajes;
     }
 

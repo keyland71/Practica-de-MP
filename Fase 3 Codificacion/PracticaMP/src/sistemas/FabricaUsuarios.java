@@ -4,7 +4,6 @@
  */
 package sistemas;
 
-import baseDeDatos.Estado;
 import clasesDeJuego.Administrador;
 import clasesDeJuego.Jugador;
 import clasesDeJuego.NumeroRegistro;
@@ -60,7 +59,7 @@ public class FabricaUsuarios {
 
     private void ponerNumeroRegistro(Jugador j) {
         NumeroRegistro num = Juego.estado.obtenerNumeroRegistro();
-        num.incrementarNumReg(); //num = num.incrementarNumReg()
+        num.incrementarNumReg();
         j.ponerNumReg(num);
         Juego.estado.ponerNumReg(num);
     }

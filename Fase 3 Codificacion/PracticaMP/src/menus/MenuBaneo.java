@@ -60,9 +60,9 @@ public class MenuBaneo {
         }
         int tamPag = ControladorBaneos.tamPag;
         for (int i=0;i<=tamPag-1;i++){
-            if (i+n*tamPag >= this.jugadores.size()){ //si el elemento que se mostraría no existe en el array, no hacemos nada
+            if (i+n*tamPag >= this.jugadores.size()){ 
                 break;
-            } else{ //la posición en la que vamos a buscar al jugador existe en el array
+            } else{ 
                 System.out.println(Integer.toString(i+1) + ". " + this.jugadores.get(i+n*tamPag));
             }
         }

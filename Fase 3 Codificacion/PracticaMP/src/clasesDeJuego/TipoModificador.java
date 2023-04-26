@@ -11,5 +11,5 @@ package clasesDeJuego;
 public enum TipoModificador {
     Fortaleza,
     Debilidad;
-   
+
 }

@@ -9,5 +9,5 @@ package sistemas;
  * @author Ángel Marqués
  */
 public class ExcepcionMalaEntrada extends Exception {
-    
+
 }

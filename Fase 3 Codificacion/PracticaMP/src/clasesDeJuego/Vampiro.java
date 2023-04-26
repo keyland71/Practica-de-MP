@@ -25,7 +25,7 @@ public class Vampiro extends Personaje {
         super(nombre, vampiroModelo);
         this.edad = vampiroModelo.obtenerEdad();
     }
-    
+
     @Override
     public void ponerEsbirros(Set<Esbirro> esbirros) {
         Set<Esbirro> esbirrosSinHumanos = new HashSet<>();
@@ -36,7 +36,7 @@ public class Vampiro extends Personaje {
         }
         super.ponerEsbirros(esbirrosSinHumanos);
     }
-    
+
     @Override
     public void ponerHabilidadEspecial(HabilidadEspecial hab) {
         if (hab.obtenerTipo().equals(TipoHabilidad.Disciplina)) {

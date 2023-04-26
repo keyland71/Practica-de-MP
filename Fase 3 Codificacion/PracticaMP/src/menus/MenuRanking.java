@@ -12,19 +12,19 @@ import java.util.Scanner;
  *
  * @author Ángel Marqués
  */
-public class MenuRanking { //Hay que ver cómo hacemos el ranking
-    //private List <String> mensajes;
+public class MenuRanking {
+
     private Scanner lector;
-    
-    public MenuRanking(){
-        //carga el ranking
+
+    public MenuRanking() {
         this.lector = new Scanner(System.in);
     }
-    public void mostrarRanking(List<Jugador> ranking){
+
+    public void mostrarRanking(List<Jugador> ranking) {
         System.out.print("Este es el ranking de Jugadores:");
-        
-        for (int i=0;i<ranking.size();i++){
-            System.out.print("\n    " + Integer.toString(i+1) + ". " + ranking.get(i).obtenerNick() + " (" + Integer.toString(ranking.get(i).obtenerVictorias()) + " victorias)");
+
+        for (int i = 0; i < ranking.size(); i++) {
+            System.out.print("\n    " + Integer.toString(i + 1) + ". " + ranking.get(i).obtenerNick() + " (" + Integer.toString(ranking.get(i).obtenerVictorias()) + " victorias)");
         }
         System.out.println();
         this.lector.nextLine();

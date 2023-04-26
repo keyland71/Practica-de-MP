@@ -7,16 +7,14 @@ package clasesDeJuego;
 import java.util.List;
 import java.util.Set;
 
-
-
 /**
  *
  * @author lucia
  */
 public class Cazador extends Personaje {
-    
+
     public static int voluntadMaxima = 3;
-   
+
     public Cazador(HabilidadEspecial hab, Set<Arma> armas, Set<Armadura> armaduras, Set<Esbirro> esbirros, int vida, int poder, List<Modificador> mods, String desc) {
         super(hab, armas, armaduras, esbirros, vida, poder, mods, desc, voluntadMaxima);
     }
@@ -24,7 +22,7 @@ public class Cazador extends Personaje {
     public Cazador(String nombre, Cazador cazadorModelo) {
         super(nombre, cazadorModelo);
     }
-    
+
     @Override
     public void ponerHabilidadEspecial(HabilidadEspecial hab) {
         if (hab.obtenerTipo().equals(TipoHabilidad.Talento)) {
@@ -48,7 +46,7 @@ public class Cazador extends Personaje {
         int potencialDefensa = super.calcularPotencialDefensa() + this.obtenerRecurso();
         return potencialDefensa;
     }
-    
+
     @Override
     public void reestablecerPersonaje() {
         this.ponerPuntosRecurso(voluntadMaxima);

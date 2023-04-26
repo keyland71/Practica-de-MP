@@ -7,16 +7,14 @@ package clasesDeJuego;
 import java.util.List;
 import java.util.Set;
 
-
-
 /**
  *
  * @author lucia
  */
 public class Licantropo extends Personaje {
-    
+
     public static int rabiaMaxima = 3;
-    
+
     public Licantropo(HabilidadEspecial hab, Set<Arma> armas, Set<Armadura> armaduras, Set<Esbirro> esbirros, int vida, int poder, List<Modificador> mods, String desc) {
         super(hab, armas, armaduras, esbirros, vida, poder, mods, desc, 0);
     }
@@ -24,7 +22,7 @@ public class Licantropo extends Personaje {
     public Licantropo(String nombre, Licantropo licantropoModelo) {
         super(nombre, licantropoModelo);
     }
-    
+
     @Override
     public void ponerHabilidadEspecial(HabilidadEspecial hab) {
         if (hab.obtenerTipo().equals(TipoHabilidad.Don)) {

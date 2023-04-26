@@ -15,26 +15,26 @@ import java.util.Scanner;
  * @author Ángel Marqués
  */
 public class MenuCombateTerminado {
+
     private List<String> mensajes;
     private List<String> mensajesError;
     private Scanner lector;
-    
-    public MenuCombateTerminado(){
+
+    public MenuCombateTerminado() {
         mensajes = new ArrayList<>();
         mensajesError = new ArrayList<>();
-        
+
         String mensaje = "Si has enviado algún desafio, el oponente todavía no ha respondido";
         this.mensajes.add(mensaje);
         mensaje = "Han respondido a alguno de tus desafíos. Aquí está el resultado:";
         this.mensajes.add(mensaje);
 
-        
         mensaje = "Por favor, introduzca un valor correcto. Pulse intro para continuar";
         this.mensajesError.add(mensaje);
-        
+
         this.lector = new Scanner(System.in);
     }
-    
+
     public String mostrarMensaje(int pos) {
         System.out.println(this.mensajes.get(pos));
         return this.lector.nextLine();

@@ -13,10 +13,11 @@ import java.util.Scanner;
  * @author Ángel Marqués García
  */
 public class MenuRegistro {
+
     private List<String> mensajes;
     private List<String> mensajesError;
     private Scanner lector;
- 
+
     public MenuRegistro() {
         this.mensajes = new ArrayList<>();
         this.mensajesError = new ArrayList<>();

@@ -11,37 +11,38 @@ import java.util.Collection;
  * @author marcos
  * @author lucia
  */
-public abstract class Esbirro implements Serializable{
+public abstract class Esbirro implements Serializable {
 
     public static String fromListToString(Collection<Esbirro> elementos) {
         String result = "";
         int i = 1;
-        for (Esbirro esb:elementos){
+        for (Esbirro esb : elementos) {
             result += "    " + Integer.toString(i) + ". " + esb.nombre + "\n";
             i++;
         }
-        return result;    
+        return result;
     }
 
     private String nombre;
     private int vida;
-    
-    public Esbirro(String nom, int v){
+
+    public Esbirro(String nom, int v) {
         this.nombre = nom;
         this.vida = v;
     }
-    
-    public String obtenerNombre(){
+
+    public String obtenerNombre() {
         return this.nombre;
     }
-    
+
     public int obtenerVida() {
         return this.vida;
     }
-    
-    public boolean tieneSubordinados(){
+
+    public boolean tieneSubordinados() {
         return false;
     }
+
     public boolean tieneHumanos() {
         return false;
     }

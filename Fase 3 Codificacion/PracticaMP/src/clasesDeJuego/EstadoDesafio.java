@@ -14,5 +14,5 @@ public enum EstadoDesafio {
     aceptado,
     rechazado,
     completado,
-    cancelado;  
+    cancelado;
 }

@@ -6,46 +6,44 @@ package baseDeDatos;
 
 import clasesDeJuego.Arma;
 import clasesDeJuego.Armadura;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import clasesDeJuego.Variante;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
-public class AlmacenEquipo implements Serializable{
+public class AlmacenEquipo implements Serializable {
 
     private List<Arma> armas;
     private List<Armadura> armaduras;
 
-    public AlmacenEquipo() { 
+    public AlmacenEquipo() {
         this.armas = new ArrayList<>();
         this.armaduras = new ArrayList<>();
         this.cargarEquipo();
-        
+
     }
 
     private void cargarEquipo() {
-    File armas = new File("./archivos/Armas.csv");
-    File armaduras = new File("./archivos/Armaduras.csv");
-        try { //podría estar interesante separarlos en dos try catch distintos
-            
+        File armas = new File("./archivos/Armas.csv");
+        File armaduras = new File("./archivos/Armaduras.csv");
+        try {
+
             String nombre;
             Variante tipo;
             int ataque;
             int defensa;
-            
+
             //leemos armas
             Scanner lectorArmas = new Scanner(armas);
             while (lectorArmas.hasNextLine()) {
                 String linea = lectorArmas.nextLine();
                 String[] seccionesLinea = linea.split(";");
-                
+
                 nombre = seccionesLinea[0];
                 ataque = Integer.parseInt(seccionesLinea[1]);
                 defensa = Integer.parseInt(seccionesLinea[2]);
@@ -54,13 +52,13 @@ public class AlmacenEquipo implements Serializable{
                 Arma nuevaArma = new Arma(nombre, ataque, defensa, tipo);
                 this.armas.add(nuevaArma);
             }
-            
+
             //leemos armaduras
             Scanner lectorArmaduras = new Scanner(armaduras);
             while (lectorArmaduras.hasNextLine()) {
                 String linea = lectorArmaduras.nextLine();
                 String[] seccionesLinea = linea.split(";");
-              
+
                 nombre = seccionesLinea[0];
                 ataque = Integer.parseInt(seccionesLinea[1]);
                 defensa = Integer.parseInt(seccionesLinea[2]);
@@ -70,41 +68,6 @@ public class AlmacenEquipo implements Serializable{
             }
         } catch (FileNotFoundException exception) {
             System.out.println("No existe uno de los siguients archivos: Armas.csv, Armaduras.csv.");
-        }
-    }
-    
-    private void cargarEquipoViejo() {
-        try {
-            String nombre;
-            int modificadorAtaque;
-            int modificadorDefensa;
-
-            //Leer armas
-            BufferedReader br = new BufferedReader(new FileReader("./archivos/Armas.csv"));
-            for (String linea = br.readLine(); linea != null; linea = br.readLine()) {
-                String[] lineaLeida = linea.split(";");
-                nombre = lineaLeida[0];
-                modificadorAtaque = Integer.parseInt(lineaLeida[1]);
-                modificadorDefensa = Integer.parseInt(lineaLeida[2]);
-                Variante tipo = Variante.valueOf(lineaLeida[3]);
-                Arma nuevaArma = new Arma(nombre, modificadorAtaque, modificadorDefensa, tipo);
-                this.armas.add(nuevaArma);
-            }
-            br.close();
-
-            //Leer armaduras
-            br = new BufferedReader(new FileReader("./archivos/Armaduras.csv"));
-            for (String linea = br.readLine(); linea != null; linea = br.readLine()) {
-                String[] lineaLeida = linea.split(";");
-                nombre = lineaLeida[0];
-                modificadorAtaque = Integer.parseInt(lineaLeida[1]);
-                modificadorDefensa = Integer.parseInt(lineaLeida[2]);
-                Armadura nuevaArmadura = new Armadura(nombre, modificadorAtaque, modificadorDefensa);
-                this.armaduras.add(nuevaArmadura);
-            }
-            br.close();
-        } catch (IOException | NumberFormatException e) {
-            System.out.println("Problemas con lectura de archivo Armas.csv o Armaduras.csv");
         }
     }
 

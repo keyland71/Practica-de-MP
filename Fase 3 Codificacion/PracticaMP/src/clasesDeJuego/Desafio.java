@@ -10,56 +10,56 @@ import java.io.Serializable;
  *
  * @author lucia
  */
-public class Desafio implements Serializable{
+public class Desafio implements Serializable {
+
     private Jugador uDesafiante;
     private Jugador uDesafiado;
     private EstadoDesafio estadoCombate;
     private int oroApostado;
     private Combate combate;
-    
-    
-    public Desafio (Jugador j1, Jugador j2,int oro){
-     this.uDesafiante = j1;
-     this.uDesafiado = j2;
-     this.estadoCombate = EstadoDesafio.pendienteValidar;
-     this.oroApostado = oro;
-     this.combate = new Combate(j1,j2);
-}
-    
-    public EstadoDesafio obtenerEstado (){
+
+    public Desafio(Jugador j1, Jugador j2, int oro) {
+        this.uDesafiante = j1;
+        this.uDesafiado = j2;
+        this.estadoCombate = EstadoDesafio.pendienteValidar;
+        this.oroApostado = oro;
+        this.combate = new Combate(j1, j2);
+    }
+
+    public EstadoDesafio obtenerEstado() {
         return estadoCombate;
     }
-    
-    public void cambiarEstado(EstadoDesafio estado){
+
+    public void cambiarEstado(EstadoDesafio estado) {
         estadoCombate = estado;
     }
-    
-    public int obtenerOro(){
+
+    public int obtenerOro() {
         return oroApostado;
     }
-    
-    public String resultadoCombate(Combate comb){
-       return comb.toStringCombate();
+
+    public String resultadoCombate(Combate comb) {
+        return comb.toStringCombate();
     }
-    
-    public Combate obtenerCombate(){
-       return this.combate;
+
+    public Combate obtenerCombate() {
+        return this.combate;
     }
-    
-    public Jugador obtenerJugadorDesafiante (){
+
+    public Jugador obtenerJugadorDesafiante() {
         return this.uDesafiante;
     }
-    
-    public Jugador obtenerJugadorDesafiado (){
+
+    public Jugador obtenerJugadorDesafiado() {
         return uDesafiado;
     }
 
     public void devolverOro() {
         this.uDesafiante.obtenerPersonaje().sumarOro(oroApostado);
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return this.uDesafiante.obtenerNick() + " -> " + this.uDesafiado.obtenerNick() + "(" + Integer.toString(this.oroApostado) + ")"; //Escribe angel -> sergio (300)
     }
 }

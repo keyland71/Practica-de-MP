@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * @author Ángel Marqués
  */
-public class MenuJugador { //se ocupa de Ranking, Oro, Borrar personaje, y ¿Crear Personaje?
+public class MenuJugador { 
     private List<String> mensajes;
     private List<String> mensajesError;
     private Scanner lector;
@@ -58,7 +58,7 @@ public class MenuJugador { //se ocupa de Ranking, Oro, Borrar personaje, y ¿Cre
         this.lector.nextLine();
     }
     
-    private String mostrarMensaje0() { //igual se puede ahorrar este método actualizando la String desde ponerOro
+    private String mostrarMensaje0() { 
         String mensaje0 = String.format("""
                           Bienvenido al Menú de Jugador, estas son tus opciones:
                             1. Consultar Ranking

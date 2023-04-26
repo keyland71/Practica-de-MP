@@ -31,12 +31,11 @@ public class Jugador extends Usuario {
     //y para eso te quedas con la implementación de arriba
     //más sentido me tiene implementarlo arriba y hacer override en Admin
     //por ahora lo hago como he dicho
-
     public void incrementarVictorias() {
         this.victorias++;
     }
-    
-    public int obtenerVictorias(){
+
+    public int obtenerVictorias() {
         return this.victorias;
     }
 }

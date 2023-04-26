@@ -14,24 +14,24 @@ import clasesDeJuego.Desafio;
  * @author Ángel Marqués
  */
 public class MenuDesafioPendiente {
+
     private List<String> mensajes;
     private Scanner lector;
-    
-    
-    public MenuDesafioPendiente(){
+
+    public MenuDesafioPendiente() {
         this.mensajes = new ArrayList<>();
 
         String mensaje = "El valor introducido no es correcto. Introduce a para aceptar, o r para rechazar el combate.";
         this.mensajes.add(mensaje);
         mensaje = "No tienes ningún desafío pendiente de ser aceptado";
         this.mensajes.add(mensaje);
-        
+
         this.lector = new Scanner(System.in);
     }
-    
+
     public String mostrarResumenDesafio(Desafio d) {
-        String mensaje = "Te desafía " + d.obtenerJugadorDesafiante().obtenerNick() + ", con una apuesta de " + Integer.toString(d.obtenerOro()) + " piezas de oro.\n" +
-                "¿Aceptas(a) o rechazas(r) el desafio? Ten en cuenta que si lo rechazas, deberás pagar " + Integer.toString(d.obtenerOro()/10) + " piezas de oro";
+        String mensaje = "Te desafía " + d.obtenerJugadorDesafiante().obtenerNick() + ", con una apuesta de " + Integer.toString(d.obtenerOro()) + " piezas de oro.\n"
+                + "¿Aceptas(a) o rechazas(r) el desafio? Ten en cuenta que si lo rechazas, deberás pagar " + Integer.toString(d.obtenerOro() / 10) + " piezas de oro";
         System.out.println(mensaje);
         return this.lector.nextLine();
     }

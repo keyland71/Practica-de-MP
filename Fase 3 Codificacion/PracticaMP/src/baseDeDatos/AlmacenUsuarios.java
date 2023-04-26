@@ -2,10 +2,6 @@ package baseDeDatos;
 
 import clasesDeJuego.Jugador;
 import clasesDeJuego.Usuario;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,7 +59,7 @@ public class AlmacenUsuarios implements Serializable {
 
     public void aniadirUsuario(Usuario u) {
         this.usuarios.put(u.obtenerNick(), u);
-        Juego.estado.guardar(); //antes llamaba a guardarUsuarios()
+        Juego.estado.guardar();
     }
 
     public void borrarUsuario(Usuario u) {
@@ -71,47 +67,18 @@ public class AlmacenUsuarios implements Serializable {
         Juego.estado.guardar();
     }
 
-    //inutil
-    private void cargarUsuarios() {
-        AlmacenUsuarios almacenLeido = null;
-        try {
-            String fic = "./archivos/AlmacenUsuarios.AlmacenUsuarios";
-            ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(fic));
-            almacenLeido = (AlmacenUsuarios) entrada.readObject();
-            this.usuarios = almacenLeido.obtenerUsuarios();
-            entrada.close();
-        } catch (Exception e) {
-            System.out.println("No se ha encontrado el almacén, así que se ha creado uno nuevo");
-            System.out.println(e);
-            this.usuarios = new HashMap<>();
-        }
-    }
-
-    //inutil
-    public void guardarUsuarios() {
-        try {
-            String fic = "./archivos/AlmacenUsuarios.AlmacenUsuarios";
-            ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(fic));
-            salida.writeObject(this);
-            salida.close();
-        } catch (Exception e) {
-            System.out.println("No se ha podido guardar correctamente");
-            System.out.println(e);
-        }
-    }
-
     public List<Jugador> obtenerJugadoresBan(boolean mostrarBaneados) {
         List<Jugador> candidatos = this.obtenerJugadores();
         List<Jugador> result = new ArrayList<>();
-        for (Jugador j:candidatos){
-            if (j.estaBaneado() == mostrarBaneados){
+        for (Jugador j : candidatos) {
+            if (j.estaBaneado() == mostrarBaneados) {
                 result.add(j);
             }
         }
         return result;
     }
 
-    public List<Jugador> obtenerRanking(){
+    public List<Jugador> obtenerRanking() {
         List<Jugador> jugadores = this.obtenerJugadores();
         jugadores.sort((j1, j2) -> -Integer.compare(j1.obtenerVictorias(), j2.obtenerVictorias()));
         return jugadores;
@@ -122,9 +89,10 @@ public class AlmacenUsuarios implements Serializable {
     }
 
     public boolean existeJugador(String nombre) {
-        for (Jugador j:this.obtenerJugadores()){
-            if (j.obtenerNick().equalsIgnoreCase(nombre))
+        for (Jugador j : this.obtenerJugadores()) {
+            if (j.obtenerNick().equalsIgnoreCase(nombre)) {
                 return true;
+            }
         }
         return false;
     }

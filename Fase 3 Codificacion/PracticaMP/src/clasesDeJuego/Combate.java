@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author lucia
  */
-public class Combate implements Serializable{
+public class Combate implements Serializable {
 
     private Jugador uDesafiante;
     private Jugador uDesafiado;
@@ -30,7 +30,7 @@ public class Combate implements Serializable{
     public Combate(Jugador j1, Jugador j2) {
         this.uDesafiante = j1;
         this.uDesafiado = j2;
-        this.fecha = LocalDateTime.now(); //ponía fecha.now, por si diera problemas
+        this.fecha = LocalDateTime.now();
         this.rondasUsadas = 0;
         this.vencedor = null;
         this.usuarioConEsbirros = null;
@@ -41,10 +41,10 @@ public class Combate implements Serializable{
     }
 
     public void incrementarRonda() {
-        this.rondasUsadas++;  //incrementa el valor en 1
+        this.rondasUsadas++;
     }
 
-    public String obtenerFecha() { 
+    public String obtenerFecha() {
         String[] parts = fecha.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:MM:ss")).split(" ");
         return parts[0] + " a las " + parts[1]; //"yyyy-MM-dd HH:mm:ss"
     }
@@ -55,13 +55,14 @@ public class Combate implements Serializable{
 
     public String toStringCombate() {
         String reg = Ronda.fromListToString(registroRondas);
-        String combate = "Resumen del Combate: "
-                + "\n    Usuario Desafiante: " + uDesafiante.obtenerNick()
+        String combate = """
+                         Resumen del Combate: 
+                             Usuario Desafiante: """ + uDesafiante.obtenerNick()
                 + ",\n    Usuario Desafiado: " + uDesafiado.obtenerNick()
                 + ",\n    Rondas Usadas: " + Integer.toString(rondasUsadas)
                 + ",\n    Fecha: " + fecha.toString()
-                + ",\n    Vencedor: " + (vencedor == null ? "empate":vencedor.obtenerNick())
-                + ",\n    Usuario Con Esbirros Vivos: " + (usuarioConEsbirros == null ? "ninguno":usuarioConEsbirros)
+                + ",\n    Vencedor: " + (vencedor == null ? "empate" : vencedor.obtenerNick())
+                + ",\n    Usuario Con Esbirros Vivos: " + (usuarioConEsbirros == null ? "ninguno" : usuarioConEsbirros)
                 + ",\n    Oro Ganado: " + Integer.toString(oroGanado)
                 + ",\n    " + reg; //habrá que revisar cómo escribir el registro de rondas
         return combate;
@@ -107,14 +108,15 @@ public class Combate implements Serializable{
     }
 
     public void ponerVencedor(boolean b) {
-        this.vencedor = (b ? this.uDesafiante:this.uDesafiado);
+        this.vencedor = (b ? this.uDesafiante : this.uDesafiado);
     }
 
     public void ponerUsuarioConEsbirros(Jugador j) {
-        if (j != null)
+        if (j != null) {
             this.usuarioConEsbirros = j.obtenerNick();
-        else 
+        } else {
             this.usuarioConEsbirros = null;
+        }
     }
 
     public void ponerOro(int o) {

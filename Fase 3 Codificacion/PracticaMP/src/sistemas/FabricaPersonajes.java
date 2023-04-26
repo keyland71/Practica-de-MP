@@ -20,7 +20,7 @@ import java.util.Set;
  *
  * @author Marcos, Lucía
  */
-public class FabricaPersonajes implements Serializable{
+public class FabricaPersonajes implements Serializable {
 
     private Vampiro modeloVampiro;
     private Licantropo modeloLicantropo;
@@ -28,7 +28,7 @@ public class FabricaPersonajes implements Serializable{
 
     public FabricaPersonajes() {
     }
-    
+
     public Vampiro crearVampiro(String nombre) {
         return new Vampiro(nombre, this.modeloVampiro);
     }
@@ -40,7 +40,7 @@ public class FabricaPersonajes implements Serializable{
     public Cazador crearCazador(String nombre) {
         return new Cazador(nombre, this.modeloCazador);
     }
-    
+
     public void crearModeloVampiro(Set<Arma> armas, Set<Armadura> armaduras, Set<Esbirro> esbirros, HabilidadEspecial habilidad, List<Modificador> modificadores) {
         this.modeloVampiro = new Vampiro(habilidad, armas, armaduras, esbirros, 5, 3, modificadores, "Los vampiros son criaturas que utilizan la sangre que roban de sus víctimas como recurso para activar algunas de sus habilidades.");
     }

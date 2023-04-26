@@ -9,11 +9,11 @@ package clasesDeJuego;
  * @author sergi
  */
 public class Ghoul extends Esbirro {
-    
+
     private int dependencia;
-    
-    public Ghoul(String nom, int vida, int nivelDep){
+
+    public Ghoul(String nom, int vida, int nivelDep) {
         super(nom, vida);
-        this.dependencia = nivelDep;  
+        this.dependencia = nivelDep;
     }
 }

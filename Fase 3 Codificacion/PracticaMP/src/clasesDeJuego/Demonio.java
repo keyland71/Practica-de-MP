@@ -11,17 +11,16 @@ import java.util.Set;
  * @author sergi
  */
 public class Demonio extends Esbirro {
-    
+
     private String pacto;
     private Set<Esbirro> esbirros;
-    
-    public Demonio(String nom, int vida, String pac, Set<Esbirro> conjEsb){
+
+    public Demonio(String nom, int vida, String pac, Set<Esbirro> conjEsb) {
         super(nom, vida);
         this.pacto = pac;
-        this.esbirros = conjEsb; 
+        this.esbirros = conjEsb;
     }
-    
-    
+
     @Override
     public int obtenerVida() {
         int vidaTotal = super.obtenerVida();
@@ -30,12 +29,12 @@ public class Demonio extends Esbirro {
         }
         return vidaTotal;
     }
-    
+
     @Override
-    public boolean tieneSubordinados(){
+    public boolean tieneSubordinados() {
         return (!this.esbirros.isEmpty());
     }
-    
+
     public boolean tieneHumanos() {
         boolean hayHumanos = super.tieneHumanos();
         for (Esbirro esbirro : this.esbirros) {
@@ -43,5 +42,5 @@ public class Demonio extends Esbirro {
         }
         return hayHumanos;
     }
-    
+
 }

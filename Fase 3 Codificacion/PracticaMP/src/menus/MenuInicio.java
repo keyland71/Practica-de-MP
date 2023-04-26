@@ -44,7 +44,7 @@ public class MenuInicio {
     public void mostrarMensajeError(int pos) {
         String mensaje = this.mensajesError.get(pos);
         System.out.println(mensaje);
-       this.lector.nextLine();
+        this.lector.nextLine();
     }
 
 }

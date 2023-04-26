@@ -11,12 +11,12 @@ import java.util.List;
  *
  * @author lucia
  */
-public class HabilidadEspecial implements Serializable{
+public class HabilidadEspecial implements Serializable {
 
     public static String fromListToString(List<HabilidadEspecial> habilidades) {
         String result = "";
         int i = 1;
-        for (HabilidadEspecial h:habilidades){
+        for (HabilidadEspecial h : habilidades) {
             result += "    " + Integer.toString(i) + ". " + h.nombre + "\n";
             i++;
         }
@@ -29,15 +29,15 @@ public class HabilidadEspecial implements Serializable{
     private int coste;
     private TipoHabilidad tipo; //Se tiene en cuenta que, en el caso de que la habilidad especial sea de tipo Talento, el coste tiene que ser 0
 
-    public HabilidadEspecial(String nom, int at, int def, int cost, TipoHabilidad t){
+    public HabilidadEspecial(String nom, int at, int def, int cost, TipoHabilidad t) {
         this.nombre = nom;
         this.ataque = at;
         this.defensa = def;
         this.coste = cost;
         this.tipo = t;
-        
+
     }
-    
+
     public int obtenerAtaque() {
         return ataque;
     }
@@ -53,6 +53,7 @@ public class HabilidadEspecial implements Serializable{
     public TipoHabilidad obtenerTipo() {
         return this.tipo;
     }
+
     public String obtenerNombre() {
         return this.nombre;
     }

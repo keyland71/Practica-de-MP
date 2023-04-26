@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author Ángel Marqués García
  * @author Marcos Jiménez Pulido
  */
-public class NumeroRegistro implements Serializable { //debe implementar equals
+public class NumeroRegistro implements Serializable {
 
     private char caracter1;
     private int numero1;
@@ -41,14 +41,11 @@ public class NumeroRegistro implements Serializable { //debe implementar equals
         this.caracter3 = numReg.caracter3;
     }
 
-    //para eso sería mejor hacer return this, no? And that's a kinda pointless operation, is it not?
-    //en todo caso, si fuera abstracta obtenerNumReg, todavía.
     public NumeroRegistro obtenerNumReg() {
         return new NumeroRegistro(caracter1, numero1, numero2, caracter2, caracter3);
     }
 
     public void incrementarNumReg() {
-        //esta función se encarga de empezar el proceso recursivo
         incrementarRecursivo(4);
     }
 
@@ -64,34 +61,37 @@ public class NumeroRegistro implements Serializable { //debe implementar equals
             case 0 -> {
                 this.caracter1 = incrementarCaracter(this.caracter1);
                 c = this.caracter1;
-            } case 1 -> {
+            }
+            case 1 -> {
                 this.numero1 = incrementarNumero(this.numero1);
                 num = this.numero1;
-            } case 2 -> {
+            }
+            case 2 -> {
                 this.numero2 = incrementarNumero(this.numero2);
                 num = this.numero2;
-            } case 3 -> {
+            }
+            case 3 -> {
                 this.caracter2 = incrementarCaracter(this.caracter2);
                 c = this.caracter2;
-            } case 4 -> {
+            }
+            case 4 -> {
                 this.caracter3 = incrementarCaracter(this.caracter3);
                 c = this.caracter3;
-            } default -> {
+            }
+            default -> {
             }
         }
         if (num == 0 || c == '0') {
             if (pos != 0) {
                 incrementarRecursivo(pos - 1);
-                return; // el return es para ahorrarse un else
+                return;
             }
-            System.out.print("Error: Overflow en el número de registro"); //no se debería dar esto nunca. Lo correcto sería lanzar una excepción y usar logger, pero no sé hacer lo uno ni lo otro
+            System.out.print("Error: Overflow en el número de registro");
         }
     }
 
-    
-
     private int incrementarNumero(int n) {
-        n++;//igual se podría poner con pre incremento en el if
+        n++;
         if (n == 10) {
             n = 0;
         }
@@ -102,7 +102,7 @@ public class NumeroRegistro implements Serializable { //debe implementar equals
         //queremos aumentar el caracter c. si está en 57, saltamos a 65. Si está en 90, saltamos a 97. Si está en 122, saltamos a 48.
         //esto va saltando de numeros a mayúsculas a minúsculas, a números de nuevo. Esta hecho así para evitar carácteres especiales.
         int value = c;
-        //lo prefiero como cadena de if, si lo quereis poner como switch no me importa
+
         if (value == 57) {
             c += 8; // si es '9', pasa a 'A'
         } else if (value == 90) {

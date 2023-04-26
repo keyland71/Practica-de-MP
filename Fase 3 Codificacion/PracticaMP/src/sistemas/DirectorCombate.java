@@ -36,20 +36,20 @@ public class DirectorCombate {
         while (this.vidaP1 > 0 && this.vidaP2 > 0) {
             realizarRonda();
         }
-        if (vidaP1==vidaP2){
+        if (vidaP1 == vidaP2) {
             return;
         }
-        boolean ganaP1 = vidaP1>vidaP2 ;
+        boolean ganaP1 = vidaP1 > vidaP2;
         this.combate.ponerVencedor(ganaP1); //igual para que los setters sean setters, la logica tendría que estar aquí
         this.combate.ponerUsuarioConEsbirros(null);
-        if (ganaP1){
-            if (this.vidaP1 > this.p1.obtenerVida())
+        if (ganaP1) {
+            if (this.vidaP1 > this.p1.obtenerVida()) {
                 this.combate.ponerUsuarioConEsbirros(this.combate.obtenerUDesafiante());
-        } else
-            if (this.vidaP2 > this.p2.obtenerVida()){
-                this.combate.ponerUsuarioConEsbirros(this.combate.obtenerUDesafiado());
             }
-        
+        } else if (this.vidaP2 > this.p2.obtenerVida()) {
+            this.combate.ponerUsuarioConEsbirros(this.combate.obtenerUDesafiado());
+        }
+
     }
 
     private void realizarRonda() {
@@ -67,25 +67,28 @@ public class DirectorCombate {
     private void realizarTurno(Personaje atacante, Personaje defensor) {
         int potencial = atacante.calcularPotencialAtaque();
         int ataqueReal = calcularEficacia(potencial);
-        if (atacante.obtenerNombre().equalsIgnoreCase(p1.obtenerNombre())){
+        if (atacante.obtenerNombre().equalsIgnoreCase(p1.obtenerNombre())) {
             this.rondaActual.ponerAtaqueA(ataqueReal);
-        } else 
+        } else {
             this.rondaActual.ponerAtaqueB(ataqueReal);
+        }
 
         potencial = defensor.calcularPotencialDefensa();
         int defensaReal = calcularEficacia(potencial);
-        if (atacante.obtenerNombre().equalsIgnoreCase(p1.obtenerNombre())){
+        if (atacante.obtenerNombre().equalsIgnoreCase(p1.obtenerNombre())) {
             this.rondaActual.ponerDefensaB(defensaReal);
-        } else 
+        } else {
             this.rondaActual.ponerDefensaA(defensaReal);
+        }
 
         if (ataqueReal >= defensaReal) {
             //los vampiros me suena que recuperan recurso al hacer daño
             defensor.recibirDanio();
-            if (defensor.obtenerNombre().equals(p1.obtenerNombre())){
+            if (defensor.obtenerNombre().equals(p1.obtenerNombre())) {
                 this.vidaP1--;
-            } else
+            } else {
                 this.vidaP2--;
+            }
         }
     }
 
