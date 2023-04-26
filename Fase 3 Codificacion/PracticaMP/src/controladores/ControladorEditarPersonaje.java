@@ -227,8 +227,13 @@ public class ControladorEditarPersonaje {
         }
 
         tam -= elegidos.size();
-        int op = Integer.parseInt(opcion);
-        return op <= tam && op > 0;
+        try {
+            int op = Integer.parseInt(opcion);
+            return op <= tam && op > 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
     }
 
     private void editarCampoLibre(String campo) {
