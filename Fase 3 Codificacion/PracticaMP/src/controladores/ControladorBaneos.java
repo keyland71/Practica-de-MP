@@ -41,7 +41,7 @@ public class ControladorBaneos {
         cargarJugadores();
         this.menuBan.ponerJugadores(this.jugadores);
         if (this.jugadores.isEmpty()) {
-            this.menuBan.mostrarMensaje(mostrarBaneados ? 6 : 5);
+            this.menuBan.mostrarMensaje(mostrarBaneados ? 7 : 6);
             return;
         }
 
@@ -53,7 +53,7 @@ public class ControladorBaneos {
                 if (this.pagActual != 0) {
                     this.pagActual--;
                 } else {
-                    this.menuBan.mostrarMensaje(mostrarBaneados ? 6 : 5);
+                    this.menuBan.mostrarMensaje(mostrarBaneados ? 7 : 6);
                     return;
                 }
             }
@@ -143,7 +143,7 @@ public class ControladorBaneos {
                     this.jugadores.remove(pos);
                     this.menuBan.quitarJugador(pos);
 
-                    this.menuBan.mostrarMensaje(4);
+                    this.menuBan.mostrarMensaje(this.mostrarBaneados ? 5:4);
                 }
             }
 

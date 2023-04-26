@@ -34,6 +34,8 @@ public class MenuCrearDesafio {
         this.mensajes.add(mensaje);
         mensaje = "Si te equivocas, en cualquier momento puedes escribir 'salir', que te devolverá al menú anterior y cancelará el desafío";
         this.mensajes.add(mensaje);
+        mensaje = "El desafío ha sido creado. Ahora queda a la espera de que lo valide un administrador. Una vez validado, se le mostrará a tu oponente, y cuando responda se te notificará";
+        this.mensajes.add(mensaje);
 
         mensaje = "No puedes apostar esa cantidad";
         this.mensajesError.add(mensaje);
@@ -46,15 +48,12 @@ public class MenuCrearDesafio {
     }
 
     public String mostrarMensaje(int pos) {
-        String mensaje = this.mensajes.get(pos);
-        System.out.println(mensaje);
-        String opcion = this.lector.nextLine();
-        return opcion;
+        System.out.println(this.mensajes.get(pos));
+        return this.lector.nextLine();
     }
 
     public void mostrarMensajeError(int pos) {
-        String mensaje = this.mensajesError.get(pos);
-        System.out.println(mensaje);
+        System.out.println(this.mensajesError.get(pos));
         this.lector.nextLine();
     }
 }

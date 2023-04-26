@@ -79,46 +79,45 @@ public class ControladorJugador {
 
     private boolean procesarEntrada(String entrada) {
         String opcion;
+        Personaje pActivo = Juego.estado.obtenerPersonajeActivo();
         switch (entrada) {
-            case "1" -> {
+            case "1" -> { // ver ranking
                 List<Jugador> ranking = Juego.estado.obtenerAlmacenUsuarios().obtenerRanking();
                 this.menuRanking.mostrarRanking(ranking);
             }
-            case "2" -> {
-                if (Juego.estado.obtenerPersonajeActivo() == null) {
+            case "2" -> { // cambiar equipo activo
+                if (pActivo == null) {
                     this.menuJugador.mostrarMensaje(5);
                 } else {
-                    ControladorCambiarEquipoActivo cCamEqAc = new ControladorCambiarEquipoActivo(Juego.estado.obtenerPersonajeActivo());
+                    ControladorCambiarEquipoActivo cCamEqAc = new ControladorCambiarEquipoActivo(pActivo);
                     cCamEqAc.iniciarControlador();
                 }
             }
-            case "3" -> {
-                Personaje p = Juego.estado.obtenerPersonajeActivo();
-                if (p != null && Juego.estado.obtenerAlmacenUsuarios().obtenerNumJugadores() >= 2) {
+            case "3" -> { // Crear desafio
+                if (pActivo != null && Juego.estado.obtenerAlmacenUsuarios().obtenerNumJugadores() >= 2) {
                     ControladorCrearDesafío cCrearDes = new ControladorCrearDesafío();
                     cCrearDes.iniciarControlador();
-                    this.menuJugador.ponerOro(p.obtenerOro());
+                    this.menuJugador.ponerOro(pActivo.obtenerOro());
                 } else {
-                    this.menuJugador.mostrarMensaje(4);
+                    this.menuJugador.mostrarMensaje((pActivo != null ? 4:6));
                 }
             }
-            case "4" -> {
+            case "4" -> { //ver historial oro
                 mostrarMenuOro();
             }
-            case "5" -> {
-                if (Juego.estado.obtenerPersonajeActivo() != null) {
+            case "5" -> { //crear personaje
+                if (pActivo != null) {
                     this.menuJugador.mostrarMensajeError(1);
                 } else {
                     ControladorCrearPersonaje cCrearPers = new ControladorCrearPersonaje();
                     cCrearPers.iniciarControlador();
-                    Personaje p = Juego.estado.obtenerPersonajeActivo();
-                    if (p != null) {
-                        this.menuJugador.ponerOro(p.obtenerOro());
+                    if (pActivo != null) {
+                        this.menuJugador.ponerOro(pActivo.obtenerOro());
                     }
                 }
             }
-            case "6" -> {
-                if (Juego.estado.obtenerPersonajeActivo() == null) {
+            case "6" -> { // borrar personaje
+                if (pActivo == null) {
                     this.menuBorrarPersonaje.mostrarMensajeError(1);
                     return false;
                 }
@@ -133,12 +132,13 @@ public class ControladorJugador {
                 } while (!valido);
                 if (opcion.equalsIgnoreCase("si")) {
                     AlmacenPersonajes almacen = Juego.estado.obtenerAlmacenPersonajes();
-                    almacen.borrarPersonaje(Juego.estado.obtenerPersonajeActivo());
+                    almacen.borrarPersonaje(pActivo);
                     Juego.estado.quitarPersonajeActivo();
                     this.menuBorrarPersonaje.mostrarMensaje(1);
+                    this.menuJugador.ponerOro(0);
                 }
             }
-            case "7" -> {
+            case "7" -> { // Darse de baja/borrar cuenta
                 boolean valido;
                 int i = 0;
                 do {
@@ -154,13 +154,15 @@ public class ControladorJugador {
                     }
                 } while (!valido || i != 2);
                 if (opcion.equalsIgnoreCase("si") && i == 2) {
-                    AlmacenUsuarios almacen = Juego.estado.obtenerAlmacenUsuarios();
-                    almacen.borrarUsuario(Juego.estado.obtenerUsuarioActivo());
+                    AlmacenPersonajes almacenP = Juego.estado.obtenerAlmacenPersonajes();
+                    almacenP.borrarPersonaje(pActivo);
+                    AlmacenUsuarios almacenU = Juego.estado.obtenerAlmacenUsuarios();
+                    almacenU.borrarUsuario(Juego.estado.obtenerUsuarioActivo());
                     this.menuBorrarCuenta.mostrarMensaje(i);
                     return true;
                 }
             }
-            case "8" -> {
+            case "8" -> { // cerrar sesión/salir
                 String optSalir = this.menuJugador.mostrarMensaje(3);
                 this.modo = 1;
                 if (validarEntrada(optSalir)) {

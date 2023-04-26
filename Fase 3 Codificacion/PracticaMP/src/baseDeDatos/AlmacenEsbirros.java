@@ -17,6 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import sistemas.BOMRemover;
 
 public class AlmacenEsbirros implements Serializable {
 
@@ -38,6 +39,7 @@ public class AlmacenEsbirros implements Serializable {
 
             while (lector.hasNextLine()) {
                 String linea = lector.nextLine();
+                linea = BOMRemover.removeUTF8BOM(linea);
                 String[] seccionesLinea = linea.split(";");
 
                 nombre = seccionesLinea[0];

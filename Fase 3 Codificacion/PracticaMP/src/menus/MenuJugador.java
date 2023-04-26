@@ -30,12 +30,14 @@ public class MenuJugador {
         String mensaje3 = "¿Seguro que quiere cerrar sesión?";
         String mensaje4 = "No puede crear un desafio si no tiene personaje.";
         String mensaje5 = "No puede editar su personaje si no tiene un personaje. Cree un personaje y vuelva a intentarlo.";
+        String mensaje6 = "No puede crear un desafio, pues no hay jugadores a los que desafiar";
         mensajes.add(mensaje0);
         mensajes.add(mensaje1);
         mensajes.add(mensaje2);
         mensajes.add(mensaje3);
         mensajes.add(mensaje4);
         mensajes.add(mensaje5);
+        mensajes.add(mensaje6);
         
         String mensajeError1 = "Por favor, introduzca un valor correcto. Pulse intro para continuar";
         String mensajeError2 = "No puedes crear un personaje si ya tienes uno. Borra tu personaje y vuelve a intentarlo";
@@ -67,7 +69,7 @@ public class MenuJugador {
                             4. Consultar Historial de Oro
                             5. Crear Personaje
                             6. Borrar Personaje
-                            7. Borrar Cuenta
+                            7. Darse de baja/Borrar cuenta
                             8. Cerrar Sesión""", Integer.toString(oro));
         System.out.println(mensaje0);
         return this.lector.nextLine();

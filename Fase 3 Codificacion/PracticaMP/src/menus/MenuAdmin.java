@@ -29,8 +29,8 @@ public MenuAdmin(){
                          2) Validar desafios
                          3) Banear usuarios
                          4) Desbanear usuarios
-                         5) Darse de baja
-                         6) Salir""";
+                         5) Darse de baja/Borrar cuenta
+                         6) Cerrar sesión""";
         this.mensajes.add(mensaje);
         mensaje = "¿Esta seguro de que quiere borrar su cuenta?";
         this.mensajes.add(mensaje);

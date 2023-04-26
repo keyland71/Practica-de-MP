@@ -65,9 +65,14 @@ public class ControladorCrearDesafío {
     }
 
     private boolean confirmarOro(String o) {
-        int oroA = Integer.parseInt(o);
-        Personaje p = Juego.estado.obtenerPersonajeActivo();
-        return p.obtenerOro() >= oroA && oroA >= 0;
+        try {
+            int oroA = Integer.parseInt(o);
+            Personaje p = Juego.estado.obtenerPersonajeActivo();
+            return p.obtenerOro() >= oroA && oroA >= 0;
+        } catch(NumberFormatException e){
+            return false;
+        }
+        
     }
 
     private boolean usuarioValido(String nombre) {
@@ -96,6 +101,7 @@ public class ControladorCrearDesafío {
                     jActivo.obtenerPersonaje().sumarOro(-this.oro);
                     Desafio des = new Desafio(jActivo, this.oponente, this.oro);
                     Juego.estado.obtenerAlmacenDesafios().aniadirDesafio(des);
+                    this.menuDesafio.mostrarMensaje(4);
                 }
                 return true;
             }

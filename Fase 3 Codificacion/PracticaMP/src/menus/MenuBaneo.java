@@ -35,6 +35,8 @@ public class MenuBaneo {
         this.mensajes.add(mensaje);
         mensaje = "Usuario baneado. Pulse intro para continuar";
         this.mensajes.add(mensaje);
+        mensaje = "Usuario desbaneado. Pulse intro para continuar";
+        this.mensajes.add(mensaje);
         mensaje = "Todos los usuarios están baneados, no se puede banear ningún usuario";
         this.mensajes.add(mensaje);
         mensaje = "No hay ningún usuario baneado";
@@ -42,7 +44,7 @@ public class MenuBaneo {
         mensaje = "   (s)siguiente página\n   (a)anterior página\n   (salir) para volver al menú Admin";
         this.mensajes.add(mensaje);
         
-        mensaje = "Por favor introduzca un valor válido (1,2,3,4,5,s,a,salir). Pulse intro para continuar.";
+        mensaje = "Por favor introduzca un valor válido (s,a,salir, o el numero correspondiente a alguno de los elementos). Pulse intro para continuar.";
         this.mensajesError.add(mensaje);
         mensaje = "Por favor introduzca un valor válido (si/no). Pulse intro para continuar.";
         this.mensajesError.add(mensaje);
@@ -67,7 +69,7 @@ public class MenuBaneo {
             }
         }
         
-        return mostrarMensaje(7);
+        return mostrarMensaje(8);
         
     }
 

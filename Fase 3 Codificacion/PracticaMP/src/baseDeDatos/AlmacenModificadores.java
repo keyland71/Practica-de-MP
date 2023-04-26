@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import sistemas.BOMRemover;
 
 public class AlmacenModificadores implements Serializable {
 
@@ -37,6 +38,7 @@ public class AlmacenModificadores implements Serializable {
 
             while (lector.hasNextLine()) {
                 String linea = lector.nextLine();
+                linea = BOMRemover.removeUTF8BOM(linea);
                 String[] seccionesLinea = linea.split(";");
 
                 nombre = seccionesLinea[0];

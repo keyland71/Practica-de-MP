@@ -16,7 +16,9 @@ import sistemas.DirectorCombate;
 
 /**
  *
- * @author Ángel Marqués García Te muestra los desafíos que tengas pendientes
+ * @author Ángel Marqués García 
+ * 
+ * Te muestra los desafíos que tengas pendientes
  * por aceptar, o si algún desafío tuyo se ha completado, te lo muestra también
  */
 public class ControladorNotificaciones {
