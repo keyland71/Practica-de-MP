@@ -25,14 +25,14 @@ public class MenuOro {
     public String mostrarHistorial(List<Combate> combates) {
         int i = 1;
         for (Combate c : combates) {
-            mostrarElemento(c, i);
+            mostrarCombate(c, i);
             i++;
         }
         System.out.println("Pulsa intro para volver");
         return this.lector.nextLine();
     }
 
-    private void mostrarElemento(Combate combate, int num) {
+    private void mostrarCombate(Combate combate, int num) {
         String fecha = combate.obtenerFecha();
         int oro = combate.obtenerOroGanado();
         String vencedor = combate.obtenerVencedor().obtenerNick();

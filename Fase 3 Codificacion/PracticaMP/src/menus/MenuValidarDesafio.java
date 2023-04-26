@@ -64,16 +64,11 @@ public class MenuValidarDesafio {
 
         List<Modificador> elementos;
         switch (pos) {
-            case 0 ->
-                elementos = this.fP1;
-            case 1 ->
-                elementos = this.dP1;
-            case 2 ->
-                elementos = this.fP2;
-            case 3 ->
-                elementos = this.dP2;
-            default ->
-                elementos = null;
+            case 0 -> elementos = this.fP1;
+            case 1 -> elementos = this.dP1;
+            case 2 -> elementos = this.fP2;
+            case 3 -> elementos = this.dP2;
+            default -> elementos = null;
         }
         if (elementos != null) {
             int i = 1;

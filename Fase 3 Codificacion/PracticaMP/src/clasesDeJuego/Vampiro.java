@@ -71,6 +71,8 @@ public class Vampiro extends Personaje {
 
     @Override
     public void usarHabilidad() {
+        //what the fuck does this do???
+        //Le resta al recurso el ataque de la habilidad, no tendrá que ser el coste?
         this.sumarRecurso(this.obtenerHabilidadEspecial().obtenerAtaque() * -1);
     }
 

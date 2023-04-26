@@ -41,10 +41,6 @@ public class NumeroRegistro implements Serializable {
         this.caracter3 = numReg.caracter3;
     }
 
-    public NumeroRegistro obtenerNumReg() {
-        return new NumeroRegistro(caracter1, numero1, numero2, caracter2, caracter3);
-    }
-
     public void incrementarNumReg() {
         incrementarRecursivo(4);
     }

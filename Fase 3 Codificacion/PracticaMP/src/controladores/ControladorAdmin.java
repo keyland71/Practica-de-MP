@@ -54,26 +54,26 @@ public class ControladorAdmin {
 
     private boolean procesarEntrada(String opcion) {
         switch (opcion) {
-            case "1" -> {
+            case "1" -> { // Editar personaje
                 ControladorSeleccionarPersonaje cSelPj = new ControladorSeleccionarPersonaje();
                 cSelPj.iniciarControlador();
             }
-            case "2" -> {
+            case "2" -> { // Validar Desafio
                 ControladorSeleccionarDesafio cSelDes = new ControladorSeleccionarDesafio();
                 cSelDes.iniciarControlador();
             }
-            case "3" -> {
+            case "3" -> { // Banear usuarios
                 ControladorBaneos cBan = new ControladorBaneos(false);
                 cBan.iniciarControlador();
             }
-            case "4" -> {
+            case "4" -> { //Desbanear Usuarios
                 ControladorBaneos cBan = new ControladorBaneos(true);
                 cBan.iniciarControlador();
             }
-            case "5" -> {
+            case "5" -> { //Darse de baja/borrar cuenta
                 return darseDeBaja();
             }
-            case "6" -> {
+            case "6" -> { //salir
                 String optSalir = this.menuAdministrador.mostrarMensaje(2);
                 this.modo = 1;
                 boolean valido = validarEntrada(optSalir);
