@@ -45,7 +45,7 @@ public class MenuSeleccionarPersonaje {
 
     public String mostrarPagina(int n) {
         System.out.println(this.mensajes.get(0));
-        int tamPag = ControladorSeleccionarPersonaje.tamPag;
+        int tamPag = ControladorSeleccionarPersonaje.TAMANIO_PAGINA;
         for (int i = 0; i <= tamPag - 1; i++) {
             if (i + n * tamPag >= this.personajes.size()) {
                 break;

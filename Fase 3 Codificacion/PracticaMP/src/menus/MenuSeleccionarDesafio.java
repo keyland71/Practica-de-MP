@@ -57,7 +57,7 @@ public class MenuSeleccionarDesafio {
 
     public String mostrarPagina(int n) {
         System.out.println(this.mensajes.get(0));
-        int tamPag = ControladorSeleccionarDesafio.tamPag;
+        int tamPag = ControladorSeleccionarDesafio.TAMANIO_PAGINA;
         for (int i = 0; i <= tamPag - 1; i++) {
             if (i + n * tamPag >= this.desafios.size()) {
                 break;
