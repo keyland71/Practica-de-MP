@@ -5,7 +5,6 @@
 package controladores;
 
 import baseDeDatos.AlmacenUsuarios;
-import clasesDeJuego.Jugador;
 import menus.MenuAdmin;
 import menus.MenuBorrarCuenta;
 import practicamp.Juego;
@@ -19,7 +18,7 @@ public class ControladorAdmin {
     private MenuAdmin menuAdministrador;
     private MenuBorrarCuenta menuBorrarCuenta;
     private int modo; //0 selección, 
-   
+
     public ControladorAdmin() {
         this.menuAdministrador = new MenuAdmin();
         this.menuBorrarCuenta = new MenuBorrarCuenta();
@@ -56,23 +55,19 @@ public class ControladorAdmin {
     private boolean procesarEntrada(String opcion) {
         switch (opcion) {
             case "1" -> {
-                //se llama a controlador editar personajes; 
-                ControladorSeleccionarPersonaje cSelPj = new ControladorSeleccionarPersonaje(); //editar personajes es privado, por lo que habría que llamarlo desde su constructor
+                ControladorSeleccionarPersonaje cSelPj = new ControladorSeleccionarPersonaje();
                 cSelPj.iniciarControlador();
             }
             case "2" -> {
-                //se llama a controlador de validar desafio;
-                ControladorSeleccionarDesafio cSelDes = new ControladorSeleccionarDesafio(); //lo mismo que arriba
+                ControladorSeleccionarDesafio cSelDes = new ControladorSeleccionarDesafio();
                 cSelDes.iniciarControlador();
             }
-            case "3" -> { //banear
-                //se llama a controlador de baneos
-                ControladorBaneos cBan = new ControladorBaneos(false); //lo mismo que arriba
+            case "3" -> {
+                ControladorBaneos cBan = new ControladorBaneos(false);
                 cBan.iniciarControlador();
             }
-            case "4" -> { //desbanear
-                //se llama a controlador de baneos
-                ControladorBaneos cBan = new ControladorBaneos(true); //lo mismo que arriba
+            case "4" -> {
+                ControladorBaneos cBan = new ControladorBaneos(true);
                 cBan.iniciarControlador();
             }
             case "5" -> {
@@ -84,9 +79,9 @@ public class ControladorAdmin {
                 boolean valido = validarEntrada(optSalir);
                 if (valido) {
                     return optSalir.equals("si");
-                } //end if
-            } //end case 5
-        } // end switch 1
+                }
+            }
+        }
         return false;
     }
 

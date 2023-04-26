@@ -9,9 +9,7 @@ import clasesDeJuego.Armadura;
 import clasesDeJuego.Personaje;
 import clasesDeJuego.Variante;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import menus.MenuCambiarEquipoActivo;
 import menus.MenuVistaArmaduras;
 import menus.MenuVistaArmas;
@@ -19,11 +17,10 @@ import practicamp.Juego;
 
 /**
  *
- * @author Ángel Marqués
+ * @author Ángel Marqués Muestra al usuario las armas y armadura activas. Se le
+ * pregunta al usuario qué quiere cambiar. Si quiere cambiar las armas, se le
+ * muestra una lista con las armas disponibles. Ídem para las armaduras.
  */
-//Muestra al usuario las armas y armadura activas. Se le pregunta al usuario qué quiere cambiar.
-//Si quiere cambiar las armas, se le muestra una lista con las armas disponibles.
-//Ídem para las armaduras.
 public class ControladorCambiarEquipoActivo {
 
     private int modo;
@@ -67,22 +64,21 @@ public class ControladorCambiarEquipoActivo {
             return true;
         }
         try {
-        switch (this.modo) {
-            case 0 -> {
-                return opcion.equals("1") || opcion.equals("2");
+            switch (this.modo) {
+                case 0 -> {
+                    return opcion.equals("1") || opcion.equals("2");
+                }
+                case 1 -> {
+                    return Integer.parseInt(opcion) <= this.armasDisponibles.size() && (armasElegidas.isEmpty() || armasElegidas.size() == 1 && this.armasDisponibles.get(Integer.parseInt(opcion) - 1).obtenerVariante() == Variante.unaMano);
+                }
+                case 2 -> {
+                    return Integer.parseInt(opcion) <= personaje.obtenerArmadurasDisponibles().size();
+                }
+                case 3 -> {
+                    return opcion.equalsIgnoreCase("si") || opcion.equalsIgnoreCase("no");
+                }
             }
-            case 1 -> {
-                return Integer.parseInt(opcion) <= this.armasDisponibles.size() && (armasElegidas.isEmpty() || armasElegidas.size() == 1 && this.armasDisponibles.get(Integer.parseInt(opcion)-1).obtenerVariante() == Variante.unaMano);
-            }
-            case 2 -> {
-                return Integer.parseInt(opcion) <= personaje.obtenerArmadurasDisponibles().size();
-            }
-            case 3 -> {
-                return opcion.equalsIgnoreCase("si") || opcion.equalsIgnoreCase("no");
-            }
-        }
-        } catch (NumberFormatException e){
-            //necesario para poder hacer Integer.parseInt(opcion) sin preocuparse de si opcion representa un numero
+        } catch (NumberFormatException e) {
         }
         return false;
     }
@@ -114,7 +110,7 @@ public class ControladorCambiarEquipoActivo {
 
             if (validarEntrada(opcion)) {
                 int op = Integer.parseInt(opcion) - 1;
-                this.armasElegidas.add(op); //se podría añadir directamente el Arma en vez de su índice. Así, cambiarArmas no necesita buscar el arma.
+                this.armasElegidas.add(op);
                 salir = (this.armasDisponibles.get(op).obtenerVariante() == Variante.dosManos || this.armasElegidas.size() == 2);
             } else {
                 this.menuArmas.mostrarMensajeError(0);
@@ -138,7 +134,7 @@ public class ControladorCambiarEquipoActivo {
 
     private void cambiarArmas() {
         List<Arma> armas = new ArrayList<>();
-        
+
         Arma arma1 = this.armasDisponibles.get(this.armasElegidas.get(0));
         armas.add(arma1);
         if (this.armasElegidas.size() == 2) {
@@ -163,14 +159,14 @@ public class ControladorCambiarEquipoActivo {
             }
             valido = validarEntrada(opcion);
             if (!valido) {
-                this.menuArmaduras.mostrarMensajeError(0); //input inválido
+                this.menuArmaduras.mostrarMensajeError(0);
             }
         } while (!valido);
         armaduraElegida = Integer.parseInt(opcion) - 1;
 
         this.modo = 3;
         do {
-            opcion = this.menuArmaduras.mostrarMensaje(0); //seguro que quieres cambiar tu armadura?
+            opcion = this.menuArmaduras.mostrarMensaje(0);
             valido = validarEntrada(opcion);
             if (valido) {
                 if (opcion.equalsIgnoreCase("si")) {

@@ -23,7 +23,12 @@ public class ControladorValidarDesafio {
     private Personaje p1;
     private Personaje p2;
 
-    //se encarga de llevar a cabo el proceso de validación del desafío que reciba en el constructor
+    /**
+     * se encarga de llevar a cabo el proceso de validación del desafío que
+     * reciba en el constructor
+     *
+     * @param d desafío a validar
+     */
     public ControladorValidarDesafio(Desafio d) {
         this.desafio = d;
         this.p1 = this.desafio.obtenerJugadorDesafiante().obtenerPersonaje();
@@ -46,7 +51,7 @@ public class ControladorValidarDesafio {
                 this.menuDesafio.mostrarMensajeError(this.modo);
             }
         } while (!salir);
-        return tramitado[0]; //necesito que devuelva algo para actualizar en ControladorSeleccionarDesafio la lista de desafios pendientes
+        return tramitado[0];
     }
 
     private boolean validarEntrada(String opcion) {
@@ -55,28 +60,26 @@ public class ControladorValidarDesafio {
         }
         int tam = 0;
         switch (this.modo) {
-            case 0 -> { //input válido si es un número del 1 a len(fortalezas)
-                tam = this.p1.obtenerFortalezas().size();
-                //ponía esto en todas
-                //return confirmarValido(opcion, this.p1.obtenerFortalezas().size());   
+            case 0 -> {
+                tam = this.p1.obtenerFortalezas().size();   
             }
-            case 1 -> { //input válido si es un número del 1 a len(debilidades)
+            case 1 -> {
                 tam = this.p1.obtenerDebilidades().size();
             }
-            case 2 -> { //input válido si es un número del 1 a len(fortalezas)
+            case 2 -> {
                 tam = this.p2.obtenerFortalezas().size();
             }
-            case 3 -> { //input válido si es un número del 1 a len(debilidades)
+            case 3 -> {
                 tam = this.p2.obtenerDebilidades().size();
             }
             case 4 -> {
                 return opcion.equalsIgnoreCase("si") || opcion.equalsIgnoreCase("no");
             }
         }
-        return confirmarValido(opcion, tam); // si no ocurre ninguno en el case, se llama con tam=0, en cual caso devuelve false
+        return confirmarValido(opcion, tam);
     }
 
-    private boolean confirmarValido(String opcion, int tam) { //devuelve true si opcion in range(tam)
+    private boolean confirmarValido(String opcion, int tam) {
         for (int i = 1; i <= tam; i++) {
             if (opcion.equals(Integer.toString(i))) {
                 return true;
@@ -86,45 +89,45 @@ public class ControladorValidarDesafio {
     }
 
     private boolean procesarEntrada(String entrada, boolean[] tramitado) {
-        
+
         Combate c = this.desafio.obtenerCombate();
         if (entrada.equalsIgnoreCase("salir")) {
-            this.menuDesafio.mostrarMensaje(2); //operacion cancelada
-            c.resetearModificadores(); // si se interrumpe el proceso, reseteamos los modificadores
+            this.menuDesafio.mostrarMensaje(2);
+            c.resetearModificadores();
             return true;
         }
-        
+
         int pos = 0;
-        if (this.modo != 4){
+        if (this.modo != 4) {
             pos = Integer.parseInt(entrada);
         }
 
-        switch (this.modo) { //guardamos en el combate el modificador seleccionado
-            case 0 -> { // fortaleza 1
+        switch (this.modo) {
+            case 0 -> {
                 c.ponerFortalezaP1(pos);
             }
-            case 1 -> { // debilidad 1
+            case 1 -> {
                 c.ponerDebilidadP1(pos);
             }
-            case 2 -> { // fortaleza 2
+            case 2 -> {
                 c.ponerFortalezaP2(pos);
             }
-            case 3 -> { // debilidad 2
+            case 3 -> {
                 c.ponerDebilidadP2(pos);
             }
             case 4 -> {
                 if (entrada.equalsIgnoreCase("si")) {
-                    this.desafio.cambiarEstado(EstadoDesafio.validado); //realizamos el cambio
-                    Juego.estado.guardar();  //guardamos el cambio
-                    this.menuDesafio.mostrarMensaje(5); //Desafio validado
+                    this.desafio.cambiarEstado(EstadoDesafio.validado);
+                    Juego.estado.guardar();
+                    this.menuDesafio.mostrarMensaje(5);
                     tramitado[0] = true;
-                } else{
-                    c.resetearModificadores(); // si no se crea el desafío, reseteamos los modificadores
+                } else {
+                    c.resetearModificadores();
                 }
                 return true;
             }
         }
         return false;
-        
+
     }
 }

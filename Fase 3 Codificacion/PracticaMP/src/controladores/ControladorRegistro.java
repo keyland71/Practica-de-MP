@@ -5,7 +5,6 @@
 package controladores;
 
 import baseDeDatos.AlmacenUsuarios;
-import baseDeDatos.Estado;
 import clasesDeJuego.Usuario;
 import menus.MenuRegistro;
 import practicamp.Juego;
@@ -27,7 +26,7 @@ public class ControladorRegistro {
 
     private MenuRegistro menuRegistro;
     private FabricaUsuarios fabricaUsuarios;
-    private int modo; ////0 nick, 1 nombre, 2 contraseña, 3 tipo
+    private int modo; //0 nick, 1 nombre, 2 contraseña, 3 tipo
 
     public ControladorRegistro() {
         this.menuRegistro = new MenuRegistro();
@@ -48,18 +47,19 @@ public class ControladorRegistro {
                     this.modo++;
                 }
             } catch (ExcepcionMalaEntrada e) {
-                System.out.println(e);
                 this.menuRegistro.mostrarMensajeError(this.modo);
             }
         }
     }
 
     /**
-     * En función del modo del controlador, comprueba si el dato introducido por el usuario es correcto.
+     * En función del modo del controlador, comprueba si el dato introducido por
+     * el usuario es correcto.
+     *
      * @param opcion dato introducido por el usuario
-     * @return 
+     * @return
      */
-    private boolean validarEntrada(String opcion) { //0 nick, 1 nombre, 2 contraseña, 3 tipo
+    private boolean validarEntrada(String opcion) {
         switch (this.modo) {
             case 0 -> {
                 return nickUnico(opcion);
@@ -77,11 +77,13 @@ public class ControladorRegistro {
     }
 
     /**
-     * En función del modo del controlador, se realizan unas acciones u otras relacionadas con la creación de un usuario.
+     * En función del modo del controlador, se realizan unas acciones u otras
+     * relacionadas con la creación de un usuario.
+     *
      * @param opcion
-     * @return 
+     * @return
      */
-    private boolean procesarEntrada(String opcion){ //0 nick, 1 nombre, 2 contraseña, 3 tipo
+    private boolean procesarEntrada(String opcion) {
         if (opcion.equalsIgnoreCase("salir")) {
             return true;
         }
@@ -90,10 +92,10 @@ public class ControladorRegistro {
                 this.fabricaUsuarios.ponerNick(opcion);
             }
             case 1 -> {
-                this.fabricaUsuarios.ponerNombre(opcion);//this.fabricaUsuarios.ponerContrasenia(opcion);
+                this.fabricaUsuarios.ponerNombre(opcion);
             }
             case 2 -> {
-                this.fabricaUsuarios.ponerContrasenia(opcion);//this.fabricaUsuarios.ponerNombre(opcion);
+                this.fabricaUsuarios.ponerContrasenia(opcion);
             }
             default -> { //case 3
                 registrarUsuario(opcion);
@@ -125,7 +127,7 @@ public class ControladorRegistro {
      */
     private boolean hacerPeticion() throws ExcepcionMalaEntrada {
         boolean salir = false;
-        String opcion = this.menuRegistro.mostrarMensaje(this.modo); //0 nick, 1 nombre, 2 contraseña, 3 tipo
+        String opcion = this.menuRegistro.mostrarMensaje(this.modo);
         boolean valido = validarEntrada(opcion);
 
         if (valido) {

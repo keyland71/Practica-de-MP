@@ -11,15 +11,14 @@ import menus.MenuDesafioPendiente;
 import clasesDeJuego.Desafio;
 import clasesDeJuego.EstadoDesafio;
 import clasesDeJuego.Jugador;
-import clasesDeJuego.Personaje;
 import practicamp.Juego;
 import sistemas.DirectorCombate;
 
 /**
  *
- * @author Ángel Marqués García
+ * @author Ángel Marqués García Te muestra los desafíos que tengas pendientes
+ * por aceptar, o si algún desafío tuyo se ha completado, te lo muestra también
  */
-//te muestra los desafíos que tengas pendientes por aceptar, o si algún desafío tuyo se ha completado, te lo muestra también
 public class ControladorNotificaciones {
 
     private MenuDesafioPendiente menuDesafio;
@@ -40,10 +39,10 @@ public class ControladorNotificaciones {
         String opcion;
         boolean inputValido = false;
         this.modo = 0;
-        if (this.desafiosPendientes.isEmpty()){
-            this.menuDesafio.mostrarMensaje(1); //no hay desafios que mostrar
+        if (this.desafiosPendientes.isEmpty()) {
+            this.menuDesafio.mostrarMensaje(1);
         }
-        
+
         for (Desafio d : this.desafiosPendientes) {
             this.desafioActual = d;
             do {
@@ -57,21 +56,24 @@ public class ControladorNotificaciones {
             } while (!inputValido);
         }
 
-        if (this.desafiosCompletados.isEmpty()){
+        if (this.desafiosCompletados.isEmpty()) {
             this.menuCombate.mostrarMensaje(0);
-        } else
+        } else {
             this.menuCombate.mostrarMensaje(1);
-        
+        }
+
         for (Desafio d : this.desafiosCompletados) {
             switch (d.obtenerEstado()) {
-                case rechazado -> this.menuCombate.mostrarDesafioRechazado(d);
-                case aceptado -> this.menuCombate.mostrarCombate(d.obtenerCombate());
+                case rechazado ->
+                    this.menuCombate.mostrarDesafioRechazado(d);
+                case aceptado ->
+                    this.menuCombate.mostrarCombate(d.obtenerCombate());
                 default -> {
                     this.menuCombate.mostrarDesafioCancelado(d);
                     Juego.estado.obtenerAlmacenDesafios().borrarDesafio(d);
                 }
             }
-            d.cambiarEstado(EstadoDesafio.completado); //igual no debería estar aquí por no cambiarlo si se ha borrado
+            d.cambiarEstado(EstadoDesafio.completado);
         }
         Juego.estado.guardar();
     }
@@ -84,27 +86,26 @@ public class ControladorNotificaciones {
 
     }
 
-    private void procesarEntrada(String entrada) { //había un switch case 0, pero sólo con ese caso. En teoría nunca habrá más, lo he quitado por los indents 
+    private void procesarEntrada(String entrada) {
         if (entrada.equalsIgnoreCase("a")) {
             Combate c = this.desafioActual.obtenerCombate();
             int oroDesafiado = c.obtenerUDesafiado().obtenerPersonaje().sumarOro(-this.desafioActual.obtenerOro());
-            
+
             DirectorCombate director = new DirectorCombate(c);
             director.realizarCombate();
-            
+
             c.ponerOro(this.desafioActual.obtenerOro());
-            
+
             this.desafioActual.cambiarEstado(EstadoDesafio.aceptado);
             this.menuCombate.mostrarCombate(c);
-            
+
             Jugador vencedor = c.obtenerVencedor();
-            if (vencedor == null){ //si es empate
+            if (vencedor == null) {
                 c.ponerOro(0);
                 c.obtenerUDesafiado().obtenerPersonaje().sumarOro(oroDesafiado);
                 this.desafioActual.devolverOro();
                 return;
             }
-            //si no es empate
             vencedor.incrementarVictorias();
             vencedor.obtenerPersonaje().sumarOro(this.desafioActual.obtenerOro() + oroDesafiado + DirectorCombate.oroFijo);
         } else if (entrada.equalsIgnoreCase("r")) {
@@ -113,9 +114,9 @@ public class ControladorNotificaciones {
     }
 
     private void combateRechazado() {
-        this.desafioActual.cambiarEstado(EstadoDesafio.rechazado); //cambia el estado a rechazado
-        this.desafioActual.obtenerJugadorDesafiado().obtenerPersonaje().sumarOro(-this.desafioActual.obtenerOro() / 10); //penaliza al que rechaza
-        this.desafioActual.devolverOro(); //devuelve el oro al que desafió
+        this.desafioActual.cambiarEstado(EstadoDesafio.rechazado);
+        this.desafioActual.obtenerJugadorDesafiado().obtenerPersonaje().sumarOro(-this.desafioActual.obtenerOro() / 10);
+        this.desafioActual.devolverOro();
     }
 
 }

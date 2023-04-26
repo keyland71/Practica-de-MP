@@ -23,8 +23,7 @@ public class ControladorCrearDesafío {
     private int modo;
     private MenuCrearDesafio menuDesafio;
     private int oro;
-    private Jugador oponente; 
-    
+    private Jugador oponente;
 
     public ControladorCrearDesafío() {
         this.menuDesafio = new MenuCrearDesafio();
@@ -48,11 +47,11 @@ public class ControladorCrearDesafío {
     }
 
     private boolean validarEntrada(String opcion) {
-        if (opcion.equalsIgnoreCase("salir")){
+        if (opcion.equalsIgnoreCase("salir")) {
             return true;
         }
         switch (this.modo) {
-            case 0 -> { //input válido si es un número del 1 al 8, inclusive
+            case 0 -> {
                 return confirmarOro(opcion);
             }
             case 1 -> {
@@ -73,27 +72,26 @@ public class ControladorCrearDesafío {
 
     private boolean usuarioValido(String nombre) {
         AlmacenUsuarios almacen = Juego.estado.obtenerAlmacenUsuarios();
-        if (!almacen.existeJugador(nombre) || Juego.estado.obtenerUsuarioActivo().obtenerNick().equalsIgnoreCase(nombre)){
-            return false; //si no existe el usuario o es el usuario activo, devuelve false
+        if (!almacen.existeJugador(nombre) || Juego.estado.obtenerUsuarioActivo().obtenerNick().equalsIgnoreCase(nombre)) {
+            return false;
         }
         Jugador j = (Jugador) almacen.obtenerUsuario(nombre);
-        return j.obtenerPersonaje()!=null;
+        return j.obtenerPersonaje() != null;
     }
 
     private boolean procesarEntrada(String entrada) {
-        if (entrada.equalsIgnoreCase("salir")){
+        if (entrada.equalsIgnoreCase("salir")) {
             return true;
         }
-        String opcion;
         switch (modo) {
-            case 0 -> { //guardar el oro apostado
+            case 0 -> {
                 this.oro = Integer.parseInt(entrada);
             }
-            case 1 -> { //guardar el oponente
+            case 1 -> {
                 this.oponente = (Jugador) Juego.estado.obtenerAlmacenUsuarios().obtenerUsuario(entrada);
             }
-            case 2 -> { //crear el desafío y guardarlo
-                if (entrada.equalsIgnoreCase("si")){
+            case 2 -> {
+                if (entrada.equalsIgnoreCase("si")) {
                     Jugador jActivo = (Jugador) Juego.estado.obtenerUsuarioActivo();
                     jActivo.obtenerPersonaje().sumarOro(-this.oro);
                     Desafio des = new Desafio(jActivo, this.oponente, this.oro);
@@ -102,7 +100,7 @@ public class ControladorCrearDesafío {
                 return true;
             }
 
-        } //end switch 1
+        }
         return false;
     }
 }

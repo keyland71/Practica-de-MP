@@ -5,7 +5,6 @@
 package controladores;
 
 import baseDeDatos.AlmacenUsuarios;
-import baseDeDatos.Estado;
 import clasesDeJuego.Usuario;
 import menus.MenuIniciarSesion;
 import practicamp.Juego;
@@ -25,7 +24,7 @@ import sistemas.ExcepcionMalaEntrada;
 public class ControladorInicioSesion {
 
     private MenuIniciarSesion menuIniciarSesion;
-    private int modo; 
+    private int modo;
     private String nick;
 
     public ControladorInicioSesion() {
@@ -44,9 +43,6 @@ public class ControladorInicioSesion {
                         this.modo++;
                     }
                 } catch (ExcepcionMalaEntrada e) {
-                    e.printStackTrace();
-                    System.out.println(e);
-                    
                     this.menuIniciarSesion.mostrarMensajeError(this.modo);
                 }
             }
@@ -56,7 +52,7 @@ public class ControladorInicioSesion {
 
     }
 
-    private boolean validarEntrada(String opcion){
+    private boolean validarEntrada(String opcion) {
         if (this.modo == 0) {
             return nickValido(opcion) || opcion.equalsIgnoreCase("salir");
         }
@@ -92,7 +88,7 @@ public class ControladorInicioSesion {
     private boolean nickValido(String nick) {
         AlmacenUsuarios almacen = Juego.estado.obtenerAlmacenUsuarios();
         Usuario u = almacen.obtenerUsuario(nick);
-        return u!=null && !u.estaBaneado(); //un nick es válido si existe un usuario NO baneado con ese nick
+        return u != null && !u.estaBaneado();
     }
 
     /**

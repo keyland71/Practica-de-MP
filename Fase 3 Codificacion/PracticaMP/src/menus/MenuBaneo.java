@@ -58,7 +58,7 @@ public class MenuBaneo {
         } else {
             System.out.println(this.mensajes.get(0));
         }
-        int tamPag = ControladorBaneos.tamPag;
+        int tamPag = ControladorBaneos.TAMANIO_PAGINA;
         for (int i=0;i<=tamPag-1;i++){
             if (i+n*tamPag >= this.jugadores.size()){ 
                 break;
