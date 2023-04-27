@@ -39,6 +39,8 @@ public class DirectorCombate {
             realizarRonda();
         }
         if (vidaP1 == vidaP2) {
+            p1.reestablecerPersonaje();
+            p2.reestablecerPersonaje();
             return;
         }
         boolean ganaP1 = vidaP1 > vidaP2;
