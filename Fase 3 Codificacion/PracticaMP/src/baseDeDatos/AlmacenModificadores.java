@@ -13,6 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * @author Sergio de Oro Fernández
+ * @author Marcos Jiménez Pulido
+ * @author Lucia Dominguez Rodrigo
+ * @author Ángel Marqués García
+ */
 public class AlmacenModificadores implements Serializable {
 
     private List<Modificador> modificadores;

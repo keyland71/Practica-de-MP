@@ -10,8 +10,10 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- *
- * @author Ángel Marqués
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class MenuVistaArmas {
 
@@ -26,7 +28,7 @@ public class MenuVistaArmas {
         String mensaje = "¿Seguro que quieres cambiar tu arma activa a las armas seleccionadas?";
         this.mensajes.add(mensaje);
 
-        mensaje = "El valor introducido no corresponde a un arma. Introduce un numero que corresponda a un arma, o salir para cancelar la operación";
+        mensaje = "El valor introducido no corresponde a un arma. Introduce un numero que corresponda a un arma, o salir para cancelar la operacion";
         this.mensajesError.add(mensaje);
         mensaje = "Debes introducir si o no";
         this.mensajesError.add(mensaje);
@@ -52,7 +54,7 @@ public class MenuVistaArmas {
         for (int i = 0; i < armas.size(); i++) {
             System.out.println("    Arma " + Integer.toString(i + 1) + ":\n" + armas.get(i).toString());
         }
-        System.out.println("Introduce el número del arma que te quieras equipar, o 'salir' si no quieres cambiar tu arma");
+        System.out.println("Introduce el numero del arma que te quieras equipar, o 'salir' si no quieres cambiar tu arma");
 
         return this.lector.nextLine();
     }

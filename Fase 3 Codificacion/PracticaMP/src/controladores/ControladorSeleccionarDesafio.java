@@ -15,8 +15,10 @@ import menus.MenuSeleccionarDesafio;
 import practicamp.Juego;
 
 /**
- *
- * @author Ángel Marqués
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class ControladorSeleccionarDesafio {
 
@@ -67,27 +69,20 @@ public class ControladorSeleccionarDesafio {
 
     private boolean validarEntrada(String opcion) {
         switch (this.modo) {
-            case 0 -> { //salir, s, a, 1, 2, ..., tamPag
-                //si decide salir, siguiente o anterior página, es válido
-                //si no decide eso, hay varias opciones.
-                //si el número de elementos es múltiplo del tamaño de página, todas las páginas tendrán 5 elementos, por lo que 1-5 serán válidos independientemente de pagActual
-                //En caso contrario, última página tendrá menos opciones. Si sólo muestra 4 opciones, 5 no es un input válido
-                //por tanto comprobamos si estamos en la última página. Si no estamos, vale 1-5
-                //Si estamos en la última página, valen los números del 1 al último que muestre la página
+            case 0 -> {
                 double ultimaPagina = Math.ceil((double) desafios.size() / TAMANIO_PAGINA) - 1;
-                if (opcion.equalsIgnoreCase("s") || opcion.equalsIgnoreCase("a") || opcion.equals("salir")) { //salir debe ser con minúsculas, o toca poner 2^5 combinaciones en el case de procesarEntrada
+                if (opcion.equalsIgnoreCase("s") || opcion.equalsIgnoreCase("a") || opcion.equals("salir")) {
                     return true;
                 }
                 int mod = desafios.size() % TAMANIO_PAGINA;
-                if (mod == 0 || this.pagActual != ultimaPagina) { // si la última página tiene tamPag elementos o no estamos en la última página
-                    for (int i = 1; i <= TAMANIO_PAGINA; i++) { //el for hace lo mismo que los or, pero dinámico. Permite que los válidos dependan de tamPag
+                if (mod == 0 || this.pagActual != ultimaPagina) {
+                    for (int i = 1; i <= TAMANIO_PAGINA; i++) {
                         if (opcion.equals(Integer.toString(i))) {
                             return true;
                         }
                     }
                     return false;
                 }
-                // Si estamos en la última página, y esta tiene menos de tamPag elementos
                 for (int i = 1; i <= mod; i++) {
                     if (opcion.equals(Integer.toString(i))) {
                         return true;
@@ -115,8 +110,7 @@ public class ControladorSeleccionarDesafio {
             case "volver" -> {
                 this.modo = 0;
             }
-            case "s", "S" -> { //suma 1 a la página actual si no estamos en la última. 
-                //Para saber si estamos en la última, divide el tamaño de la lista entre el tamaño de página (redondeando hacia arriba), y lo compara con la página actual
+            case "s", "S" -> {
                 if (this.pagActual != Math.ceil((double) desafios.size() / TAMANIO_PAGINA) - 1) {
                     this.pagActual++;
                 } else {

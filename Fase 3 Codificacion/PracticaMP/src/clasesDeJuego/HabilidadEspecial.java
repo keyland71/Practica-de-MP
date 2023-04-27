@@ -8,8 +8,10 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- *
- * @author lucia
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class HabilidadEspecial implements Serializable {
 
@@ -27,7 +29,7 @@ public class HabilidadEspecial implements Serializable {
     private int ataque;
     private int defensa;
     private int coste;
-    private TipoHabilidad tipo; //Se tiene en cuenta que, en el caso de que la habilidad especial sea de tipo Talento, el coste tiene que ser 0
+    private TipoHabilidad tipo;
 
     public HabilidadEspecial(String nom, int at, int def, int cost, TipoHabilidad t) {
         this.nombre = nom;

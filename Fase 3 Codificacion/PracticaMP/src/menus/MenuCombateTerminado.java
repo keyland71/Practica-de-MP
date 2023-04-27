@@ -11,8 +11,10 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- *
- * @author Ángel Marqués
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class MenuCombateTerminado {
 
@@ -24,9 +26,9 @@ public class MenuCombateTerminado {
         mensajes = new ArrayList<>();
         mensajesError = new ArrayList<>();
 
-        String mensaje = "Si has enviado algún desafio, el oponente todavía no ha respondido";
+        String mensaje = "Si has enviado algun desafio, el oponente todavia no ha respondido";
         this.mensajes.add(mensaje);
-        mensaje = "Han respondido a alguno de tus desafíos. Aquí está el resultado:";
+        mensaje = "Han respondido a alguno de tus desafios. Aqui esta el resultado:";
         this.mensajes.add(mensaje);
 
         mensaje = "Por favor, introduzca un valor correcto. Pulse intro para continuar";
@@ -52,12 +54,12 @@ public class MenuCombateTerminado {
     }
 
     public void mostrarDesafioRechazado(Desafio d) {
-        System.out.println("El jugador " + d.obtenerJugadorDesafiado().obtenerNick() + " ha rechazado tu desafio. Se te devolverá el oro que apostaste (" + d.obtenerOro() + ")");
+        System.out.println("El jugador " + d.obtenerJugadorDesafiado().obtenerNick() + " ha rechazado tu desafio. Se te devolvera el oro que apostaste (" + d.obtenerOro() + ")");
         this.lector.nextLine();
     }
 
     public void mostrarDesafioCancelado(Desafio d) {
-        System.out.println("El desafío " + d.toString() + " ha sido cancelado por un administrador. Se te devolverá el oro que apostaste (" + d.obtenerOro() + ")");
+        System.out.println("El desafio " + d.toString() + " ha sido cancelado por un administrador. Se te devolvera el oro que apostaste (" + d.obtenerOro() + ")");
         this.lector.nextLine();
     }
 

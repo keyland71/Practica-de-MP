@@ -11,8 +11,10 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- *
- * @author burakku
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class MenuSeleccionarDesafio {
 
@@ -28,28 +30,28 @@ public class MenuSeleccionarDesafio {
 
         String mensaje = "Seleccione un desafio que validar o cancelar (con su posicion), o una de las opciones del final:";
         this.mensajes.add(mensaje);
-        mensaje = "¿Quieres validar el desafío, cancelarlo, o volver a la selección de desafíos? (validar/cancelar/volver)";
+        mensaje = "¿Quieres validar el desafio, cancelarlo, o volver a la seleccion de desafios? (validar/cancelar/volver)";
         this.mensajes.add(mensaje);
         mensaje = "¿Seguro que quieres validar el desafio? (si/no)";
         this.mensajes.add(mensaje);
         mensaje = "¿Seguro que quieres cancelar el desafio? (si/no)";
         this.mensajes.add(mensaje);
-        mensaje = "Desafío eliminado";
+        mensaje = "Desafio eliminado";
         this.mensajes.add(mensaje);
-        mensaje = "No hay desafíos que validar";
+        mensaje = "No hay desafios que validar";
         this.mensajes.add(mensaje);
-        mensaje = "   (s)siguiente página\n   (a)anterior página\n   (salir) para volver al menú Admin";
+        mensaje = "   (s)siguiente pagina\n   (a)anterior pagina\n   (salir) para volver al menu Admin";
         this.mensajes.add(mensaje);
-        mensaje = "¿Por qué quieres cancelar el desafío?\n   1. Me parece injusto\n   2. Incumple las normas\n   3. Cancelar";
+        mensaje = "¿Por que quieres cancelar el desafio?\n   1. Me parece injusto\n   2. Incumple las normas\n   3. Cancelar";
         this.mensajes.add(mensaje);
 
-        mensaje = "El valor introducido no es válido. Por favor introduzca un valor válido. Pulse intro para continuar.";
+        mensaje = "El valor introducido no es valido. Por favor introduzca un valor valido. Pulse intro para continuar.";
         this.mensajesError.add(mensaje);
-        mensaje = "Por favor introduzca un valor válido (validar/cancelar/volver). Pulse intro para continuar.";
+        mensaje = "Por favor introduzca un valor valido (validar/cancelar/volver). Pulse intro para continuar.";
         this.mensajesError.add(mensaje);
-        mensaje = "Por favor introduzca un valor válido (si/no). Pulse intro para continuar.";
+        mensaje = "Por favor introduzca un valor valido (si/no). Pulse intro para continuar.";
         this.mensajesError.add(mensaje);
-        mensaje = "No hay más datos que mostrar. Pulse intro para continuar";
+        mensaje = "No hay mas datos que mostrar. Pulse intro para continuar";
         this.mensajesError.add(mensaje);
 
         this.lector = new Scanner(System.in);

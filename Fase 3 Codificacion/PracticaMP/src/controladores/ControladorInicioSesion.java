@@ -11,7 +11,6 @@ import practicamp.Juego;
 import sistemas.ExcepcionMalaEntrada;
 
 /**
- *
  * @author Sergio de Oro Fernández
  * @author Lucía Domínguez Rodrigo
  * @author Ángel Marqués García
@@ -102,7 +101,7 @@ public class ControladorInicioSesion {
     private boolean comprobarContrasenia(String contrasenia) {
         AlmacenUsuarios almacen = Juego.estado.obtenerAlmacenUsuarios();
         Usuario usuario = almacen.obtenerUsuario(this.nick);
-        boolean valido = contrasenia.equalsIgnoreCase("salir") || usuario.compararContrasenia(contrasenia); //(contrasenia.length() >= 8 && contrasenia.length() <= 12) && usuario.compararContrasenia(contrasenia);
+        boolean valido = contrasenia.equalsIgnoreCase("salir") || usuario.compararContrasenia(contrasenia);
         return valido;
     }
 

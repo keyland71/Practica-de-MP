@@ -4,15 +4,16 @@
  */
 package menus;
 
-import baseDeDatos.Estado;
 import clasesDeJuego.Combate;
 import java.util.List;
 import java.util.Scanner;
 import practicamp.Juego;
 
 /**
- *
- * @author Ángel Marqués
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class MenuOro {
 
@@ -47,7 +48,7 @@ public class MenuOro {
     }
 
     public void mostrarMensaje() {
-        System.out.println("No has participado en ningún combate todavía. Cuando participes en alguno, aquí podrás ver un pequeño resumen, junto con el oro perdido o ganado");
+        System.out.println("No has participado en ningun combate todavia. Pulse intro para continuar");
         this.lector.nextLine();
     }
 }

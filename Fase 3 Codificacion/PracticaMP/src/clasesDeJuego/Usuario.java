@@ -7,8 +7,10 @@ package clasesDeJuego;
 import java.io.Serializable;
 
 /**
- *
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
  * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class Usuario implements Serializable {
 

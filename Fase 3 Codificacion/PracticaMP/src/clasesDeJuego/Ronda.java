@@ -8,22 +8,13 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- *
- * @author lucia
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class Ronda implements Serializable {
-
-    static String fromListToString(List<Ronda> registroRondas) {
-        String result = "";
-        int i = 0;
-        for (Ronda r : registroRondas) {
-            result += r.toStringRonda(i) + "\n    ";
-            i++;
-        }
-
-        return result;
-    }
-
+    
     private int vidaInicialA;
     private int vidaInicialB;
     private int vidaFinalA;
@@ -89,5 +80,16 @@ public class Ronda implements Serializable {
 
     public void ponerDefensaB(int valor) {
         this.defensaFinalB = valor;
+    }
+    
+    public static String fromListToString(List<Ronda> registroRondas) {
+        String result = "";
+        int i = 0;
+        for (Ronda r : registroRondas) {
+            result += r.toStringRonda(i) + "\n    ";
+            i++;
+        }
+
+        return result;
     }
 }

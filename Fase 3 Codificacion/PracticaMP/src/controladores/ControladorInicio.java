@@ -16,9 +16,7 @@ import menus.MenuInicio;
  * proceso contamos con las funciones de "validarEntrada" y "procesarEntrada".
  * Ambas dependen del estado interno del controlador (variable "modo"). En
  * función del modo, el controlador realizará unas acciones u otras. Los
- * distintos modos son: 
- * 0: Selección en el menú de inicio. 
- * 1: Sí / No
+ * distintos modos son: 0: Selección en el menú de inicio. 1: Sí / No
  */
 public class ControladorInicio {
 
@@ -58,7 +56,7 @@ public class ControladorInicio {
             return procesarInicio(opcion);
         }
         return opcion.equalsIgnoreCase("si");
-        
+
     }
 
     private boolean procesarInicio(String opcion) {
@@ -89,7 +87,7 @@ public class ControladorInicio {
     }
 
     private void registrarse() {
-         ControladorRegistro controladorRegistro = new ControladorRegistro();
+        ControladorRegistro controladorRegistro = new ControladorRegistro();
         controladorRegistro.iniciarControlador();
     }
 

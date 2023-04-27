@@ -27,7 +27,7 @@ public class MenuInicio {
                          2) Registrarse
                          3) Salir""";
         this.mensajes.add(mensaje);
-        mensaje = "¿Está seguro de que desea salir?";
+        mensaje = "¿Esta seguro de que desea salir?";
         this.mensajes.add(mensaje);
         mensaje = "Por favor, introduzca un valor correcto. Pulse cualquier boton para continuar.";
         this.mensajesError.add(mensaje);

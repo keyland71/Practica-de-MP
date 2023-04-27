@@ -13,8 +13,10 @@ import java.util.Set;
 import java.util.List;
 
 /**
- *
- * @author Marcos
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public abstract class Personaje implements Serializable {
 
@@ -39,16 +41,16 @@ public abstract class Personaje implements Serializable {
         List<Equipo> adDisp = new ArrayList<>(armadurasDisponibles);
 
         String result = "1. Nombre: " + nombre + "\n"
-                      + "2. Descripcion: " + descripcion + "\n"
-                      + "3. Vida: " + Integer.toString(vida) + "\n"
-                      + "4. Poder: " + Integer.toString(poder) + "\n"
-                      + "5. Habilidad: " + habilidadEspecial.obtenerNombre() + "\n"
-                      + "6. Armas Activas: " + eqToString(aAc) + "\n"
-                      + "7. Armas Disponibles" + "\n    " + eqToString(aDisp) + "\n"
-                      + "8. Armadura Activa: " + armaduraActiva.obtenerNombre() + "\n"
-                      + "9. Armaduras Disponibles: " + "\n    " + eqToString(adDisp) + "\n"
-                      + "10. Modificadores: " + modToString(this.modificadores) + "\n"
-                      + "11. Esbirros: " + esbToString(this.esbirros) + "\n";
+                + "2. Descripcion: " + descripcion + "\n"
+                + "3. Vida: " + Integer.toString(vida) + "\n"
+                + "4. Poder: " + Integer.toString(poder) + "\n"
+                + "5. Habilidad: " + habilidadEspecial.obtenerNombre() + "\n"
+                + "6. Armas Activas: " + eqToString(aAc) + "\n"
+                + "7. Armas Disponibles" + "\n    " + eqToString(aDisp) + "\n"
+                + "8. Armadura Activa: " + armaduraActiva.obtenerNombre() + "\n"
+                + "9. Armaduras Disponibles: " + "\n    " + eqToString(adDisp) + "\n"
+                + "10. Modificadores: " + modToString(this.modificadores) + "\n"
+                + "11. Esbirros: " + esbToString(this.esbirros) + "\n";
         return result;
     }
 
@@ -99,8 +101,6 @@ public abstract class Personaje implements Serializable {
         this.modificadores = mods;
         this.descripcion = desc;
         this.puntosRecurso = puntosRec;
-
-        //para pruebas
         this.armasActivas.add((Arma) armas.toArray()[0]);
         this.armaduraActiva = ((Armadura) armaduras.toArray()[0]);
     }
@@ -125,7 +125,7 @@ public abstract class Personaje implements Serializable {
             this.modificadores.add(mod);
         }
         this.descripcion = personajeModelo.obtenerDescripcion();
-        
+
         this.armasActivas.add((Arma) this.armasDisponibles.toArray()[0]);
         this.armaduraActiva = ((Armadura) this.armadurasDisponibles.toArray()[0]);
     }
@@ -248,10 +248,12 @@ public abstract class Personaje implements Serializable {
     }
 
     /**
-     * Suma la cantidad de oro pasada como parámetro al personaje sobre quien se llame, 
-     * y devuelve la cantidad de oro que se le haya quitado/sumado al usuario (siempre devuelve un número positivo)
+     * Suma la cantidad de oro pasada como parámetro al personaje sobre quien se
+     * llame, y devuelve la cantidad de oro que se le haya quitado/sumado al
+     * usuario (siempre devuelve un número positivo)
+     *
      * @param i
-     * @return 
+     * @return
      */
     public int sumarOro(int i) {
         if (this.oro + i >= 0) {
@@ -288,8 +290,6 @@ public abstract class Personaje implements Serializable {
         int potencialAtaque = this.obtenerPoder() + this.obtenerAtaqueArmas() + this.obtenerAtaqueArmadura() + promedioModificadores;
         if (this.puedeUsarHabilidad()) {
             potencialAtaque += this.obtenerHabilidadEspecial().obtenerAtaque();
-            //no habría que poner aquí que gaste el recurso si debe?
-            //no, porque luego se deberá calcular el otro potencial, y lo debe tener en cuenta
         }
         return potencialAtaque;
     }

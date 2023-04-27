@@ -5,8 +5,10 @@
 package menus;
 
 /**
- *
- * @author Marcos, Lucía
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 import java.util.ArrayList;
 import java.util.List;
@@ -30,11 +32,11 @@ public class MenuCrearPersonaje {
         mensaje = "¿Seguro que quieres crear ese personaje?";
         this.mensajes.add(mensaje);
 
-        mensaje = "Has introducido un nombre inválido. El nombre de los personajes debe ser único. Pulse cualquier boton para continuar"; //se borra esta frase si el nombre no tiene que ser unico
+        mensaje = "Has introducido un nombre invalido. El nombre de los personajes debe ser único. Pulse cualquier boton para continuar";
         this.mensajesError.add(mensaje);
-        mensaje = "Has introducido un tipo inválido. Pulse cualquier boton para continuar";
+        mensaje = "Has introducido un tipo invalido. Pulse cualquier boton para continuar";
         this.mensajesError.add(mensaje);
-        mensaje = "Has introducido un valor inválido. Debes escribir si o no. Pulse cualquier boton para continuar";
+        mensaje = "Has introducido un valor invalido. Debes escribir si o no. Pulse cualquier boton para continuar";
         this.mensajesError.add(mensaje);
     }
 

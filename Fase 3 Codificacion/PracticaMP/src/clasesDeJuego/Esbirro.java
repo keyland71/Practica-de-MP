@@ -8,8 +8,10 @@ import java.io.Serializable;
 import java.util.Collection;
 
 /**
- * @author marcos
- * @author lucia
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public abstract class Esbirro implements Serializable {
 

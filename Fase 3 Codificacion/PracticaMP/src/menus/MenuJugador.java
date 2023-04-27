@@ -9,21 +9,23 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- *
- * @author Ángel Marqués
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
-public class MenuJugador { 
+public class MenuJugador {
+
     private List<String> mensajes;
     private List<String> mensajesError;
     private Scanner lector;
     private int oro;
-    
-    public MenuJugador(){
+
+    public MenuJugador() {
         this.mensajes = new ArrayList<>();
         this.mensajesError = new ArrayList<>();
         this.oro = 0;
-        
-        
+
         String mensaje0 = "";
         String mensaje1 = "¿Seguro que quiere borrar su personaje?";
         String mensaje2 = "¿Seguro que quiere borrar su cuenta?";
@@ -38,17 +40,17 @@ public class MenuJugador {
         mensajes.add(mensaje4);
         mensajes.add(mensaje5);
         mensajes.add(mensaje6);
-        
+
         String mensajeError1 = "Por favor, introduzca un valor correcto. Pulse intro para continuar";
         String mensajeError2 = "No puedes crear un personaje si ya tienes uno. Borra tu personaje y vuelve a intentarlo";
         this.mensajesError.add(mensajeError1);
         this.mensajesError.add(mensajeError2);
-        
+
         this.lector = new Scanner(System.in);
     }
-    
+
     public String mostrarMensaje(int pos) {
-        if (pos==0){
+        if (pos == 0) {
             return mostrarMensaje0();
         }
         System.out.println(this.mensajes.get(pos));
@@ -59,8 +61,8 @@ public class MenuJugador {
         System.out.println(this.mensajesError.get(pos));
         this.lector.nextLine();
     }
-    
-    private String mostrarMensaje0() { 
+
+    private String mostrarMensaje0() {
         String mensaje0 = String.format("""
                           Bienvenido al Menú de Jugador, estas son tus opciones:
                             1. Consultar Ranking
@@ -74,9 +76,9 @@ public class MenuJugador {
         System.out.println(mensaje0);
         return this.lector.nextLine();
     }
-    
-    public void ponerOro(int o){
+
+    public void ponerOro(int o) {
         this.oro = o;
     }
-    
+
 }

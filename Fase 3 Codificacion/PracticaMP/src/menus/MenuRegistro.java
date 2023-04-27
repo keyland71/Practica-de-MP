@@ -9,8 +9,10 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- *
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
  * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class MenuRegistro {
 
@@ -21,7 +23,7 @@ public class MenuRegistro {
     public MenuRegistro() {
         this.mensajes = new ArrayList<>();
         this.mensajesError = new ArrayList<>();
-        String mensaje = "Introduce tu nick unico: (escriba \"salir\" en cualquier momento si desea salir al menú principal)";
+        String mensaje = "Introduce tu nick unico: (escriba \"salir\" en cualquier momento si desea salir al menu principal)";
         this.mensajes.add(mensaje);
         mensaje = "Introduce tu nombre de usuario:";
         this.mensajes.add(mensaje);

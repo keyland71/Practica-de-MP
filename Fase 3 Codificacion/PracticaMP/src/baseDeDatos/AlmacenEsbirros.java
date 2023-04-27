@@ -18,6 +18,12 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
+/**
+ * @author Sergio de Oro Fernández
+ * @author Marcos Jiménez Pulido
+ * @author Lucia Dominguez Rodrigo
+ * @author Ángel Marqués García
+ */
 public class AlmacenEsbirros implements Serializable {
 
     private List<Esbirro> esbirros;
@@ -77,7 +83,7 @@ public class AlmacenEsbirros implements Serializable {
                 String n = esbirro.obtenerNombre();
                 if (n.equals(nombre)) {
                     esbirrosSubordinados.add(esbirro);
-                    break; //los nombres son únicos. Cuando coincida uno salimos.
+                    break;
                 }
             }
         }

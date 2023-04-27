@@ -3,7 +3,6 @@ package clasesDeJuego;
 import java.io.Serializable;
 
 /**
- *
  * @author Sergio de Oro Fernández
  * @author Lucía Domínguez Rodrigo
  * @author Ángel Marqués García
@@ -46,11 +45,6 @@ public class NumeroRegistro implements Serializable {
     }
 
     private void incrementarRecursivo(int pos) {
-        //esta función hace lo siguiente:
-        //  1. incrementa en 1 el valor en la posición pasada
-        //  2. guarda el valor en una variable
-        //  3. Si el nuevo valor es un 0 o '0', se llama a si misma con la siguiente posicion
-        //  4. Si el nuevo valor es un '0', Y la posición también es 0, avisa de que ha habido overflow
         int num = -1;
         char c = ' ';
         switch (pos) {
@@ -95,18 +89,17 @@ public class NumeroRegistro implements Serializable {
     }
 
     private char incrementarCaracter(char c) {
-        //queremos aumentar el caracter c. si está en 57, saltamos a 65. Si está en 90, saltamos a 97. Si está en 122, saltamos a 48.
-        //esto va saltando de numeros a mayúsculas a minúsculas, a números de nuevo. Esta hecho así para evitar carácteres especiales.
         int value = c;
 
-        if (value == 57) {
-            c += 8; // si es '9', pasa a 'A'
-        } else if (value == 90) {
-            c += 7; // si es 'Z', pasa a 'a'
-        } else if (value == 122) {
-            c = '0'; // si es 'z', pasa a '0'
-        } else {
-            c += 1; //en cualquier otro caso, pasa al siguiente
+        switch (value) {
+            case 57 ->
+                c += 8;
+            case 90 ->
+                c += 7;
+            case 122 ->
+                c = '0';
+            default ->
+                c += 1;
         }
         return c;
     }

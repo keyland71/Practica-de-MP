@@ -5,24 +5,30 @@
 package controladores;
 
 import baseDeDatos.AlmacenUsuarios;
+import java.util.Arrays;
+import java.util.HashSet;
 import menus.MenuAdmin;
 import menus.MenuBorrarCuenta;
 import practicamp.Juego;
 
 /**
- * @authos marcos
- * @author lucia
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class ControladorAdmin {
 
     private MenuAdmin menuAdministrador;
     private MenuBorrarCuenta menuBorrarCuenta;
     private int modo; //0 selección, 
+    private HashSet opcionesDisponibles;
 
     public ControladorAdmin() {
         this.menuAdministrador = new MenuAdmin();
         this.menuBorrarCuenta = new MenuBorrarCuenta();
         this.modo = 0;
+        this.opcionesDisponibles = new HashSet(Arrays.asList("1", "2", "3", "4", "5", "6"));
     }
 
     public void iniciarControlador() {
@@ -43,7 +49,7 @@ public class ControladorAdmin {
     private boolean validarEntrada(String opcion) {
         switch (this.modo) {
             case 0 -> {
-                return opcion.equals("1") || opcion.equals("2") || opcion.equals("3") || opcion.equals("4") || opcion.equals("5") || opcion.equals("6") || opcion.equalsIgnoreCase("salir");
+                return this.opcionesDisponibles.contains(opcion) || opcion.equalsIgnoreCase("salir");
             }
             case 1 -> {
                 return opcion.equals("si") || opcion.equals("no");
@@ -54,26 +60,26 @@ public class ControladorAdmin {
 
     private boolean procesarEntrada(String opcion) {
         switch (opcion) {
-            case "1" -> { // Editar personaje
+            case "1" -> {
                 ControladorSeleccionarPersonaje cSelPj = new ControladorSeleccionarPersonaje();
                 cSelPj.iniciarControlador();
             }
-            case "2" -> { // Validar Desafio
+            case "2" -> {
                 ControladorSeleccionarDesafio cSelDes = new ControladorSeleccionarDesafio();
                 cSelDes.iniciarControlador();
             }
-            case "3" -> { // Banear usuarios
+            case "3" -> {
                 ControladorBaneos cBan = new ControladorBaneos(false);
                 cBan.iniciarControlador();
             }
-            case "4" -> { //Desbanear Usuarios
+            case "4" -> {
                 ControladorBaneos cBan = new ControladorBaneos(true);
                 cBan.iniciarControlador();
             }
-            case "5" -> { //Darse de baja/borrar cuenta
+            case "5" -> {
                 return darseDeBaja();
             }
-            case "6" -> { //salir
+            case "6" -> {
                 String optSalir = this.menuAdministrador.mostrarMensaje(2);
                 this.modo = 1;
                 boolean valido = validarEntrada(optSalir);
@@ -86,28 +92,25 @@ public class ControladorAdmin {
     }
 
     private boolean darseDeBaja() {
-        //pregunta 2 veces si quieres borrar la cuenta. 
-        //Si en alguna dices que no, sale inmediatamente. 
-        //Si en ambas dices que sí, borra la cuenta.
         boolean valido;
         int i = 0;
         String opcion;
         do {
-            this.modo = 1; //el modo es para que de por valido "si" y "no"
-            opcion = this.menuBorrarCuenta.mostrarMensaje(i); //seguro que lo quieres borrar?
+            this.modo = 1;
+            opcion = this.menuBorrarCuenta.mostrarMensaje(i);
             valido = validarEntrada(opcion);
             if (!valido) {
                 this.menuBorrarCuenta.mostrarMensajeError();
             } else if (opcion.equalsIgnoreCase("no")) {
                 break;
-            } else { //opcion == si
+            } else {
                 i++;
             }
-        } while (!valido || i != 2); //se mantiene aquí hasta que reciba 2 veces un input valido
+        } while (!valido || i != 2);
         if (opcion.equalsIgnoreCase("si") && i == 2) {
             AlmacenUsuarios almacen = Juego.estado.obtenerAlmacenUsuarios();
             almacen.borrarUsuario(Juego.estado.obtenerUsuarioActivo());
-            this.menuBorrarCuenta.mostrarMensaje(i); //borrado correctamente
+            this.menuBorrarCuenta.mostrarMensaje(i);
             return true;
         } else {
             return false;

@@ -9,8 +9,10 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- *
- * @author Ángel Marqués
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class MenuCamposLibres {
 
@@ -26,8 +28,8 @@ public class MenuCamposLibres {
         this.mensajes.add(mensaje);
 
         mensaje = """
-                  El valor introducido no es un valor v\u00e1lido para el campo que quiere modificar.
-                   Tenga en cuenta que los campos vida y poder s\u00f3lo aceptan valores entre 1 y 5, y el nombre del personaje debe ser \u00fanico""";
+                  El valor introducido no es un valor valido para el campo que quiere modificar.
+                   Tenga en cuenta que los campos vida y poder solo aceptan valores entre 1 y 5, y el nombre del personaje debe ser unico""";
         this.mensajesError.add(mensaje);
 
         this.lector = new Scanner(System.in);

@@ -9,8 +9,10 @@ import java.util.List;
 import java.util.Set;
 
 /**
- *
- * @author lucia
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class Vampiro extends Personaje {
 
@@ -71,9 +73,7 @@ public class Vampiro extends Personaje {
 
     @Override
     public void usarHabilidad() {
-        //what the fuck does this do???
-        //Le resta al recurso el ataque de la habilidad, no tendrá que ser el coste?
-        this.sumarRecurso(this.obtenerHabilidadEspecial().obtenerAtaque() * -1);
+        this.sumarRecurso(this.obtenerHabilidadEspecial().obtenerCoste() * -1);
     }
 
     public int obtenerEdad() {

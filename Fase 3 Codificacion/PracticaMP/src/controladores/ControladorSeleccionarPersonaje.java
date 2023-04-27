@@ -12,8 +12,10 @@ import menus.MenuSeleccionarPersonaje;
 import practicamp.Juego;
 
 /**
- *
- * @author Ángel Marqués
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class ControladorSeleccionarPersonaje {
 
@@ -64,13 +66,7 @@ public class ControladorSeleccionarPersonaje {
 
     private boolean validarEntrada(String opcion) {
         switch (this.modo) {
-            case 0 -> { //salir, s, a, 1, 2, ..., tamPag
-                //si decide salir, siguiente o anterior página, es válido
-                //si no decide eso, hay varias opciones.
-                //si el número de elementos es múltiplo del tamaño de página, todas las páginas tendrán 5 elementos, por lo que 1-5 serán válidos independientemente de pagActual
-                //En caso contrario, última página tendrá menos opciones. Si sólo muestra 4 opciones, 5 no es un input válido
-                //por tanto comprobamos si estamos en la última página. Si no estamos, vale 1-5
-                //Si estamos en la última página, valen los números del 1 al último que muestre la página
+            case 0 -> {
                 double ultimaPagina = Math.ceil((double) personajes.size() / TAMANIO_PAGINA) - 1;
                 if (opcion.equalsIgnoreCase("s") || opcion.equalsIgnoreCase("a") || opcion.equalsIgnoreCase("salir")) {
                     return true;

@@ -7,8 +7,10 @@ package clasesDeJuego;
 import java.util.Set;
 
 /**
- *
- * @author sergi
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class Demonio extends Esbirro {
 
@@ -35,6 +37,7 @@ public class Demonio extends Esbirro {
         return (!this.esbirros.isEmpty());
     }
 
+    @Override
     public boolean tieneHumanos() {
         boolean hayHumanos = super.tieneHumanos();
         for (Esbirro esbirro : this.esbirros) {

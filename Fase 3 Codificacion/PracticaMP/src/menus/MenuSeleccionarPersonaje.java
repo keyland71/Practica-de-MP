@@ -11,8 +11,10 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- *
- * @author Ángel Marqués
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class MenuSeleccionarPersonaje {
 
@@ -30,14 +32,14 @@ public class MenuSeleccionarPersonaje {
         this.mensajes.add(mensaje);
         mensaje = "No hay personajes que editar";
         this.mensajes.add(mensaje);
-        mensaje = "   (s)siguiente página\n   (a)anterior página\n   (salir) para volver al menú Admin";
+        mensaje = "   (s)siguiente pagina\n   (a)anterior pagina\n   (salir) para volver al menu Admin";
         this.mensajes.add(mensaje);
 
-        mensaje = "El valor introducido no es válido. Por favor introduzca un valor válido. Pulse intro para continuar.";
+        mensaje = "El valor introducido no es valido. Por favor introduzca un valor valido. Pulse intro para continuar.";
         this.mensajesError.add(mensaje);
-        mensaje = "Por favor introduzca un valor válido (si/no). Pulse intro para continuar.";
+        mensaje = "Por favor introduzca un valor valido (si/no). Pulse intro para continuar.";
         this.mensajesError.add(mensaje);
-        mensaje = "No hay más datos que mostrar. Pulse intro para continuar";
+        mensaje = "No hay mas datos que mostrar. Pulse intro para continuar";
         this.mensajesError.add(mensaje);
 
         this.lector = new Scanner(System.in);

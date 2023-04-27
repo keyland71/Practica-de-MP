@@ -13,8 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author Ángel Marqués
+ * @author Sergio de Oro Fernández
+ * @author Marcos Jiménez Pulido
+ * @author Lucia Dominguez Rodrigo
+ * @author Ángel Marqués García
  */
 public class AlmacenPersonajes implements Serializable {
 
@@ -40,7 +42,6 @@ public class AlmacenPersonajes implements Serializable {
         String nombre = p.obtenerNombre();
         int i;
 
-        //buscamos en los vampiros
         i = 0;
         for (Vampiro v : this.vampiros) {
             if (v.obtenerNombre().equalsIgnoreCase(nombre)) {
@@ -49,7 +50,6 @@ public class AlmacenPersonajes implements Serializable {
             }
             i++;
         }
-        //buscamos en los licantropos
         i = 0;
         for (Licantropo l : this.licantropos) {
             if (l.obtenerNombre().equalsIgnoreCase(nombre)) {
@@ -58,7 +58,6 @@ public class AlmacenPersonajes implements Serializable {
             }
             i++;
         }
-        //buscamos en los cazadores
         i = 0;
         for (Cazador c : this.cazadores) {
             if (c.obtenerNombre().equalsIgnoreCase(nombre)) {
@@ -70,25 +69,21 @@ public class AlmacenPersonajes implements Serializable {
     }
 
     public boolean existePersonaje(String nombre) {
-        //buscamos en los vampiros
         for (Vampiro v : this.vampiros) {
             if (v.obtenerNombre().equalsIgnoreCase(nombre)) {
                 return true;
             }
         }
-        //buscamos en los licantropos
         for (Licantropo l : this.licantropos) {
             if (l.obtenerNombre().equalsIgnoreCase(nombre)) {
                 return true;
             }
         }
-        //buscamos en los cazadores
         for (Cazador c : this.cazadores) {
             if (c.obtenerNombre().equalsIgnoreCase(nombre)) {
                 return true;
             }
         }
-        //si no está en ninguno, no existe
         return false;
     }
 

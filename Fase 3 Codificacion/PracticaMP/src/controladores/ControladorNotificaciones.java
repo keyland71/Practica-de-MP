@@ -15,11 +15,13 @@ import practicamp.Juego;
 import sistemas.DirectorCombate;
 
 /**
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  *
- * @author Ángel Marqués García 
- * 
- * Te muestra los desafíos que tengas pendientes
- * por aceptar, o si algún desafío tuyo se ha completado, te lo muestra también
+ * Te muestra los desafíos que tengas pendientes por aceptar, o si algún desafío
+ * tuyo se ha completado, te lo muestra también
  */
 public class ControladorNotificaciones {
 
@@ -39,7 +41,7 @@ public class ControladorNotificaciones {
 
     public void iniciarControlador() {
         String opcion;
-        boolean inputValido = false;
+        boolean inputValido;
         this.modo = 0;
         if (this.desafiosPendientes.isEmpty()) {
             this.menuDesafio.mostrarMensaje(1);
@@ -109,7 +111,7 @@ public class ControladorNotificaciones {
                 return;
             }
             vencedor.incrementarVictorias();
-            vencedor.obtenerPersonaje().sumarOro(this.desafioActual.obtenerOro() + oroDesafiado + DirectorCombate.oroFijo);
+            vencedor.obtenerPersonaje().sumarOro(this.desafioActual.obtenerOro() + oroDesafiado + DirectorCombate.ORO_FIJO);
         } else if (entrada.equalsIgnoreCase("r")) {
             combateRechazado();
         }

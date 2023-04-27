@@ -8,8 +8,10 @@ import java.util.List;
 import java.util.Set;
 
 /**
- *
- * @author lucia
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class Licantropo extends Personaje {
 

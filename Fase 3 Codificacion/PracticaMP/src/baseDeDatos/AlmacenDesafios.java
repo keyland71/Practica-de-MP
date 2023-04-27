@@ -13,10 +13,10 @@ import java.util.List;
 import practicamp.Juego;
 
 /**
- *
- * @author Marcos Jiménez
- * @author Lucia Dominguez
- * @author Ángel Marqués
+ * @author Sergio de Oro Fernández
+ * @author Marcos Jiménez Pulido
+ * @author Lucia Dominguez Rodrigo
+ * @author Ángel Marqués García
  */
 public class AlmacenDesafios implements Serializable {
 

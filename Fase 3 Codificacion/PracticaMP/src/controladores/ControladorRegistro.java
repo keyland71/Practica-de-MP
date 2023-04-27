@@ -70,7 +70,7 @@ public class ControladorRegistro {
             case 2 -> {
                 return opcion.length() >= 8 && opcion.length() <= 12 || opcion.equalsIgnoreCase("salir");
             }
-            default -> { //case 3 
+            default -> {
                 return opcion.equalsIgnoreCase("admin") || opcion.equalsIgnoreCase("jugador") || opcion.equalsIgnoreCase("salir");
             }
         }
@@ -97,7 +97,7 @@ public class ControladorRegistro {
             case 2 -> {
                 this.fabricaUsuarios.ponerContrasenia(opcion);
             }
-            default -> { //case 3
+            default -> {
                 registrarUsuario(opcion);
                 return true;
             }

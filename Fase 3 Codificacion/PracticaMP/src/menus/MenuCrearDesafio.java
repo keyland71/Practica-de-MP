@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- *
  * @author Sergio de Oro
  * @author Marcos Jimenez
  * @author Lucía Dominguez
@@ -17,7 +16,6 @@ import java.util.Scanner;
  */
 public class MenuCrearDesafio {
 
-    private List<String> jugadores;
     private List<String> mensajes;
     private List<String> mensajesError;
     private Scanner lector;
@@ -28,20 +26,20 @@ public class MenuCrearDesafio {
 
         String mensaje = "¿Cuanto Oro quieres apostar?";
         this.mensajes.add(mensaje);
-        mensaje = "¿A quién quieres desafiar (introduce su nick)?";
+        mensaje = "¿A quien quieres desafiar (introduce su nick)?";
         this.mensajes.add(mensaje);
-        mensaje = "¿Seguro que quieres crear el desafío? (si/no)";
+        mensaje = "¿Seguro que quieres crear el desafio? (si/no)";
         this.mensajes.add(mensaje);
-        mensaje = "Si te equivocas, en cualquier momento puedes escribir 'salir', que te devolverá al menú anterior y cancelará el desafío";
+        mensaje = "Si te equivocas, en cualquier momento puedes escribir 'salir', que te devolvera al menu anterior y cancelara el desafio";
         this.mensajes.add(mensaje);
-        mensaje = "El desafío ha sido creado. Ahora queda a la espera de que lo valide un administrador. Una vez validado, se le mostrará a tu oponente, y cuando responda se te notificará";
+        mensaje = "El desafio ha sido creado. Ahora queda a la espera de que lo valide un administrador. Una vez validado, se le mostrara a tu oponente, y cuando responda se te notificara";
         this.mensajes.add(mensaje);
 
         mensaje = "No puedes apostar esa cantidad";
         this.mensajesError.add(mensaje);
         mensaje = "No existe un usuario con ese nick, el usuario no tiene un personaje activo, o el nick introducido es el tuyo";
         this.mensajesError.add(mensaje);
-        mensaje = "No has introducido un valor válido. Vuelve a interlo!";
+        mensaje = "No has introducido un valor valido. Vuelve a intentarlo!";
         this.mensajesError.add(mensaje);
 
         this.lector = new Scanner(System.in);

@@ -3,8 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 /**
- *
- * @author Marcos
+ *@author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 package clasesDeJuego;
 
@@ -28,7 +30,9 @@ public class Armadura extends Equipo {
 
     @Override
     public String toString() {
-        String result = "        Nombre: " + this.obtenerNombre() + "\n        Defensa: " + this.obtenerDefensa() + "\n        Ataque: " + this.obtenerAtaque();
+        String result = "        Nombre: " + this.obtenerNombre()
+                + "\n        Defensa: " + this.obtenerDefensa()
+                + "\n        Ataque: " + this.obtenerAtaque();
         return result;
     }
 }

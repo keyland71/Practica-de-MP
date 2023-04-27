@@ -5,8 +5,10 @@
 package clasesDeJuego;
 
 /**
- *
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
  * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class Administrador extends Usuario {
 
@@ -14,8 +16,6 @@ public class Administrador extends Usuario {
         super(nombre, nick, contrasenia);
     }
 
-    //habría que ver estas dos si se dejan así o si se hace al revés. Esta implementación en Usuario, y que Jugador le haga override
-    //está explicado en Jugador por qué lo he hecho así
     @Override
     public boolean estaBaneado() {
         return false;

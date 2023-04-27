@@ -5,8 +5,10 @@
 package clasesDeJuego;
 
 /**
- *
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
  * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class Jugador extends Usuario {
 
@@ -26,11 +28,7 @@ public class Jugador extends Usuario {
     public void ponerPersonaje(Personaje p) {
         this.personaje = p;
     }
-
-    //no me tiene sentido implementar aquí estaBaneado, porque necesitarias implementarlo tb arriba
-    //y para eso te quedas con la implementación de arriba
-    //más sentido me tiene implementarlo arriba y hacer override en Admin
-    //por ahora lo hago como he dicho
+    
     public void incrementarVictorias() {
         this.victorias++;
     }

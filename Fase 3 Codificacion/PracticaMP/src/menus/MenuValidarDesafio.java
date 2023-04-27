@@ -11,12 +11,13 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- *
- * @author Ángel Marqués
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class MenuValidarDesafio {
 
-    private List<String> jugadores;
     private List<String> mensajes;
     private List<String> mensajesError;
     private Scanner lector;
@@ -50,9 +51,9 @@ public class MenuValidarDesafio {
 
         mensaje = "El numero introducido no corresponde con una debilidad/fortaleza";
         this.mensajesError.add(mensaje);
-        mensaje = "Ha introducido un valor no válido. Los valores válidos son 'si' y 'no'";
+        mensaje = "Ha introducido un valor no valido. Los valores validos son 'si' y 'no'";
         this.mensajesError.add(mensaje);
-        mensaje = "Operación cancelada";
+        mensaje = "Operacion cancelada";
         this.mensajesError.add(mensaje);
 
         this.lector = new Scanner(System.in);
@@ -64,11 +65,16 @@ public class MenuValidarDesafio {
 
         List<Modificador> elementos;
         switch (pos) {
-            case 0 -> elementos = this.fP1;
-            case 1 -> elementos = this.dP1;
-            case 2 -> elementos = this.fP2;
-            case 3 -> elementos = this.dP2;
-            default -> elementos = null;
+            case 0 ->
+                elementos = this.fP1;
+            case 1 ->
+                elementos = this.dP1;
+            case 2 ->
+                elementos = this.fP2;
+            case 3 ->
+                elementos = this.dP2;
+            default ->
+                elementos = null;
         }
         if (elementos != null) {
             int i = 1;

@@ -10,7 +10,6 @@ import java.util.Map;
 import practicamp.Juego;
 
 /**
- *
  * @author Sergio de Oro Fernández
  * @author Lucía Domínguez Rodrigo
  * @author Ángel Marqués García

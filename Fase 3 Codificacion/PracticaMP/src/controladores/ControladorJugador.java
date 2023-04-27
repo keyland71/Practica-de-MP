@@ -12,6 +12,8 @@ import clasesDeJuego.Desafio;
 import clasesDeJuego.Jugador;
 import clasesDeJuego.Personaje;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import menus.MenuBorrarCuenta;
 import menus.MenuBorrarPersonaje;
@@ -21,8 +23,10 @@ import menus.MenuRanking;
 import practicamp.Juego;
 
 /**
- *
- * @author Ángel Marqués
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class ControladorJugador {
 
@@ -32,6 +36,7 @@ public class ControladorJugador {
     private MenuBorrarPersonaje menuBorrarPersonaje;
     private MenuBorrarCuenta menuBorrarCuenta;
     private int modo;  //0 selección de opción, 1 borrarPersonaje/cuenta (si/no)
+    private HashSet opcionesDisponibles;
 
     public ControladorJugador() {
         this.menuBorrarPersonaje = new MenuBorrarPersonaje();
@@ -39,7 +44,7 @@ public class ControladorJugador {
         this.menuJugador = new MenuJugador();
         this.menuRanking = new MenuRanking();
         this.menuOro = new MenuOro();
-
+        this.opcionesDisponibles = new HashSet(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8"));
         this.modo = 0;
     }
 
@@ -68,7 +73,7 @@ public class ControladorJugador {
     private boolean validarEntrada(String opcion) {
         switch (this.modo) {
             case 0 -> {
-                return opcion.equals("1") || opcion.equals("2") || opcion.equals("3") || opcion.equals("4") || opcion.equals("5") || opcion.equals("6") || opcion.equals("7") || opcion.equals("8");
+                return this.opcionesDisponibles.contains(opcion);
             }
             case 1 -> {
                 return opcion.equalsIgnoreCase("si") || opcion.equalsIgnoreCase("no");
@@ -81,11 +86,11 @@ public class ControladorJugador {
         String opcion;
         Personaje pActivo = Juego.estado.obtenerPersonajeActivo();
         switch (entrada) {
-            case "1" -> { // ver ranking
+            case "1" -> {
                 List<Jugador> ranking = Juego.estado.obtenerAlmacenUsuarios().obtenerRanking();
                 this.menuRanking.mostrarRanking(ranking);
             }
-            case "2" -> { // cambiar equipo activo
+            case "2" -> {
                 if (pActivo == null) {
                     this.menuJugador.mostrarMensaje(5);
                 } else {
@@ -93,19 +98,19 @@ public class ControladorJugador {
                     cCamEqAc.iniciarControlador();
                 }
             }
-            case "3" -> { // Crear desafio
+            case "3" -> {
                 if (pActivo != null && Juego.estado.obtenerAlmacenUsuarios().obtenerNumJugadores() >= 2) {
                     ControladorCrearDesafío cCrearDes = new ControladorCrearDesafío();
                     cCrearDes.iniciarControlador();
                     this.menuJugador.ponerOro(pActivo.obtenerOro());
                 } else {
-                    this.menuJugador.mostrarMensaje((pActivo != null ? 4:6));
+                    this.menuJugador.mostrarMensaje((pActivo != null ? 4 : 6));
                 }
             }
-            case "4" -> { //ver historial oro
+            case "4" -> {
                 mostrarMenuOro();
             }
-            case "5" -> { //crear personaje
+            case "5" -> {
                 if (pActivo != null) {
                     this.menuJugador.mostrarMensajeError(1);
                 } else {
@@ -116,7 +121,7 @@ public class ControladorJugador {
                     }
                 }
             }
-            case "6" -> { // borrar personaje
+            case "6" -> {
                 if (pActivo == null) {
                     this.menuBorrarPersonaje.mostrarMensajeError(1);
                     return false;
@@ -138,7 +143,7 @@ public class ControladorJugador {
                     this.menuJugador.ponerOro(0);
                 }
             }
-            case "7" -> { // Darse de baja/borrar cuenta
+            case "7" -> {
                 boolean valido;
                 int i = 0;
                 do {
@@ -162,7 +167,7 @@ public class ControladorJugador {
                     return true;
                 }
             }
-            case "8" -> { // cerrar sesión/salir
+            case "8" -> {
                 String optSalir = this.menuJugador.mostrarMensaje(3);
                 this.modo = 1;
                 if (validarEntrada(optSalir)) {

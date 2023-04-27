@@ -17,8 +17,10 @@ import java.util.List;
 import java.util.Set;
 
 /**
- *
- * @author Marcos, Lucía
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class FabricaPersonajes implements Serializable {
 
@@ -42,11 +44,11 @@ public class FabricaPersonajes implements Serializable {
     }
 
     public void crearModeloVampiro(Set<Arma> armas, Set<Armadura> armaduras, Set<Esbirro> esbirros, HabilidadEspecial habilidad, List<Modificador> modificadores) {
-        this.modeloVampiro = new Vampiro(habilidad, armas, armaduras, esbirros, 5, 3, modificadores, "Los vampiros son criaturas que utilizan la sangre que roban de sus víctimas como recurso para activar algunas de sus habilidades.");
+        this.modeloVampiro = new Vampiro(habilidad, armas, armaduras, esbirros, 5, 3, modificadores, "Los vampiros son criaturas que utilizan la sangre que roban de sus vIctimas como recurso para activar algunas de sus habilidades.");
     }
 
     public void crearModeloLicantropo(Set<Arma> armas, Set<Armadura> armaduras, Set<Esbirro> esbirros, HabilidadEspecial habilidad, List<Modificador> modificadores) {
-        this.modeloLicantropo = new Licantropo(habilidad, armas, armaduras, esbirros, 4, 4, modificadores, "Los licántropos son criaturas que pueden cambiar de forma humana a una forma de Bestia que aparenta ser la de un gigantesco lobo bípedo.");
+        this.modeloLicantropo = new Licantropo(habilidad, armas, armaduras, esbirros, 4, 4, modificadores, "Los licantropos son criaturas que pueden cambiar de forma humana a una forma de Bestia que aparenta ser la de un gigantesco lobo bipedo.");
     }
 
     public void crearModeloCazador(Set<Arma> armas, Set<Armadura> armaduras, Set<Esbirro> esbirros, HabilidadEspecial habilidad, List<Modificador> modificadores) {

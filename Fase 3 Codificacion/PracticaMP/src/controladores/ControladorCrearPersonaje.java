@@ -10,28 +10,25 @@ import clasesDeJuego.Jugador;
 import clasesDeJuego.Licantropo;
 import clasesDeJuego.Personaje;
 import clasesDeJuego.Vampiro;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import menus.MenuCrearPersonaje;
 import practicamp.Juego;
 import sistemas.FabricaPersonajes;
 
 /**
- *
- * @author Marcos, Lucía
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class ControladorCrearPersonaje {
 
     private int modo;
     private MenuCrearPersonaje menuCrearPersonaje;
-    private Set<String> tiposDisponibles;
     private String tipoElegido;
     private String nombreElegido;
 
     public ControladorCrearPersonaje() {
         this.menuCrearPersonaje = new MenuCrearPersonaje();
-        this.tiposDisponibles = new HashSet(Arrays.asList("vampiro", "licantropo", "cazador", "VAMPIRO", "LICANTROPO", "CAZADOR", "Vampiro", "Licantropo", "Cazador"));
         this.modo = 0;
     }
 
@@ -59,7 +56,7 @@ public class ControladorCrearPersonaje {
                 return this.nombreUnico(opcion);
             }
             case 1 -> {
-                return this.tiposDisponibles.contains(opcion);
+                return opcion.equalsIgnoreCase("vampiro") || opcion.equalsIgnoreCase("licantropo") || opcion.equalsIgnoreCase("cazador");
             }
             case 2 -> {
                 return opcion.equalsIgnoreCase("si") || opcion.equalsIgnoreCase("no");

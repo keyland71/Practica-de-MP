@@ -29,9 +29,9 @@ public class MenuIniciarSesion {
         this.mensajes = new ArrayList<>();
         this.mensajesError = new ArrayList<>();
 
-        String mensaje = "Introduce tu nick:";
+        String mensaje = "Introduce tu nick: (escriba \"salir\" si desea salir al menú principal)";
         this.mensajes.add(mensaje);
-        mensaje = "Introduce tu contrasenia: (escriba \"salir\" si desea salir al menú principal)";
+        mensaje = "Introduce tu contrasenia:";
         this.mensajes.add(mensaje);
         mensaje = "No existe un usuario con el nick introducido, o bien el usuario está baneado. Pulse cualquier boton para continuar.";
         this.mensajesError.add(mensaje);

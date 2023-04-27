@@ -9,8 +9,10 @@ import clasesDeJuego.Personaje;
 import clasesDeJuego.Ronda;
 
 /**
- *
- * @author Ángel Marqués
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class DirectorCombate {
 
@@ -20,7 +22,7 @@ public class DirectorCombate {
     private int vidaP1;
     private Personaje p2;
     private int vidaP2;
-    public static final int oroFijo = 10;
+    public static final int ORO_FIJO = 10;
 
     public DirectorCombate(Combate c) {
         this.combate = c;
@@ -40,7 +42,7 @@ public class DirectorCombate {
             return;
         }
         boolean ganaP1 = vidaP1 > vidaP2;
-        this.combate.ponerVencedor(ganaP1); //igual para que los setters sean setters, la logica tendría que estar aquí
+        this.combate.ponerVencedor(ganaP1);
         this.combate.ponerUsuarioConEsbirros(null);
         if (ganaP1) {
             if (this.vidaP1 > this.p1.obtenerVida()) {
@@ -82,7 +84,6 @@ public class DirectorCombate {
         }
 
         if (ataqueReal >= defensaReal) {
-            //los vampiros me suena que recuperan recurso al hacer daño
             defensor.recibirDanio();
             if (defensor.obtenerNombre().equals(p1.obtenerNombre())) {
                 this.vidaP1--;

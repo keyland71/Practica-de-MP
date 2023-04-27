@@ -16,12 +16,14 @@ import menus.MenuVistaArmas;
 import practicamp.Juego;
 
 /**
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  *
- * @author Ángel Marqués 
- * 
- * Muestra al usuario las armas y armadura activas. 
- * Se le pregunta al usuario qué quiere cambiar. Si quiere cambiar las armas, 
- * se le muestra una lista con las armas disponibles. Ídem para las armaduras.
+ * Muestra al usuario las armas y armadura activas. Se le pregunta al usuario
+ * qué quiere cambiar. Si quiere cambiar las armas, se le muestra una lista con
+ * las armas disponibles. Ídem para las armaduras.
  */
 public class ControladorCambiarEquipoActivo {
 

@@ -11,8 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author lucia
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class Combate implements Serializable {
 
@@ -46,7 +48,7 @@ public class Combate implements Serializable {
 
     public String obtenerFecha() {
         String[] parts = fecha.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:MM:ss")).split(" ");
-        return parts[0] + " a las " + parts[1]; //"yyyy-MM-dd HH:mm:ss"
+        return parts[0] + " a las " + parts[1];
     }
 
     public void aniadirRonda(Ronda ronda) {
@@ -63,7 +65,7 @@ public class Combate implements Serializable {
                 + ",\n    Vencedor: " + (vencedor == null ? "empate" : vencedor.obtenerNick())
                 + ",\n    Usuario Con Esbirros Vivos: " + (usuarioConEsbirros == null ? "ninguno" : usuarioConEsbirros)
                 + ",\n    Oro Ganado: " + Integer.toString(oroGanado)
-                + ",\n    " + reg; //habrá que revisar cómo escribir el registro de rondas
+                + ",\n    " + reg;
         return combate;
     }
 
@@ -75,7 +77,6 @@ public class Combate implements Serializable {
         return uDesafiante;
     }
 
-    //Son necesarias para mostrar el historial de oro
     public int obtenerOroGanado() {
         return this.oroGanado;
     }

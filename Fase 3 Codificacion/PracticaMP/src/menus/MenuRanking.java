@@ -9,8 +9,10 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- *
- * @author Ángel Marqués
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class MenuRanking {
 
@@ -24,7 +26,8 @@ public class MenuRanking {
         System.out.print("Este es el ranking de Jugadores:");
 
         for (int i = 0; i < ranking.size(); i++) {
-            System.out.print("\n    " + Integer.toString(i + 1) + ". " + ranking.get(i).obtenerNick() + " (" + Integer.toString(ranking.get(i).obtenerVictorias()) + " victorias)");
+            System.out.print("\n    " + Integer.toString(i + 1) + ". " + ranking.get(i).obtenerNick()
+                    + " (" + Integer.toString(ranking.get(i).obtenerVictorias()) + " victorias)");
         }
         System.out.println();
         this.lector.nextLine();

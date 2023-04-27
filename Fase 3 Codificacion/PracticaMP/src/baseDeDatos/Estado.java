@@ -20,7 +20,6 @@ import java.util.Set;
 import sistemas.FabricaPersonajes;
 
 /**
- *
  * @author Sergio de Oro Fernández
  * @author Lucía Domínguez Rodrigo
  * @author Ángel Marqués García
@@ -42,17 +41,17 @@ public class Estado implements Serializable {
     private static final String UTF8_BOM = "\uFeFF";
 
     public Estado() {
-        this.ultimoNumRegistro = new NumeroRegistro(); //para copiarlo debe estar inicializado
+        this.ultimoNumRegistro = new NumeroRegistro();
         cargar();
     }
 
     private void cargar() {
-        Estado estadoLeido = null;
+        Estado estadoLeido;
         try {
             String fic = "./archivos/Estado.Estado";
             ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(fic));
-            estadoLeido = (Estado) entrada.readObject();    //lee el estado
-            this.copia(estadoLeido);                        //copia el estado leído en this
+            estadoLeido = (Estado) entrada.readObject();
+            this.copia(estadoLeido);
             entrada.close();
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("No se ha encontrado el Estado, así que se ha creado vacío");
@@ -64,7 +63,6 @@ public class Estado implements Serializable {
             this.almacenEsbirros = new AlmacenEsbirros();
             this.almacenHabilidades = new AlmacenHabilidades();
             this.almacenModificadores = new AlmacenModificadores();
-            //cargarNumReg();
             this.usuarioActivo = null;
             this.fabricaPersonajes = new FabricaPersonajes();
             inicializarFabricaPersonajes();
@@ -115,36 +113,8 @@ public class Estado implements Serializable {
         this.usuarioActivo = u;
     }
 
-    //inutil
-    private void guardarNumReg(NumeroRegistro numReg) {
-        try {
-            String fic = "./archivos/UltimoNumeroDeRegistro.NumeroRegistro";
-            ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(fic));
-            salida.writeObject(numReg);
-            salida.close();
-        } catch (IOException e) {
-            System.out.println("No se ha podido guardar correctamente");
-            System.out.println(e);
-        }
-    }
-
-    //inutil
-    private void cargarNumReg() {
-        try {
-            String fic = "./archivos/UltimoNumeroDeRegistro.NumeroRegistro";
-            ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(fic));
-            this.ultimoNumRegistro = (NumeroRegistro) entrada.readObject();
-            entrada.close();
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println("No se ha encontrado el último numero de registro.");
-            System.out.println(e);
-            this.ultimoNumRegistro = new NumeroRegistro();
-        }
-    }
-
     public void ponerNumReg(NumeroRegistro num) {
         this.ultimoNumRegistro.copiar(num);
-        //guardarNumReg(num);
         this.guardar();
     }
 
@@ -156,7 +126,6 @@ public class Estado implements Serializable {
         return this.usuarioActivo;
     }
 
-    //cuidado con esta función, podría dar problemas
     public Personaje obtenerPersonajeActivo() {
         try {
             if (Class.forName("clasesDeJuego.Jugador").isInstance(this.usuarioActivo)) {
@@ -205,23 +174,21 @@ public class Estado implements Serializable {
         return this.fabricaPersonajes;
     }
 
+    /**
+     * En esta función se crean los personajes de ejemplo de la fábrica de
+     * personajes, que serviran como modelo para crear otros personajes. Primero
+     * se crea el vampiro de ejemplo, luego el licántropo y, por último, el
+     * cazador
+     */
     private void inicializarFabricaPersonajes() {
-        //declaración de variables
-        Set<Arma> armas;
-        Set<Armadura> armaduras;
-        Set<Esbirro> esbirros;
-        List<Modificador> modificadores;
-        HabilidadEspecial habilidad;
 
-        //creación del Vampiro
-        armas = this.almacenEquipo.obtenerArmasEjemploVampiro();
-        armaduras = this.almacenEquipo.obtenerArmadurasEjemploVampiro();
-        esbirros = this.almacenEsbirros.obtenerEsbirrosEjemploVampiro();
-        habilidad = this.almacenHabilidades.obtenerHabilidadEjemploVampiro();
-        modificadores = this.almacenModificadores.obtenerModificadoresEjemploVampiro();
+        Set<Arma> armas = this.almacenEquipo.obtenerArmasEjemploVampiro();
+        Set<Armadura>armaduras = this.almacenEquipo.obtenerArmadurasEjemploVampiro();
+        Set<Esbirro> esbirros = this.almacenEsbirros.obtenerEsbirrosEjemploVampiro();
+        HabilidadEspecial habilidad = this.almacenHabilidades.obtenerHabilidadEjemploVampiro();
+        List<Modificador> modificadores = this.almacenModificadores.obtenerModificadoresEjemploVampiro();
         this.fabricaPersonajes.crearModeloVampiro(armas, armaduras, esbirros, habilidad, modificadores);
 
-        //creación del Licántropo
         armas = this.almacenEquipo.obtenerArmasEjemploLicantropo();
         armaduras = this.almacenEquipo.obtenerArmadurasEjemploLicantropo();
         esbirros = this.almacenEsbirros.obtenerEsbirrosEjemploLicantropo();
@@ -229,7 +196,6 @@ public class Estado implements Serializable {
         modificadores = this.almacenModificadores.obtenerModificadoresEjemploLicantropo();
         this.fabricaPersonajes.crearModeloLicantropo(armas, armaduras, esbirros, habilidad, modificadores);
 
-        //creación del cazador
         armas = this.almacenEquipo.obtenerArmasEjemploCazador();
         armaduras = this.almacenEquipo.obtenerArmadurasEjemploCazador();
         esbirros = this.almacenEsbirros.obtenerEsbirrosEjemploCazador();
@@ -237,9 +203,14 @@ public class Estado implements Serializable {
         modificadores = this.almacenModificadores.obtenerModificadoresEjemploCazador();
         this.fabricaPersonajes.crearModeloCazador(armas, armaduras, esbirros, habilidad, modificadores);
     }
-    
-    public static String quitarCaracterInicioCSV(String s){
-        if (s.startsWith(UTF8_BOM)){
+
+    /**
+     * Esta función quita de una string el carácter de inicio de los archivos .csv ("\uFeFF")
+     * @param s String a la que se le quita el carácter de inicio indicado
+     * @return String inicial sin el carácter de inicio indicado
+     */
+    public static String quitarCaracterInicioCSV(String s) {
+        if (s.startsWith(UTF8_BOM)) {
             s = s.substring(1);
         }
         return s;

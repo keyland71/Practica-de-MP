@@ -3,8 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 /**
- *
- * @author Marcos
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 package clasesDeJuego;
 
@@ -38,14 +40,15 @@ public class Modificador implements Serializable {
         return this.valor;
     }
 
-    private int obtenerIncremento(int valor, TipoModificador tipo) {  //CAMBIARLO
-        if (tipo.equals(TipoModificador.Fortaleza)) {
-            return valor;
-        } else if (tipo.equals(TipoModificador.Debilidad)) {
-            return valor * (-1);
-        } else {
-            return 0;
-        }
+    private int obtenerIncremento(int valor, TipoModificador tipo) {
+        return switch (tipo) {
+            case Fortaleza ->
+                valor;
+            case Debilidad ->
+                valor * (-1);
+            default ->
+                0;
+        };
     }
 
     public String obtenerNombre() {

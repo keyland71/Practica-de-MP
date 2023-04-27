@@ -12,7 +12,6 @@ import menus.MenuCrearDesafio;
 import practicamp.Juego;
 
 /**
- *
  * @author Sergio de Oro
  * @author Marcos Jimenez
  * @author Lucía Dominguez
@@ -69,10 +68,10 @@ public class ControladorCrearDesafío {
             int oroA = Integer.parseInt(o);
             Personaje p = Juego.estado.obtenerPersonajeActivo();
             return p.obtenerOro() >= oroA && oroA >= 0;
-        } catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             return false;
         }
-        
+
     }
 
     private boolean usuarioValido(String nombre) {

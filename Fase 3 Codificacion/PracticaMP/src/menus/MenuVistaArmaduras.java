@@ -10,8 +10,10 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- *
- * @author Ángel Marqués
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class MenuVistaArmaduras {
 
@@ -26,7 +28,7 @@ public class MenuVistaArmaduras {
         String mensaje = "¿Seguro que quieres cambiar tu armadura activa a la seleccionada?";
         this.mensajes.add(mensaje);
 
-        mensaje = "El valor introducido no corresponde a una armadura. Introduce un numero que corresponda a una armadura, o salir para cancelar la operación";
+        mensaje = "El valor introducido no corresponde a una armadura. Introduce un numero que corresponda a una armadura, o salir para cancelar la operacion";
         this.mensajesError.add(mensaje);
         mensaje = "Debes introducir si o no";
         this.mensajesError.add(mensaje);
@@ -52,7 +54,7 @@ public class MenuVistaArmaduras {
         for (int i = 0; i < armaduras.size(); i++) {
             System.out.println("    Armadura " + Integer.toString(i + 1) + ":\n" + armaduras.get(i).toString());
         }
-        System.out.println("Introduce el número de la armadura que te quieras equipar, o 'salir' si no quieres cambiar tu armadura");
+        System.out.println("Introduce el numero de la armadura que te quieras equipar, o 'salir' si no quieres cambiar tu armadura");
         return this.lector.nextLine();
     }
 }

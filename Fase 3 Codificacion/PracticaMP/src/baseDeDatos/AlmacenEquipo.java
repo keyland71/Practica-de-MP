@@ -16,6 +16,12 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
+/**
+ * @author Sergio de Oro Fernández
+ * @author Marcos Jiménez Pulido
+ * @author Lucia Dominguez Rodrigo
+ * @author Ángel Marqués García
+ */
 public class AlmacenEquipo implements Serializable {
 
     private List<Arma> armas;
@@ -29,17 +35,15 @@ public class AlmacenEquipo implements Serializable {
     }
 
     private void cargarEquipo() {
-        File armas = new File("./archivos/Armas.csv");
-        File armaduras = new File("./archivos/Armaduras.csv");
+        File archivoArmas = new File("./archivos/Armas.csv");
+        File archivoArmaduras = new File("./archivos/Armaduras.csv");
         try {
-
             String nombre;
             Variante tipo;
             int ataque;
             int defensa;
 
-            //leemos armas
-            Scanner lectorArmas = new Scanner(armas);
+            Scanner lectorArmas = new Scanner(archivoArmas);
             while (lectorArmas.hasNextLine()) {
                 String linea = lectorArmas.nextLine();
                 linea = Estado.quitarCaracterInicioCSV(linea);
@@ -54,8 +58,7 @@ public class AlmacenEquipo implements Serializable {
                 this.armas.add(nuevaArma);
             }
 
-            //leemos armaduras
-            Scanner lectorArmaduras = new Scanner(armaduras);
+            Scanner lectorArmaduras = new Scanner(archivoArmaduras);
             while (lectorArmaduras.hasNextLine()) {
                 String linea = lectorArmaduras.nextLine();
                 linea = Estado.quitarCaracterInicioCSV(linea);
@@ -69,7 +72,7 @@ public class AlmacenEquipo implements Serializable {
                 this.armaduras.add(nuevaArmadura);
             }
         } catch (FileNotFoundException exception) {
-            System.out.println("No existe uno de los siguients archivos: Armas.csv, Armaduras.csv.");
+            System.out.println("No existe uno de los siguientes archivos: Armas.csv, Armaduras.csv.");
         }
     }
 

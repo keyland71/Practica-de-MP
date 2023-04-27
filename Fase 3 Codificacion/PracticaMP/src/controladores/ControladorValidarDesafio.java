@@ -12,8 +12,10 @@ import menus.MenuValidarDesafio;
 import practicamp.Juego;
 
 /**
- *
- * @author Ángel Marqués
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class ControladorValidarDesafio {
 
@@ -24,7 +26,7 @@ public class ControladorValidarDesafio {
     private Personaje p2;
 
     /**
-     * se encarga de llevar a cabo el proceso de validación del desafío que
+     * Se encarga de llevar a cabo el proceso de validación del desafío que
      * reciba en el constructor
      *
      * @param d desafío a validar
@@ -61,7 +63,7 @@ public class ControladorValidarDesafio {
         int tam = 0;
         switch (this.modo) {
             case 0 -> {
-                tam = this.p1.obtenerFortalezas().size();   
+                tam = this.p1.obtenerFortalezas().size();
             }
             case 1 -> {
                 tam = this.p1.obtenerDebilidades().size();

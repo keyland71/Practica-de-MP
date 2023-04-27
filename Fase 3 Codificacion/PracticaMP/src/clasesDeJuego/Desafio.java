@@ -7,8 +7,10 @@ package clasesDeJuego;
 import java.io.Serializable;
 
 /**
- *
- * @author lucia
+ * @author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 public class Desafio implements Serializable {
 
@@ -60,6 +62,7 @@ public class Desafio implements Serializable {
 
     @Override
     public String toString() {
-        return this.uDesafiante.obtenerNick() + " -> " + this.uDesafiado.obtenerNick() + "(" + Integer.toString(this.oroApostado) + ")"; //Escribe angel -> sergio (300)
+        return this.uDesafiante.obtenerNick() + " -> " + this.uDesafiado.obtenerNick()
+                + "(" + Integer.toString(this.oroApostado) + ")";
     }
 }

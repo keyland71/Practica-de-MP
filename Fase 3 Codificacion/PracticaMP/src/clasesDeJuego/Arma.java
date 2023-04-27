@@ -3,8 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 /**
- *
- * @author Marcos
+ *@author Sergio de Oro Fernández
+ * @author Lucía Domínguez Rodrigo
+ * @author Ángel Marqués García
+ * @author Marcos Jiménez Pulido
  */
 package clasesDeJuego;
 
@@ -36,7 +38,10 @@ public class Arma extends Equipo {
 
     @Override
     public String toString() {
-        String result = "        Nombre: " + this.obtenerNombre() + "\n        Ataque: " + this.obtenerAtaque() + "\n        Defensa: " + this.obtenerDefensa() + "\n        Tipo: " + (this.tipo == Variante.unaMano ? "Una mano" : "Dos manos");
+        String result = "        Nombre: " + this.obtenerNombre()
+                + "\n        Ataque: " + this.obtenerAtaque()
+                + "\n        Defensa: " + this.obtenerDefensa()
+                + "\n        Tipo: " + (this.tipo == Variante.unaMano ? "Una mano" : "Dos manos");
         return result;
     }
 
