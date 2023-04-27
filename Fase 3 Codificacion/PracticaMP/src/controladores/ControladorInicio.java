@@ -89,7 +89,7 @@ public class ControladorInicio {
     }
 
     private void registrarse() {
-        ControladorRegistro controladorRegistro = new ControladorRegistro();
+         ControladorRegistro controladorRegistro = new ControladorRegistro();
         controladorRegistro.iniciarControlador();
     }
 

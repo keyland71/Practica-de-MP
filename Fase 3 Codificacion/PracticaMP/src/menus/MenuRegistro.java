@@ -35,6 +35,8 @@ public class MenuRegistro {
         this.mensajesError.add(mensaje);
         mensaje = "Por favor, introduzca una contrasenia con una longitud entre 8 y 12 caracteres. Pulse cualquier boton para continuar.";
         this.mensajesError.add(mensaje);
+        mensaje = "Por favor, introduzca un tipo de usuario valido. Pulse cualquier boton para continuar.";
+        this.mensajesError.add(mensaje);
         this.lector = new Scanner(System.in);
     }
 
