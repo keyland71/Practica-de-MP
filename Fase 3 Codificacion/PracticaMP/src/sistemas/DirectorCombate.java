@@ -51,7 +51,8 @@ public class DirectorCombate {
         } else if (this.vidaP2 > this.p2.obtenerVida()) {
             this.combate.ponerUsuarioConEsbirros(this.combate.obtenerUDesafiado());
         }
-
+        p1.reestablecerPersonaje();
+        p2.reestablecerPersonaje();
     }
 
     private void realizarRonda() {
