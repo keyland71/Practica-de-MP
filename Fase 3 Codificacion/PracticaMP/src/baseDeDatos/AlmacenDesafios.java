@@ -45,7 +45,7 @@ public class AlmacenDesafios implements Serializable {
 
         List<Desafio> desafiosCompletados = new ArrayList<>();
         for (Desafio d : this.desafios) {
-            if (d.obtenerEstado() == EstadoDesafio.completado && (d.obtenerJugadorDesafiado().obtenerNick().equals(j.obtenerNick()) || d.obtenerJugadorDesafiante().obtenerNick().equals(j.obtenerNick()))) {
+            if (d.obtenerEstado() == EstadoDesafio.completado || d.obtenerEstado().equals(EstadoDesafio.aceptado) && (d.obtenerJugadorDesafiado().obtenerNick().equals(j.obtenerNick()) || d.obtenerJugadorDesafiante().obtenerNick().equals(j.obtenerNick()))) {
                 desafiosCompletados.add(d);
             }
         }
