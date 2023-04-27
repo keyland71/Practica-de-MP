@@ -17,15 +17,23 @@ import java.util.Set;
 public class Vampiro extends Personaje {
 
     private int edad;
+    private static int SUMA_RECURSO = 4;
+    private static int MAX_RECURSO = 10;
+    private static int LIMITE_RECURSO = 5;
+    private static int SUMA_POTENCIAL = 2;
 
     public Vampiro(HabilidadEspecial hab, Set<Arma> armas, Set<Armadura> armaduras, Set<Esbirro> esbirros, int vida, int poder, List<Modificador> mods, String desc) {
-        super(hab, armas, armaduras, esbirros, vida, poder, mods, desc, 0);
+        super(hab, armas, armaduras, esbirros, vida, poder, mods, desc, 0, SUMA_RECURSO, MAX_RECURSO);
         this.edad = (int) (Math.random() * 1000 + 18);
     }
 
     public Vampiro(String nombre, Vampiro vampiroModelo) {
         super(nombre, vampiroModelo);
         this.edad = vampiroModelo.obtenerEdad();
+    }
+
+    public int obtenerEdad() {
+        return this.edad;
     }
 
     @Override
@@ -48,16 +56,18 @@ public class Vampiro extends Personaje {
 
     @Override
     public void modificarRecurso() {
-        if ((this.obtenerRecurso()) <= 10) {
-            this.sumarRecurso(4);
+        int sumaTotal = this.obtenerSumaRecurso();
+        if (this.obtenerRecurso() + sumaTotal > this.obtenerMaxRecurso()) {
+            sumaTotal = this.obtenerMaxRecurso() - this.obtenerRecurso();
         }
+        this.sumarRecurso(sumaTotal);
     }
 
     @Override
     public int calcularPotencialAtaque() {
         int potencialAtaque = super.calcularPotencialAtaque();
-        if (this.obtenerRecurso() >= 5) {
-            potencialAtaque += 2;
+        if (this.obtenerRecurso() >= LIMITE_RECURSO) {
+            potencialAtaque += SUMA_POTENCIAL;
         }
         return potencialAtaque;
     }
@@ -65,19 +75,27 @@ public class Vampiro extends Personaje {
     @Override
     public int calcularPotencialDefensa() {
         int potencialDefensa = super.calcularPotencialDefensa();
-        if (this.obtenerRecurso() >= 5) {
-            potencialDefensa += 2;
+        if (this.obtenerRecurso() >= LIMITE_RECURSO) {
+            potencialDefensa += SUMA_POTENCIAL;
         }
         return potencialDefensa;
     }
 
+    /**
+     * Se le restará al recurso del vampiro el coste de su habilidad
+     */
     @Override
     public void usarHabilidad() {
-        this.sumarRecurso(this.obtenerHabilidadEspecial().obtenerCoste() * -1);
+        int costeFinal = this.obtenerHabilidadEspecial().obtenerCoste() * -1;
+        if (this.obtenerRecurso() + costeFinal < 0) {
+            costeFinal = this.obtenerRecurso() * -1;
+        }
+        this.sumarRecurso(costeFinal);
     }
 
-    public int obtenerEdad() {
-        return this.edad;
+    @Override
+    public void hacerDanio() {
+        this.modificarRecurso();
     }
 
 }

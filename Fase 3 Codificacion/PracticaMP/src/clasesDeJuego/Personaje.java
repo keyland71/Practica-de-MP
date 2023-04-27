@@ -33,64 +33,10 @@ public abstract class Personaje implements Serializable {
     private Set<Esbirro> esbirros;
     private int oro = 100;
     private int puntosRecurso = 0;
+    private int sumaRecurso;
+    private int maxRecurso;
 
-    @Override
-    public String toString() {
-        List<Equipo> aAc = new ArrayList<>(armasActivas);
-        List<Equipo> aDisp = new ArrayList<>(armasDisponibles);
-        List<Equipo> adDisp = new ArrayList<>(armadurasDisponibles);
-
-        String result = "1. Nombre: " + nombre + "\n"
-                + "2. Descripcion: " + descripcion + "\n"
-                + "3. Vida: " + Integer.toString(vida) + "\n"
-                + "4. Poder: " + Integer.toString(poder) + "\n"
-                + "5. Habilidad: " + habilidadEspecial.obtenerNombre() + "\n"
-                + "6. Armas Activas: " + eqToString(aAc) + "\n"
-                + "7. Armas Disponibles" + "\n    " + eqToString(aDisp) + "\n"
-                + "8. Armadura Activa: " + armaduraActiva.obtenerNombre() + "\n"
-                + "9. Armaduras Disponibles: " + "\n    " + eqToString(adDisp) + "\n"
-                + "10. Modificadores: " + modToString(this.modificadores) + "\n"
-                + "11. Esbirros: " + esbToString(this.esbirros) + "\n";
-        return result;
-    }
-
-    private String eqToString(List<Equipo> e) {
-        String result = null;
-        for (Equipo eq : e) {
-            if (result == null) {
-                result = eq.obtenerNombre();
-            } else {
-                result += ", " + eq.obtenerNombre();
-            }
-        }
-        return result;
-    }
-
-    private String modToString(List<Modificador> m) {
-        String result = null;
-        for (Modificador mod : m) {
-            if (result == null) {
-                result = mod.obtenerNombre() + (mod.obtenerTipo() == TipoModificador.Fortaleza ? "(F)" : "(D)");
-            } else {
-                result += ", " + mod.obtenerNombre() + (mod.obtenerTipo() == TipoModificador.Fortaleza ? "(F)" : "(D)");
-            }
-        }
-        return result;
-    }
-
-    private String esbToString(Set<Esbirro> esbirros) {
-        String result = null;
-        for (Esbirro esb : esbirros) {
-            if (result == null) {
-                result = esb.obtenerNombre();
-            } else {
-                result += ", " + esb.obtenerNombre();
-            }
-        }
-        return result;
-    }
-
-    public Personaje(HabilidadEspecial hab, Set<Arma> armas, Set<Armadura> armaduras, Set<Esbirro> esbirros, int vida, int poder, List<Modificador> mods, String desc, int puntosRec) {
+    public Personaje(HabilidadEspecial hab, Set<Arma> armas, Set<Armadura> armaduras, Set<Esbirro> esbirros, int vida, int poder, List<Modificador> mods, String desc, int puntosRec, int sumaRec, int maxRec) {
         this.nombre = "Modelo Personaje";
         ponerHabilidadEspecial(hab);
         this.armasDisponibles.addAll(armas);
@@ -103,6 +49,8 @@ public abstract class Personaje implements Serializable {
         this.puntosRecurso = puntosRec;
         this.armasActivas.add((Arma) armas.toArray()[0]);
         this.armaduraActiva = ((Armadura) armaduras.toArray()[0]);
+        this.sumaRecurso = sumaRec;
+        this.maxRecurso = maxRec;
     }
 
     public Personaje(String nombre, Personaje personajeModelo) {
@@ -128,6 +76,9 @@ public abstract class Personaje implements Serializable {
 
         this.armasActivas.add((Arma) this.armasDisponibles.toArray()[0]);
         this.armaduraActiva = ((Armadura) this.armadurasDisponibles.toArray()[0]);
+        this.sumaRecurso = personajeModelo.obtenerSumaRecurso();
+        this.maxRecurso = personajeModelo.obtenerMaxRecurso();
+
     }
 
     public List<Arma> obtenerArmasActivas() {
@@ -226,6 +177,14 @@ public abstract class Personaje implements Serializable {
         return this.oro;
     }
 
+    public int obtenerSumaRecurso() {
+        return this.sumaRecurso;
+    }
+
+    public int obtenerMaxRecurso() {
+        return this.maxRecurso;
+    }
+
     public void ponerPuntosRecurso(int recurso) {
         this.puntosRecurso = recurso;
     }
@@ -266,11 +225,7 @@ public abstract class Personaje implements Serializable {
     }
 
     public void sumarRecurso(int recurso) {
-        if ((this.puntosRecurso + recurso) <= 0) {
-            this.puntosRecurso += recurso;
-        } else {
-            this.puntosRecurso = 0;
-        }
+        this.puntosRecurso += recurso;
 
     }
 
@@ -317,14 +272,27 @@ public abstract class Personaje implements Serializable {
         return this.puntosRecurso >= this.habilidadEspecial.obtenerCoste();
     }
 
+    /**
+     * Este metodo sera reimplementado en las clases hijas. Por defecto no se
+     * realiza ninguna acción
+     */
     public void usarHabilidad() {
-        //Por defecto no hace nada
     }
 
     public abstract void modificarRecurso();
 
+    /**
+     * Este metodo sera reimplementado en las clases hijas. Por defecto no se
+     * realiza ninguna acción
+     */
     public void recibirDanio() {
-        //Por defecto no ocurre nada
+    }
+
+    /**
+     * Este metodo sera reimplementado en las clases hijas. Por defecto no se
+     * realiza ninguna acción
+     */
+    public void hacerDanio() {
     }
 
     public void reestablecerPersonaje() {
@@ -364,4 +332,61 @@ public abstract class Personaje implements Serializable {
         this.modificadores.clear();
         this.modificadores.addAll(mods);
     }
+
+    @Override
+    public String toString() {
+        List<Equipo> aAc = new ArrayList<>(armasActivas);
+        List<Equipo> aDisp = new ArrayList<>(armasDisponibles);
+        List<Equipo> adDisp = new ArrayList<>(armadurasDisponibles);
+
+        String result = "1. Nombre: " + nombre + "\n"
+                + "2. Descripcion: " + descripcion + "\n"
+                + "3. Vida: " + Integer.toString(vida) + "\n"
+                + "4. Poder: " + Integer.toString(poder) + "\n"
+                + "5. Habilidad: " + habilidadEspecial.obtenerNombre() + "\n"
+                + "6. Armas Activas: " + eqToString(aAc) + "\n"
+                + "7. Armas Disponibles" + "\n    " + eqToString(aDisp) + "\n"
+                + "8. Armadura Activa: " + armaduraActiva.obtenerNombre() + "\n"
+                + "9. Armaduras Disponibles: " + "\n    " + eqToString(adDisp) + "\n"
+                + "10. Modificadores: " + modToString(this.modificadores) + "\n"
+                + "11. Esbirros: " + esbToString(this.esbirros) + "\n";
+        return result;
+    }
+
+    private String eqToString(List<Equipo> e) {
+        String result = null;
+        for (Equipo eq : e) {
+            if (result == null) {
+                result = eq.obtenerNombre();
+            } else {
+                result += ", " + eq.obtenerNombre();
+            }
+        }
+        return result;
+    }
+
+    private String modToString(List<Modificador> m) {
+        String result = null;
+        for (Modificador mod : m) {
+            if (result == null) {
+                result = mod.obtenerNombre() + (mod.obtenerTipo() == TipoModificador.Fortaleza ? "(F)" : "(D)");
+            } else {
+                result += ", " + mod.obtenerNombre() + (mod.obtenerTipo() == TipoModificador.Fortaleza ? "(F)" : "(D)");
+            }
+        }
+        return result;
+    }
+
+    private String esbToString(Set<Esbirro> esbirros) {
+        String result = null;
+        for (Esbirro esb : esbirros) {
+            if (result == null) {
+                result = esb.obtenerNombre();
+            } else {
+                result += ", " + esb.obtenerNombre();
+            }
+        }
+        return result;
+    }
+
 }

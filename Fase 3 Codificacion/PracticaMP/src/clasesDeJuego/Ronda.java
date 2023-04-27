@@ -36,7 +36,7 @@ public class Ronda implements Serializable {
     }
 
     public String toStringRonda(int i) {
-        String ronda = "Ronda " + Integer.toString(i)
+        String ronda = "\n" + "Ronda " + Integer.toString(i)
                 + "\n   Datos del desafiante:"
                 + "\n      Vida Inicial: " + Integer.toString(vidaInicialA)
                 + "\n      Vida Final: " + Integer.toString(vidaFinalA)

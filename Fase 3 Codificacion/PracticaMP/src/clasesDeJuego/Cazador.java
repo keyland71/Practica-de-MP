@@ -15,10 +15,12 @@ import java.util.Set;
  */
 public class Cazador extends Personaje {
 
-    public static int voluntadMaxima = 3;
+    public static int VOLUNTAD_MAXIMA = 3;
+    private static int SUMA_RECURSO = -1;
+    private static int MAX_RECURSO = 0;
 
     public Cazador(HabilidadEspecial hab, Set<Arma> armas, Set<Armadura> armaduras, Set<Esbirro> esbirros, int vida, int poder, List<Modificador> mods, String desc) {
-        super(hab, armas, armaduras, esbirros, vida, poder, mods, desc, voluntadMaxima);
+        super(hab, armas, armaduras, esbirros, vida, poder, mods, desc, VOLUNTAD_MAXIMA, SUMA_RECURSO, MAX_RECURSO);
     }
 
     public Cazador(String nombre, Cazador cazadorModelo) {
@@ -51,6 +53,6 @@ public class Cazador extends Personaje {
 
     @Override
     public void reestablecerPersonaje() {
-        this.ponerPuntosRecurso(voluntadMaxima);
+        this.ponerPuntosRecurso(VOLUNTAD_MAXIMA);
     }
 }

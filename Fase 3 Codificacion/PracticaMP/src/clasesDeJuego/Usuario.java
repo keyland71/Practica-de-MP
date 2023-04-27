@@ -66,23 +66,6 @@ public class Usuario implements Serializable {
         }
 
         return contraseniaEncriptada;
-
-    }
-
-    public String desencriptarContrasenia(String c) {
-        String[] caracteres = c.split("");
-        String contraseniaDesencriptada = "";
-        for (int i = 0; i <= c.length() - 1; i++) {
-            char caracter = caracteres[i].charAt(0);
-            int posicionTablaASCII = caracter;
-            posicionTablaASCII = (posicionTablaASCII - this.claveEncriptacion);
-            char nuevoCaracter = (char) posicionTablaASCII;
-            String nuevoString = Character.toString(nuevoCaracter);
-            caracteres[i] = nuevoString;
-            contraseniaDesencriptada = contraseniaDesencriptada + (caracteres[i] == null ? "" : caracteres[i]);
-        }
-        this.claveEncriptacion = 0;
-        return contraseniaDesencriptada;
     }
 
     public boolean esAdministrador() {

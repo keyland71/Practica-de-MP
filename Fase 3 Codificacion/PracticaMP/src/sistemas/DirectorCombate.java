@@ -60,6 +60,12 @@ public class DirectorCombate {
         this.rondaActual.ponerVidaInicialB(vidaP2);
         realizarTurno(p1, p2);
         realizarTurno(p2, p1);
+        if (p1.puedeUsarHabilidad()) {
+            p1.usarHabilidad();
+        }
+        if (p2.puedeUsarHabilidad()) {
+            p2.usarHabilidad();
+        }
         this.rondaActual.ponerVidaFinalA(vidaP1);
         this.rondaActual.ponerVidaFinalB(vidaP2);
         this.combate.incrementarRonda();
@@ -84,6 +90,7 @@ public class DirectorCombate {
         }
 
         if (ataqueReal >= defensaReal) {
+            atacante.hacerDanio();
             defensor.recibirDanio();
             if (defensor.obtenerNombre().equals(p1.obtenerNombre())) {
                 this.vidaP1--;

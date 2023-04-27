@@ -15,10 +15,11 @@ import java.util.Set;
  */
 public class Licantropo extends Personaje {
 
-    public static int rabiaMaxima = 3;
+    private static int SUMA_RECURSO = 1;
+    private static int MAX_RECURSO = 3;
 
     public Licantropo(HabilidadEspecial hab, Set<Arma> armas, Set<Armadura> armaduras, Set<Esbirro> esbirros, int vida, int poder, List<Modificador> mods, String desc) {
-        super(hab, armas, armaduras, esbirros, vida, poder, mods, desc, 0);
+        super(hab, armas, armaduras, esbirros, vida, poder, mods, desc, 0, SUMA_RECURSO, MAX_RECURSO);
     }
 
     public Licantropo(String nombre, Licantropo licantropoModelo) {
@@ -34,9 +35,11 @@ public class Licantropo extends Personaje {
 
     @Override
     public void modificarRecurso() {
-        if ((this.obtenerRecurso()) <= Licantropo.rabiaMaxima) {
-            this.sumarRecurso(1);
+        int sumaTotal = this.obtenerSumaRecurso();
+        if (this.obtenerRecurso() + sumaTotal > this.obtenerMaxRecurso()) {
+            sumaTotal = this.obtenerMaxRecurso() - this.obtenerRecurso();
         }
+        this.sumarRecurso(sumaTotal);
     }
 
     @Override
