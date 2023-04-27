@@ -62,7 +62,7 @@ public class ControladorRegistro {
     private boolean validarEntrada(String opcion) {
         switch (this.modo) {
             case 0 -> {
-                return nickUnico(opcion);
+                return nickUnico(opcion) && opcion.length() > 0;
             }
             case 1 -> {
                 return opcion.length() > 0;
