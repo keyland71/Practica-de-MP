@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
-import sistemas.BOMRemover;
 
 public class AlmacenEquipo implements Serializable {
 
@@ -43,7 +42,7 @@ public class AlmacenEquipo implements Serializable {
             Scanner lectorArmas = new Scanner(armas);
             while (lectorArmas.hasNextLine()) {
                 String linea = lectorArmas.nextLine();
-                linea = BOMRemover.removeUTF8BOM(linea);
+                linea = Estado.quitarCaracterInicioCSV(linea);
                 String[] seccionesLinea = linea.split(";");
 
                 nombre = seccionesLinea[0];
@@ -59,7 +58,7 @@ public class AlmacenEquipo implements Serializable {
             Scanner lectorArmaduras = new Scanner(armaduras);
             while (lectorArmaduras.hasNextLine()) {
                 String linea = lectorArmaduras.nextLine();
-                linea = BOMRemover.removeUTF8BOM(linea);
+                linea = Estado.quitarCaracterInicioCSV(linea);
                 String[] seccionesLinea = linea.split(";");
 
                 nombre = seccionesLinea[0];

@@ -39,6 +39,7 @@ public class Estado implements Serializable {
     private NumeroRegistro ultimoNumRegistro;
     private FabricaPersonajes fabricaPersonajes;
     private Usuario usuarioActivo;
+    private static final String UTF8_BOM = "\uFeFF";
 
     public Estado() {
         this.ultimoNumRegistro = new NumeroRegistro(); //para copiarlo debe estar inicializado
@@ -235,6 +236,13 @@ public class Estado implements Serializable {
         habilidad = this.almacenHabilidades.obtenerHabilidadEjemploCazador();
         modificadores = this.almacenModificadores.obtenerModificadoresEjemploCazador();
         this.fabricaPersonajes.crearModeloCazador(armas, armaduras, esbirros, habilidad, modificadores);
+    }
+    
+    public static String quitarCaracterInicioCSV(String s){
+        if (s.startsWith(UTF8_BOM)){
+            s = s.substring(1);
+        }
+        return s;
     }
 
 }
