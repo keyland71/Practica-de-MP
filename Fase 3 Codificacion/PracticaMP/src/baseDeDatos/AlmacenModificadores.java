@@ -50,6 +50,9 @@ public class AlmacenModificadores implements Serializable {
                 valor = Integer.parseInt(seccionesLinea[1]);
                 tipo = TipoModificador.valueOf(seccionesLinea[2]);
 
+                if (tipo.equals(TipoModificador.Debilidad)) {
+                    valor = valor * -1;
+                }
                 Modificador mod = new Modificador(nombre, valor, tipo);
                 this.modificadores.add(mod);
             }
