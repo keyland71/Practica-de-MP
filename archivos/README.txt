@@ -1,1 +1,1 @@
-En esta carpeta se guardarán todos los archivos asociados a los almacenes del programa, así como el último número de registro
+En esta carpeta se guardarán el estado y los archivos de texto plano desde los que se leerán parte de los datos de la aplicación
