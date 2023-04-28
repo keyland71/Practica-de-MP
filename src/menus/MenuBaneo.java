@@ -40,7 +40,7 @@ public class MenuBaneo {
         this.mensajes.add(mensaje);
         mensaje = "Usuario desbaneado. Pulse intro para continuar";
         this.mensajes.add(mensaje);
-        mensaje = "Todos los usuarios estan baneados, no se puede banear ningun usuario";
+        mensaje = "Todos los usuarios estan baneados o no existe ningun usuario";
         this.mensajes.add(mensaje);
         mensaje = "No hay ningún usuario baneado";
         this.mensajes.add(mensaje);

@@ -54,8 +54,6 @@ public class Estado implements Serializable {
             this.copia(estadoLeido);
             entrada.close();
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("No se ha encontrado el Estado, así que se ha creado vacío");
-
             this.almacenUsuarios = new AlmacenUsuarios();
             this.almacenDesafios = new AlmacenDesafios();
             this.almacenPersonajes = new AlmacenPersonajes();
