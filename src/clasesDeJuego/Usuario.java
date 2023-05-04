@@ -33,15 +33,11 @@ public class Usuario implements Serializable {
         return this.nick;
     }
 
-    public String obtenerContrasenia() {
-        return this.contrasenia;
-    }
-
     public boolean compararContrasenia(String input) {
         return this.contrasenia.equals(encriptarContrasenia(input, false));
     }
 
-    public final String encriptarContrasenia(String c, boolean generarClave) {
+    private final String encriptarContrasenia(String c, boolean generarClave) {
         int clave;
         String[] caracteres = c.split("");
         if (generarClave) {
@@ -82,6 +78,10 @@ public class Usuario implements Serializable {
 
     public void ponerNumReg(NumeroRegistro numR) {
         this.numReg.copiar(numR);
+    }
+    
+    public boolean compararNumReg(NumeroRegistro numR) {
+        return this.numReg.sonIguales(numR);
     }
 
 }

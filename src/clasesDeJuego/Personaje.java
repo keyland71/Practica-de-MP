@@ -36,6 +36,14 @@ public abstract class Personaje implements Serializable {
     private int sumaRecurso;
     private int maxRecurso;
 
+    /**
+     * Solo se debe usar en testing
+     * @param n
+     */
+    public Personaje(String n){
+        this.nombre = n;
+    }
+    
     public Personaje(HabilidadEspecial hab, Set<Arma> armas, Set<Armadura> armaduras, Set<Esbirro> esbirros, int vida, int poder, List<Modificador> mods, String desc, int puntosRec, int sumaRec, int maxRec) {
         this.nombre = "Modelo Personaje";
         ponerHabilidadEspecial(hab);
@@ -333,6 +341,7 @@ public abstract class Personaje implements Serializable {
         this.modificadores.addAll(mods);
     }
 
+    
     @Override
     public String toString() {
         List<Equipo> aAc = new ArrayList<>(armasActivas);
