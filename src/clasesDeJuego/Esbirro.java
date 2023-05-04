@@ -13,7 +13,7 @@ import java.util.Collection;
  * @author Ángel Marqués García
  * @author Marcos Jiménez Pulido
  */
-public abstract class Esbirro implements Serializable {
+public class Esbirro implements Serializable {
 
     public static String fromListToString(Collection<Esbirro> elementos) {
         String result = "";
