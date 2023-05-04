@@ -19,7 +19,8 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
     clasesDeJuego.JugadorTest.class,
     clasesDeJuego.UsuarioTest.class,
-    clasesDeJuego.AdministradorTest.class
+    clasesDeJuego.AdministradorTest.class,
+    clasesDeJuego.NumeroRegistroTest.class
 })
 public class UsuarioTestSuite {
 
