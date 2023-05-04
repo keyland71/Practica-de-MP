@@ -1,6 +1,7 @@
 package clasesDeJuego;
 
 import java.io.Serializable;
+import sistemas.NumRegOverflowException;
 
 /**
  * @author Sergio de Oro Fernández
@@ -40,11 +41,11 @@ public class NumeroRegistro implements Serializable {
         this.caracter3 = numReg.caracter3;
     }
 
-    public void incrementarNumReg() {
+    public void incrementarNumReg() throws NumRegOverflowException {
         incrementarRecursivo(4);
     }
 
-    private void incrementarRecursivo(int pos) {
+    private void incrementarRecursivo(int pos) throws NumRegOverflowException {
         int num = -1;
         char c = ' ';
         switch (pos) {
@@ -76,7 +77,7 @@ public class NumeroRegistro implements Serializable {
                 incrementarRecursivo(pos - 1);
                 return;
             }
-            System.out.print("Error: Overflow en el número de registro");
+            throw new NumRegOverflowException();
         }
     }
 

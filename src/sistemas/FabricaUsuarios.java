@@ -7,6 +7,8 @@ package sistemas;
 import clasesDeJuego.Administrador;
 import clasesDeJuego.Jugador;
 import clasesDeJuego.NumeroRegistro;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import practicamp.Juego;
 
 /**
@@ -47,9 +49,14 @@ public class FabricaUsuarios {
     }
 
     public Jugador crearJugador() {
-        Jugador j = new Jugador(this.nombre, this.nick, this.contrasenia);
-        ponerNumeroRegistro(j);
-        return j;
+        try {
+            Jugador j = new Jugador(this.nombre, this.nick, this.contrasenia);
+            ponerNumeroRegistro(j);
+            return j;
+        } catch (NumRegOverflowException ex) {
+            System.out.println("Ha habido un error al crear el jugador. No se ha creado el jugador");
+            return null;
+        } 
     }
 
     public Administrador crearAdministrador() {
@@ -57,7 +64,7 @@ public class FabricaUsuarios {
         return admin;
     }
 
-    private void ponerNumeroRegistro(Jugador j) {
+    private void ponerNumeroRegistro(Jugador j) throws NumRegOverflowException {
         NumeroRegistro num = Juego.estado.obtenerNumeroRegistro();
         num.incrementarNumReg();
         j.ponerNumReg(num);

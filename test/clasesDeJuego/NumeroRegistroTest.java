@@ -4,12 +4,15 @@
  */
 package clasesDeJuego;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import sistemas.NumRegOverflowException;
 
 /**
  *
@@ -54,50 +57,64 @@ public class NumeroRegistroTest {
      */
     @Test
     public void testIncrementarNumReg() {
-        System.out.println("Empezando test: incrementarNumReg");
-        //probamos con 
-        NumeroRegistro instance = new NumeroRegistro();
-        instance.incrementarNumReg();
-        NumeroRegistro expectedValue = new NumeroRegistro('0',0,0,'0','1');
-        assertTrue(expectedValue.sonIguales(instance));
+        NumeroRegistro instance;
+        NumeroRegistro expectedValue;
+        try {
+            System.out.println("Empezando test: incrementarNumReg");
+            
+            instance = new NumeroRegistro();
+            instance.incrementarNumReg();
+            expectedValue = new NumeroRegistro('0',0,0,'0','1');
+            assertTrue(expectedValue.sonIguales(instance));
+            
+            instance = new NumeroRegistro('0',0,0,'0','9');
+            instance.incrementarNumReg();
+            expectedValue = new NumeroRegistro('0',0,0,'0','A');
+            assertTrue(expectedValue.sonIguales(instance));
+            
+            instance = new NumeroRegistro('0',0,0,'0','Z');
+            instance.incrementarNumReg();
+            expectedValue = new NumeroRegistro('0',0,0,'0','a');
+            assertTrue(expectedValue.sonIguales(instance));
+            
+            instance = new NumeroRegistro('0',0,0,'0','z');
+            instance.incrementarNumReg();
+            expectedValue = new NumeroRegistro('0',0,0,'1','0');
+            assertTrue(expectedValue.sonIguales(instance));
+            
+            instance = new NumeroRegistro('0',0,0,'z','z');
+            instance.incrementarNumReg();
+            expectedValue = new NumeroRegistro('0',0,1,'0','0');
+            assertTrue(expectedValue.sonIguales(instance));
+            
+            instance = new NumeroRegistro('0',0,1,'z','z');
+            instance.incrementarNumReg();
+            expectedValue = new NumeroRegistro('0',0,2,'0','0');
+            assertTrue(expectedValue.sonIguales(instance));
+            
+            instance = new NumeroRegistro('0',0,9,'z','z');
+            instance.incrementarNumReg();
+            expectedValue = new NumeroRegistro('0',1,0,'0','0');
+            assertTrue(expectedValue.sonIguales(instance));
+            
+            instance = new NumeroRegistro('0',9,9,'z','z');
+            instance.incrementarNumReg();
+            expectedValue = new NumeroRegistro('1',0,0,'0','0');
+            assertTrue(expectedValue.sonIguales(instance));
+        } catch (NumRegOverflowException ex) {
+            fail("Ha lanzado una excepción cuando no debía");
+        }
+        try {    
+            instance = new NumeroRegistro('z',9,9,'z','z');
+            instance.incrementarNumReg();
+            expectedValue = new NumeroRegistro('0',0,0,'0','0');
+            assertTrue(expectedValue.sonIguales(instance));
+            fail("No ha lanzado la excepción");
+        } catch (NumRegOverflowException ex) {
+        }
+            
+        System.out.println("Test  completo: incrementarNumReg");
         
-        
-        instance = new NumeroRegistro('0',0,0,'0','9');
-        instance.incrementarNumReg();
-        expectedValue = new NumeroRegistro('0',0,0,'0','A');
-        assertTrue(expectedValue.sonIguales(instance));
-        
-        instance = new NumeroRegistro('0',0,0,'0','Z');
-        instance.incrementarNumReg();
-        expectedValue = new NumeroRegistro('0',0,0,'0','a');
-        assertTrue(expectedValue.sonIguales(instance));
-        
-        instance = new NumeroRegistro('0',0,0,'0','z');
-        instance.incrementarNumReg();
-        expectedValue = new NumeroRegistro('0',0,0,'1','0');
-        assertTrue(expectedValue.sonIguales(instance));
-        
-        instance = new NumeroRegistro('0',0,0,'z','z');
-        instance.incrementarNumReg();
-        expectedValue = new NumeroRegistro('0',0,1,'0','0');
-        assertTrue(expectedValue.sonIguales(instance));
-        
-        instance = new NumeroRegistro('0',0,1,'z','z');
-        instance.incrementarNumReg();
-        expectedValue = new NumeroRegistro('0',0,2,'0','0');
-        assertTrue(expectedValue.sonIguales(instance));
-        
-        instance = new NumeroRegistro('0',0,9,'z','z');
-        instance.incrementarNumReg();
-        expectedValue = new NumeroRegistro('0',1,0,'0','0');
-        assertTrue(expectedValue.sonIguales(instance));
-        
-        instance = new NumeroRegistro('0',9,9,'z','z');
-        instance.incrementarNumReg();
-        expectedValue = new NumeroRegistro('1',0,0,'0','0');
-        assertTrue(expectedValue.sonIguales(instance));
-        
-        System.out.println("Test  completo: estaBaneado");
     }
 
     /**
@@ -121,7 +138,6 @@ public class NumeroRegistroTest {
         result = instance.sonIguales(num);
         assertFalse(result);
         
-        System.out.println("Test  completo: estaBaneado");
+        System.out.println("Test  completo: sonIguales");
     }
-    
 }

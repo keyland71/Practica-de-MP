@@ -147,7 +147,9 @@ public class ControladorRegistro {
             u = this.fabricaUsuarios.crearJugador();
         }
         AlmacenUsuarios almacen = Juego.estado.obtenerAlmacenUsuarios();
-        almacen.aniadirUsuario(u);
+        if (u != null){
+            almacen.aniadirUsuario(u);
+        }
     }
 
 }
