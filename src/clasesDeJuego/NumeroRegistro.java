@@ -75,9 +75,15 @@ public class NumeroRegistro implements Serializable {
         if (num == 0 || c == '0') {
             if (pos != 0) {
                 incrementarRecursivo(pos - 1);
-                return;
+            } else {
+                this.caracter1 = 'z';
+                this.numero1 = 9;
+                this.numero2 = 9;
+                this.caracter2 = 'z';
+                this.caracter3 = 'z';
+
+                throw new NumRegOverflowException();
             }
-            throw new NumRegOverflowException();
         }
     }
 
@@ -106,6 +112,9 @@ public class NumeroRegistro implements Serializable {
     }
 
     public boolean sonIguales(NumeroRegistro num) {
+        if (num == null) {
+            return false;
+        }
         boolean sonIguales = true;
         if (this.caracter1 != num.caracter1 || this.caracter2 != num.caracter2 || this.caracter3 != num.caracter3) {
             sonIguales = false;

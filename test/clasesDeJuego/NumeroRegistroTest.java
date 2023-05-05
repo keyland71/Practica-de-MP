@@ -4,8 +4,6 @@
  */
 package clasesDeJuego;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -33,6 +31,7 @@ public class NumeroRegistroTest {
     
     @Before
     public void setUp() {
+        System.out.println();
     }
     
     @After
@@ -57,7 +56,7 @@ public class NumeroRegistroTest {
      */
     @Test
     public void testIncrementarNumReg() {
-        NumeroRegistro instance;
+        NumeroRegistro instance = null;
         NumeroRegistro expectedValue;
         try {
             System.out.println("Empezando test: incrementarNumReg");
@@ -107,10 +106,10 @@ public class NumeroRegistroTest {
         try {    
             instance = new NumeroRegistro('z',9,9,'z','z');
             instance.incrementarNumReg();
-            expectedValue = new NumeroRegistro('0',0,0,'0','0');
-            assertTrue(expectedValue.sonIguales(instance));
             fail("No ha lanzado la excepción");
         } catch (NumRegOverflowException ex) {
+            expectedValue = new NumeroRegistro('z',9,9,'z','z');
+            assertTrue(expectedValue.sonIguales(instance));
         }
             
         System.out.println("Test  completo: incrementarNumReg");
@@ -134,6 +133,11 @@ public class NumeroRegistroTest {
         assertTrue(result);
         
         num = new NumeroRegistro();
+        instance = new NumeroRegistro('a',1,2,'b','c');
+        result = instance.sonIguales(num);
+        assertFalse(result);
+        
+        num = null;
         instance = new NumeroRegistro('a',1,2,'b','c');
         result = instance.sonIguales(num);
         assertFalse(result);

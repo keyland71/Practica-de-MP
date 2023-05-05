@@ -64,6 +64,8 @@ public class UsuarioTest {
         Usuario instance = new Usuario(nombre, nick, contrasenia);
         boolean result = instance.compararContrasenia(contrasenia);
         assertTrue(result);
+        result = instance.compararContrasenia("otraString");
+        assertFalse(result);
         System.out.println("Test  completo: compararContrasenia");
     }
 

@@ -30,6 +30,7 @@ public class JugadorTest {
     
     @Before
     public void setUp() {
+        System.out.println();
     }
     
     @After
