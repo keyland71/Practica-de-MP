@@ -53,6 +53,9 @@ public class EsbirroTest {
         System.out.println("Empezando test: fromListToString");
         
         List <Esbirro> esbirros = new ArrayList<>();
+        String result = Esbirro.fromListToString(esbirros);
+        String expResult = "";
+        assertEquals(expResult, result);
         
         Esbirro esb1 = new Esbirro("Esbirro1", 5);
         Esbirro esb2 = new Esbirro("Esbirro2", 5);
@@ -62,14 +65,19 @@ public class EsbirroTest {
         esbirros.add(esb2);
         esbirros.add(esb3);
         
-        String expResult = "    1. Esbirro1\n" 
-                         + "    2. Esbirro2\n"
-                         + "    3. Esbirro3\n";
+        expResult = "    1. Esbirro1\n" 
+                  + "    2. Esbirro2\n"
+                  + "    3. Esbirro3\n";
         
-        
-        String result = Esbirro.fromListToString(esbirros);
+        result = Esbirro.fromListToString(esbirros);
         
         assertEquals(expResult, result);
+        
+        try{
+            Esbirro.fromListToString(null);
+            fail("no ha lanzado error");
+        } catch (RuntimeException e){}
+        
         System.out.println("Test  completo: fromListToString");
     }   
     

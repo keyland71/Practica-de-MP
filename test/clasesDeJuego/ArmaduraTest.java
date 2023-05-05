@@ -43,6 +43,9 @@ public class ArmaduraTest {
         System.out.println("Empezando test: fromListToString");
         
         List <Armadura> armaduras = new ArrayList<>();
+        String result = Armadura.fromListToString(armaduras);
+        String expResult = "";
+        assertEquals(expResult, result);
         
         Armadura a1 = new Armadura("Armadura1", 3,3);
         Armadura a2 = new Armadura("Armadura2", 2,1);
@@ -52,13 +55,19 @@ public class ArmaduraTest {
         armaduras.add(a2);
         armaduras.add(a3);
         
-        String expResult = "    1. Armadura1\n" 
-                         + "    2. Armadura2\n"
-                         + "    3. Armadura3\n";
+        expResult = "    1. Armadura1\n" 
+                  + "    2. Armadura2\n"
+                  + "    3. Armadura3\n";
         
-        String result = Armadura.fromListToString(armaduras);
+        result = Armadura.fromListToString(armaduras);
         
         assertEquals(expResult, result);
+        
+        try{
+            Armadura.fromListToString(null);
+            fail("no ha lanzado error");
+        } catch (RuntimeException e){}
+        
         System.out.println("Test  completo: fromListToString");
     }
 

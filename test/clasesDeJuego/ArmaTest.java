@@ -46,6 +46,9 @@ public class ArmaTest {
         System.out.println("Empezando test: fromListToString");
         
         List <Arma> armas = new ArrayList<>();
+        String result = Arma.fromListToString(armas);
+        String expResult = "";
+        assertEquals(expResult, result);
         
         Arma a1 = new Arma("Arma1", 3,3,Variante.dosManos);
         Arma a2 = new Arma("Arma2", 1,2,Variante.unaMano);
@@ -55,13 +58,19 @@ public class ArmaTest {
         armas.add(a2);
         armas.add(a3);
         
-        String expResult = "    1. Arma1 (dosManos)\n" 
-                         + "    2. Arma2 (unaMano)\n"
-                         + "    3. Arma3 (unaMano)\n";
+        expResult = "    1. Arma1 (dosManos)\n" 
+                  + "    2. Arma2 (unaMano)\n"
+                  + "    3. Arma3 (unaMano)\n";
         
-        String result = Arma.fromListToString(armas);
+        result = Arma.fromListToString(armas);
         
         assertEquals(expResult, result);
+
+        try{
+            Arma.fromListToString(null);
+            fail("no ha lanzado error");
+        } catch (RuntimeException e){}
+        
         System.out.println("Test  completo: fromListToString");
     }
 
