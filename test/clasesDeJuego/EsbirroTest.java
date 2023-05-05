@@ -63,6 +63,7 @@ public class EsbirroTest {
         System.out.println(result);
         
         assertEquals(expResult, result);
+        System.out.println("Test  completo: fromListToString");
     }   
     
     /**
@@ -70,16 +71,17 @@ public class EsbirroTest {
      */
     @Test 
     public void testObtenerNombre() { //Getter 
-        /*Revisar. O bien hay que romper la encapsulación para obtener nombre directamente o bien geneerar una lista con todos los 
-        nombres de los esbirros y comparar cada uno con el string que se obtiene directamente*/
         System.out.println("Empezando test: obtenerNombre");
-        Estado estadoJuego = new Estado(); //Se crea un nuevo estado para que el constructor del estado cargue los datos serializados (ya que si no el estado seria null)
-        List listaEsbirros = estadoJuego.obtenerAlmacenEsbirros().obtenerEsbirros();
-        int numEsbAleatorio = (int) (Math.random() * listaEsbirros.size()-1);
-        Esbirro esb = (Esbirro) listaEsbirros.get(numEsbAleatorio);
-        String expResult = esb.obtenerNombre();
-        String result = esb.obtenerNombre();
+        Esbirro instance = new Esbirro("Nombre", 5);
+        String expResult = "Nombre";
+        String result = instance.obtenerNombre();
         assertEquals(expResult, result);
+        
+        instance = new Esbirro("juan", 5);
+        expResult = "juan";
+        result = instance.obtenerNombre();
+        assertEquals(expResult, result);
+        System.out.println("Test  completo: obtenerNombre");
     }
 
     /**
@@ -88,13 +90,17 @@ public class EsbirroTest {
     @Test
     public void testObtenerVida() { //Getter
         System.out.println("Empezando test: obtenerVida");
-        Estado estadoJuego = new Estado();
-        List listaEsbirros = estadoJuego.obtenerAlmacenEsbirros().obtenerEsbirros();
-        int numEsbAleatorio = (int)(Math.random() * listaEsbirros.size()-1);
-        Esbirro esb = (Esbirro) listaEsbirros.get(numEsbAleatorio);
-        int expResult = esb.obtenerVida();
-        int result = esb.obtenerVida();
+        Esbirro instance = new Esbirro("Nombre", 5);
+        int expResult = 5;
+        int result = instance.obtenerVida();
         assertEquals(expResult,result);
+        
+        instance = new Esbirro("Nombre", 3);
+        expResult = 3;
+        result = instance.obtenerVida();
+        assertEquals(expResult,result);
+        
+        System.out.println("Test  completo: obtenerVida");
     }
 
     /**
@@ -103,10 +109,11 @@ public class EsbirroTest {
     @Test
     public void testTieneSubordinados() {
         System.out.println("Empezando test: tieneSubordinados");
-        Esbirro instance = new Esbirro("nombre",(int)(Math.random() * 5));
+        Esbirro instance = new Esbirro("Nombre",(int)(Math.random() * 5));
         boolean expResult = false;
         boolean result = instance.tieneSubordinados();
         assertEquals(expResult, result);
+        System.out.println("Test  completo: tieneSubordinados");
     }
 
     /**
@@ -115,10 +122,11 @@ public class EsbirroTest {
     @Test
     public void testTieneHumanos() {
         System.out.println("Empezando test: tieneHumanos");
-        Esbirro instance = new Esbirro("nombre",(int)(Math.random() * 5));
+        Esbirro instance = new Esbirro("Nombre",(int)(Math.random() * 5));
         boolean expResult = false;
         boolean result = instance.tieneHumanos();
         assertEquals(expResult, result);
+        System.out.println("Test  completo: tieneHumanos");
     }
 }
     
