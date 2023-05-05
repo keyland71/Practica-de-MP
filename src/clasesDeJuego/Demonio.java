@@ -4,6 +4,7 @@
  */
 package clasesDeJuego;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -20,7 +21,13 @@ public class Demonio extends Esbirro {
     public Demonio(String nom, int vida, String pac, Set<Esbirro> conjEsb) {
         super(nom, vida);
         this.pacto = pac;
-        this.esbirros = conjEsb;
+        if (conjEsb != null) {
+            this.esbirros = conjEsb;
+        } else{
+            this.esbirros = new HashSet<>();
+        }
+        
+        
     }
 
     @Override

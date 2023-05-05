@@ -17,23 +17,21 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-    clasesDeJuego.JugadorTest.class,
-    clasesDeJuego.UsuarioTest.class,
-    clasesDeJuego.AdministradorTest.class,
-    clasesDeJuego.NumeroRegistroTest.class
+    clasesDeJuego.EsbirroTest.class,
+    clasesDeJuego.DemonioTest.class,
 })
-public class UsuarioTestSuite {
+public class EsbirroTestSuite {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        System.out.println("Testing all tests for Usuario, Jugador, and Administrador");
+        System.out.println("Testing all tests for Esbirro and Demonio");
         System.out.println();
     }
 
     @AfterClass
     public static void tearDownClass() throws Exception {
         System.out.println();
-        System.out.println("All tests complete for Usuario, Jugador, and Administrador");
+        System.out.println("All tests complete for Esbirro and Demonio");
     }
 
     @Before
