@@ -16,6 +16,7 @@ import static org.junit.Assert.*;
 
 import practicamp.Juego;
 import clasesDeJuego.Esbirro;
+import java.util.ArrayList;
 
 /**
  *
@@ -50,17 +51,23 @@ public class EsbirroTest {
     @Test
     public void testFromListToString() {
         System.out.println("Empezando test: fromListToString");
-        String expResult = "";
-        Estado estadoJuego = new Estado();
-        List <Esbirro> esbirros = estadoJuego.obtenerAlmacenEsbirros().obtenerEsbirros();
-        for (int i=1; i<= esbirros.size(); i++) {
-            expResult += "    " + Integer.toString(i) + ". " + esbirros.get(i-1).obtenerNombre() + "\n";
-        }
+        
+        List <Esbirro> esbirros = new ArrayList<>();
+        
+        Esbirro esb1 = new Esbirro("Esbirro1", 5);
+        Esbirro esb2 = new Esbirro("Esbirro2", 5);
+        Esbirro esb3 = new Esbirro("Esbirro3", 5);
+        
+        esbirros.add(esb1);
+        esbirros.add(esb2);
+        esbirros.add(esb3);
+        
+        String expResult = "    1. Esbirro1\n" 
+                         + "    2. Esbirro2\n"
+                         + "    3. Esbirro3\n";
+        
         
         String result = Esbirro.fromListToString(esbirros);
-        
-        System.out.println(expResult);
-        System.out.println(result);
         
         assertEquals(expResult, result);
         System.out.println("Test  completo: fromListToString");
